@@ -1,0 +1,11 @@
+Services/Orders/node_modules
+Services/Orders/.env
+
+Services/Products/node_modules
+Services/Products/.env
+
+Services/UserAuth/node_modules
+Services/UserAuth/.env
+
+Services/Tracking/node_modules
+Services/Tracking/.env
