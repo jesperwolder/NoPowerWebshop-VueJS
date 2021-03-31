@@ -22,6 +22,8 @@
 </style>
 
 <script>
+import navbar from '@/components/navbar.vue';
+
 
 import NavBar from '@/components/NavBar';
 
