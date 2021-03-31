@@ -1,5 +1,9 @@
 <template>
 	<v-app>
+    <br />
+    <br />
+    <br />
+    <br />
 		<NavBar />
 		<div id="mainWrapper">
 			<v-sheet

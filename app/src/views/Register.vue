@@ -19,6 +19,11 @@
                     type="email"
                     v-model="register.email"
                 > </v-text-field>
+                <v-text-field
+                    label="Telefon nummer"
+                    type="text"
+                    v-model="register.phone"
+                > </v-text-field>
                 <div class="row">
                     <v-text-field
                         label="Password"
@@ -35,24 +40,24 @@
                     <v-text-field
                         label="Vej"
                         type="text"
-                        v-model="register.adress.street"
+                        v-model="register.address.street"
                     > </v-text-field>
                     <v-text-field
                         label="Husnummer"
                         type="text"
-                        v-model="register.adress.number"
+                        v-model="register.address.number"
                     > </v-text-field>
                 </div>
                 <div class="row">
                     <v-text-field
                         label="Postnummer"
                         type="number"
-                        v-model="register.adress.zip"
+                        v-model="register.address.zip"
                     > </v-text-field>
                     <v-text-field
                         label="By"
                         type="text"
-                        v-model="register.adress.city"
+                        v-model="register.address.city"
                     > </v-text-field>
                 </div>
                 <v-btn
@@ -83,7 +88,7 @@ export default {
                 password: null,
                 confirmPassword: null,
                 phone: null,
-                adress: {
+                address: {
                     street: null,
                     number: null,
                     zip: null,
@@ -98,11 +103,12 @@ export default {
                 this.error = "Passwords matcher ikke";
                 return;
             }
-            this.$axios.post('http://server.topper144p.com:3000/register', { user: register })
+            console.log({ user: this.register });
+            this.axios.post('http://server.topper144p.com:3000/register', { user: this.register })
             .then((res) => {
                 console.log(res);
             }).catch((res) => {
-
+                console.log(res);
             });
         }
     }

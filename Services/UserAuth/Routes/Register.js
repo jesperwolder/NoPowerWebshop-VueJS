@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         !req.body.user.address.zip ||
         !req.body.user.address.city
     ) {
-        res.status(400).json({
+        res.status(503).json({
             message: "missing values"
         });
         return;
