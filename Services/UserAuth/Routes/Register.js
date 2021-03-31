@@ -58,6 +58,7 @@ router.post('/', async (req, res) => {
     user.save();
     res.status(200).res.json({
         jwt: jwt,
+        isAdmin: false,
         message: "Success"
     });
 });
