@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
     let jwt = auth.SignJwt({id: user._id, email: req.body.user.email});
 
     user.save();
-    res.status(200).res.json({
+    res.status(200).json({
         jwt: jwt,
         isAdmin: false,
         message: "Success"
