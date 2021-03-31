@@ -3,6 +3,7 @@
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
                 class=""
+                elevation="0"
             >
             <v-form class="col-11">
                 <h1> Registre en bruger </h1>

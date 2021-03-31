@@ -1,5 +1,5 @@
 :root {
-    --maxWidth: 1200px;
+    --maxWidth: 1800px;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
     
     background-color: #fff;
 
-    margin: 132px auto 0 auto;
+    margin: 132px auto 20px auto;
     padding: 20px;
 /* 
     box-shadow: 

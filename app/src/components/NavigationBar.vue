@@ -5,6 +5,7 @@
             dark
             color="rgba(39,39,39,.95)"
             app
+            extensionHeight="48px"
         >
 
             <RouterLink to="/" class="logo">
@@ -53,6 +54,7 @@
                 depressed
                 text
                 mr-2
+                to="/login"
             >
                 Log Ind
             </v-btn>
@@ -61,16 +63,32 @@
                 depressed
                 icon
                 mr-2
+                to="/cart"
             >
                 <v-icon>mdi-cart</v-icon>
             </v-btn>
-
+            
             <template v-slot:extension>
-                <v-tabs>
-                    <v-tab>Tab 1</v-tab>
-                    <v-tab>Tab 2</v-tab>
-                    <v-tab>Tab 3</v-tab>
-                </v-tabs>
+                <v-btn
+                    depressed
+                    text
+                >
+                    Knap 1
+                </v-btn>
+                
+                <v-btn
+                    depressed
+                    text
+                >
+                    Knap 1
+                </v-btn>
+                
+                <v-btn
+                    depressed
+                    text
+                >
+                    Knap 1
+                </v-btn>
             </template>
         </v-app-bar>
     </v-card>
@@ -98,4 +116,8 @@ export default {
 	.searchBar {
 		max-width: 600px;
 	}
+
+    /deep/ div.v-toolbar__extension {
+        background-color: rgba(255,255,255,.05);
+    }
 </style>
