@@ -104,6 +104,11 @@ export default {
 		isLoggedIn: false,
 		search: ""
 	}),
+    mounted: function() {
+        if(!this.$cookies.get('jwt')){
+            this.isLoggedIn = false;
+        }
+    }
 }
 </script>
 

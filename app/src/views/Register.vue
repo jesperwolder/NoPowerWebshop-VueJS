@@ -109,9 +109,9 @@ export default {
             }
             this.axios.post('http://server.topper144p.com:3000/register', { user: this.register })
             .then((res) => {
-                this.cookies.set('jwt', res.data.jwt);
-                this.cookies.set('isAdmin', res.data.isAdmin);
-                this.router.push('/dashboard');
+                this.$cookies.set('jwt', res.data.jwt);
+                this.$cookies.set('isAdmin', res.data.isAdmin);
+                this.$router.push('/dashboard');
             }).catch(err => {
                 this.error = err.response.data.message;
             });
