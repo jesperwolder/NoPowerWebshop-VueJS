@@ -19,6 +19,12 @@ export default {
 				to: '/'
 			},
 			{
+				text: 'Login',
+				disabled: false,
+				link: true,
+				to: '/login'
+			},
+			{
 				text: 'Registrer',
 				disabled: false,
 				link: true,
