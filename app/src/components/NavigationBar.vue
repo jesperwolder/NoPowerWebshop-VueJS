@@ -47,18 +47,30 @@
                     icon
                 >
                     <v-icon>mdi-account-circle</v-icon>
+                    Profil
                 </v-btn>
             </div>
 
-            <v-btn v-else
-                depressed
-                text
-                mr-2
-                to="/login"
-            >
-                <v-icon>mdi-account</v-icon>
-                Log Ind
-            </v-btn>
+            <div v-else>
+                <v-btn 
+                    depressed
+                    text
+                    mr-2
+                    to="/login"
+                >
+                    <v-icon>mdi-account</v-icon>
+                    Log Ind
+                </v-btn>
+                    <v-btn 
+                    depressed
+                    text
+                    mr-2
+                    to="/register"
+                >
+                    <v-icon>mdi-account</v-icon>
+                    Register
+                </v-btn>
+            </div>
 
             <v-btn
                 depressed
