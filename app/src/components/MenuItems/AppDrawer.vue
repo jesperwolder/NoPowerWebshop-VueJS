@@ -1,9 +1,16 @@
 <template>
     <v-card
-        width="256"
+        width="300"
         mx="auto"
+        elevation="2"
     >
-        <v-navigation-drawer permanet>
+        <v-navigation-drawer 
+            permanet
+            app
+            clipped
+            class="drawer"
+            width="256"
+        >
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="title">
@@ -46,6 +53,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .drawer {
+        border-radius: 0 !important;
+    }
 </style>

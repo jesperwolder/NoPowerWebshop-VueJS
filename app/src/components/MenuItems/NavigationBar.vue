@@ -3,9 +3,9 @@
         <v-app-bar
             fixed
             dark
-            color="rgba(39,39,39,.95)"
+            light
             app
-            extensionHeight="48px"
+            clipped-left
         >
 
             <RouterLink to="/" class="logo">
@@ -43,68 +43,48 @@
 
             <div v-if="this.isLoggedIn">
                 <v-btn
+                    class="buttons"
                     depressed
-                    icon
+                    text
                 >
-                    <v-icon>mdi-account-circle</v-icon>
+                    <v-icon left>mdi-account</v-icon>
                     Profil
                 </v-btn>
             </div>
 
             <div v-else>
                 <v-btn 
+                    class="buttons"
                     depressed
                     text
                     mr-2
                     to="/login"
                 >
-                    <v-icon>mdi-account</v-icon>
+                    <v-icon left>mdi-account</v-icon>
                     Log Ind
                 </v-btn>
-                    <v-btn 
+                <v-btn 
+                    class="buttons"
                     depressed
                     text
                     mr-2
                     to="/register"
                 >
-                    <v-icon>mdi-account</v-icon>
+                    <v-icon left>mdi-account</v-icon>
                     Register
                 </v-btn>
             </div>
 
             <v-btn
+                class="buttons"
                 depressed
-                icon
-                mr-2
+                text
+                pl-12
                 to="/cart"
             >
-                <v-icon>mdi-cart</v-icon>
+                <v-icon left>mdi-cart</v-icon>
+                Kurv
             </v-btn>
-            
-            <!-- Synes ærligt denne del skulle fjernes :/
-            <template v-slot:extension>
-                <v-btn
-                    depressed
-                    text
-                >
-                    Knap 1
-                </v-btn>
-                
-                <v-btn
-                    depressed
-                    text
-                >
-                    Knap 1
-                </v-btn>
-                
-                <v-btn
-                    depressed
-                    text
-                >
-                    Knap 1
-                </v-btn>
-            </template> 
-            -->
         </v-app-bar>
     </v-card>
 
@@ -113,7 +93,7 @@
 <script>
 export default {
     data: () => ({
-		isLoggedIn: false,
+		isLoggedIn: true,
 		search: ""
 	}),
     mounted: function() {
@@ -128,6 +108,14 @@ export default {
 	.v-app-bar {
 		border-radius: 0 !important;
 	}
+
+    .buttons {
+        margin-right: 4px;
+    }
+
+    .button:last-child {
+        margin-right: 0;
+    }
 
 	.logo {
 		margin-right: 20px;

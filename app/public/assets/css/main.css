@@ -1,28 +1,81 @@
 :root {
     --maxWidth: 1800px;
+
+    /* *
+      * * * Colors * * *
+    * */
+    /* ? Light Theme Colors */
+    --c-light-bg: #EFEFEF;    
+    --c-light-header: rgba(234,234,234,.95);    
+    --c-light-drawer: #fff;    
+    --c-light-card: #fff;    
+    --c-light-footer: rgba(255,255,255,.95);    
+
+    /* ~ Dark Theme Colors */
+    --c-dark-bg: #14161A;
+    --c-dark-header: rgba(33,37,43,.95);
+    --c-dark-drawer: rgba(27,31,36,.95);
+    --c-dark-card: #272B33;
+    --c-dark-footer: rgba(40,44,52,.95);
 }
 
 body {
-    background-color: #efefef;
+    background-color: #222;
 }
 
 .theme--light.v-application {
-    background-color: #efefef !important;
+    background-color: var(--c-light-bg) !important;
+}
+
+.theme--dark.v-application {
+    background-color: var(--c-dark-bg) !important;
 }
 
 .mainContainer {
-    width: 100%;
-    max-width: var(--maxWidth);
+    /* width: 100%; */
+    /* max-width: var(--maxWidth); */
     
-    background-color: #fff;
+    /* background-color: #fff; */
 
-    margin: 132px auto 20px auto;
-    padding: 20px;
-/* 
-    box-shadow: 
-        0px 2px 4px -1px rgb(0 0 0 / 20%), 
-        0px 4px 5px 0px rgb(0 0 0 / 14%), 
-        0px 1px 10px 0px rgb(0 0 0 / 12%); */
+    margin: 0 auto 20px auto;
+    padding: 20px !important;
+    /* padding-left: 276px !important; */
 
     box-sizing: border-box;
+}
+
+.v-card {
+    margin-bottom: 10px;
+}
+
+.v-navigation-drawer.theme--dark {
+    background-color: var(--c-dark-drawer) !important;
+}
+
+.v-navigation-drawer.theme--light {
+    background-color: var(--c-light-drawer) !important;
+}
+
+.v-card.theme--dark {
+    background-color: var(--c-dark-card) !important;
+}
+
+.v-card.theme--light {
+    background-color: var(--c-light-card) !important;
+}
+
+.v-app-bar.theme--dark {
+    background-color: var(--c-dark-header) !important;
+}
+
+.v-app-bar.theme--light {
+    background-color: var(--c-light-header) !important;
+}
+
+.v-footer.theme--dark {
+    background-color: var(--c-dark-footer) !important;
+}
+
+.v-footer.theme--light {
+    background-color: var(--c-light-footer) !important;
 }
