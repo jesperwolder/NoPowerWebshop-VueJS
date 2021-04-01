@@ -3,11 +3,11 @@
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
                 :loading="loading"
-                class=""
+                class="pa-5"
                 elevation="3"
             >
-            <v-form class="col-11">
-                <h1> Registre en bruger </h1>
+            <v-form class="col-12 pa-0">
+                <h1>Registrer en bruger</h1>
                 <div v-if="this.error">
                     <h2 class="error-text"> {{ this.error }} </h2>
                 </div>
@@ -29,12 +29,13 @@
                     v-model="register.phone"
                     required
                 > </v-text-field>
-                <div class="row">
+                <div class="row ma-0">
                     <v-text-field
                         label="Password"
                         type="password"
                         v-model="register.password"
                         required
+                        class="pr-2"
                     > </v-text-field>
                     <v-text-field
                         label="Gentag password"
@@ -43,11 +44,12 @@
                         required
                     > </v-text-field>
                 </div>
-                <div class="row">
+                <div class="row ma-0">
                     <v-text-field
                         label="Vej"
                         type="text"
                         v-model="register.address.street"
+                        class="pr-2"
                     > </v-text-field>
                     <v-text-field
                         label="Husnummer"
@@ -55,11 +57,12 @@
                         v-model="register.address.number"
                     > </v-text-field>
                 </div>
-                <div class="row">
+                <div class="row ma-0">
                     <v-text-field
                         label="Postnummer"
                         type="number"
                         v-model="register.address.zip"
+                        class="pr-2"
                     > </v-text-field>
                     <v-text-field
                         label="By"
@@ -78,9 +81,13 @@
   </v-container>
 </template>
 
-<style>
+<style scoped>
     .error-text {
         color: red;
+    }
+
+    .row {
+        /* margin: 0 !important; */
     }
 </style>
 
