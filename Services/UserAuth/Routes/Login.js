@@ -16,14 +16,14 @@ router.post('/', async (req, res) => {
     let err, user = await User.findOne({ email: req.body.email });
     if(err || !user) {
         res.status(503).json({
-            message: "an error has occurred"
+            message: "Der blev ikke fundet en bruger"
         });
         return;
     }
 
     if(!(await auth.Compare(req.body.password, user.password))){
         res.status(401).json({
-            message: "Wrong email or passsword"
+            message: "Forkert email eller password"
         });
         return;
     }

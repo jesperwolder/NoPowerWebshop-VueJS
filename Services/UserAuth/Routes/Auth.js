@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     if(!req.headers.jwt) {
         res.status(403).json({
-            message: "unauthorized"
+            message: "Ikke Autoriseret"
         });
         return;
     }
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     let authObj = auth.VerifyJwt(req.headers.jwt);
     if(!authObj) {
         res.status(403).json({
-            message: "Unauthorized"
+            message: "Ikke Autoriseret"
         });
         return;
     }
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     let err, user = await User.findOne({ _id: authObj.id });
     if(err || !user) {
         res.status(403).json({
-            message: "User not found, please sign out and try again"
+            message: "Der blev ikke fundet en brugere, prøv at logge ud og ind"
         });
         return;
     }
@@ -33,7 +33,8 @@ router.post('/', async (req, res) => {
     res.status(200).json({
         authorized: true,
         isAdmin: user.isAdmin,
-        user: user
+        user: user,
+        message: "Success"
     });
 });
 

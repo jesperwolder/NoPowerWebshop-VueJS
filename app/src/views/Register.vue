@@ -2,8 +2,9 @@
   <v-container>
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
+                :loading="loading"
                 class=""
-                elevation="0"
+                elevation="3"
             >
             <v-form class="col-11">
                 <h1> Registre en bruger </h1>
@@ -82,6 +83,7 @@
 export default {
     data() {
         return {
+            loading: false,
             error: null,
             register: {
                 email: null,
@@ -100,17 +102,20 @@ export default {
     },
     methods: {
         SignUp: function() {
+            this.loading = true;
             if(this.register.password != this.register.confirmPassword) {
                 this.error = "Passwords matcher ikke";
                 return;
             }
-            console.log({ user: this.register });
             this.axios.post('http://server.topper144p.com:3000/register', { user: this.register })
             .then((res) => {
-                console.log(res);
-            }).catch((res) => {
-                console.log(res);
+                this.cookies.set('jwt', res.data.jwt);
+                this.cookies.set('isAdmin', res.data.isAdmin);
+                this.router.push('/dashboard');
+            }).catch(err => {
+                this.error = err.response.data.message;
             });
+            this.loading = false;
         }
     }
 }

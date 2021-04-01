@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
         !req.body.user.address.city
     ) {
         res.status(503).json({
-            message: "missing values"
+            message: "Nogle værdier var tomme"
         });
         return;
     }
@@ -28,14 +28,14 @@ router.post('/', async (req, res) => {
     let err, data = await User.findOne({ email: req.body.user.email });
     if(err) {
         res.status(503).json({ 
-            message: "An error has occured"
+            message: "Der skete en fejl, prøv igen senere"
         });
         return;
     }
 
     if(data != null) {
         res.status(409).json({
-            message: "Email already in use"
+            message: "Email allerede i brug"
         });
         return;
     }
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
     
     if(!hash){
         res.status(424).json({
-            message: "An error has occured try again later"
+            message: "Der skete en fejl prøv igen senere"
         });
         return;
     }

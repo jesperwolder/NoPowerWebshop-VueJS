@@ -18,7 +18,7 @@
             </RouterLink>
             
             <v-toolbar-title>
-                Dynamisk Titel
+               
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -56,6 +56,7 @@
                 mr-2
                 to="/login"
             >
+                <v-icon>mdi-account</v-icon>
                 Log Ind
             </v-btn>
 
@@ -68,6 +69,7 @@
                 <v-icon>mdi-cart</v-icon>
             </v-btn>
             
+            <!-- Synes ærligt denne del skulle fjernes :/
             <template v-slot:extension>
                 <v-btn
                     depressed
@@ -89,7 +91,8 @@
                 >
                     Knap 1
                 </v-btn>
-            </template>
+            </template> 
+            -->
         </v-app-bar>
     </v-card>
 
