@@ -15,27 +15,32 @@
                     label="Fulde navn"
                     type="text"
                     v-model="register.fullname"
+                    required
                 > </v-text-field>
                 <v-text-field
                     label="Email"
                     type="email"
                     v-model="register.email"
+                    required
                 > </v-text-field>
                 <v-text-field
                     label="Telefon nummer"
                     type="text"
                     v-model="register.phone"
+                    required
                 > </v-text-field>
                 <div class="row">
                     <v-text-field
                         label="Password"
                         type="password"
                         v-model="register.password"
+                        required
                     > </v-text-field>
                     <v-text-field
                         label="Gentag password"
                         type="password"
                         v-model="register.confirmPassword"
+                        required
                     > </v-text-field>
                 </div>
                 <div class="row">
@@ -103,19 +108,37 @@ export default {
     methods: {
         SignUp: function() {
             this.loading = true;
-            if(this.register.password != this.register.confirmPassword) {
-                this.error = "Passwords matcher ikke";
+
+            if(!this.CheckForNullInObject(this.register)) {
+                this.error = "Et eller flere felter er tomme";
+                this.loading = false;
                 return;
             }
+            // Validere om passwords matcher
+            if(this.register.password != this.register.confirmPassword) {
+                this.error = "Passwords matcher ikke";
+                this.loading = false;
+                return;
+            }
+
+            // Send post request om at oprette brugeren
             this.axios.post('http://server.topper144p.com:3000/register', { user: this.register })
             .then((res) => {
+                // Success respons
                 this.$cookies.set('jwt', res.data.jwt);
                 this.$cookies.set('isAdmin', res.data.isAdmin);
                 this.$router.push('/dashboard');
             }).catch(err => {
+                // Fejled respons
                 this.error = err.response.data.message;
             });
             this.loading = false;
+        },
+        CheckForNullInObject: function(obj) {
+            for (let key in obj) {
+                if(obj[key] == null || obj[key] == "") return false;
+            }
+            return true;
         }
     }
 }
