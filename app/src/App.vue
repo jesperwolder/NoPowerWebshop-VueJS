@@ -2,7 +2,7 @@
 	<v-app>
 		<AppDrawer v-if="!this.hideDrawer" />
 		<NavBar />
-		<v-main class="mt-6 pt-5">
+		<v-main class="pt-5">
 			<v-container
 				color="transparent"
 				class="mainContainer"

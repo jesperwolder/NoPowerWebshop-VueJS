@@ -7,7 +7,21 @@
                 elevation="3"
             >
             <v-form class="col-12 pa-0">
-                <h1>Registrer en bruger</h1>
+                <v-card-title class="px-0 pt-0">Opret bruger</v-card-title>
+                <v-card-subtitle class="px-0">
+                    Hos NoPower Webshoppen tilbyder vi alle og en hver, at være medlem hos os. <br>
+                    Det er gratis at være medlem, og som en bonus, kan du benytte dig af alle medlems fordelene. <br><br>
+                    <v-btn 
+                        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                        color="primary"
+                        outlined
+                        x-small
+                        target="_blank"
+                    >
+                        Læs mere
+                    </v-btn>
+                </v-card-subtitle>
+                <v-divider class="pb-5"></v-divider>
                 <div v-if="this.error">
                     <h2 class="error-text"> {{ this.error }} </h2>
                 </div>
