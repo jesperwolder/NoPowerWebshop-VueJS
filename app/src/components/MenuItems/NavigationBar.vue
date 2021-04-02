@@ -51,6 +51,15 @@
                     Profil
                 </v-btn>
             </div>
+            
+         
+            <div v-if="this.isLoggedIn">
+              <v-btn
+                block
+                color="primary"
+                v-on:click.prevent="logout()"
+              > logout </v-btn>
+            </div>
 
             <div v-else>
                 <v-btn 
@@ -100,7 +109,14 @@ export default {
         if(!this.$cookies.get('jwt')){
             this.isLoggedIn = false;
         }
-    }
+    },
+    methods: {
+        //virker ikke helt endnu
+            logout: function() {
+                isLoggedIn.logout();
+                this.$router.push('/');
+            }
+        }
 }
 </script>
 
