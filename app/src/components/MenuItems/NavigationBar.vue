@@ -124,8 +124,4 @@ export default {
 	.searchBar {
 		max-width: 600px;
 	}
-
-    /deep/ div.v-toolbar__extension {
-        background-color: rgba(255,255,255,.05);
-    }
 </style>
