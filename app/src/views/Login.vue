@@ -15,7 +15,7 @@
                 <v-text-field
                     label="Email"
                     type="email"
-                    v-model="Login.email"
+                    v-model="login.email"
                     required
                 > </v-text-field>
                 
@@ -23,15 +23,15 @@
                     <v-text-field
                         label="Password"
                         type="password"
-                        v-model="Login.password"
+                        v-model="login.password"
                         required
                     > </v-text-field>
                     </div>
                 <v-btn
                     block
                     color="primary"
-                    v-on:click="Login()"
-                > Opret </v-btn>
+                    v-on:click="UserLogin()"
+                > login </v-btn>
             </v-form>
       </v-card>
       </div>
@@ -51,38 +51,34 @@ export default {
         return {
             loading: false,
             error: null,
-            register: {
-                email: null,
-
-                password: null,
+            login: {
+                email: "",
+                password: "",
                 
             }
         }
     },
     methods: {
-        Login: function() {
+        UserLogin: function() {
             this.loading = true;
 
-            if(!this.CheckForNullInObject(this.login)) {
-                this.error = "Et eller flere felter er tomme";
-                this.loading = false;
-                return;
-            }
-           
+               this.axios.post('http://localhost:3000/login', {... this.login}) 
+                
+                    .then((res) =>{
+                    this.$cookies.set('jwt', res.data.jwt);
+                    this.$cookies.set('isAdmin', res.data.isAdmin);
+                    this.$router.push('/dashboard');
+                   
+                    }).catch(err => {
+                        //fejl
+                      this.error = err.response.data.message;
+                    });
+                    
+                    this.loading = false;
+            
 
-            // Send post request om at oprette brugeren
-            this.axios.post('http://server.topper144p.com:3000/login', { user: this.login})
-            .then((res) => {
-                // Success respons
-                this.$cookies.set('jwt', res.data.jwt);
-                this.$cookies.set('isAdmin', res.data.isAdmin);
-                this.$router.push('/dashboard');
-            }).catch(err => {
-                // Fejled respons
-                this.error = err.response.data.message;
-            });
-            this.loading = false;
         },
+        
         CheckForNullInObject: function(obj) {
             for (let key in obj) {
                 if(obj[key] == null || obj[key] == "") return false;
