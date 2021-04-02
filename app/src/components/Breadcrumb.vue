@@ -12,25 +12,8 @@
 import routes from '@/router/index.js';
 
 let _routes = routes;
-// console.log(_routes.history);
-
-// for(var i = 0; i < _routes.options.routes.length; i++) {
-// 	if(_routes.history.current.path === _routes.options.routes[i].path) {
-// 		bread = {
-// 			text: _routes.options.routes[i].name,
-// 			disabled: false,
-// 			link: true,
-// 			to: _routes.options.routes[i].path,
-// 		}
-		
-// 		break;
-// 	}
-// 	//console.log(_routes.options.routes[i].name);
-// }
-// console.log(routes.path);
 
 export default {
-	
     data() {
 		return {
 			bread: this.updateBC(),
@@ -42,17 +25,27 @@ export default {
 
 			let output = [];
 			
-			for(let i = 0; i < items.length; i++) {
+			if(items != undefined) {		
+				for(let i = 0; i < items.length; i++) {
+					output.push(
+						{
+							text: items[i].name,
+							to: items[i].to,
+						}
+					);
+				}
+			} else {
 				output.push(
 					{
-						text: items[i].name,
-						to: items[i].to,
+						text: '404 – Siden kunne ikke findes',
+						to: '/',
+						disabled: true
 					}
 				);
 			}
-				
+			
 			return output;
-		}
+		},
 	},
 	computed: {
 		init() {
@@ -62,6 +55,7 @@ export default {
 	
 	watch: {
 		$route() {
+			
 			this.bread = this.updateBC();
 		}
 	}
@@ -69,5 +63,5 @@ export default {
 </script>
 
 <style>
-/* comment */
+
 </style>
