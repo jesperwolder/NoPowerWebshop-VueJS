@@ -1,15 +1,22 @@
 <template>
     <v-container>
         <div class="col-md-5 col-sm-12 mx-auto">
-    <h2 class="text-center">Profile Page {{ user.namename }}</h2>
-           <v-text-field
-                        label="Fulde navn"
+
+            <v-card
+                :loading="loading"
+                class="pa-5"
+                elevation="3"
+            >
+      <v-form class="col-12 pa-0"> 
+            <h2 class="text-center">Profile Page {{}}</h2>
+                <v-text-field
+                        
                         type="text"
                         v-model="fullname"
                         placeholder="$user.fullname"
-                    > </v-text-field>
+                    ></v-text-field>
                     <v-text-field
-                        label="Email"
+                        
                         type="email"
                         v-model="email"
                         placeholder="$user.email"
@@ -17,13 +24,13 @@
 
                  
                     <v-text-field
-                        label="Telefon nummer"
+                        
                         type="text"
                         v-model="phone"
                         placeholder="$user.phone"
                     > </v-text-field>
 
-                       <div class="row ma-0">
+                    
                         <v-text-field
                             label="Password"
                             type="password"
@@ -33,14 +40,14 @@
 
                     <div class="row ma-0">
                         <v-text-field
-                            label="Vej"
+                            
                             type="text"
                             v-model="address.street"
                             class="pr-2"
                             placeholder="$user.address.street"
                         > </v-text-field>
                         <v-text-field
-                            label="Husnummer"
+                            
                             type="text"
                             v-model="address.number"
                             placeholder="$user.address.number"
@@ -48,14 +55,14 @@
                     </div>
                     <div class="row ma-0">
                         <v-text-field
-                            label="Postnummer"
+                            
                             type="number"
                             v-model="address.zip"
                             class="pr-2"
                             placeholder="$user.address.zip"
                         > </v-text-field>
                         <v-text-field
-                            label="By"
+                            
                             type="text"
                             v-model="address.city"
                             placeholder="$user.address.city"
@@ -69,7 +76,10 @@
                     >
                         Update
                     </v-btn>
+                </v-form>
+            </v-card>
         </div>
+        
     </v-container>
 </template>
 
@@ -106,7 +116,7 @@ async onUpdateProfile() {
             city: this.city
                 }
     };
-       let response = await this.$axios.$put("", data);
+       let response = await this.axios.put("", data);
         if (response.success) {
           this.email = "";
           this.fullname = "";

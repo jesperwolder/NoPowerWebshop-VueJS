@@ -4,6 +4,8 @@ import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
+import Profile from '../views/Profile.vue';
+
 
 Vue.use(VueRouter)
 
@@ -31,7 +33,17 @@ const routes = [
 			]
 		}
 	},
-	{ path: '*', name: '404', component: NotFound },
+	{ path: '/profile', name: 'profile', component: Profile,
+	meta: { 
+		breadcrumb: [
+			{ name: 'Forside', to: '/' },
+		]
+	} 
+},
+
+{ path: '*', name: '404', component: NotFound },
+
+	
 ];
 
 const router = new VueRouter({

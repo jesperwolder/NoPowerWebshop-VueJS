@@ -48,12 +48,12 @@
                     text
                 >
                     <v-icon left>mdi-account</v-icon>
-                    Profil
+                    dashboard
                 </v-btn>
             </div>
             
-         
-            <div v-if="this.isLoggedIn">
+         <!-- does not work yet -->
+            <div v-if="this.isLoggedIn.user">
               <v-btn
                 block
                 color="primary"
@@ -114,7 +114,7 @@ export default {
         //virker ikke helt endnu
             logout: function() {
                 isLoggedIn.logout();
-                this.$router.push('/');
+                this.router.push('/');
             }
         }
 }
