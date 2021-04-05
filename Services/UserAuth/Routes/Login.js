@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     if(!req.body.email || !req.body.password) {
         res.status(400).json({ 
-            message: "missing values" 
+            message: "missing values1" 
         });
         return
     }

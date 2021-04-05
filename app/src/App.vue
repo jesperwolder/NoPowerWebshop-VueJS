@@ -1,35 +1,32 @@
 <template>
 	<v-app>
+		<AppDrawer v-if="!this.hideDrawer" />
 		<NavBar />
-		<div id="mainWrapper">
-			<v-sheet
-				color="white"
-				elevation=1
+		<v-main class="pt-5">
+			<v-container
+				color="transparent"
 				class="mainContainer"
+				fluid
 			>
-				<Breadcrumb />
-				<!-- <AppDrawer /> -->
-
+				<Breadcrumb v-if="!this.hideBreadcrumb" />
 				<router-view />
-			</v-sheet>
-		</div>
+			</v-container>
+		</v-main>
 		<Footer />
 	</v-app>
 </template>
 
 <style scoped>
 	#mainWrapper {
-		padding: 0 20px;
-
 		box-sizing: border-box;
 	}
 </style>
 
 <script>
-import NavBar from '@/components/NavigationBar';
+import NavBar from '@/components/MenuItems/NavigationBar';
 import Breadcrumb from '@/components/Breadcrumb';
-import Footer from '@/components/Footer';
-import AppDrawer from '@/components/AppDrawer';
+import Footer from '@/components/MenuItems/Footer';
+import AppDrawer from '@/components/MenuItems/AppDrawer';
 
 export default {
 	name: 'App',
@@ -42,7 +39,8 @@ export default {
 	},
 
 	data: () => ({
-		
+		hideDrawer: false,
+		hideBreadcrumb: false,
 	}),
 };
 </script>
