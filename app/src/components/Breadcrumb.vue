@@ -20,8 +20,8 @@ export default {
 		}
 	},
 	methods: {
-		updateBC: () => {
-			let items = _routes.history.current.meta.breadcrumb;
+		updateBC: function() {
+			let items = this.$route.meta.breadcrumb;
 
 			let output = [];
 			

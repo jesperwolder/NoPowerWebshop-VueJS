@@ -42,5 +42,15 @@ export default {
 		hideDrawer: false,
 		hideBreadcrumb: false,
 	}),
+
+	mounted() {
+		document.title = this.$route.name + " - NoPower";
+	},
+
+	watch: {
+		$route (to, from) {
+			document.title = to.name + " - NoPower" || 'NoPower'
+		}
+	}
 };
 </script>

@@ -10,14 +10,14 @@ import Profile from '../views/Profile.vue';
 Vue.use(VueRouter)
 
 const routes = [
-	{ path: '/', name: 'Home', component: Home, 
+	{ path: '/', name: 'Forside', component: Home, 
 		meta: { 
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 			]
 		}
 	},
-	{ path: '/register', name: 'Register', component: Register, 
+	{ path: '/register', name: 'Bliv medlem', component: Register, 
 		meta: { 
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
@@ -25,7 +25,7 @@ const routes = [
 			]	
 		}
 	},
-	{ path: '/login', name: 'Login', component: Login, 
+	{ path: '/login', name: 'Log ind', component: Login, 
 		meta: { 
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
@@ -33,17 +33,16 @@ const routes = [
 			]
 		}
 	},
-	{ path: '/profile', name: 'Profile', component: Profile,
-	meta: { 
-		breadcrumb: [
-			{ name: 'Forside', to: '/' },
-		]
-	} 
-},
+	{ path: '/profile', name: 'Profil', component: Profile,
+		meta: { 
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Profil', to: '/profile' },
+			]
+		} 
+	},
+	{ path: '*', name: '404', component: NotFound },
 
-{ path: '*', name: '404', component: NotFound },
-
-	
 ];
 
 const router = new VueRouter({
