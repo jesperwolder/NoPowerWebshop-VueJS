@@ -37,7 +37,12 @@ let SignJwt = (store) => {
 }
 
 let VerifyJwt = (token) => {
-    return jwt.verify(token, process.env.SECRET);
+    try {
+        return jwt.verify(token, process.env.SECRET);
+    }catch {
+        return null;
+    }
+    
 }
 
 module.exports = { 

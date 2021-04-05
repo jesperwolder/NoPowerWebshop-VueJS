@@ -52,6 +52,35 @@ SECRET=
 }
 ```
 
+## domain.com/update
+### also requires jwt header
+```json
+{
+    user: {
+        _id: string,
+        email: string,
+        fullname: string,
+        password: string,
+        phone: string,
+        adress: {
+            street: string,
+            number: string,
+            zip: number,
+            city: string
+        },
+        isAdmin: Boolean
+    }
+}
+```
+
+### returns
+
+```json
+{
+    message: string
+}
+```
+
 ## domain.com/auth
 ### only requires header with jwt
 ```
