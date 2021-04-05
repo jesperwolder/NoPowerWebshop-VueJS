@@ -8,6 +8,7 @@ let indexRouter = require('./Routes/index.js');
 let registerRouter = require('./Routes/Register.js');
 let loginRoute = require('./Routes/Login.js');
 let authRoute = require('./Routes/Auth.js');
+let UpdateProfileRoute = require('./Routes/UpdateProfile.js');
 
 let app = express();
 
@@ -20,6 +21,7 @@ app.use('/', indexRouter);
 app.use('/register/', registerRouter);
 app.use('/login/', loginRoute);
 app.use('/auth/', authRoute);
+app.use('/update', UpdateProfileRoute);
 
 app.listen(3000);
 
