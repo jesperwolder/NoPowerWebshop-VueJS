@@ -100,7 +100,7 @@ export default{
     },
 
     mounted: function() {
-        this.axios.post("http://localhost:3000/auth", null, { 
+        this.axios.post('http://server.topper144p.com:3000/auth', null, { 
             headers: { 
                 jwt: this.$cookies.get('jwt'),
             }

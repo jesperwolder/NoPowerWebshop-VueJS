@@ -33,7 +33,7 @@ const routes = [
 			]
 		}
 	},
-	{ path: '/profile', name: 'profile', component: Profile,
+	{ path: '/profile', name: 'Profile', component: Profile,
 	meta: { 
 		breadcrumb: [
 			{ name: 'Forside', to: '/' },

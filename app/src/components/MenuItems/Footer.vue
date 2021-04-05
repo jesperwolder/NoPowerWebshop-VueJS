@@ -22,10 +22,20 @@
             </v-card-text>
 
             <v-divider></v-divider>
+
+            <v-switch
+                style="display:flex;justify-content:center;"
+                v-model="$vuetify.theme.dark"
+                label="Mørk tema"
+            >
+            </v-switch>
+
+            <v-divider></v-divider>
             <v-card-text>
                 © {{ new Date().getFullYear() }} — <strong>NoPower</strong>
             </v-card-text>
         </v-card>
+        
 
     </v-footer>
 </template>
