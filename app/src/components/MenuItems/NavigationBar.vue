@@ -52,13 +52,16 @@
                 </v-btn>
             </div>
             
-         <!-- does not work yet -->
-            <div v-if="this.isLoggedIn.user">
-              <v-btn
-                block
-                color="primary"
-                v-on:click.prevent="logout()"
-              > logout </v-btn>
+            <div v-if="this.isLoggedIn">
+                <v-btn
+                    depressed
+                    text
+                    v-on:click.prevent="logout()"
+                >
+                    <v-icon left>mdi-logout</v-icon>
+                    Logout
+                </v-btn>
+            
             </div>
 
             <div v-else>
