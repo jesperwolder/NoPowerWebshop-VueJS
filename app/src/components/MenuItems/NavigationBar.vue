@@ -53,7 +53,7 @@
             </div>
             
          <!-- does not work yet -->
-            <div v-if="this.isLoggedIn.user">
+            <div v-if="this.isLoggedIn">
               <v-btn
                 block
                 color="primary"

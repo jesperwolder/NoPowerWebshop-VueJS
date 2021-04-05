@@ -3,12 +3,12 @@
         <div class="col-md-5 col-sm-12 mx-auto">
 
             <v-card
-                :loading="loading"
+                
                 class="pa-5"
                 elevation="3"
             >
       <v-form class="col-12 pa-0"> 
-            <h2 class="text-center">Profile Page {{}}</h2>
+            <h2 class="text-center">Profile Page {{fullname}}</h2>
                 <v-text-field
                         
                         type="text"
@@ -101,6 +101,23 @@ data() {
             
         };
 },
+mounted: function() {
+    this.axios.post("http://localhost:3000/auth", null, {headers: {jwt: this.$cookies.get('jwt')}
+    
+    }) 
+    .then((res) =>{
+        console.log(res)
+        this.fullname = res.data.user.fullname;
+
+    }).catch(err => {
+        console.log(err);
+        this.$router.push('/*');
+    });
+                    
+    
+},
+
+
 methods: {
 async onUpdateProfile() {
     try {

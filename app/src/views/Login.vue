@@ -75,12 +75,12 @@ export default {
         UserLogin: function() {
             this.loading = true;
 
-               this.axios.post('http://localhost:3000/login', {... this.login}) 
+               this.axios.post('http://localhost:3000/login', {email: this.login.email, password: this.login.password}) 
                 
                     .then((res) =>{
                     this.$cookies.set('jwt', res.data.jwt);
                     this.$cookies.set('isAdmin', res.data.isAdmin);
-                    this.$router.push('/dashboard');
+                    this.$router.push('/profile');
                    
                     }).catch(err => {
                         //fejl
