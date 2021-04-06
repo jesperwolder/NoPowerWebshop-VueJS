@@ -7,7 +7,7 @@
             >
                 <v-form class="col-12 pa-0"> 
                     <h2 class="text-center">Profile Page {{ fullname }}</h2>
-
+                    
                     <v-text-field
                         type="text"
                         v-model="fullname"
@@ -28,9 +28,16 @@
                     > </v-text-field>
                         
                     <v-text-field
-                        label="Password"
+                        label="New password?"
                         type="password"
-                        v-model="password"
+                       
+                        class="pr-2"
+                    > </v-text-field>
+
+                    <v-text-field
+                        label="Reapeat password"
+                        type="password"
+                       
                         class="pr-2"
                     > </v-text-field>
 
@@ -40,7 +47,7 @@
                             type="text"
                             v-model="address.street"
                             class="pr-2"
-                            placeholder="$user.address.street"
+                            placeholder="$user.street"
                         > </v-text-field>
 
                         <v-text-field
@@ -73,7 +80,7 @@
                         color="primary"
                         v-on:click="onUpdateProfile()"
                     >
-                        Update
+                        Update userinfo
                     </v-btn>
                 </v-form>
             </v-card>
@@ -95,9 +102,23 @@ export default{
                 number: null,
                 zip: null,
                 city: null
+            },
+
+            UpdateProfile:{
+            email: null,
+            fullname: null,
+            password: null,
+            phone: null,
+            address: {
+                street: null,
+                number: null,
+                zip: null,
+                city: null
+            } 
             }
         };
     },
+    
 
     mounted: function() {
         this.axios.post('http://server.topper144p.com:3000/auth', null, { 
@@ -108,6 +129,11 @@ export default{
         .then((res) =>{
             console.log(res)
             this.fullname = res.data.user.fullname;
+            this.email = res.data.user.email;
+            // this.password = res.data.user.password;
+            this.phone = res.data.user.phone;
+            this.address = res.data.user.address;
+            
 
         }).catch(err => {
             console.log(err);
@@ -116,45 +142,44 @@ export default{
                         
         
     },
+    
 
     methods: {
-        async onUpdateProfile() {
-            try {
-                let data = {
-                    email: this.email,
-                    fullname: this.email,
-                    password: this.password,
-                    phone: this.phone,
-                    address: {
-                        street: this.street,
-                        number: this.number,
-                        zip: this.zip,
-                        city: this.city
-                    }
-                };
+        onUpdateProfile: function() {
+            
+          
+          
+            // Validere om passwords matcher
+                // if(this.register.password != this.register.confirmPassword) {
+                //     this.error = "Passwords matcher ikke";
+                //     this.loading = false;
+                //     return;
+                // }
 
-                let response = await this.axios.put("", data);
+            // Send post request om at update brugeren
+            this.axios.post('http://server.topper144p.com:3000/UpdateProfile', {user: this.UpdateProfile})
 
-                if (response.success) {
-                    this.email = "";
-                    this.fullname = "";
-                    this.password = "";
-                    this.phone = "";
-                    this.adress.street = "";
-                    this.adress.number = "";
-                        this.adress.zip = "";
-                        this.adress.city = "";
-                    await this.user.fetchUser();
-                }
-            } catch (err) {
-                console.log(err);
-            }
+            .then((res) => {
+                // Success respons
+                this.$cookies.set('jwt', res.data.jwt);
+                this.$cookies.set('isAdmin', res.data.isAdmin);
+                this.$router.push('/dashboard');
+            }).catch(err => {
+                // Fejled respons
+                this.error = err.response.data.message;
+            });
+            this.loading = false;
         },
-        
-        async onLogout() {
-            await this.user.logout();
-        }
+        CheckForNullInObject: function(obj) {
+            for (let key in obj) {
+                if(obj[key] == null || obj[key] == "") return false;
+            }
+            return true;
+     }
     }
-};
+}
 
 </script>
+<style>
+
+</style>
