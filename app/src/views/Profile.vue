@@ -10,8 +10,8 @@
                     
                     <v-text-field
                         type="text"
-                        v-model="fullname"
-                        placeholder="$user.fullname"
+                        placeholder="user.fullname"
+                        v-model="UpdateProfile.fullname"
                     ></v-text-field>
                     <v-text-field
                         
@@ -105,15 +105,15 @@ export default{
             },
 
             UpdateProfile:{
-            email: null,
-            fullname: null,
-            password: null,
-            phone: null,
+            email: "",
+            fullname: "",
+            password: "",
+            phone: "",
             address: {
-                street: null,
-                number: null,
-                zip: null,
-                city: null
+                street: "",
+                number: "",
+                zip: "",
+                city: ""
             } 
             }
         };
@@ -146,9 +146,6 @@ export default{
 
     methods: {
         onUpdateProfile: function() {
-            
-          
-          
             // Validere om passwords matcher
                 // if(this.register.password != this.register.confirmPassword) {
                 //     this.error = "Passwords matcher ikke";
@@ -157,29 +154,25 @@ export default{
                 // }
 
             // Send post request om at update brugeren
-            this.axios.post('http://server.topper144p.com:3000/UpdateProfile', {user: this.UpdateProfile})
-
+            this.axios.post('http://server.topper144p.com:3000/update', {user: this.UpdateProfile}, { 
+            headers: { 
+                jwt: this.$cookies.get('jwt'),
+            }
+            })
             .then((res) => {
-                // Success respons
-                this.$cookies.set('jwt', res.data.jwt);
-                this.$cookies.set('isAdmin', res.data.isAdmin);
+                console.log(res)
                 this.$router.push('/dashboard');
             }).catch(err => {
                 // Fejled respons
-                this.error = err.response.data.message;
+                console.log(err);
+                this.$router.push('/*');
             });
-            this.loading = false;
+            
         },
-        CheckForNullInObject: function(obj) {
-            for (let key in obj) {
-                if(obj[key] == null || obj[key] == "") return false;
-            }
-            return true;
-     }
+        
     }
 }
 
 </script>
 <style>
-
 </style>
