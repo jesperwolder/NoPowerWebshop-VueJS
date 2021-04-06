@@ -10,34 +10,33 @@
                     
                     <v-text-field
                         type="text"
-                        placeholder="user.fullname"
                         v-model="UpdateProfile.fullname"
+                        :placeholder="fullname"
+                        
                     ></v-text-field>
                     <v-text-field
                         
                         type="email"
-                        v-model="email"
-                        placeholder="$user.email"
+                        v-model="UpdateProfile.email"
+                        :placeholder="email"
                     > </v-text-field>
                     
                     <v-text-field
                         
                         type="text"
-                        v-model="phone"
-                        placeholder="$user.phone"
+                        v-model="UpdateProfile.phone"
+                        :placeholder="phone"
                     > </v-text-field>
                         
                     <v-text-field
                         label="New password?"
                         type="password"
-                       
                         class="pr-2"
                     > </v-text-field>
 
                     <v-text-field
                         label="Reapeat password"
                         type="password"
-                       
                         class="pr-2"
                     > </v-text-field>
 
@@ -45,16 +44,16 @@
                         <v-text-field
                             
                             type="text"
-                            v-model="address.street"
+                            v-model="UpdateProfile.street"
                             class="pr-2"
-                            placeholder="$user.street"
+                            :placeholder="address.street"
                         > </v-text-field>
 
                         <v-text-field
                             
                             type="text"
-                            v-model="address.number"
-                            placeholder="$user.address.number"
+                            v-model="UpdateProfile.number"
+                            :placeholder="address.number"
                         > </v-text-field>
                     </div>
 
@@ -62,16 +61,16 @@
                         <v-text-field
                             
                             type="number"
-                            v-model="address.zip"
+                            v-model="UpdateProfile.zip"
                             class="pr-2"
-                            placeholder="$user.address.zip"
+                            :placeholder="address.zip"
                         > </v-text-field>
 
                         <v-text-field
                             
                             type="text"
-                            v-model="address.city"
-                            placeholder="$user.address.city"
+                            v-model="UpdateProfile.city"
+                            :placeholder="address.city"
                         > </v-text-field>
                     </div>
 
@@ -165,7 +164,7 @@ export default{
             }).catch(err => {
                 // Fejled respons
                 console.log(err);
-                this.$router.push('/*');
+                this.$router.push('/dashboard');
             });
             
         },
