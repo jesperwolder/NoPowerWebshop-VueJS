@@ -44,12 +44,33 @@ export default {
 	}),
 
 	mounted() {
-		document.title = this.$route.name + " - NoPower";
+		document.title = this.$route.name + " - NoPower"; // ? Updates the page title, on mouting.
+
+
+		/*  
+		 ? Checks if cookie exists with theme preference, on mounting.
+		 ? Sets perfered theme.
+		 */
+		if(this.$cookies.get('themeDark') != null) {
+			this.$vuetify.theme.dark = (this.$cookies.get('themeDark') === 'true' ? true : false);
+		} else {
+			this.$vuetify.theme.dark = false;
+		}
 	},
 
 	watch: {
 		$route (to, from) {
-			document.title = to.name + " - NoPower" || 'NoPower'
+			document.title = to.name + " - NoPower" || 'NoPower'; // ? Updates the page title, on rerouting.
+
+			/*
+			 ?  Checks if 'themeDark' has been changed, bewteen rerouting of pages.
+			 ? 	Sets the theme to dark/light mode, by reading the cookie. 
+			 */
+			if(this.$cookies.get('themeDark') != null) {
+				this.$vuetify.theme.dark = (this.$cookies.get('themeDark') === 'true' ? true : false);
+			} else {
+				this.$vuetify.theme.dark = false;
+			}
 		}
 	}
 };

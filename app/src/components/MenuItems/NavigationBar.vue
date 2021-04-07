@@ -33,7 +33,7 @@
             <v-spacer></v-spacer> -->
 
       <div v-if="this.isLoggedIn">
-        <v-btn class="buttons" depressed text mr-2 to="/dashboard">
+        <v-btn class="buttons" depressed text>
           <v-icon left>mdi-account</v-icon>
           dashboard
         </v-btn>

@@ -32,6 +32,7 @@
                     v-for="item in drawerItems"
                     :key="item.title"
                     link
+                    :to="item.path"
                 >
                     <v-list-item-content>
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -46,7 +47,7 @@
 export default {
     data: () => ({
 		drawerItems: [
-			{ title: 'Alle Produkter', path: '/' },
+			{ title: 'Alle Produkter', path: '/products' },
 			{ title: 'Ingen produkter', path: '/' },
 		]
 	}),

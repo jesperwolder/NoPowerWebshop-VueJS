@@ -26,6 +26,7 @@
             <v-switch
                 style="display:flex;justify-content:center;"
                 v-model="$vuetify.theme.dark"
+                v-on:click="setTheme()"
                 label="Mørk tema"
             >
             </v-switch>
@@ -41,14 +42,29 @@
 </template>
 
 <script>
+
+
 export default {
+        
     data: () => ({
         links: [
             'Om Os',
             'Kontakt Os',
             'Returret'
-        ]
-    })
+        ],
+    }),
+    methods: {
+        setTheme() {
+            /*
+             ?  Updates theme, and cookie, when the switch button, has been pressed.  
+             */
+
+            this.$cookies.set('themeDark', this.$vuetify.theme.dark);
+            
+            console.log("DarkMode: " + (this.$vuetify.theme.dark ? 'On' : 'Off'));
+
+        }
+    }
 }
 </script>
 
