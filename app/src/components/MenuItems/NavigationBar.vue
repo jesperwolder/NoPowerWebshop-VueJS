@@ -2,8 +2,6 @@
     <v-card class="overflow-hidden">
         <v-app-bar
             fixed
-            dark
-            light
             app
             clipped-left
         >

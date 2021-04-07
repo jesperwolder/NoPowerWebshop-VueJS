@@ -67,7 +67,6 @@ export default {
             login: {
                 email: "",
                 password: "",
-                
             }
         }
     },
@@ -75,21 +74,21 @@ export default {
         UserLogin: function() {
             this.loading = true;
 
-               this.axios.post('http://server.topper144p.com:3000/login', {email: this.login.email, password: this.login.password}) 
-                
-                    .then((res) =>{
+            this.axios.post('http://server.topper144p.com:3000/login', {
+                email: this.login.email, 
+                password: this.login.password
+            })
+                .then((res) =>{
                     this.$cookies.set('jwt', res.data.jwt);
                     this.$cookies.set('isAdmin', res.data.isAdmin);
                     this.$router.push('/profile');
-                   
-                    }).catch(err => {
-                        //fejl
-                      this.error = err.response.data.message;
-                    });
-                    
-                    this.loading = false;
+                    location.reload(); // Forces refresh (Bad fix, but it works xD)
+                        
+                }).catch(err => {
+                    this.error = err.response.data.message;
+                });
             
-
+            this.loading = false;
         },
         
         CheckForNullInObject: function(obj) {

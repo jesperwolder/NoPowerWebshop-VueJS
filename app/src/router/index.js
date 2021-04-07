@@ -46,7 +46,7 @@ const routes = [
 		meta: { 
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'Produkter', to: '/products' },
+				{ name: 'Alle Produkter', to: '/products' },
 			]
 		} 
 	},

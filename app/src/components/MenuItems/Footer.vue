@@ -1,7 +1,11 @@
 <template>
     <v-footer
         padless
+        tile
         app
+        absolute
+        inset
+        class="mt-0 pt-0"
     >
         <v-card
             flat
