@@ -5,6 +5,7 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
+import DashBoard from '../views/DashBoard.vue'
 import Products from '../views/Products/Index.vue';
 
 
@@ -34,10 +35,20 @@ const routes = [
 			]
 		}
 	},
+	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
+		meta: { 
+		breadcrumb: [
+			{ name: 'Forside', to: '/' },
+			{ name: 'dashboard', to: 'dashboard' },
+			{ name: 'Profil', to: '/profile' },
+		]
+	} 
+},
 	{ path: '/profile', name: 'Profil', component: Profile,
 		meta: { 
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
+				{ name: 'dashboard', to: 'dashboard' },
 				{ name: 'Profil', to: '/profile' },
 			]
 		} 
