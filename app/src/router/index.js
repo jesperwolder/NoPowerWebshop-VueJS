@@ -5,6 +5,7 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
+import Products from '../views/Products/Index.vue';
 
 
 Vue.use(VueRouter)
@@ -38,6 +39,14 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Profil', to: '/profile' },
+			]
+		} 
+	},
+	{ path: '/products', name: 'Produkter', component: Products,
+		meta: { 
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Produkter', to: '/products' },
 			]
 		} 
 	},
