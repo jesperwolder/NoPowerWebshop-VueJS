@@ -15,12 +15,12 @@
                     </v-btn>
 
                     <v-btn class="buttons" depressed text mr-2 to="/OrderHistory">
-                    <v-icon left>mdi-account</v-icon>
+                    <v-icon left>mdi-cart-check</v-icon>
                     Købshistorik
                     </v-btn>
 
                     <v-btn class="buttons" depressed text mr-2 to="/Support">
-                    <v-icon left>mdi-account</v-icon>
+                    <v-icon left>mdi-face-agent</v-icon>
                     support
                     </v-btn>
 
