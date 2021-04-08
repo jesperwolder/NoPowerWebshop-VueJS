@@ -9,10 +9,6 @@
 </template>
 
 <script>
-import routes from '@/router/index.js';
-
-let _routes = routes;
-
 export default {
     data() {
 		return {

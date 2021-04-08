@@ -2,6 +2,7 @@
 	<v-card class="overflow-hidden">
 		<v-app-bar
 				fixed
+				dark
 				app
 				clipped-left
 		>
@@ -82,10 +83,13 @@ export default {
 		}
 	},
 	methods: {
-		//virker ikke helt endnu
+		// Dårlig løsning, but it works :)
 		logout: function() {
-			isLoggedIn.logout();
-			this.router.push("/");
+			this.isLoggedIn = false;
+			this.$cookies.remove('jwt');
+			this.$cookies.remove('isAdmin');
+			this.$router.push("/");
+			// location.reload();
 		},
 	},
 };

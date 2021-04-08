@@ -14,13 +14,15 @@ Vue.use(VueRouter)
 const routes = [
 	{ path: '/', name: 'Forside', component: Home, 
 		meta: { 
+			title: 'Forside',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 			]
 		}
 	},
 	{ path: '/register', name: 'Bliv medlem', component: Register, 
-		meta: { 
+		meta: {
+			title: 'Bliv medlem',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Bliv medlem', to: '/register' }			
@@ -28,7 +30,8 @@ const routes = [
 		}
 	},
 	{ path: '/login', name: 'Log ind', component: Login, 
-		meta: { 
+		meta: {
+			title: 'Log ind',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Log Ind', to: '/login' }
@@ -36,16 +39,18 @@ const routes = [
 		}
 	},
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
-		meta: { 
-		breadcrumb: [
-			{ name: 'Forside', to: '/' },
-			{ name: 'dashboard', to: 'dashboard' },
-			{ name: 'Profil', to: '/profile' },
-		]
-	} 
-},
+		meta: {
+			title: 'Dashboard',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Dashboard', to: '/dashboard' },
+				{ name: 'Profil', to: '/profile' },
+			]
+		} 
+	},
 	{ path: '/profile', name: 'Profil', component: Profile,
 		meta: { 
+			title: 'Profil',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'dashboard', to: 'dashboard' },
@@ -54,7 +59,8 @@ const routes = [
 		} 
 	},
 	{ path: '/products', name: 'Produkter', component: Products,
-		meta: { 
+		meta: {
+			title: 'Alle Produkter',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Alle Produkter', to: '/products' },

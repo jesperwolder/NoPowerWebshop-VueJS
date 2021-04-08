@@ -6,7 +6,7 @@
                 elevation="3"
             >
                 <v-form class="col-12 pa-0"> 
-                    <h2 class="text-center">DashBoard </h2>
+                    <h2 class="text-center">{{ meta.title }}</h2>
                     
                    
                   <v-btn class="buttons" depressed text mr-2 to="/profile">
@@ -42,7 +42,7 @@ export default {
         return {
             loading: false,
             error: null,
-          
+            meta: this.$route.meta,
         }
     },
 }

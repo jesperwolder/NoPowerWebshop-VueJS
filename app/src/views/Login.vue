@@ -7,7 +7,7 @@
                 elevation="3"
             >
                 <v-form class="col-12 pa-0">
-                    <v-card-title class="px-0 pt-0">Log ind</v-card-title>
+                    <v-card-title class="px-0 pt-0">{{ meta.title }}</v-card-title>
                     <v-card-subtitle class="px-0">
                         Har du ikke en bruger, kan du oprette dig som medlem af NoPower. <br><br>
                         <v-btn 
@@ -67,7 +67,8 @@ export default {
             login: {
                 email: "",
                 password: "",
-            }
+            },
+            meta: this.$route.meta,
         }
     },
     methods: {

@@ -7,7 +7,7 @@
                 elevation="3"
             >
                 <v-form class="col-12 pa-0">
-                    <v-card-title class="px-0 pt-0">Opret bruger</v-card-title>
+                    <v-card-title class="px-0 pt-0">{{ meta.title }}</v-card-title>
                     <v-card-subtitle class="px-0">
                         Hos NoPower Webshoppen tilbyder vi alle og en hver, at være medlem hos os. <br>
                         Det er gratis at være medlem, og som en bonus, kan du benytte dig af alle medlems fordelene. <br><br>
@@ -142,7 +142,8 @@ export default {
                     zip: null,
                     city: null
                 }
-            }
+            },
+            meta: this.$route.meta,
         }
     },
     methods: {
