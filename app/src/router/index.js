@@ -44,7 +44,6 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Dashboard', to: '/dashboard' },
-				{ name: 'Profil', to: '/profile' },
 			]
 		} 
 	},
@@ -53,7 +52,7 @@ const routes = [
 			title: 'Profil',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'dashboard', to: 'dashboard' },
+				{ name: 'Dashboard', to: '/dashboard' },
 				{ name: 'Profil', to: '/profile' },
 			]
 		} 
