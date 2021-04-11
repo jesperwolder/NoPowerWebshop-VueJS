@@ -10,6 +10,7 @@ const ProductSchema = mongoose.Schema({
     Name: String,
     Description: String,
     Price: Number,
+    Image: String,
     SalePercentage: { type: Number, default: 0 },
     TechnicalDetails: Array // contains objects { name: string, value: string }
 });
