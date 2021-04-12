@@ -65,7 +65,7 @@ body {
 }
 
 .v-app-bar {
-    /* backdrop blur is unsupported in firefox, sadly :( */
+    /* ! backdrop blur is unsupported in firefox, sadly :( */
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
