@@ -1,12 +1,14 @@
 <template>
     <div>
-        <!-- <v-card
-            block
-            class="pa-5 mb-0"
-        > -->
+        <v-card
+            class="pa-5 ma-0"
+            elevation="2"
+        >
             <h1>{{ meta.title }}</h1>
 
-            <v-row no-gutters>
+            <v-divider class="pb-3 mt-3"></v-divider>
+
+            <v-row>
                 <v-col
                     v-for="n in 20"
                     :key="n"
@@ -16,43 +18,49 @@
                     md="4"
                     lg="3"
                     xl="2"
-                    class="px-2 mb-5 mt-5 productCols"
+                    class="px-2 my-0 productCols"
                 >
                     <v-card
                         height="100%"
+                        class="pb-0 mb-0 productCard"
+                        outlined
                     >
-                        <!-- <v-img
-                            height="200"
-                            src="http://placekitten.com/300"
-                            style="filter:blur(3px);position:absolute;"
-                        ></v-img> -->
-                        <v-img
-                            min-height="200"
-                            max-height="300"
-                            :src="`http://placekitten.com/${ getRandomInt(250, 600) }`"
-                            contain
-                            class="productImage"
-                        ></v-img>
+                        <div style="position:relative;">
+                            <v-btn
+                                elevation="2"
+                                fab
+                                absolute
+                                right
+                                small
+                                bottom
+                            >
+                                <v-icon>mdi-heart-outline</v-icon>
+                            </v-btn>
+                            <v-img
+                                height="20rem"
+                                :src="`http://placeimg.com/${ getRandomInt(250, 600) }/${ getRandomInt(250, 600) }/tech`"
+                                contain
+                                class="productImage"
+                            ></v-img>
+                        </div>
+
                         <v-card-title
-                            class="productTitle"
+                            class="productTitle text-truncate"
                         >
                             {{ n }}: Produkt
                         </v-card-title>
-                        <v-card-subtitle>
-                            subtitle
+                        <v-card-subtitle class="pb-0 text-caption text-truncate truncate-2">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quam laudantium consectetur aliquid maxime! Dignissimos dolor minima officiis possimus deleniti consectetur aut sed sequi deserunt perspiciatis, commodi necessitatibus ipsum in.
                         </v-card-subtitle>
-                        <v-card-text three-line>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non cupiditate nihil ipsam distinctio sint aspernatur iure nisi vel, odio, adipisci, voluptas voluptatibus atque molestias minima repellat nam nobis fuga magnam!
-                            <div v-if="n == 2">
-                                {{ (n == 2) }}: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum autem fuga repudiandae voluptatibus consequatur. Mollitia, quam tempora quisquam assumenda cupiditate nam officiis voluptate dolore placeat et unde sint rem maiores!
-                            </div>
-                        </v-card-text>
+                        <v-card-subtitle class="pt-2">
+                            Kun <b>200</b>,- 
+                        </v-card-subtitle>
+
                         <v-card-actions>
                             <v-btn
-                                block
+                                color="#F7941D"
+                                class="mb-0"
                                 text
-                                tile                                
-                                color="primary"
                             >
                                 Til produkt
                             </v-btn>
@@ -60,7 +68,7 @@
                     </v-card>
                 </v-col>
             </v-row>
-        <!-- </v-card> -->
+        </v-card>
     </div>
 </template>
 
@@ -85,7 +93,7 @@ export default {
 
 <style scoped>
     .productImage {
-        background-color: #212112;
+        background-color: #212121;
     }
 
     .productCols {
@@ -93,10 +101,19 @@ export default {
         flex-grow: .2;
     }
 
+    .productCard {
+        border-bottom: 3px solid rgba(0,0,0,.2)
+    }
+
     .productTitle {
+        display: block;
+    }
+
+    .truncate-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        overflow: hidden;
+        white-space: unset !important;
+        display: -webkit-box;
     }
 </style>

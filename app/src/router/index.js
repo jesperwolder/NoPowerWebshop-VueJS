@@ -8,6 +8,7 @@ import Profile from '../views/Profile.vue';
 import DashBoard from '../views/DashBoard.vue';
 import AdminPage from '../views/AdminPage.vue';
 import Products from '../views/Products/Index.vue';
+import Cart from '../views/Cart.vue';
 
 
 
@@ -37,6 +38,15 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Log Ind', to: '/login' }
+			]
+		}
+	},
+	{ path: '/cart', name: 'Kurv', component: Cart, 
+		meta: {
+			title: 'Indkøbskurv',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Kurv', to: '/cart' }
 			]
 		}
 	},
