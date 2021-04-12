@@ -5,9 +5,11 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
-import DashBoard from '../views/DashBoard.vue'
+import DashBoard from '../views/DashBoard.vue';
+import AdminPage from '../views/AdminPage.vue';
 import Products from '../views/Products/Index.vue';
 import Cart from '../views/Cart.vue';
+
 
 
 Vue.use(VueRouter)
@@ -64,6 +66,16 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Dashboard', to: '/dashboard' },
 				{ name: 'Profil', to: '/profile' },
+			]
+		} 
+	},
+	{ path: '/adminpage', name: 'AdminPage', component: AdminPage,
+		meta: {
+			title: 'AdminPage',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'AdminPage', to: '/adminpage' },
+				{ name: 'Dashboard', to: '/dashboard' },
 			]
 		} 
 	},
