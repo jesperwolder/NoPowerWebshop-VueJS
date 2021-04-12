@@ -22,7 +22,7 @@
                 >
                     <v-card
                         height="100%"
-                        class="pb-0 mb-0 productCard"
+                        class="pb-0 mb-0 productCard rounded-lg"
                         outlined
                     >
                         <div style="position:relative;">

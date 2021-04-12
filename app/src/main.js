@@ -6,14 +6,10 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueCookies from 'vue-cookies';
 import Vuetify from 'vuetify/lib/framework';
-import VueSmoothScroll from 'vue2-smooth-scroll'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios);
 Vue.use(VueCookies);
-Vue.use(VueSmoothScroll, {
-	updateHistory: false,
-});
 
 new Vue({
 	router,
