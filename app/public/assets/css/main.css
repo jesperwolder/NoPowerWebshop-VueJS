@@ -23,6 +23,10 @@ body {
     background-color: #222;
 }
 
+html, body{
+    scroll-behavior: smooth;
+}
+
 .theme--light.v-application {
     background-color: var(--c-light-bg) !important;
 }

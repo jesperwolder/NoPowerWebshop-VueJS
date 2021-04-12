@@ -7,6 +7,7 @@ import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
 import DashBoard from '../views/DashBoard.vue'
 import Products from '../views/Products/Index.vue';
+import Cart from '../views/Cart.vue';
 
 
 Vue.use(VueRouter)
@@ -35,6 +36,15 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Log Ind', to: '/login' }
+			]
+		}
+	},
+	{ path: '/cart', name: 'Kurv', component: Cart, 
+		meta: {
+			title: 'Indkøbskurv',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Kurv', to: '/cart' }
 			]
 		}
 	},

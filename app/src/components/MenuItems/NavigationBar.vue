@@ -1,5 +1,19 @@
 <template>
 	<v-card class="overflow-hidden">
+		<v-btn
+            fab
+			app
+            fixed
+            right
+            bottom
+            color="#F7941D"
+            v-on:click="scrollToTop()"
+            class="toTopBtn"
+			v-scroll="onScroll"
+        >
+            <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>
+
 		<v-app-bar
 				fixed
 				dark
@@ -63,10 +77,16 @@
 				</v-btn>
 			</div>
 
-			<v-btn class="buttons" depressed text pl-12 to="/cart">
-				<v-icon left>mdi-cart</v-icon>
-				Kurv
-			</v-btn>
+			<v-badge
+				content="5"
+				color="#F7941D"
+				overlap
+			>
+				<v-btn class="buttons" depressed text pl-12 to="/cart">
+					<v-icon left>mdi-cart</v-icon>
+					Kurv
+				</v-btn>
+			</v-badge>
 		</v-app-bar>
 	</v-card>
 </template>
@@ -76,6 +96,7 @@ export default {
 	data: () => ({
 		isLoggedIn: true,
 		search: "",
+		offsetTop: 0,
 	}),
 	mounted: function() {
 		if (!this.$cookies.get("jwt")) {
@@ -83,14 +104,25 @@ export default {
 		}
 	},
 	methods: {
-		// Dårlig løsning, but it works :)
 		logout: function() {
 			this.isLoggedIn = false;
 			this.$cookies.remove('jwt');
 			this.$cookies.remove('isAdmin');
 			this.$router.push("/");
-			// location.reload();
 		},
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
+		onScroll() {
+			let scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+			this.offsetTop = scrollTop;
+
+			if(scrollTop < 100) {
+				document.querySelector('.toTopBtn').classList.add('off');
+			} else {
+				document.querySelector('.toTopBtn').classList.remove('off');
+			}
+		}
 	},
 };
 </script>
@@ -98,6 +130,7 @@ export default {
 <style scoped>
 	.v-app-bar {
 		border-radius: 0 !important;
+		z-index: 9999999;
 	}
 
 	.buttons {
@@ -114,5 +147,14 @@ export default {
 
 	.searchBar {
 		max-width: 600px;
+	}
+
+	.toTopBtn {
+        z-index: 9999 !important;
+    }
+
+	.toTopBtn.off {
+		opacity: 0;
+		pointer-events: none;
 	}
 </style>
