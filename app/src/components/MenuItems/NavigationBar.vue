@@ -37,7 +37,14 @@
 						</v-container>
 
 						<v-spacer></v-spacer> -->
-
+			<div v-if="this.isLoggedIn">
+				<div v-if="this.isAdmin">
+				<v-btn class="buttons" depressed text mr-2 to="/adminpage">
+					<v-icon left>mdi-account</v-icon>
+					Admin page
+				</v-btn>
+				</div>
+			</div>
 			<div v-if="this.isLoggedIn">
 				<v-btn class="buttons" depressed text mr-2 to="/dashboard">
 					<v-icon left>mdi-account</v-icon>
@@ -76,10 +83,15 @@ export default {
 	data: () => ({
 		isLoggedIn: true,
 		search: "",
+		isAdmin: false,
 	}),
 	mounted: function() {
 		if (!this.$cookies.get("jwt")) {
 			this.isLoggedIn = false;
+			
+		}
+		if(this.$cookies.get('isAdmin')){
+			this.isAdmin = true;
 		}
 	},
 	methods: {
