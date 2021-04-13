@@ -89,6 +89,8 @@
 </template>
 
 <script>
+import {AuthBody} from '../Services/AuthApi';
+
 export default{
     data() {
         return {
@@ -120,22 +122,14 @@ export default{
     
 
     mounted: function() {
-        this.axios.post('http://server.topper144p.com:3000/auth', null, { 
-            headers: { 
-                jwt: this.$cookies.get('jwt'),
-            }
-        })
-        .then((res) =>{
-            console.log(res)
-            this.fullname = res.data.user.fullname;
-            this.email = res.data.user.email;
+        AuthBody(this.$cookies.get('jwt'))
+        .then((body) =>{
+            this.fullname = res.user.fullname;
+            this.email = res.user.email;
             // this.password = res.data.user.password;
-            this.phone = res.data.user.phone;
-            this.address = res.data.user.address;
-            
-
+            this.phone = res.user.phone;
+            this.address = res.user.address;
         }).catch(err => {
-            console.log(err);
             this.$router.push('/*');
         });
                         

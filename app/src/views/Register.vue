@@ -125,6 +125,8 @@
 </style>
 
 <script>
+import { RegisterBody } from '../Services/AuthApi.js';
+
 export default {
     data() {
         return {
@@ -163,11 +165,11 @@ export default {
             }
 
             // Send post request om at oprette brugeren
-            this.axios.post('http://server.topper144p.com:3000/register', { user: this.register })
-            .then((res) => {
+            RegisterBody({ user: this.register })
+            .then((body) => {
                 // Success respons
-                this.$cookies.set('jwt', res.data.jwt);
-                this.$cookies.set('isAdmin', res.data.isAdmin);
+                this.$cookies.set('jwt', body.jwt);
+                this.$cookies.set('isAdmin', body.isAdmin);
                 this.$router.push('/dashboard');
             }).catch(err => {
                 // Fejled respons

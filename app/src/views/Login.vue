@@ -58,6 +58,7 @@
 </style>
 
 <script>
+import {LoginBody} from '../Services/AuthApi';
 
 export default {
     data() {
@@ -75,7 +76,7 @@ export default {
         UserLogin: function() {
             this.loading = true;
 
-            this.axios.post('http://server.topper144p.com:3000/login', {
+            LoginBody('http://server.topper144p.com:3000/login', {
                 email: this.login.email, 
                 password: this.login.password
             })
@@ -90,13 +91,6 @@ export default {
                 });
             
             this.loading = false;
-        },
-        
-        CheckForNullInObject: function(obj) {
-            for (let key in obj) {
-                if(obj[key] == null || obj[key] == "") return false;
-            }
-            return true;
         }
     }
 }
