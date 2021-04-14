@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const Product = require('../Schema/Product.js')
 
+const validator = require('../modules/Validator.js');
 const auth = require('../modules/authentication.js');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     if(!req.headers.jwt) {
         res.status(403).json({
             message: 'unauthorized'
@@ -16,44 +17,38 @@ router.post('/', (req, res) => {
         return;
     }
 
-    let options = { headers: { jwt: req.headers.jwt } }
-    let response;
-    axios.post(
+    let options = { headers: { jwt: req.headers.jwt } };
+    let err, response = await axios.post(
         'http://' + process.env.AuthService + '/auth', 
         null,
         options
-    ).then(response => {
-        if(!response.data.isAdmin){
-            res.status(403).json({
-                message: 'unauthorized'
-            });
-            return;
-        }
-    
-        var product = new Product();
-        product._id = mongoose.Types.ObjectId();
-        product.Creator.createdBy = response.data.user._id;
-        product.Creator.creatorEmail = response.data.user.email;
-        product.Creator.creatorFullname = response.data.user.fullname;
-        product.Name = req.body.product.Name;
-        product.Description = req.body.product.Description;
-        product.Price = req.body.product.Price;
-        product.Image  = req.body.product.Image;
-        product.TechnicalDetails = req.body.TechnicalDetails;
-    
-        product.save();
-    
-        res.status(200).json({
-            message: 'success'
+    );
+
+    if(err || response.data.isAdmin) {
+        res.status(403).json({
+            message: err.response.data.message
         });
         return;
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(503).json({
-            message: 'an unknown error has occured'
+    }
+
+    let product = new Product(req.body.product);
+    product._id = mongoose.Types.ObjectId();
+    product.Creator.createdBy = response.data.user._id;
+    product.Creator.creatorEmail = response.data.user.email;
+    product.Creator.creatorFullname = response.data.user.fullname;
+
+    if(product.TechnicalDetails.length == 0 || validator.ObjectHasNoNull(product)) {
+        res.status(401).json({
+            message: 'Der var ikke nok tekniske detaljer, eller også er alle værdier ikke udfyldt'
         });
         return;
+    }
+
+    product.save();
+
+    res.json({
+        message: 'success',
+        product: product
     });
 
 });
