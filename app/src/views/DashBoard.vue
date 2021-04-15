@@ -4,6 +4,7 @@
             <v-card
                 class="pa-5 ma-0"
                 elevation="2"
+                v-if="CS.isLoggedIn"
             >
                 <v-form class="col-12 pa-0"> 
                     <h1>{{ meta.title }}</h1>
@@ -36,6 +37,7 @@
 </template>
 <script>
 
+import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
 	data() {
@@ -43,7 +45,9 @@ export default {
             loading: false,
             error: null,
             meta: this.$route.meta,
+            CS: CurrentSession
         }
     },
+    
 }
 </script>
