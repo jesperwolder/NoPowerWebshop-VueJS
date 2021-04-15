@@ -9,7 +9,7 @@ const UpdateUrl = server + '/update'
 
 export const AuthBody = async (jwt) => {
     let err, response = await axios.post(AuthUrl, null, { headers: { jwt: jwt }});
-
+    
     if(err) throw err;
 
     return response.data;

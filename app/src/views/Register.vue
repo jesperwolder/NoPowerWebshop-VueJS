@@ -168,8 +168,9 @@ export default {
             RegisterBody({ user: this.register })
             .then((res) => {
                 // Success respons
+                CurrentSession.isLoggedIn = res.authorized;
+                CurrentSession.isAdmin = res.isAdmin;
                 this.$cookies.set('jwt', res.jwt);
-                this.$cookies.set('isAdmin', res.isAdmin);
                 this.$router.push('/dashboard');
             }).catch(err => {
                 // Fejled respons

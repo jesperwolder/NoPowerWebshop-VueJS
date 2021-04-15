@@ -23,6 +23,8 @@ router.post('/', async (req, res) => {
         return;
     }
 
+    req.body.user.email = req.body.user.email.toLowerCase();
+
     console.log("/register -> " + req.body.user.email);
 
     let err, data = await User.findOne({ email: req.body.user.email });

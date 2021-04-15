@@ -58,7 +58,8 @@
 </style>
 
 <script>
-import {LoginBody} from '../Services/AuthApi';
+import { LoginBody } from '../Services/AuthApi';
+import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
     data() {
@@ -70,6 +71,7 @@ export default {
                 password: "",
             },
             meta: this.$route.meta,
+            CS: CurrentSession
         }
     },
     methods: {
@@ -77,14 +79,14 @@ export default {
             this.loading = true;
 
             LoginBody({
-                email: this.login.email, 
+                email: this.login.email.toLowerCase(), 
                 password: this.login.password
             })
-                .then((res) =>{
+                .then((res) => {
+                    CurrentSession.isLoggedIn = res.authorized;
+                    CurrentSession.isAdmin = res.isAdmin;
                     this.$cookies.set('jwt', res.jwt);
-                    this.$cookies.set('isAdmin', res.isAdmin);
                     this.$router.push('/profile');
-                    location.reload(); // Forces refresh (Bad fix, but it works xD)
                         
                 }).catch(err => {
                     this.error = err.response.message;
