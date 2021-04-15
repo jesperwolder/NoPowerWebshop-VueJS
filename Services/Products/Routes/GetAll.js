@@ -7,7 +7,8 @@ router.get('/', async (req, res) => {
     let err, products = await Product.find({});
     if(err || !products) {
         res.status(404).json({
-            message: 'Der skete en fejl'
+            message: 'Der skete en fejl',
+            products: null
         });
         return;
     }

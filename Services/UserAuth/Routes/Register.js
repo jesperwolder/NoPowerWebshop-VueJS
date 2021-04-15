@@ -18,6 +18,8 @@ router.post('/', async (req, res) => {
         !req.body.user.address.city
     ) {
         res.status(503).json({
+            authorized: false,
+            jwt: null,
             message: "Nogle værdier var tomme"
         });
         return;
@@ -30,6 +32,8 @@ router.post('/', async (req, res) => {
     let err, data = await User.findOne({ email: req.body.user.email });
     if(err) {
         res.status(503).json({ 
+            authorized: false,
+            jwt: null,
             message: "Der skete en fejl, prøv igen senere"
         });
         return;
@@ -37,6 +41,8 @@ router.post('/', async (req, res) => {
 
     if(data != null) {
         res.status(409).json({
+            authorized: false,
+            jwt: null,
             message: "Email allerede i brug"
         });
         return;
@@ -46,6 +52,8 @@ router.post('/', async (req, res) => {
     
     if(!hash){
         res.status(424).json({
+            authorized: false,
+            jwt: null,
             message: "Der skete en fejl prøv igen senere"
         });
         return;
@@ -59,6 +67,7 @@ router.post('/', async (req, res) => {
 
     user.save();
     res.status(200).json({
+        authorized: true,
         jwt: jwt,
         isAdmin: false,
         message: "Success"
