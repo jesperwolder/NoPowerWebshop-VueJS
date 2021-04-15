@@ -76,18 +76,18 @@ export default {
         UserLogin: function() {
             this.loading = true;
 
-            LoginBody('http://server.topper144p.com:3000/login', {
+            LoginBody({
                 email: this.login.email, 
                 password: this.login.password
             })
                 .then((res) =>{
-                    this.$cookies.set('jwt', res.data.jwt);
-                    this.$cookies.set('isAdmin', res.data.isAdmin);
+                    this.$cookies.set('jwt', res.jwt);
+                    this.$cookies.set('isAdmin', res.isAdmin);
                     this.$router.push('/profile');
                     location.reload(); // Forces refresh (Bad fix, but it works xD)
                         
                 }).catch(err => {
-                    this.error = err.response.data.message;
+                    this.error = err.response.message;
                 });
             
             this.loading = false;

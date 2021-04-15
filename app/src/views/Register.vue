@@ -166,10 +166,10 @@ export default {
 
             // Send post request om at oprette brugeren
             RegisterBody({ user: this.register })
-            .then((body) => {
+            .then((res) => {
                 // Success respons
-                this.$cookies.set('jwt', body.jwt);
-                this.$cookies.set('isAdmin', body.isAdmin);
+                this.$cookies.set('jwt', res.jwt);
+                this.$cookies.set('isAdmin', res.isAdmin);
                 this.$router.push('/dashboard');
             }).catch(err => {
                 // Fejled respons

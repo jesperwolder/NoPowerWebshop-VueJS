@@ -63,7 +63,7 @@
                             type="number"
                             v-model="UpdateProfile.zip"
                             class="pr-2"
-                            :placeholder="address.zip"
+                            :placeholder="address.zip.toString()"
                         > </v-text-field>
 
                         <v-text-field
@@ -101,7 +101,7 @@ export default{
             address: {
                 street: null,
                 number: null,
-                zip: null,
+                zip: '',
                 city: null
             },
 
@@ -123,14 +123,15 @@ export default{
 
     mounted: function() {
         AuthBody(this.$cookies.get('jwt'))
-        .then((body) =>{
+        .then((res) => {
             this.fullname = res.user.fullname;
             this.email = res.user.email;
             // this.password = res.data.user.password;
             this.phone = res.user.phone;
             this.address = res.user.address;
         }).catch(err => {
-            this.$router.push('/*');
+            console.log(err);
+            //this.$router.push('/*');
         });
                         
         

@@ -23,7 +23,7 @@ export const LoginBody = async (body) => {
     return response.data;
 }
 
-export const RegisterBody = async (body , jwt) => {
+export const RegisterBody = async (body, jwt) => {
     let err, response = await axios.post(RegisterUrl, body, { headers: { jwt: jwt }});
 
     if(err) throw err;
