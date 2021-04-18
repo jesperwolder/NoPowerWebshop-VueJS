@@ -1,7 +1,7 @@
 <template>
     
        	<div
-           v-if="CS.isAdmin" 
+           v-if="CS.isLoggedIn" 
            >
             <v-card
                 class="pa-5 ma-0"
