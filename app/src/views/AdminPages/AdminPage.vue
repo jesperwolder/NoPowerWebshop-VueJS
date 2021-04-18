@@ -1,10 +1,12 @@
 <template>
     
-       	<div v-if="CS.isLoggedIn">
+       	<div
+           v-if="CS.isAdmin" 
+           >
             <v-card
                 class="pa-5 ma-0"
                 elevation="3"
-                 v-if="CS.isAdmin" && 
+                 v-if="CS.isAdmin" 
                  
             >
                 <v-form class="col-12 pa-0"> 
@@ -16,24 +18,24 @@
                         Profile
                         </v-btn>
 
-                        <v-btn class="buttons" depressed text mr-2 to="/OrderHistory">
+                        <v-btn class="buttons" depressed text mr-2 to="/products">
                         <v-icon left>mdi-cart-check</v-icon>
-                        Custormers
+                        Products-overview
                         </v-btn>
 
-                        <v-btn class="buttons" depressed text mr-2 to="/Support">
+                        <v-btn class="buttons" depressed text mr-2 to="/item_management">
+                        <v-icon left>mdi-cart-check</v-icon>
+                        Item-management
+                        </v-btn>
+
+                        <v-btn class="buttons" depressed text mr-2 to="/customer_management">
+                        <v-icon left>mdi-account</v-icon>
+                        Custormer-management
+                        </v-btn>
+
+                         <v-btn class="buttons" depressed text mr-2 to="/*">
                         <v-icon left>mdi-face-agent</v-icon>
                         support
-                        </v-btn>
-
-                          <v-btn class="buttons" depressed text mr-2 to="/Support">
-                        <v-icon left>mdi-cart-check</v-icon>
-                        add-items
-                        </v-btn>
-
-                        <v-btn class="buttons" depressed text mr-2 to="/Support">
-                        <v-icon left>mdi-account</v-icon>
-                        Items
                         </v-btn>
                 </v-form>
             </v-card>
@@ -44,7 +46,7 @@
 </template>
 <script>
 
-
+import { CurrentSession } from '@/Services/GlobalVariables';
 export default {
 	data() {
         return {

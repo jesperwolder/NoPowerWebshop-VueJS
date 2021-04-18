@@ -6,7 +6,10 @@ import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
 import DashBoard from '../views/DashBoard.vue';
-import AdminPage from '../views/AdminPage.vue';
+import AdminPage from '../views/AdminPages/AdminPage.vue';
+import Customer_Management from '../views/AdminPages/Customer_Management.vue';
+import Item_management from '../views/AdminPages/Item_management.vue';
+import Support_management from '../views/AdminPages/Support_tickets.vue';
 import Products from '../views/Products/Index.vue';
 import Cart from '../views/Cart.vue';
 
@@ -75,7 +78,45 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'AdminPage', to: '/adminpage' },
-				{ name: 'Dashboard', to: '/dashboard' },
+				{ name: 'Item_management', to: '/item_management' },	
+				{ name: 'Customer_Management', to: '/customer_management' },
+				{ name: 'Support_management', to: '/support_management' },
+			]
+		} 
+	},
+	{ path: '/customer_management', name: 'Customer_Management', component: Customer_Management,
+		meta: {
+			title: 'Customer_Management',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'AdminPage', to: '/adminpage' },
+				{ name: 'Item_management', to: '/item_management' },	
+				{ name: 'Customer_Management', to: '/customer_management' },
+				{ name: 'Support_management', to: '/support_management' },
+			]
+		} 
+	},
+	{ path: '/item_management', name: 'Item_management', component: Item_management,
+		meta: {
+			title: 'Customer_Management',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'AdminPage', to: '/adminpage' },
+				{ name: 'Item_management', to: '/item_management' },
+				{ name: 'Customer_Management', to: '/customer_management' },
+				{ name: 'Support_management', to: '/support_management' },
+			]
+		} 
+	},
+	{ path: '/support_management', name: 'Support_management', component: Support_management,
+		meta: {
+			title: 'Customer_Management',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'AdminPage', to: '/adminpage' },
+				{ name: 'Item_management', to: '/item_management' },
+				{ name: 'Customer_Management', to: '/customer_management' },
+				{ name: 'Support_management', to: '/support_management' },
 			]
 		} 
 	},
