@@ -25,7 +25,7 @@ app.use('/login/', loginRoute);
 app.use('/auth/', authRoute);
 app.use('/update', UpdateProfileRoute);
 app.use('/all', GetAllUserRoute);
-app.use('/promote', promoteadmin);
+app.use('/changeprivilege', promoteadmin);
 
 app.listen(3000);
 
