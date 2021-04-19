@@ -90,7 +90,7 @@ jwt: string
 ### returns
 ```json
 {
-    authed: Boolean,
+    authorized: Boolean,
     isAdmin: Boolean,
     user: {
         _id: string,
@@ -106,5 +106,38 @@ jwt: string
         },
         isAdmin: Boolean
     }
+}
+```
+
+## domain.com/all
+### only requires header
+```
+jwt: string
+```
+
+### returns
+```json
+{
+    message: string
+}
+```
+
+## domain.com/changeprivilege
+### changes the admin from false to true or true to false, depending on the current role
+### header
+```
+jwt: string
+```
+### body
+```json
+{
+    userID: string
+}
+```
+
+### returns
+```json
+{
+    message: string
 }
 ```
