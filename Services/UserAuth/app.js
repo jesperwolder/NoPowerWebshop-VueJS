@@ -10,6 +10,7 @@ let loginRoute = require('./Routes/Login.js');
 let authRoute = require('./Routes/Auth.js');
 let UpdateProfileRoute = require('./Routes/UpdateProfile.js');
 let GetAllUserRoute = require('./Routes/GetAllUsers');
+let promoteadmin = require('./Routes/PromoteToAdmin');
 
 let app = express();
 
@@ -24,6 +25,7 @@ app.use('/login/', loginRoute);
 app.use('/auth/', authRoute);
 app.use('/update', UpdateProfileRoute);
 app.use('/all', GetAllUserRoute);
+app.use('/changeprivilege', promoteadmin);
 
 app.listen(3000);
 

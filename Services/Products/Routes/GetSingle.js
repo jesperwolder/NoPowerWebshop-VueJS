@@ -3,19 +3,19 @@ const Product = require('../Schema/Product');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    let err, products = await Product.find({});
-    if(err || !products) {
+router.get('/:id', async (req, res) => {
+    let err, product = await Product.findById(req.params.id);
+    if(err || !product) {
         res.status(404).json({
-            message: 'Der skete en fejl',
-            products: null
+            message: 'Not found',
+            product: null
         });
         return;
     }
 
     res.json({
         message: 'success',
-        products: products
+        product: product
     });
 });
 

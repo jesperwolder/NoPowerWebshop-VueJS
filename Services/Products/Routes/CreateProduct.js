@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         options
     );
 
-    if(err || response.data.isAdmin) {
+    if(err || !response.data.isAdmin) {
         res.status(403).json({
             message: err.response.data.message
         });
