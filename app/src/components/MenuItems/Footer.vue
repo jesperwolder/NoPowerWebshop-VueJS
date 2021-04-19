@@ -63,7 +63,7 @@ export default {
              ?  Updates theme, and cookie, when the switch button, has been pressed.  
              */
 
-            this.$cookies.set('themeDark', this.$vuetify.theme.dark);
+            this.$cookies.set('themeDark', this.$vuetify.theme.dark, 2592000);
             
             console.log("DarkMode: " + (this.$vuetify.theme.dark ? 'On' : 'Off'));
 
