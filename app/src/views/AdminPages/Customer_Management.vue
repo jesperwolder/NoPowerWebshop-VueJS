@@ -9,20 +9,29 @@
                  v-if="CS.isAdmin" 
                  
             >
+            <h1>Admin Page, Only Admin's Can See This!</h1>
+            
                 <v-form class="col-12 pa-0"> 
-                    <h1>{{ meta.title }}</h1>
+                    
                     <v-divider class="pb-3 mt-3"></v-divider>
-                   <h1>gadgfdg</h1>
-                    <v-btn class="buttons" depressed text mr-2 to="/profile">
-                        <v-icon left>mdi-account</v-icon>
-                        Profile
-                        </v-btn>
-                        <h1>customer stuff</h1>
+                       <v-card-title>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="Search"
+                                single-line
+                                hide-details
+                            ></v-text-field>
+                            </v-card-title>
+                            <v-data-table
+                            :headers="headers"
+                            :items="desserts"
+                            :search="search"
+                            ></v-data-table>
+                        
                 </v-form>
             </v-card>
         </div>
-
-
 
 </template>
 <script>
@@ -31,11 +40,31 @@ import { CurrentSession } from '@/Services/GlobalVariables';
 export default {
 	data() {
         return {
-            loading: false,
             error: null,
             meta: this.$route.meta,
-            CS: CurrentSession
-        }
+            CS: CurrentSession,
+            search: '',
+        headers: [
+          {
+            text: 'Fullname',
+            align: 'start',
+            filterable: false,
+            value: 'name',
+          },
+          { text: 'Email', value: 'email' },
+          { text: 'Phone', value: 'phone' },
+          { text: 'Street', value: 'street' },
+          { text: 'Number', value: 'number' },
+          { text: 'Zip', value: 'zip' },
+          { text: 'City', value: 'city' },
+        { text: 'placeholderfororder', value: 'placeholderfororder' },
+        ],
+        desserts: [
+          {
+
+          }
+        ],
+      }    
     },
 }
 </script>
