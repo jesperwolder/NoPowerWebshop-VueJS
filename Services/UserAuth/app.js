@@ -9,6 +9,7 @@ let registerRouter = require('./Routes/Register.js');
 let loginRoute = require('./Routes/Login.js');
 let authRoute = require('./Routes/Auth.js');
 let UpdateProfileRoute = require('./Routes/UpdateProfile.js');
+let GetAllUserRoute = require('./Routes/GetAllUsers');
 
 let app = express();
 
@@ -22,6 +23,7 @@ app.use('/register/', registerRouter);
 app.use('/login/', loginRoute);
 app.use('/auth/', authRoute);
 app.use('/update', UpdateProfileRoute);
+app.use('/all', GetAllUserRoute);
 
 app.listen(3000);
 
