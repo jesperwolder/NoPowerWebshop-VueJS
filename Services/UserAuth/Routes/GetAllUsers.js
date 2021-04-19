@@ -32,6 +32,8 @@ router.get('/', async (req, res) => {
         return;
     }
     
+    console.log('/all -> ' + user.email);
+
     let err3, users = await User.find({});
     if(err3 || !users || users.length == 0) {
         res.status().json({
