@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     let err, products = await Product.find({});
-    if(err || !products) {
+    if(err || !products || products.length == 0) {
         res.status(404).json({
             message: 'Der skete en fejl',
             products: null
