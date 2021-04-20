@@ -70,7 +70,7 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editItem.fullname"
+                                                v-model="editedItem.fullname"
                                                 label="Fullname"
                                                 ></v-text-field>
                                             </v-col>
@@ -157,7 +157,7 @@
 
 
 
-                            <template v-slot:item.actions="{users}">
+                            <template v-slot:item.actions="{ item }">
                                 <v-icon
                                     small
                                     class="mr-2"
@@ -213,7 +213,7 @@ export default {
               
         ],
         editedIndex: -1,
-        editItem: {
+        editedItem: {
             fullname: '',
             email: '',
             phone: '',
@@ -251,6 +251,11 @@ export default {
         
     },
     
+    watch: {
+        dialog (val) {
+            val || this.close();
+        },
+    },
 
     methods: {
         onUpdateProfile: function() {
@@ -273,14 +278,8 @@ export default {
 
         editItem(item){
             this.editedIndex = this.users.indexOf(item)
-            this.editItem = Object.assign({}, item)
+            this.editedItem = Object.assign({}, item)
             this.dialog = true
-        },
-        watch: {
-            dialog (val) {
-                val || this.close()
-            },
-            
         },
         close () {
             this.dialog = false
