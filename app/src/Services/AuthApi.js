@@ -5,6 +5,7 @@ const AuthUrl = server + '/auth';
 const LoginUrl = server + '/login';
 const RegisterUrl = server + '/register';
 const UpdateUrl = server + '/update'
+const GetAllUsersUrl = server +'/all'
 
 
 export const AuthBody = async (jwt) => {
@@ -37,4 +38,12 @@ export const UpdateBody = async (body, options) => {
     if(err) throw err;
 
     return response.data;
+}
+
+export const GetAllUsersBody = async(jwt) =>{
+    let err, response = await axios.post(GetAllUsersUrl, null, {headers: {jwt: jwt}});
+
+    if(err) throw err;
+
+    return response.data
 }

@@ -37,6 +37,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
+import {GetAllUsersBody} from '@/Services/AuthApi';
 export default {
 	data() {
         return {
@@ -66,5 +67,42 @@ export default {
         ],
       }    
     },
+    mounted: function() {
+        GetAllUsersBody(this.$cookies.get('jwt'))
+        .then((res) => {
+          var obj = JSON.parse(res)
+          obj.forEach(element => {
+              console.log(element)
+          });  
+        }).catch(err => {
+            console.log(err);
+            
+        });
+                        
+        
+    },
+    
+
+    methods: {
+        onUpdateProfile: function() {
+            
+            this.axios.post('http://server.topper144p.com:3000/', {}, { 
+            headers: { 
+                jwt: this.$cookies.get('jwt'),
+            }
+            })
+            .then((res) => {
+                console.log(res)
+                this.$router.push('/dashboard');
+            }).catch(err => {
+                // Fejled respons
+                console.log(err);
+                this.$router.push('/dashboard');
+            });
+            
+        },
+        
+    }
+
 }
 </script>
