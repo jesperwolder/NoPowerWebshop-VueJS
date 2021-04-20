@@ -126,14 +126,19 @@
                                             </v-col>
 
                                             <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="4"
+                                                cols="6"
+                                                sm="2"
+                                                md="1"
                                             >
-                                                <v-text-field
-                                                
-                                                label="isAdmin"
-                                                ></v-text-field>
+                                                 <v-container
+                                                    class="px-0"
+                                                    fluid
+                                                >
+                                                    <v-switch
+                                                    v-model="isAdminswitch"
+                                                    :label="`isAdmin: ${isAdminswitch.toString()}`"
+                                                    ></v-switch>
+                                                </v-container>
                                             </v-col>
                                             </v-row>
                                         </v-container>
@@ -210,6 +215,7 @@ export default {
         return {
             error: null,
             meta: this.$route.meta,
+            isAdminswitch: false,
             CS: CurrentSession,
             dialog: false,
             search: '',
