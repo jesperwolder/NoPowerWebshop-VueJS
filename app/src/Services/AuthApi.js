@@ -4,8 +4,9 @@ const server = "http://server.topper144p.com:3000"
 const AuthUrl = server + '/auth';
 const LoginUrl = server + '/login';
 const RegisterUrl = server + '/register';
-const UpdateUrl = server + '/update'
-const GetAllUsersUrl = server +'/all'
+const UpdateUrl = server + '/update';
+const GetAllUsersUrl = server +'/all';
+const ChangePrivilegeUrl = server + '/changeprivilege';
 
 
 export const AuthBody = async (jwt) => {
@@ -46,4 +47,8 @@ export const GetAllUsersBody = async (jwt) =>{
     if(err) throw err;
 
     return response.data;
+}
+
+export const ChangePrivilegeBody = async(body, options) =>{
+    let err, response = await axios.post(ChangePrivilegeUrl, )
 }
