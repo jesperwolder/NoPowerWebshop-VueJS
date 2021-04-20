@@ -58,7 +58,7 @@
                                     </template>
                                     <v-card>
                                         <v-card-title>
-                                        <span class="headline">{{}}</span>
+                                        <span class="headline">{{"thomas er gay"}}</span>
                                         </v-card-title>
 
                                         <v-card-text>
@@ -80,7 +80,7 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                
+                                                v-model="editedItem.email"
                                                 label="email"
                                                 ></v-text-field>
                                             </v-col>
@@ -90,8 +90,8 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                
-                                                label="Fat (g)"
+                                                v-model="editedItem.phone"
+                                                label="phone"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -100,8 +100,8 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                
-                                                label="Carbs (g)"
+                                                v-model="editedItem.street"
+                                                label="street"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -110,8 +110,29 @@
                                                 md="4"
                                             >
                                                 <v-text-field
+                                                v-model="editedItem.zip"
+                                                label="zip"
+                                                ></v-text-field>
+                                            </v-col>
+                                            <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                            >
+                                                <v-text-field
+                                                v-model="editedItem.city"
+                                                label="city"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                            >
+                                                <v-text-field
                                                 
-                                                label="Protein (g)"
+                                                label="isAdmin"
                                                 ></v-text-field>
                                             </v-col>
                                             </v-row>
@@ -130,20 +151,20 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                            @click="save"
+                                           
                                         >
                                             Save
                                         </v-btn>
                                         </v-card-actions>
                                     </v-card>
                                     </v-dialog>
-                                    <v-dialog v-model="dialogDelete" max-width="500px">
+                                    <v-dialog  max-width="500px">
                                     <v-card>
                                         <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
                                         <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                                        <v-btn color="blue darken-1" text>Cancel</v-btn>
+                                        
                                         <v-spacer></v-spacer>
                                         </v-card-actions>
                                     </v-card>
@@ -157,7 +178,7 @@
 
 
 
-                            <template v-slot:item.actions="{ item }">
+                            <template v-slot:[`item.actions`]="{ item }">
                                 <v-icon
                                     small
                                     class="mr-2"
