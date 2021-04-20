@@ -25,7 +25,7 @@
                             </v-card-title>
                             <v-data-table
                             :headers="headers"
-                            :items="desserts"
+                            :items="users"
                             :search="search"
                             ></v-data-table>
                         
@@ -49,8 +49,8 @@ export default {
           {
             text: 'Fullname',
             align: 'start',
-            filterable: false,
-            value: 'name',
+            filterable: true,
+            value: 'fullname',
           },
           { text: 'Email', value: 'email' },
           { text: 'Phone', value: 'phone' },
@@ -58,12 +58,11 @@ export default {
           { text: 'Number', value: 'number' },
           { text: 'Zip', value: 'zip' },
           { text: 'City', value: 'city' },
-        { text: 'placeholderfororder', value: 'placeholderfororder' },
+       
         ],
-        desserts: [
-          {
-
-          }
+        users: [
+          
+              
         ],
       }    
     },
@@ -73,7 +72,18 @@ export default {
             let obj = res.users;
 
           obj.forEach(element => {
-              console.log(element)
+              this.users.push(
+                  {
+                      fullname: element.fullname,
+                      email: element.email,
+                      phone: element.phone,
+                      street: element.address.street,
+                      number: element.address.number,
+                      zip: element.address.zip,
+                      city: element.address.city,
+
+                  }
+              )
           });
         }).catch(err => {
             console.log(err);
@@ -87,7 +97,7 @@ export default {
     methods: {
         onUpdateProfile: function() {
             
-            this.axios.post('http://server.topper144p.com:3000/', {}, { 
+            this.axios.post('http://server.topper144p.com:3000/changeprivilege', {}, { 
             headers: { 
                 jwt: this.$cookies.get('jwt'),
             }
