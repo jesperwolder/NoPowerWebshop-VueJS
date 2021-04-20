@@ -70,10 +70,11 @@ export default {
     mounted: function() {
         GetAllUsersBody(this.$cookies.get('jwt'))
         .then((res) => {
-          var obj = JSON.parse(res)
+            let obj = res.users;
+
           obj.forEach(element => {
               console.log(element)
-          });  
+          });
         }).catch(err => {
             console.log(err);
             

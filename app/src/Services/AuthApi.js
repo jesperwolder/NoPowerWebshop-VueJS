@@ -40,10 +40,10 @@ export const UpdateBody = async (body, options) => {
     return response.data;
 }
 
-export const GetAllUsersBody = async(jwt) =>{
-    let err, response = await axios.post(GetAllUsersUrl, null, {headers: {jwt: jwt}});
+export const GetAllUsersBody = async (jwt) =>{
+    let err, response = await axios.get(GetAllUsersUrl, { headers: { jwt: jwt }});
 
     if(err) throw err;
 
-    return response.data
+    return response.data;
 }
