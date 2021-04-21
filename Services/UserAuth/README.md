@@ -109,7 +109,7 @@ jwt: string
 }
 ```
 
-## domain.com/all
+## domain.com/admin/getAllUsers
 ### only requires header
 ```
 jwt: string
@@ -122,7 +122,7 @@ jwt: string
 }
 ```
 
-## domain.com/changeprivilege
+## domain.com/admin/changeprivilege
 ### changes the admin from false to true or true to false, depending on the current role
 ### header
 ```
@@ -139,5 +139,51 @@ jwt: string
 ```json
 {
     message: string
+}
+```
+
+## domain.com/admin/updateUser
+### header
+```json
+"jwt": string
+```
+### body
+### all values are optional but the _id
+```json
+{
+    "user": {
+        "_id": string,
+        "email": string,
+        "fullname": string,
+        "password": string,
+        "phone": string,
+        "adress": {
+            "street": string,
+            "number": string,
+            "zip": number,
+            "city": string
+        }
+    }
+}
+```
+
+### returns
+```json
+{
+    "message": string,
+    "user": {
+        "_id": string,
+        "email": string,
+        "fullname": string,
+        "password": string,
+        "phone": string,
+        "adress": {
+            "street": string,
+            "number": string,
+            "zip": number,
+            "city": string
+        },
+        "isAdmin": Boolean
+    }
 }
 ```
