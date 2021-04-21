@@ -8,6 +8,7 @@ let indexRouter = require('./Routes/index.js');
 let createRoute = require('./Routes/CreateProduct.js');
 let getAllRoute = require('./Routes/GetAll.js');
 let getSingle = require('./Routes/GetSingle.js');
+let updateRoute = require('./Routes/UpdateProduct');
 
 let app = express();
 
@@ -20,7 +21,7 @@ app.use('/', indexRouter);
 app.use('/create', createRoute);
 app.use('/all', getAllRoute);
 app.use('/product/', getSingle);
-
+app.use('/update', updateRoute);
 app.listen(3001);
 
 module.exports = app;
