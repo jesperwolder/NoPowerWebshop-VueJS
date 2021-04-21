@@ -5,8 +5,9 @@ const AuthUrl = server + '/auth';
 const LoginUrl = server + '/login';
 const RegisterUrl = server + '/register';
 const UpdateUrl = server + '/update';
-const GetAllUsersUrl = server +'/all';
-const ChangePrivilegeUrl = server + '/changeprivilege';
+const GetAllUsersUrl = server +'/admin/getAllUsers';
+const ChangePrivilegeUrl = server + '/admin/changeprivilege';
+const UpdateUserURL = server + '/admin/updateUser'
 
 
 export const AuthBody = async (jwt) => {

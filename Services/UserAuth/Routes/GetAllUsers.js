@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
     }
     
     let err2, user = await User.findOne( { _id: jwt.id } );
-    console.log(user);
     if(err2 || !user || !user.isAdmin) {
         res.status(403).json({
             message: "Ikke autoriseret",

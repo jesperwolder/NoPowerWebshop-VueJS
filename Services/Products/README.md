@@ -49,7 +49,7 @@
 ```
 
 ### POST domain.com/create
-### body (also requires jwt in headers)
+## body (also requires jwt in headers)
 ```json
 {
     "product": {
