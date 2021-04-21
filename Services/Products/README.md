@@ -86,3 +86,44 @@
     }
 }
 ```
+
+### POST domain.com/update
+## body (requires jwt header)
+```json
+{
+    "product": {
+        "_id": string, // id of product to update
+        "name": string,
+        "description": string,
+        "price": number,
+        "image": string,
+        "TechnicalDetails": [
+            { "name": string, "value": any }
+        ],
+        "SalePercentage": number
+    }
+}
+```
+
+## returns
+```json
+{
+    "message": string,
+    "product": {
+        "_id": string,
+        "Creator": {
+            "createdBy": string,
+            "creatorEmail": string,
+            "creatorFullname": string
+        },
+        "Name": string,
+        "Description": string,
+        "Price": Number,
+        "Image": string,
+        "SalePercentage": number,
+        "TechnicalDetails": [
+            { "name": string, "value": any }
+        ]
+    }
+}
+```
