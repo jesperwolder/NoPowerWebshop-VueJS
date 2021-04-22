@@ -177,7 +177,7 @@
                                     </v-dialog>
                                     <v-dialog  max-width="500px">
                                     <v-card>
-                                        <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                                        
                                         <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn color="blue darken-1" text>Cancel</v-btn>
@@ -207,7 +207,7 @@
                                     small
                                 
                                 >
-                                    mdi-delete
+                                    mdi-cart-check
                                 </v-icon>
                                 </template>
                             </v-data-table>
