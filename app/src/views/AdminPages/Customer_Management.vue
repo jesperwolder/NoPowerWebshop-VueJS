@@ -60,7 +60,7 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="UpdateProfileAdmin.fullname"
+                                                v-model="editedItem.fullname"
                                                 label="fullname"
                                                 :placeholder="editedItem.fullname"
                                                 
@@ -73,7 +73,7 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                  v-model="UpdateProfileAdmin.email"
+                                                  v-model="editedItem.email"
                                                 label="email"
                                                 :placeholder="editedItem.email"
                                                 
@@ -85,7 +85,7 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="UpdateProfileAdmin.phone"
+                                                v-model="editedItem.phone"
                                                 label="phone"
                                                 :placeholder="editedItem.phone"
                                                 ></v-text-field>
@@ -96,9 +96,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="UpdateProfileAdmin.street"
+                                                v-model="editedItem.address.street"
                                                 label="street"
-                                                :placeholder="editedItem.street"
+                                                :placeholder="editedItem.address.street"
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
@@ -107,9 +107,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="UpdateProfileAdmin.number"
+                                                v-model="editedItem.address.number"
                                                 label="number"
-                                                :placeholder="editedItem.number"
+                                                :placeholder="editedItem.address.number"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -119,9 +119,9 @@
                                             >
                                             
                                                 <v-text-field
-                                               v-model="UpdateProfileAdmin.zip"
+                                               v-model="editedItem.address.zip"
                                                 label="zip"
-                                                :placeholder="editedItem.zip.toString()"
+                                                :placeholder="editedItem.address.zip.toString()"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -130,9 +130,10 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="UpdateProfileAdmin.city"
-                                                :label="editedItem.city"
-                                                :placeholder="editedItem.city"
+                                                v-model="editedItem.address.city"
+                                                label="city"
+                                                :value="editedItem.address.city"
+                                                :placeholder="editedItem.address.city"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -221,6 +222,7 @@
 
 import { CurrentSession } from '@/Services/GlobalVariables';
 import {GetAllUsersBody} from '@/Services/AuthApi';
+import {UpdateUserAdminBody} from '@/Services/AuthApi';
 
 export default {
 	data() {
@@ -241,10 +243,10 @@ export default {
           
           { text: 'Email', value: 'email' },
           { text: 'Phone', value: 'phone' },
-          { text: 'Street', value: 'street' },
-          { text: 'Number', value: 'number' },
-          { text: 'Zip', value: 'zip' },
-          { text: 'City', value: 'city' },
+          { text: 'Street', value: 'address.street' },
+          { text: 'Number', value: 'address.number' },
+          { text: 'Zip', value: 'address.zip' },
+          { text: 'City', value: 'address.city' },
           { text: 'Actions', value: 'actions', sortable: false },
        
         ],
@@ -254,17 +256,7 @@ export default {
         ],
         editedIndex: -1,
         editedItem: {
-            fullname: '',
-            email: '',
-            phone: '',
-            street: '',
-            number: '',
-            zip: 0,
-            city: '',
-        },
-
-         UpdateProfileAdmin:{
-            
+            _id: "",
             email: "",
             fullname: "",
             password: "",
@@ -272,10 +264,25 @@ export default {
             address: {
                 street: "",
                 number: "",
-                zip: "",
+                zip: 0,
                 city: "",
             },
-        }
+        },
+        defaultItem: {
+            _id: "",
+            email: "",
+            fullname: "",
+            password: "",
+            phone: "",
+            address: {
+                street: "",
+                number: "",
+                zip: 0,
+                city: "",
+            },
+        },
+
+         
       }    
     },
     mounted: function() {
@@ -286,14 +293,16 @@ export default {
           obj.forEach(element => {
               this.users.push(
                   {
+                      _id: element._id,
                       fullname: element.fullname,
                       email: element.email,
                       phone: element.phone,
-                      street: element.address.street,
-                      number: element.address.number,
-                      zip: element.address.zip,
-                      city: element.address.city,
-
+                      address:{
+                        street: element.address.street,
+                        number: element.address.number,
+                        zip: element.address.zip,
+                        city: element.address.city,
+                    }
                   }
               )
           });
@@ -314,13 +323,11 @@ export default {
 
     methods: {
         onUpdateProfileAdminChange: function() {
-             
-            this.axios.post('http://server.topper144p.com:3000/admin/updateUser', {user: this.UpdateProfileAdmin}, { 
-            headers: { 
+            
+            UpdateUserAdminBody({user: this.editedItem},
+             {headers: { 
                 jwt: this.$cookies.get('jwt'),
-                
-            }
-            })
+            }})
             .then((res) => {
                 console.log(res)
                  
@@ -328,7 +335,7 @@ export default {
                console.log(err.response.data)
                 
             });
-            
+            close();
         },
 
         editItem(item){
