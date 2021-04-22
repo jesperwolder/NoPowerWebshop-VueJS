@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 
     let newUserVals = new User(req.body.user);
 
-    user.email = (newUserVals.email ? newUserValsemail : user.email);
+    user.email = (newUserVals.email ? newUserVals.email : user.email);
     user.fullname = (newUserVals.fullname ? newUserVals.fullname : user.fullname);
     user.phone = (newUserVals.phone ? newUserVals.phone : user.phone);
     user.address.street = (newUserVals.address.street ? newUserVals.address.street : user.address.street);
