@@ -45,17 +45,7 @@
                                     v-model="dialog"
                                     max-width="500px"
                                     >
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn
-                                        color="primary"
-                                        dark
-                                        class="mb-2"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                        >
-                                        New Item
-                                        </v-btn>
-                                    </template>
+                                    
                                     <v-card>
                                         <v-card-title>
                                         <span class="headline">{{"thomas er gay"}}</span>
@@ -70,8 +60,11 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.fullname"
-                                                label="Fullname"
+                                                v-model="UpdateProfileAdmin.fullname"
+                                                label="fullname"
+                                                :placeholder="editedItem.fullname"
+                                                
+                                                 
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -80,8 +73,10 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.email"
+                                                  v-model="UpdateProfileAdmin.email"
                                                 label="email"
+                                                :placeholder="editedItem.email"
+                                                
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -90,8 +85,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.phone"
+                                                v-model="UpdateProfileAdmin.phone"
                                                 label="phone"
+                                                :placeholder="editedItem.phone"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -100,8 +96,20 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.street"
+                                                v-model="UpdateProfileAdmin.street"
                                                 label="street"
+                                                :placeholder="editedItem.street"
+                                                ></v-text-field>
+                                            </v-col>
+                                             <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                            >
+                                                <v-text-field
+                                                v-model="UpdateProfileAdmin.number"
+                                                label="number"
+                                                :placeholder="editedItem.number"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -109,9 +117,11 @@
                                                 sm="6"
                                                 md="4"
                                             >
+                                            
                                                 <v-text-field
-                                                v-model="editedItem.zip"
+                                               v-model="UpdateProfileAdmin.zip"
                                                 label="zip"
+                                                :placeholder="editedItem.zip.toString()"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -120,8 +130,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.city"
-                                                label="city"
+                                                v-model="UpdateProfileAdmin.city"
+                                                :label="editedItem.city"
+                                                :placeholder="editedItem.city"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -156,7 +167,7 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                           
+                                           v-on:click="onUpdateProfileAdminChange()"
                                         >
                                             Save
                                         </v-btn>
@@ -210,6 +221,7 @@
 
 import { CurrentSession } from '@/Services/GlobalVariables';
 import {GetAllUsersBody} from '@/Services/AuthApi';
+
 export default {
 	data() {
         return {
@@ -226,6 +238,7 @@ export default {
             filterable: true,
             value: 'fullname',
           },
+          
           { text: 'Email', value: 'email' },
           { text: 'Phone', value: 'phone' },
           { text: 'Street', value: 'street' },
@@ -248,6 +261,20 @@ export default {
             number: '',
             zip: 0,
             city: '',
+        },
+
+         UpdateProfileAdmin:{
+            
+            email: "",
+            fullname: "",
+            password: "",
+            phone: "",
+            address: {
+                street: "",
+                number: "",
+                zip: "",
+                city: "",
+            },
         }
       }    
     },
@@ -278,6 +305,7 @@ export default {
         
     },
     
+    
     watch: {
         dialog (val) {
             val || this.close();
@@ -285,20 +313,20 @@ export default {
     },
 
     methods: {
-        onUpdateProfile: function() {
-            
-            this.axios.post('http://server.topper144p.com:3000/changeprivilege', {}, { 
+        onUpdateProfileAdminChange: function() {
+             
+            this.axios.post('http://server.topper144p.com:3000/admin/updateUser', {user: this.UpdateProfileAdmin}, { 
             headers: { 
                 jwt: this.$cookies.get('jwt'),
+                
             }
             })
             .then((res) => {
                 console.log(res)
-                this.$router.push('/dashboard');
+                 
             }).catch(err => {
-                // Fejled respons
-                console.log(err);
-                this.$router.push('/dashboard');
+               console.log(err.response.data)
+                
             });
             
         },
