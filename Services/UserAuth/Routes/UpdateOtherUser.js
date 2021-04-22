@@ -5,7 +5,7 @@ const User = require('../Schema/UserInfo');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    if(!req.headers.jwt || !req.body.user._id) {
+    if(!req.headers.jwt || !req.body.user || !req.body.user._id) {
         res.status(503).json({
             message: "manglende værdier",
             user: null
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 
     let newUserVals = new User(req.body.user);
 
-    user.email = (newUserVals.email ? newUserValsemail : user.email);
+    user.email = (newUserVals.email ? newUserVals.email : user.email);
     user.fullname = (newUserVals.fullname ? newUserVals.fullname : user.fullname);
     user.phone = (newUserVals.phone ? newUserVals.phone : user.phone);
     user.address.street = (newUserVals.address.street ? newUserVals.address.street : user.address.street);
