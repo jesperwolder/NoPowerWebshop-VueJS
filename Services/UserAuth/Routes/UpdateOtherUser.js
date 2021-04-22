@@ -5,7 +5,7 @@ const User = require('../Schema/UserInfo');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    if(!req.headers.jwt || !req.body.user._id) {
+    if(!req.headers.jwt || req.body.user || !req.body.user._id) {
         res.status(503).json({
             message: "manglende værdier",
             user: null
