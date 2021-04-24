@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const db = require('./modules/mongo.js')
 
+// Setting route variables
 let indexRouter = require('./Routes/index.js');
 let createRoute = require('./Routes/CreateProduct.js');
 let getAllRoute = require('./Routes/GetAll.js');
@@ -13,11 +14,13 @@ let changeprodStatusRoute = require('./Routes/ActivateDeactiveProduct');
 
 let app = express();
 
+// Parsing middleware
 app.use(bodyParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: '*' }));
 
+// Initiating routes
 app.use('/', indexRouter);
 app.use('/create', createRoute);
 app.use('/all', getAllRoute);
