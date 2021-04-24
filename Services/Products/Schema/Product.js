@@ -12,7 +12,8 @@ const ProductSchema = mongoose.Schema({
     Price: Number,
     Image: String,
     SalePercentage: { type: Number, default: 0 },
-    TechnicalDetails: Array // contains objects { name: string, value: string }
+    TechnicalDetails: Array, // contains objects { name: string, value: string }
+    Active: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
