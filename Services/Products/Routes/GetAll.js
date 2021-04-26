@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     if(req.headers.jwt){
         let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
         if(!error) {
-            isAdmin = response.isAdmin;
+            isAdmin = response.data.isAdmin;
         }
     }
 

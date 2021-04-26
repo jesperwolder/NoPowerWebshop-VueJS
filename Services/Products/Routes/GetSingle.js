@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
 
     if(req.headers.jwt){
         let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
-        if(error || !response.isAdmin) {
+        if(error || !response.data.isAdmin) {
             product.Creator = null;
         }
     }else {
