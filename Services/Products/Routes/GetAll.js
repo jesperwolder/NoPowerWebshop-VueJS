@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
     if(!isAdmin) {
         products.forEach(prod => {
             if(prod.isActive) {
+                prod.Creator = null;
                 prods.push(prod);
             }
         });
