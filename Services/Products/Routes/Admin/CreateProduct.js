@@ -2,10 +2,10 @@ const express = require('express');
 const axios = require('axios');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const Product = require('../Schema/Product.js')
+const Product = require('../../Schema/Product.js')
 
-const validator = require('../modules/Validator.js');
-const auth = require('../modules/authentication.js');
+const validator = require('../../modules/Validator.js');
+const auth = require('../../modules/authentication.js');
 
 const router = express.Router();
 

@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const Product = require('../Schema/Product');
 
 const router = express.Router();
@@ -16,13 +17,26 @@ router.get('/', async (req, res) => {
         return;
     }
 
+    let isAdmin = false; 
+    if(req.headers.jwt){
+        let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
+        if(!error) {
+            isAdmin = response.data.isAdmin;
+        }
+    }
+
     // Removing all inactive products
     let prods = [];
-    products.forEach(prod => {
-        if(prod.Active) {
-            prods.push(prod);
-        }
-    });
+    if(!isAdmin) {
+        products.forEach(prod => {
+            if(prod.isActive) {
+                prod.Creator = null;
+                prods.push(prod);
+            }
+        });
+    }else {
+        prods = products;
+    }
 
     // Success response
     res.json({

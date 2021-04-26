@@ -122,8 +122,8 @@ jwt: string
 }
 ```
 
-## domain.com/admin/changeprivilege
-### changes the admin from false to true or true to false, depending on the current role
+## domain.com/admin/changePrivilege/{status}
+### changes the admin status depending on on the status given on the url
 ### header
 ```
 jwt: string

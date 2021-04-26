@@ -12,8 +12,9 @@ const ProductSchema = mongoose.Schema({
     Price: Number,
     Image: String,
     SalePercentage: { type: Number, default: 0 },
+    Stock: { type: Number, default: 0 },
     TechnicalDetails: Array, // contains objects { name: string, value: string }
-    Active: { type: Boolean, default: true }
+    isActive: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

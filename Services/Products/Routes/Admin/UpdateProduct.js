@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 require('dotenv').config();
-const Product = require('../Schema/Product');
+const Product = require('../../Schema/Product');
 
 const router = express.Router();
 
