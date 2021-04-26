@@ -147,7 +147,7 @@
                                                     fluid
                                                 >
                                                     <v-switch
-                                                    v-model="isAdminswitch"
+                                                    v-on:click="ChangeAdminRole()"
                                                     :label="`isAdmin: ${isAdminswitch.toString()}`"
                                                     ></v-switch>
                                                 </v-container>
@@ -223,6 +223,7 @@
 import { CurrentSession } from '@/Services/GlobalVariables';
 import {GetAllUsersBody} from '@/Services/AuthApi';
 import {UpdateUserAdminBody} from '@/Services/AuthApi';
+import {ChangePrivilegeBody} from '@/Services/AuthApi';
 
 export default {
 	data() {
@@ -281,6 +282,7 @@ export default {
                 city: "",
             },
         },
+        
 
          
       }    
@@ -350,7 +352,25 @@ export default {
             this.editedIndex = -1
             })
         },
+
+        ChangeAdminRole: function() {
+            ChangePrivilegeBody({userID: this.editedItem._id}, { 
+            headers: { 
+                jwt: this.$cookies.get('jwt'),
+            }
+            })
+            .then((res) => {
+                console.log(res)
+                
+            }).catch(err => {
+                // Fejled respons
+                console.log(err);
+                
+            });
+            
+        },
+        }
     }
 
-}
+
 </script>

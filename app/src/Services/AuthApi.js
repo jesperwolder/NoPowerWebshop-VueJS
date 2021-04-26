@@ -6,7 +6,7 @@ const LoginUrl = server + '/login';
 const RegisterUrl = server + '/register';
 const UpdateUrl = server + '/update';
 const GetAllUsersUrl = server +'/admin/getAllUsers';
-const ChangePrivilegeUrl = server + '/admin/changeprivilege';
+const ChangePrivilegeUrl = server + '/admin/changePrivilege/';
 const UpdateUserURL = server + '/admin/updateUser'
 
 
@@ -50,8 +50,8 @@ export const GetAllUsersBody = async (jwt) =>{
     return response.data;
 }
 
-export const ChangePrivilegeBody = async(body, options) =>{
-    let err, response = await axios.post(ChangePrivilegeUrl, body, options );
+export const ChangePrivilegeBody = async(body, options, status, jwt) =>{
+    let err, response = await axios.post(ChangePrivilegeUrl + status, body, options, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
