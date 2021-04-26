@@ -48,7 +48,7 @@
 }
 ```
 
-### POST domain.com/create
+### POST domain.com/admin/create
 ## body (also requires jwt in headers)
 ```json
 {
@@ -87,7 +87,7 @@
 }
 ```
 
-### POST domain.com/update
+### POST domain.com/admin/update
 ## body (requires jwt header)
 ```json
 {
@@ -124,6 +124,35 @@
         "TechnicalDetails": [
             { "name": string, "value": any }
         ]
+    }
+}
+```
+
+### POST domain.com/admin/changeProductStatus/{ID}
+##  (requires jwt header)
+## no body required
+
+## returns
+```json
+{
+    "message": string,
+    "product": {
+        "_id": string,
+        "Creator": {
+            "createdBy": string,
+            "creatorEmail": string,
+            "creatorFullname": string
+        },
+        "Name": string,
+        "Description": string,
+        "Price": Number,
+        "Image": string,
+        "SalePercentage": number,
+        "TechnicalDetails": [
+            { "name": string, "value": any }
+        ],
+        "isActive": Boolean,
+        "Stock": Number
     }
 }
 ```

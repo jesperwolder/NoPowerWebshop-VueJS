@@ -6,11 +6,11 @@ const db = require('./modules/mongo.js')
 
 // Setting route variables
 let indexRouter = require('./Routes/index.js');
-let createRoute = require('./Routes/CreateProduct.js');
+let createRoute = require('./Routes/Admin/CreateProduct.js');
 let getAllRoute = require('./Routes/GetAll.js');
-let getSingle = require('./Routes/GetSingle.js');
-let updateRoute = require('./Routes/UpdateProduct');
-let changeprodStatusRoute = require('./Routes/ActivateDeactiveProduct');
+let getSingleRoute = require('./Routes/GetSingle.js');
+let updateRoute = require('./Routes/Admin/UpdateProduct');
+let changeprodStatusRoute = require('./Routes/Admin/ActivateDeactiveProduct');
 
 let app = express();
 
@@ -22,11 +22,11 @@ app.use(cors({ origin: '*' }));
 
 // Initiating routes
 app.use('/', indexRouter);
-app.use('/create', createRoute);
+app.use('/admin/create', createRoute);
 app.use('/all', getAllRoute);
-app.use('/product/', getSingle);
-app.use('/update', updateRoute);
-app.use('/productStatus', changeprodStatusRoute);
+app.use('/product/', getSingleRoute);
+app.use('/admin/update', updateRoute);
+app.use('/admin/changeProductStatus', changeprodStatusRoute);
 
 app.listen(3001);
 

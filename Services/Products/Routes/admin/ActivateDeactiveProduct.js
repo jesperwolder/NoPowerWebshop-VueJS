@@ -1,8 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 
-const auth = require('../modules/authentication');
-const Product = require('../Schema/Product');
+const auth = require('../../modules/authentication');
+const Product = require('../../Schema/Product');
 require('dotenv').config();
 
 const router = express.Router();

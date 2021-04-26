@@ -4,7 +4,7 @@ const auth = require('../modules/authentication');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/:status', async (req, res) => {
     if(!req.headers.jwt) {
         res.status(403).json({
             message: "Ikke autoriseret",
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         return;
     }
     
-    console.log('/promoteadmin -> ' + user.email);
+    console.log('/changePrivilege -> ' + user.email);
 
     let err3, newAdmin = await User.findOne({ _id: req.body.userID });
     if(err3 || !newAdmin) {
@@ -50,7 +50,12 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    newAdmin.isAdmin = !newAdmin.isAdmin;
+    if(req.params.status == "true"){
+        newAdmin.isAdmin = true;
+    }else {
+        newAdmin.isAdmin = false;
+    }
+
     newAdmin.save();
 
     res.json({

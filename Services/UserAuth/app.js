@@ -29,7 +29,7 @@ app.use('/update', UpdateProfileRoute);
 
 // admin routes
 app.use('/admin/getAllUsers', GetAllUserRoute);
-app.use('/admin/changeprivilege', promoteadminRoute);
+app.use('/admin/changePrivilege/', promoteadminRoute);
 app.use('/admin/updateUser', updateUserRoute);
 
 app.listen(3000);
