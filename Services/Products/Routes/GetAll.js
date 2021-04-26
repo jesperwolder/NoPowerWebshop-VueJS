@@ -26,14 +26,15 @@ router.get('/', async (req, res) => {
 
     // Removing all inactive products
     let prods = [];
-    products.forEach(prod => {
-        if(prod.Active) {
-            if(!isAdmin){
-                prod.Creator = null;
+    if(!isAdmin) {
+        products.forEach(prod => {
+            if(prod.isActive) {
+                prods.push(prod);
             }
-            prods.push(prod);
-        }
-    });
+        });
+    }else {
+        prods = products;
+    }
 
     // Success response
     res.json({
