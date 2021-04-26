@@ -16,10 +16,21 @@ router.get('/', async (req, res) => {
         return;
     }
 
+    let isAdmin = false; 
+    if(req.headers.jwt){
+        let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
+        if(!error) {
+            isAdmin = response.isAdmin;
+        }
+    }
+
     // Removing all inactive products
     let prods = [];
     products.forEach(prod => {
         if(prod.Active) {
+            if(!isAdmin){
+                prod.Creator = null;
+            }
             prods.push(prod);
         }
     });

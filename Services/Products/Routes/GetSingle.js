@@ -1,4 +1,6 @@
 const express = require('express');
+const axios = require('axios');
+require('dotenv').config();
 const Product = require('../Schema/Product');
 
 const router = express.Router();
@@ -15,6 +17,16 @@ router.get('/:id', async (req, res) => {
         });
         return;
     }
+
+    if(req.headers.jwt){
+        let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
+        if(error || !response.isAdmin) {
+            product.Creator = null;
+        }
+    }else {
+        product.Creator = null;
+    }
+    
 
     // Success response
     res.json({
