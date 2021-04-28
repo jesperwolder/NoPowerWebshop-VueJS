@@ -68,10 +68,10 @@
                                                  cols="12"
                                                 sm="6"
                                                 md="4"
-                                                v-for="item in editedItem"
-                                                :key="item.TechnicalDetails"
+                                                v-for="item in editedItem.TechnicalDetails"
+                                                :key="item"
                                                 >
-                                                {{item.name}}
+                                                    {{ item.name }}
                                                 </v-col>
 
                                             <v-col
@@ -370,7 +370,8 @@ export default {
         },
 
         editItem(item){
-            this.editedIndex = this.users.indexOf(item)
+            console.log(item)
+            this.editedIndex = this.products.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
