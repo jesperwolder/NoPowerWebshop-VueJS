@@ -25,7 +25,7 @@
                             </v-card-title>
                             <v-data-table
                             :headers="headers"
-                            :items="users"
+                            :items="products"
                             :items-per-page="25"
                             :search="search"
                             >
@@ -64,15 +64,25 @@
                                         <v-card-text>
                                         <v-container>
                                             <v-row>
+                                                <v-col
+                                                 cols="12"
+                                                sm="6"
+                                                md="4"
+                                                v-for="item in editedItem"
+                                                :key="item.TechnicalDetails"
+                                                >
+                                                {{item.name}}
+                                                </v-col>
+
                                             <v-col
                                                 cols="12"
                                                 sm="6"
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.fullname"
-                                                label="fullname"
-                                                :placeholder="editedItem.fullname"
+                                                v-model="editedItem.name"
+                                                label="name"
+                                                :placeholder="editedItem.name"
                                                 
                                                  
                                                 ></v-text-field>
@@ -83,9 +93,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                  v-model="editedItem.email"
+                                                  v-model="editedItem"
                                                 label="email"
-                                                :placeholder="editedItem.email"
+                                                :placeholder="editedItem"
                                                 
                                                 ></v-text-field>
                                             </v-col>
@@ -95,9 +105,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.phone"
+                                                v-model="editedItem"
                                                 label="phone"
-                                                :placeholder="editedItem.phone"
+                                                :placeholder="editedItem"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -106,9 +116,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.street"
+                                                v-model="editedItem.address"
                                                 label="street"
-                                                :placeholder="editedItem.address.street"
+                                                :placeholder="editedItem.address"
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
@@ -117,9 +127,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.number"
+                                                v-model="editedItem.address"
                                                 label="number"
-                                                :placeholder="editedItem.address.number"
+                                                :placeholder="editedItem.address"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -129,9 +139,9 @@
                                             >
                                             
                                                 <v-text-field
-                                               v-model="editedItem.address.zip"
+                                               v-model="editedItem"
                                                 label="zip"
-                                                :placeholder="editedItem.address.zip.toString()"
+                                                :placeholder="editedItem"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -140,10 +150,10 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.city"
+                                                v-model="editedItem"
                                                 label="city"
-                                                :value="editedItem.address.city"
-                                                :placeholder="editedItem.address.city"
+                                                :value="editedItem"
+                                                :placeholder="editedItem"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -228,7 +238,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import {GetAllUsersBody} from '@/Services/AuthApi';
+import {GetAllProductsBody} from '@/Services/ProductApi';
 
 
 
@@ -246,70 +256,84 @@ export default {
             text: 'Name',
             align: 'start',
             filterable: true,
-            value: 'fullname',
+            value: 'name',
           },
           
-          { text: 'Description', value: 'email' },
-          { text: 'Price', value: 'phone' },
-           { text: 'Category', value: 'address.city' },
-          { text: 'salepercentage', value: 'address.number' },
-          { text: 'Stock', value: 'address.city' },
-          { text: 'isActive', value: 'address.city' },
+          { text: 'Description', value: 'description' },
+          { text: 'Price', value: 'price' },
+           { text: 'Category', value: 'category' },
+          { text: 'salepercentage', value: 'salepercentage' },
+          { text: 'Stock', value: 'stock' },
+          { text: 'Active', value: 'isActive' },
+          { text: 'Actions', value: 'actions', sortable: false },
+          
        
         ],
-        users: [
+        products: [
           
               
         ],
         editedIndex: -1,
         editedItem: {
             _id: "",
-            email: "",
-            fullname: "",
-            password: "",
-            phone: "",
-            address: {
-                street: "",
-                number: "",
-                zip: 0,
-                city: "",
+            creator:{
+                createdBy: "",
+                creatorEmail: "",
+                creatorFullname: "",
             },
+            SalePercentage: "",
+            TechnicalDetails:{
+                
+            },
+            name: "",
+            description: "",
+            price: "",
+            image: "",
+            stock: "",
+            isActive:"",
         },
+
         defaultItem: {
-            _id: "",
-            email: "",
-            fullname: "",
-            password: "",
-            phone: "",
-            address: {
-                street: "",
-                number: "",
-                zip: 0,
-                city: "",
+             _id: "",
+            creator:{
+                createdBy: "",
+                creatorEmail: "",
+                creatorFullname: "",
             },
+            SalePercentage: "",
+            TechnicalDetails:{
+                
+            },
+            name: "",
+            description: "",
+            price: "",
+            image: "",
+            stock: "",
+            isActive:"",
+            
         },
 
          
       }    
     },
     mounted: function() {
-        GetAllUsersBody(this.$cookies.get('jwt'))
+        GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
-            let obj = res.users;
+            let obj = res.products;
 
           obj.forEach(element => {
-              this.users.push(
+              this.products.push(
                   {
                       _id: element._id,
-                      fullname: element.fullname,
-                      email: element.email,
-                      phone: element.phone,
-                      address:{
-                        street: element.address.street,
-                        number: element.address.number,
-                        zip: element.address.zip,
-                        city: element.address.city,
-                    }
+                      name: element.Name,
+                      description: element.Description,
+                      price: element.Price,
+                     category: element.Category,
+                     salepercentage: element.SalePercentage,
+                     stock: element.Stock,
+                     isActive: element.isActive,
+                    TechnicalDetails: element.TechnicalDetails,
+                    
                   }
               )
           });

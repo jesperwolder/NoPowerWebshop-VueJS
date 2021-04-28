@@ -7,7 +7,8 @@ const RegisterUrl = server + '/register';
 const UpdateUrl = server + '/update';
 const GetAllUsersUrl = server +'/admin/getAllUsers';
 const ChangePrivilegeUrl = server + '/admin/changePrivilege/';
-const UpdateUserURL = server + '/admin/updateUser'
+const UpdateUserURL = server + '/admin/updateUser';
+
 
 
 export const AuthBody = async (jwt) => {
@@ -65,3 +66,4 @@ export const UpdateUserAdminBody = async (body, options, jwt) => {
 
     return response.data;
 }
+
