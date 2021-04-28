@@ -147,8 +147,9 @@
                                                     fluid
                                                 >
                                                     <v-switch
-                                                    v-on:click="ChangeAdminRole()"
-                                                    :label="`isAdmin: ${isAdminswitch.toString()}`"
+                                                    
+                                                    v-model="editedItem.isAdmin"
+                                                    :label="`isAdmin: ${editedItem.isAdmin.toString()}`"
                                                     ></v-switch>
                                                 </v-container>
                                             </v-col>
@@ -168,7 +169,8 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                           v-on:click="onUpdateProfileAdminChange()"
+                                            
+                                           v-on:click=" ChangeAdminRole(), onUpdateProfileAdminChange()"
                                         >
                                             Save
                                         </v-btn>
@@ -268,6 +270,7 @@ export default {
                 zip: 0,
                 city: "",
             },
+            isAdmin: false,
         },
         defaultItem: {
             _id: "",
@@ -281,6 +284,7 @@ export default {
                 zip: 0,
                 city: "",
             },
+            isAdmin: false,
         },
         
 
@@ -304,7 +308,8 @@ export default {
                         number: element.address.number,
                         zip: element.address.zip,
                         city: element.address.city,
-                    }
+                    },
+                    isAdmin: element.isAdmin,
                   }
               )
           });
@@ -332,12 +337,12 @@ export default {
             }})
             .then((res) => {
                 console.log(res)
-                 
+                this.close();
             }).catch(err => {
                console.log(err.response.data)
                 
             });
-            close();
+           
         },
 
         editItem(item){
@@ -345,7 +350,7 @@ export default {
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
-        close () {
+        close() {
             this.dialog = false
             this.$nextTick(() => {
             this.editedItem = Object.assign({}, this.defaultItem)
@@ -358,7 +363,7 @@ export default {
             headers: { 
                 jwt: this.$cookies.get('jwt'),
             }
-            })
+            }, this.editedItem.isAdmin )
             .then((res) => {
                 console.log(res)
                 
