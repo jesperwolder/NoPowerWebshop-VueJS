@@ -155,7 +155,18 @@
                                                     ></v-text-field>
                                                 </v-col>
                                             
-                                                 
+                                                  <v-col
+                                                 cols="12"
+                                                sm="6"
+                                                md="4"
+                                                
+                                                >
+                                                    <v-text-field
+                                                    v-model="editedItem.Image"
+                                                    placeholder="URL-link"
+                                                   
+                                                    ></v-text-field>
+                                                </v-col>
 
                                             <v-col
                                                 cols="6"
@@ -288,9 +299,10 @@ export default {
             name: "",
             description: "",
             price: "",
-            image: "",
+            Image: "",
             stock: "",
             isActive:"",
+            
         },
 
         defaultItem: {
@@ -307,7 +319,7 @@ export default {
             name: "",
             description: "",
             price: "",
-            image: "",
+            Image: "",
             stock: "",
             isActive:"",
             
@@ -332,6 +344,7 @@ export default {
                      salepercentage: element.SalePercentage,
                      stock: element.Stock,
                      isActive: element.isActive,
+                     Image: element.Image,
                     TechnicalDetails: element.TechnicalDetails,
                     Creator:{
                         createdBy: element.Creator.creatorFullname,
