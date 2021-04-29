@@ -64,15 +64,7 @@
                                         <v-card-text>
                                         <v-container>
                                             <v-row>
-                                                <v-col
-                                                 cols="12"
-                                                sm="6"
-                                                md="4"
-                                                v-for="item in editedItem.TechnicalDetails"
-                                                :key="item"
-                                                >
-                                                    {{ item.name }}
-                                                </v-col>
+                                             
 
                                             <v-col
                                                 cols="12"
@@ -82,7 +74,7 @@
                                                 <v-text-field
                                                 v-model="editedItem.name"
                                                 label="name"
-                                                :placeholder="editedItem.name"
+                                                
                                                 
                                                  
                                                 ></v-text-field>
@@ -93,9 +85,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                  v-model="editedItem"
-                                                label="email"
-                                                :placeholder="editedItem"
+                                                  v-model="editedItem.description"
+                                                label="Description"
+                                                
                                                 
                                                 ></v-text-field>
                                             </v-col>
@@ -105,9 +97,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem"
-                                                label="phone"
-                                                :placeholder="editedItem"
+                                                v-model="editedItem.price"
+                                                label="price"
+                                                
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -116,9 +108,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address"
-                                                label="street"
-                                                :placeholder="editedItem.address"
+                                                v-model="editedItem.stock"
+                                                label="stock"
+                                               
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
@@ -127,35 +119,43 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address"
-                                                label="number"
-                                                :placeholder="editedItem.address"
+                                                v-model="editedItem.isActive"
+                                                label="IsActive"
+                                               
                                                 ></v-text-field>
                                             </v-col>
-                                            <v-col
-                                                cols="12"
+
+                                             <v-col
+                                                 cols="12"
                                                 sm="6"
                                                 md="4"
-                                            >
+                                                
+                                                >
+                                                    <v-text-field
+                                                    v-model="editedItem.Creator.creatorFullname"
+                                                    
+                                                   
+                                                    ></v-text-field>
+                                                </v-col>
+                                                
+
+                                                <v-col
+                                                 cols="12"
+                                                sm="6"
+                                                md="4"
+                                                v-for="item in editedItem.TechnicalDetails"
+                                                :key="item"
+                                                >
+                                                    <v-text-field
+                                                    v-model= "item.name"
+                                                    ></v-text-field>
+
+                                                    <v-text-field
+                                                    v-model= "item.value"
+                                                    ></v-text-field>
+                                                </v-col>
                                             
-                                                <v-text-field
-                                               v-model="editedItem"
-                                                label="zip"
-                                                :placeholder="editedItem"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="4"
-                                            >
-                                                <v-text-field
-                                                v-model="editedItem"
-                                                label="city"
-                                                :value="editedItem"
-                                                :placeholder="editedItem"
-                                                ></v-text-field>
-                                            </v-col>
+                                                 
 
                                             <v-col
                                                 cols="6"
@@ -276,7 +276,7 @@ export default {
         editedIndex: -1,
         editedItem: {
             _id: "",
-            creator:{
+            Creator:{
                 createdBy: "",
                 creatorEmail: "",
                 creatorFullname: "",
@@ -295,7 +295,7 @@ export default {
 
         defaultItem: {
              _id: "",
-            creator:{
+            Creator:{
                 createdBy: "",
                 creatorEmail: "",
                 creatorFullname: "",
@@ -333,6 +333,11 @@ export default {
                      stock: element.Stock,
                      isActive: element.isActive,
                     TechnicalDetails: element.TechnicalDetails,
+                    Creator:{
+                        createdBy: element.Creator.creatorFullname,
+                        creatorEmail: element.Creator.creatorEmail,
+                        creatorFullname: element.Creator.creatorFullname,
+                    }
                     
                   }
               )
