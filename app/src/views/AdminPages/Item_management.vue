@@ -58,7 +58,7 @@
                                     </template>
                                     <v-card>
                                         <v-card-title>
-                                        <span class="headline">{{"thomas er gay er super gay"}}</span>
+                                        <span class="headline">thomas er gay er super gay</span>
                                         </v-card-title>
 
                                         <v-card-text>
