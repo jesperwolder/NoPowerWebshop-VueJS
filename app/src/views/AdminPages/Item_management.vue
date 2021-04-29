@@ -140,12 +140,12 @@
                                                 
 
                                                 <v-col
-                                                 cols="12"
-                                                sm="6"
-                                                md="4"
-                                                v-for="item in editedItem.TechnicalDetails"
-                                                :key="item"
-                                                >
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                                    v-for="(item, index) in editedItem.TechnicalDetails"
+                                                    :key="index"
+                                                >  
                                                     <v-text-field
                                                     v-model= "item.name"
                                                     ></v-text-field>
