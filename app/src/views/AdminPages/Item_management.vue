@@ -154,7 +154,21 @@
                                                     v-model= "item.value"
                                                     ></v-text-field>
                                                 </v-col>
-                                            
+                                                 <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                                    v-for="(item, index) in editedItem.Categories"
+                                                    :key="index"
+                                                >  
+                                                    <v-text-field
+                                                    v-model= "item[0]"
+                                                    ></v-text-field>
+
+                                                    <v-text-field
+                                                    v-model= "item[1]"
+                                                    ></v-text-field>
+                                                </v-col>
                                                   <v-col
                                                  cols="12"
                                                 sm="6"
@@ -287,6 +301,9 @@ export default {
         editedIndex: -1,
         editedItem: {
             _id: "",
+             Categories:{
+                 
+             },
             Creator:{
                 createdBy: "",
                 creatorEmail: "",
@@ -307,6 +324,9 @@ export default {
 
         defaultItem: {
              _id: "",
+             Categories:{
+
+             },
             Creator:{
                 createdBy: "",
                 creatorEmail: "",
@@ -346,6 +366,7 @@ export default {
                      isActive: element.isActive,
                      Image: element.Image,
                     TechnicalDetails: element.TechnicalDetails,
+                     Categories: element.Categories,
                     Creator:{
                         createdBy: element.Creator.creatorFullname,
                         creatorEmail: element.Creator.creatorEmail,
