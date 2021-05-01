@@ -160,15 +160,14 @@
                                                     md="4"
                                                     v-for="(item, index) in editedItem.Categories"
                                                     :key="index"
-                                                >  
+                                                >  {{item}}
                                                     <v-text-field
-                                                    v-model= "item[0]"
+                                                    :v-model="item.toString()"
+                                                     
                                                     ></v-text-field>
 
-                                                    <v-text-field
-                                                    v-model= "item[1]"
-                                                    ></v-text-field>
                                                 </v-col>
+
                                                   <v-col
                                                  cols="12"
                                                 sm="6"
