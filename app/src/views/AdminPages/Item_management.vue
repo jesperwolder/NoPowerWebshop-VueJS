@@ -56,9 +56,9 @@
                                         New Item
                                         </v-btn>
                                     </template>
-                                    <v-card>
+                                    <v-card class="ma-0">
                                         <v-card-title>
-                                        <span class="headline">thomas er gay er super gay</span>
+                                        <span class="headline">thomas er gay er super gay 🍆✊💦</span>
                                         </v-card-title>
 
                                         <v-card-text>
@@ -68,55 +68,51 @@
 
                                             <v-col
                                                 cols="12"
-                                                sm="6"
-                                                md="4"
+                                                class="px-0"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.name"
-                                                label="name"
-                                                
-                                                
-                                                 
+                                                    v-model="editedItem.name"
+                                                    label="name" 
+                                                ></v-text-field>
+                                            </v-col>
+                                            <v-col
+                                                cols="12"
+                                                class="px-0"
+                                            >
+                                                <v-textarea
+                                                    v-model="editedItem.description"
+                                                    label="Description"
+                                                ></v-textarea>
+                                            </v-col>
+                                            <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="6"
+                                                class="pl-0"
+                                            >
+                                                <v-text-field
+                                                    v-model="editedItem.price"
+                                                    type="number"
+                                                    label="price"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
                                                 cols="12"
                                                 sm="6"
-                                                md="4"
+                                                md="6"
+                                                class="pr-0"
                                             >
                                                 <v-text-field
-                                                  v-model="editedItem.description"
-                                                label="Description"
-                                                
-                                                
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="4"
-                                            >
-                                                <v-text-field
-                                                v-model="editedItem.price"
-                                                label="price"
-                                                
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="4"
-                                            >
-                                                <v-text-field
-                                                v-model="editedItem.stock"
-                                                label="stock"
-                                               
+                                                    v-model="editedItem.stock"
+                                                    type="number"
+                                                    label="stock"
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
                                                 cols="12"
                                                 sm="6"
-                                                md="4"
+                                                md="6"
+                                                class="pl-0"
                                             >
                                                 <v-text-field
                                                 v-model="editedItem.isActive"
@@ -128,55 +124,87 @@
                                              <v-col
                                                 cols="12"
                                                 sm="6"
-                                                md="4"   
+                                                md="6"
+                                                class="pr-0"
                                             >
                                                 <v-text-field
+                                                    disabled
                                                     v-model="editedItem.Creator.creatorFullname"
                                                 ></v-text-field>
                                                 </v-col>
                                                 
                                                 <!-- Technical Details -->
-                                                <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                                    v-for="(item, index) in editedItem.TechnicalDetails"
-                                                    :key="'A' + index"
-                                                >  
-                                                    <v-text-field
-                                                        v-model="item.name"
-                                                    ></v-text-field>
+                                                
+                                                <v-card
+                                                    width="100%"
+                                                    elevation="0"
+                                                >
+                                                    <v-divider class="mb-5" ></v-divider>
+                                                    <v-card-subtitle>Technical Details</v-card-subtitle>
 
-                                                    <v-text-field
-                                                        v-model="item.value"
-                                                    ></v-text-field>
-                                                </v-col>
+                                                    <div
+                                                        cols="12"
+                                                        sm="6"
+                                                        md="6"
+                                                        v-for="(item, index) in editedItem.TechnicalDetails"
+                                                        :key="'A' + index"
+                                                    >  
+                                                        <v-text-field
+                                                            v-model="item.name"
+                                                        ></v-text-field>
+
+                                                        <v-text-field
+                                                            v-model="item.value"
+                                                        ></v-text-field>
+                                                    </div>
+
+                                                </v-card>
 
                                                 <!-- Categories -->
-                                                <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                                    v-for="(item, index) in editedItem.Categories"
-                                                    :key="index"
-                                                >
-                                                    <v-text-field
-                                                        v-model="editedItem.Categories[index]"
-                                                    ></v-text-field>
 
-                                                </v-col>
+                                                <v-card
+                                                    width="100%"
+                                                    elevation="0"
+                                                >
+                                                    <v-divider class="mb-5" ></v-divider>
+                                                    <v-card-subtitle>Categories</v-card-subtitle>
+
+                                                    <div>
+                                                        <v-text-field
+                                                            v-model="editedItem.Categories"
+                                                        >
+                                                        </v-text-field>
+                                                    </div>
+
+                                                    <!-- <div
+                                                        v-for="(item, index) in editedItem.Categories"
+                                                        :key="index"
+                                                        :id="'cat-' + index"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="editedItem.Categories[index]"
+                                                        >
+                                                            <v-icon
+                                                                slot="append"
+                                                                color="red"
+                                                                v-on:click="test( index )"
+                                                            >mdi-minus</v-icon>
+                                                        </v-text-field>
+                                                    </div> -->
+
+                                                </v-card>
 
                                                 <!-- Images -->
-                                                <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
+
+                                                <v-card
+                                                    width="100%"
+                                                    elevation="0"
                                                 >
                                                     <v-text-field
                                                         v-model="editedItem.Image"
                                                         placeholder="URL-link"
                                                     ></v-text-field>
-                                                </v-col>
+                                                </v-card>
 
                                             <v-col
                                                 cols="6"
@@ -381,6 +409,17 @@ export default {
     },
 
     methods: {
+        test: function( index ) {
+            let cat = document.getElementById('cat-' + index);
+            cat.remove();
+        },
+
+        AddCategoryField() {
+            let cat = document.getElementById('newcat');
+            // cat.append('<v-divider></v-divider>');
+            cat.innerHTML += '<v-card>test</v-card>';
+        },
+
         AdminCreateItem: function() {
             
             ({user: this.editedItem},

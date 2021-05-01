@@ -46,7 +46,7 @@
                                     max-width="500px"
                                     >
                                     
-                                    <v-card>
+                                    <v-card class="ma-0">
                                         <v-card-title>
                                         <span class="headline">{{"thomas er gay"}}</span>
                                         </v-card-title>
