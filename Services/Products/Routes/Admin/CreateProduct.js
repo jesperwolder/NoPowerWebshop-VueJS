@@ -36,12 +36,20 @@ router.post('/', async (req, res) => {
         return;
     }
 
+    // Changes to first letter to uppercase and the rest to lowercase
+    let newCats = []
+    req.body.product.Categories.forEach(Cat => {
+        Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
+        newCats.push(Cat);
+    });
+
     // Creating a product variable in order to save it on the db
     let product = new Product(req.body.product);
     product._id = mongoose.Types.ObjectId();
     product.Creator.createdBy = response.data.user._id;
     product.Creator.creatorEmail = response.data.user.email;
     product.Creator.creatorFullname = response.data.user.fullname;
+    product.Categories = newCats;
 
     // Checking if Technical details was provided or if any value is not provided
     if(product.TechnicalDetails.length == 0 || validator.ObjectHasNoNull(product)) {

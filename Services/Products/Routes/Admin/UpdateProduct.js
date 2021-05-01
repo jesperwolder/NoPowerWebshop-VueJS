@@ -46,6 +46,12 @@ router.post('/', async (req, res) => {
         return;
     }
 
+    let newCats = [];
+    req.body.product.Categories.forEach(Cat => {
+        Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
+        newCats.push(Cat);
+    });
+
     // changing the values in try statement in order to catch null errors
     try {
         // updating the values if the given new value is not null
@@ -55,6 +61,7 @@ router.post('/', async (req, res) => {
         product.Image = (req.body.product.image ? req.body.product.image : product.Image);
         product.SalePercentage = (req.body.product.SalePercentage ? req.body.product.SalePercentage : product.SalePercentage);
         product.TechnicalDetails = (req.body.product.TechnicalDetails ? req.body.product.TechnicalDetails : product.TechnicalDetails);
+        product.Categories = (newCats ? newCats : product.Categories);
 
         // Saving the changes
         product.save();
