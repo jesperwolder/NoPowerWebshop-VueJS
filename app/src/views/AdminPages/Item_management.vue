@@ -200,6 +200,9 @@
                                                     width="100%"
                                                     elevation="0"
                                                 >
+                                                    <v-divider class="mb-5" ></v-divider>
+                                                    <v-card-subtitle>Categories</v-card-subtitle>
+
                                                     <v-text-field
                                                         v-model="editedItem.Image"
                                                         placeholder="URL-link"
