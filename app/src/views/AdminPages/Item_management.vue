@@ -34,7 +34,7 @@
                                 <v-toolbar
                                     flat
                                 >
-                                    <v-toolbar-title>Thomas er gay i items, users a placeholder lige nu</v-toolbar-title>
+                                    <v-toolbar-title>Thomas er gay i items, uses a placeholder lige nu</v-toolbar-title>
                                     <v-divider
                                     class="mx-4"
                                     inset
@@ -126,58 +126,55 @@
                                             </v-col>
 
                                              <v-col
-                                                 cols="12"
+                                                cols="12"
                                                 sm="6"
-                                                md="4"
-                                                
-                                                >
-                                                    <v-text-field
+                                                md="4"   
+                                            >
+                                                <v-text-field
                                                     v-model="editedItem.Creator.creatorFullname"
-                                                    
-                                                   
-                                                    ></v-text-field>
+                                                ></v-text-field>
                                                 </v-col>
                                                 
-
+                                                <!-- Technical Details -->
                                                 <v-col
                                                     cols="12"
                                                     sm="6"
                                                     md="4"
                                                     v-for="(item, index) in editedItem.TechnicalDetails"
-                                                    :key="index"
+                                                    :key="'A' + index"
                                                 >  
                                                     <v-text-field
-                                                    v-model= "item.name"
+                                                        v-model="item.name"
                                                     ></v-text-field>
 
                                                     <v-text-field
-                                                    v-model= "item.value"
+                                                        v-model="item.value"
                                                     ></v-text-field>
                                                 </v-col>
-                                                 <v-col
+
+                                                <!-- Categories -->
+                                                <v-col
                                                     cols="12"
                                                     sm="6"
                                                     md="4"
                                                     v-for="(item, index) in editedItem.Categories"
                                                     :key="index"
-                                                >  {{item}}
+                                                >
                                                     <v-text-field
-                                                    :v-model="item.toString()"
-                                                     
+                                                        v-model="editedItem.Categories[index]"
                                                     ></v-text-field>
 
                                                 </v-col>
 
-                                                  <v-col
-                                                 cols="12"
-                                                sm="6"
-                                                md="4"
-                                                
+                                                <!-- Images -->
+                                                <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
                                                 >
                                                     <v-text-field
-                                                    v-model="editedItem.Image"
-                                                    placeholder="URL-link"
-                                                   
+                                                        v-model="editedItem.Image"
+                                                        placeholder="URL-link"
                                                     ></v-text-field>
                                                 </v-col>
 
@@ -262,7 +259,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import {GetAllProductsBody} from '@/Services/ProductApi';
+import { GetAllProductsBody } from '@/Services/ProductApi';
 
 
 
@@ -276,22 +273,20 @@ export default {
             dialog: false,
             search: '',
         headers: [
-          {
-            text: 'Name',
-            align: 'start',
-            filterable: true,
-            value: 'name',
-          },
+            {
+                text: 'Name',
+                align: 'start',
+                filterable: true,
+                value: 'name',
+            },
           
-          { text: 'Description', value: 'description' },
-          { text: 'Price', value: 'price' },
-           { text: 'Category', value: 'category' },
-          { text: 'salepercentage', value: 'salepercentage' },
-          { text: 'Stock', value: 'stock' },
-          { text: 'Active', value: 'isActive' },
-          { text: 'Actions', value: 'actions', sortable: false },
-          
-       
+            { text: 'Description', value: 'description' },
+            { text: 'Price', value: 'price' },
+            { text: 'Category', value: 'category' },
+            { text: 'salepercentage', value: 'salepercentage' },
+            { text: 'Stock', value: 'stock' },
+            { text: 'Active', value: 'isActive' },
+            { text: 'Actions', value: 'actions', sortable: false },
         ],
         products: [
           
@@ -300,9 +295,7 @@ export default {
         editedIndex: -1,
         editedItem: {
             _id: "",
-             Categories:{
-                 
-             },
+            Categories:[],
             Creator:{
                 createdBy: "",
                 creatorEmail: "",
@@ -322,10 +315,8 @@ export default {
         },
 
         defaultItem: {
-             _id: "",
-             Categories:{
-
-             },
+            _id: "",
+            Categories:[],
             Creator:{
                 createdBy: "",
                 creatorEmail: "",
@@ -352,29 +343,28 @@ export default {
         .then((res) => {
             let obj = res.products;
 
-          obj.forEach(element => {
-              this.products.push(
-                  {
-                      _id: element._id,
-                      name: element.Name,
-                      description: element.Description,
-                      price: element.Price,
-                     category: element.Category,
-                     salepercentage: element.SalePercentage,
-                     stock: element.Stock,
-                     isActive: element.isActive,
-                     Image: element.Image,
-                    TechnicalDetails: element.TechnicalDetails,
-                     Categories: element.Categories,
-                    Creator:{
-                        createdBy: element.Creator.creatorFullname,
-                        creatorEmail: element.Creator.creatorEmail,
-                        creatorFullname: element.Creator.creatorFullname,
+            obj.forEach(element => {
+                this.products.push(
+                    {
+                        _id: element._id,
+                        name: element.Name,
+                        description: element.Description,
+                        price: element.Price,
+                        category: element.Category,
+                        salepercentage: element.SalePercentage,
+                        stock: element.Stock,
+                        isActive: element.isActive,
+                        Image: element.Image,
+                        TechnicalDetails: element.TechnicalDetails,
+                        Categories: element.Categories,
+                        Creator: {
+                            createdBy: element.Creator.creatorFullname,
+                            creatorEmail: element.Creator.creatorEmail,
+                            creatorFullname: element.Creator.creatorFullname,
+                        }
                     }
-                    
-                  }
-              )
-          });
+                )
+            });
         }).catch(err => {
             console.log(err);
             
