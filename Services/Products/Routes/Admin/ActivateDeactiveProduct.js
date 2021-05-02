@@ -7,11 +7,19 @@ require('dotenv').config();
 
 const router = express.Router();
 
-router.post('/:ID', async (req, res) => {
+router.post('/:ID/:status', async (req, res) => {
     // Checking if the jwt was sent
     if(!req.headers.jwt) {
         res.status(403).json({
             message: 'Manglende jwt',
+            product: null
+        });
+        return;
+    }
+
+    if(!req.params.status) {
+        res.status().json({
+            message: "manglende status",
             product: null
         });
         return;
@@ -43,8 +51,13 @@ router.post('/:ID', async (req, res) => {
         return;
     }
 
+    let status = false;
+    if(req.params.status == 'true'){
+        status = true;
+    }
+
     // Changing the active value and saving the changes
-    product.Active = !product.Active;
+    product.Active = status;
     product.save();
 
     // Success response
