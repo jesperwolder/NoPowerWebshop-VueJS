@@ -149,12 +149,14 @@
                                                         v-for="(item, index) in editedItem.TechnicalDetails"
                                                         :key="'A' + index"
                                                     >  
+                                                   
+                                                   
                                                         <v-text-field
-                                                            v-model="item.name"
+                                                            v-model="item.items.name"
                                                         ></v-text-field>
 
                                                         <v-text-field
-                                                            v-model="item.value"
+                                                            v-model="item.items.value"
                                                         ></v-text-field>
                                                     </div>
 

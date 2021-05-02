@@ -359,11 +359,7 @@ export default {
         },
 
         ChangeAdminRole: function() {
-            ChangePrivilegeBody({userID: this.editedItem._id}, { 
-            headers: { 
-                jwt: this.$cookies.get('jwt'),
-            }
-            }, this.editedItem.isAdmin )
+            ChangePrivilegeBody({userID: this.editedItem._id}, this.editedItem.isAdmin, this.$cookies.get('jwt') )
             .then((res) => {
                 console.log(res)
                 
