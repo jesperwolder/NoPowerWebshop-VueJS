@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+
 :root {
     --maxWidth: 1800px;
 
@@ -20,7 +22,8 @@
 }
 
 ::selection {
-    background: pink;
+    background: rgba(247, 149, 29, .8);
+    color: #333;
 }
 
 body {
