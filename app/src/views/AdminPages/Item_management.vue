@@ -82,6 +82,7 @@
                                                 <v-textarea
                                                     v-model="editedItem.description"
                                                     label="Description"
+                                                    outlined
                                                 ></v-textarea>
                                             </v-col>
                                             <v-col
