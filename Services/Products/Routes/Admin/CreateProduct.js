@@ -31,7 +31,8 @@ router.post('/', async (req, res) => {
     // Checking for errors or if the user is not admin
     if(err || !response.data.isAdmin) {
         res.status(403).json({
-            message: err.response.data.message
+            message: err.response.data.message,
+            product: null
         });
         return;
     }
@@ -42,6 +43,36 @@ router.post('/', async (req, res) => {
         Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
         newCats.push(Cat);
     });
+
+    // failed is a value indictating if the validation for TechnicalDetails failed
+    let failed = false;
+    req.body.product.TechnicalDetails.forEach(detail => {
+        // Checking if the 2 keys exists within the detail object
+        if(!('header' in detail) || !('items' in detail)) {
+            failed = true;
+            return;
+        }else {
+            // checking if the required keys exists within items
+            detail.items.forEach(item => {
+                if(!('name' in item) || !('value' in item)){
+                    failed = true;
+                    return;
+                }
+            });
+            if(failed){
+                return;
+            }
+        }
+    });
+
+    // returns an error if the validation failed
+    if(failed){
+        res.status(422).json({
+            message: 'Manglende værdier i tekniske detaljer',
+            product: null
+        });
+        return;
+    }
 
     // Creating a product variable in order to save it on the db
     let product = new Product(req.body.product);
