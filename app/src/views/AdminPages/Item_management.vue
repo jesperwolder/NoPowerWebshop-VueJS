@@ -148,14 +148,22 @@
                                                         md="6"
                                                         v-for="(item, index) in editedItem.TechnicalDetails"
                                                         :key="'A' + index"
-                                                    >  
-                                                        <v-text-field
-                                                            v-model="item.name"
-                                                        ></v-text-field>
+                                                    >
+                                                        
+                                                        {{ item.header }}
+                                                        
+                                                        <div
+                                                            v-for="(row, indx) in item.items"
+                                                            :key="'B' + indx"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="row.name"
+                                                            ></v-text-field>
 
-                                                        <v-text-field
-                                                            v-model="item.value"
-                                                        ></v-text-field>
+                                                            <v-text-field
+                                                                v-model="row.value"
+                                                            ></v-text-field>
+                                                        </div>
                                                     </div>
 
                                                 </v-card>
