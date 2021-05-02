@@ -14,7 +14,7 @@ const ProductSchema = mongoose.Schema({
     Categories: Array,
     SalePercentage: { type: Number, default: 0 },
     Stock: { type: Number, default: 0 },
-    TechnicalDetails: Array, // contains objects { name: string, value: string }
+    TechnicalDetails: Array, // contains objects { header: string items: { name: string, value: string } }
     isActive: { type: Boolean, default: true }
 });
 
