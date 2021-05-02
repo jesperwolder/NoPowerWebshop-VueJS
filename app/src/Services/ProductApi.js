@@ -3,7 +3,7 @@ const server1 = "http://server.topper144p.com:3001"
 const GetAllProductsURL = server1 + '/all';
 const CreateProductURL = server1 + '/admin/create';
 const UpdateProductURL = server1 + '/admin/update';
-const ChangeProductStatusURL = server1 + '/admin/changeProductStatus';
+const ChangeProductStatusURL = server1 + '/admin/changeProductStatus/';
 
 //products
 
@@ -32,8 +32,8 @@ export const UpdateProductBody = async(body, options, jwt) =>{
     return reponse.data;
 }
 
-export const ChangeProductStatus = async(jwt) =>{
-    let err, reponse = await axios.post(ChangeProductStatusURL, {headers: {jwt: jwt}})
+export const ChangeProductStatus = async(id, status, jwt) =>{
+    let err, reponse = await axios.post(ChangeProductStatusURL + id + '/' + status, {headers: {jwt: jwt}})
 
     if(err) throw err;
 

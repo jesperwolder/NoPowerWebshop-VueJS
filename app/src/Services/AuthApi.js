@@ -51,7 +51,7 @@ export const GetAllUsersBody = async (jwt) =>{
     return response.data;
 }
 
-export const ChangePrivilegeBody = async(body, jwt) => {
+export const ChangePrivilegeBody = async(body, status, jwt) => {
     let err, response = await axios.post(ChangePrivilegeUrl + status, body, { headers: { jwt: jwt } });
 
     if(err) throw err;
