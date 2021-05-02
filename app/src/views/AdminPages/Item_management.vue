@@ -138,34 +138,95 @@
                                                 <v-card
                                                     width="100%"
                                                     elevation="0"
+                                                    class="technicalDetails"
                                                 >
                                                     <v-divider class="mb-5" ></v-divider>
-                                                    <v-card-subtitle>Technical Details</v-card-subtitle>
+                                                    <v-card-subtitle class="px-0">Technical Details</v-card-subtitle>
 
-                                                    <div
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="6"
+                                                    <v-card
+                                                        outlined
                                                         v-for="(item, index) in editedItem.TechnicalDetails"
                                                         :key="'A' + index"
+                                                        class="pa-2"
+                                                        v-bind:class="[index !== editedItem.TechnicalDetails.length - 1 ? 'mb-12' : '']"
                                                     >
-                                                        
-                                                        {{ item.header }}
-                                                        
-                                                        <div
-                                                            v-for="(row, indx) in item.items"
-                                                            :key="'B' + indx"
+                                                        <v-btn
+                                                            fab
+                                                            color="red"
+                                                            x-small
+                                                            absolute
+                                                            right
+                                                            top
                                                         >
-                                                            <v-text-field
-                                                                v-model="row.name"
-                                                            ></v-text-field>
+                                                            <v-icon>
+                                                                mdi-minus
+                                                            </v-icon>
+                                                        </v-btn>
 
+                                                        <v-card-title class="mt-4">
                                                             <v-text-field
-                                                                v-model="row.value"
+                                                                outlined
+                                                                v-model="item.header"
+                                                                label="Header"
                                                             ></v-text-field>
-                                                        </div>
-                                                    </div>
+                                                        </v-card-title>
 
+                                                        <v-card-text>
+                                                            <v-row
+                                                                v-for="(row, indx) in item.items"
+                                                                :key="'B' + indx"
+                                                            >
+                                                                <v-col
+                                                                    col="12"
+                                                                    sm="6"
+                                                                    md="6"
+                                                                >
+                                                                    <v-text-field
+                                                                        v-model="row.name"
+                                                                        label="Name"
+                                                                    ></v-text-field>
+                                                                </v-col>
+
+                                                                <v-col
+                                                                    col="12"
+                                                                    sm="6"
+                                                                    md="6"
+                                                                >
+                                                                    <v-text-field
+                                                                        v-model="row.value"
+                                                                        label="Value"
+                                                                        append-outer-icon="mdi-minus"
+                                                                        @click:append-outer="DeleteThisFieldMethod()"
+                                                                    ></v-text-field>
+                                                                </v-col>
+                                                            </v-row>
+
+                                                            <v-card-actions class="justify-center align-center">
+                                                                <v-btn
+                                                                    fab
+                                                                    color="primary"
+                                                                    small
+                                                                >
+                                                                    <v-icon>
+                                                                        mdi-plus
+                                                                    </v-icon>
+                                                                </v-btn>
+                                                            </v-card-actions>
+                                                        </v-card-text>
+                                                    </v-card>
+
+                                                    <v-card-subtitle class="pb-0 text-center">Add more technical details categories.</v-card-subtitle>
+                                                    <v-card-actions class="justify-center align-center">
+                                                        <v-btn
+                                                            fab
+                                                            color="primary"
+                                                            small
+                                                        >
+                                                            <v-icon>
+                                                                mdi-plus
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </v-card-actions>
                                                 </v-card>
 
                                                 <!-- Categories -->
@@ -175,7 +236,7 @@
                                                     elevation="0"
                                                 >
                                                     <v-divider class="mb-5" ></v-divider>
-                                                    <v-card-subtitle>Categories</v-card-subtitle>
+                                                    <v-card-subtitle class="px-0">Categories</v-card-subtitle>
 
                                                     <div>
                                                         <v-text-field
@@ -209,7 +270,7 @@
                                                     elevation="0"
                                                 >
                                                     <v-divider class="mb-5" ></v-divider>
-                                                    <v-card-subtitle>Categories</v-card-subtitle>
+                                                    <v-card-subtitle class="px-0">Images</v-card-subtitle>
 
                                                     <v-text-field
                                                         v-model="editedItem.Image"
@@ -294,7 +355,7 @@
         </div>
 
 </template>
- 
+
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
@@ -420,6 +481,10 @@ export default {
     },
 
     methods: {
+        DeleteThisFieldMethod: function() {
+            alert('🤌');
+        },
+
         test: function( index ) {
             let cat = document.getElementById('cat-' + index);
             cat.remove();
