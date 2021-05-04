@@ -383,7 +383,6 @@ export default {
           
             { text: 'Description', value: 'description' },
             { text: 'Price', value: 'price' },
-            { text: 'Category', value: 'category' },
             { text: 'salepercentage', value: 'salepercentage' },
             { text: 'Stock', value: 'stock' },
             { text: 'Active', value: 'isActive' },
@@ -447,7 +446,6 @@ export default {
                         name: element.Name,
                         description: element.Description,
                         price: element.Price,
-                        category: element.Category,
                         salepercentage: element.SalePercentage,
                         stock: element.Stock,
                         isActive: element.isActive,
@@ -494,13 +492,20 @@ export default {
             cat.innerHTML += '<v-card>test</v-card>';
         },
 
+        //opdater Products localt
+        UpdateProductsData: function() {             
+            delete this.products[this.editedIndex];             
+            this.products.push(this.editedItem); 
+        },
+
+        //updater item
         onUpdateItem: function() {
             
-            UpdateProductBody({products: this.editedItem},
-             {headers: { 
-                jwt: this.$cookies.get('jwt'),
-            }})
+            UpdateProductBody({product: this.editedItem},
+              this.$cookies.get('jwt'),
+            )
             .then((res) => {
+                this.UpdateProductsData();
                 console.log(res)
                 this.close();
             }).catch(err => {
@@ -527,7 +532,7 @@ export default {
         },
 
         editItem(item){
-            console.log(item)
+            
             this.editedIndex = this.products.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
@@ -540,9 +545,6 @@ export default {
             })
         },
 
-       
-            
-        
         }
     }
 
