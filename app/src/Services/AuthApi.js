@@ -59,8 +59,8 @@ export const ChangePrivilegeBody = async(body, status, jwt) => {
     return response.data;
 }
 
-export const UpdateUserAdminBody = async (body, options, jwt) => {
-    let err, response = await axios.post(UpdateUserURL, body, options, {headers:{jwt: jwt}});
+export const UpdateUserAdminBody = async (body, jwt) => {
+    let err, response = await axios.post(UpdateUserURL, body, {headers:{jwt: jwt}});
 
     if(err) throw err;
 

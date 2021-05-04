@@ -332,10 +332,11 @@ export default {
         onUpdateProfileAdminChange: function() {
             
             UpdateUserAdminBody({user: this.editedItem},
-             {headers: { 
-                jwt: this.$cookies.get('jwt'),
-            }})
+             
+                this.$cookies.get('jwt'),
+            )
             .then((res) => {
+                this.UpdateUserData()
                 console.log(res)
                 this.close();
             }).catch(err => {
@@ -343,6 +344,11 @@ export default {
                 
             });
            
+        },
+
+        UpdateUserData: function() {             
+            delete this.users[this.editedIndex];             
+            this.users.push(this.editedItem); 
         },
 
         editItem(item){
