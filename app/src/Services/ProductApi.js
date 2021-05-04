@@ -16,16 +16,16 @@ export const GetAllProductsBody = async(jwt) =>{
 
 }
 
-export const CreateProductBody = async(body, options, jwt) =>{
-    let err, reponse = await axios.post(CreateProductURL, body, options, {headers: {jwt: jwt}})
+export const CreateProductBody = async(body, jwt) =>{
+    let err, reponse = await axios.post(CreateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
 
     return response.data;
 }
 
-export const UpdateProductBody = async(body, options, jwt) =>{
-    let err, reponse = await axios.post(UpdateProductURL, body, options, {headers: {jwt: jwt}})
+export const UpdateProductBody = async(body, jwt) =>{
+    let err, reponse = await axios.post(UpdateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
 
