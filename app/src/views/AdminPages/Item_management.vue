@@ -307,7 +307,7 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                           v-on:click="onUpdateProfileAdminChange()"
+                                           v-on:click="onUpdateItem()"
                                         >
                                             Save
                                         </v-btn>
@@ -361,7 +361,7 @@
 
 import { CurrentSession } from '@/Services/GlobalVariables';
 import { GetAllProductsBody } from '@/Services/ProductApi';
-
+import {UpdateProductBody} from '@/Services/ProductApi';
 
 
 export default {
@@ -403,9 +403,7 @@ export default {
                 creatorFullname: "",
             },
             SalePercentage: "",
-            TechnicalDetails:{
-                
-            },
+            TechnicalDetails:[],
             name: "",
             description: "",
             price: "",
@@ -424,9 +422,7 @@ export default {
                 creatorFullname: "",
             },
             SalePercentage: "",
-            TechnicalDetails:{
-                
-            },
+            TechnicalDetails:[],
             name: "",
             description: "",
             price: "",
@@ -474,6 +470,7 @@ export default {
         
     },
     
+     
     
     watch: {
         dialog (val) {
@@ -495,6 +492,22 @@ export default {
             let cat = document.getElementById('newcat');
             // cat.append('<v-divider></v-divider>');
             cat.innerHTML += '<v-card>test</v-card>';
+        },
+
+        onUpdateItem: function() {
+            
+            UpdateProductBody({products: this.editedItem},
+             {headers: { 
+                jwt: this.$cookies.get('jwt'),
+            }})
+            .then((res) => {
+                console.log(res)
+                this.close();
+            }).catch(err => {
+               console.log(err.response.data)
+                
+            });
+           
         },
 
         AdminCreateItem: function() {

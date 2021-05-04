@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import AboutUs from '../views/NotImportantSites/AboutUs.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
@@ -18,6 +19,30 @@ import Cart from '../views/Cart.vue';
 Vue.use(VueRouter)
 
 const routes = [
+	{ path: '/', name: 'Forside', component: Home, 
+		meta: { 
+			title: 'Forside',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+			]
+		}
+	},
+	{ path: '/AboutUs', name: 'AboutUs', component: AboutUs, 
+		meta: { 
+			title: 'AboutUs',
+			breadcrumb: [
+				{ name: 'AboutUs', to: '/AboutUs' },
+			]
+		}
+	},
+	{ path: '/', name: 'Forside', component: Home, 
+		meta: { 
+			title: 'Forside',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+			]
+		}
+	},
 	{ path: '/', name: 'Forside', component: Home, 
 		meta: { 
 			title: 'Forside',
