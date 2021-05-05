@@ -176,6 +176,7 @@
                                                             <v-row
                                                                 v-for="(row, indx) in item.items"
                                                                 :key="'B' + indx"
+                                                                :id="indx + item.header"
                                                             >
                                                                 <v-col
                                                                     col="12"
@@ -197,7 +198,7 @@
                                                                         v-model="row.value"
                                                                         label="Value"
                                                                         append-outer-icon="mdi-minus"
-                                                                        @click:append-outer="DeleteThisFieldMethod()"
+                                                                        @click:append-outer="RemoveFieldInner( item.header, indx )"
                                                                     ></v-text-field>
                                                                 </v-col>
                                                             </v-row>
@@ -207,6 +208,7 @@
                                                                     fab
                                                                     color="primary"
                                                                     small
+                                                                    @click="AddFieldInner( item.header )"
                                                                 >
                                                                     <v-icon>
                                                                         mdi-plus
@@ -222,6 +224,7 @@
                                                             fab
                                                             color="primary"
                                                             small
+                                                            @click="AddFieldCategory()"
                                                         >
                                                             <v-icon>
                                                                 mdi-plus
@@ -544,6 +547,26 @@ export default {
             this.editedIndex = -1
             })
         },
+
+
+
+        AddFieldCategory: function() {
+            this.editedItem.TechnicalDetails.push( { header: '', items: [ { name: '', value: '' } ] } );
+        },
+
+        AddFieldInner: function( header ) {
+            if( header != '' ) {
+                this.editedItem.TechnicalDetails.find( x => x.header === header ).items.push( { name: '', value: '' } )
+            } else {
+                console.log( 'Header must be defined before adding new fields.' );
+            }
+        },
+
+        RemoveFieldInner: function( header, index ) {
+            //delete this.editedItem.TechnicalDetails.find( x => x.header === header ).items[index];
+            this.editedItem.TechnicalDetails.find( x => x.header === header ).items.splice(index, 1);
+            //document.getElementById(index + header).remove();
+        }
 
         }
     }
