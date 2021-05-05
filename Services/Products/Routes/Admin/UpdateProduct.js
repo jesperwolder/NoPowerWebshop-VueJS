@@ -60,6 +60,7 @@ router.post('/', async (req, res) => {
         product.Price = (req.body.product.price ? req.body.product.price : product.Price);
         product.Image = (req.body.product.image ? req.body.product.image : product.Image);
         product.SalePercentage = (req.body.product.SalePercentage ? req.body.product.SalePercentage : product.SalePercentage);
+        product.Stock =(req.body.product.Stock ? req.body.product.Stock : product.Stock);
         product.TechnicalDetails = (req.body.product.TechnicalDetails ? req.body.product.TechnicalDetails : product.TechnicalDetails);
         product.Categories = (newCats ? newCats : product.Categories);
 

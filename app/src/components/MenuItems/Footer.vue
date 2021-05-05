@@ -20,8 +20,9 @@
                     :key="link"
                     text
                     class="my-2"
+                    :to="link.to"
                 >
-                    {{ link }}
+                    {{ link.name }}
                 </v-btn>
             </v-card-text>
 
@@ -52,9 +53,9 @@ export default {
         
     data: () => ({
         links: [
-            'Om Os',
-            'Kontakt Os',
-            'Returret'
+            {name: 'Om Os', to:'/AboutUs'},
+            {name: 'Kontakt Os', to:'/'},
+            {name: 'Returret', to:'/'}
         ],
     }),
     methods: {
