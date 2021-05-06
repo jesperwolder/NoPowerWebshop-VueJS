@@ -54,8 +54,8 @@ export default {
     data: () => ({
         links: [
             {name: 'Om Os', to:'/AboutUs'},
-            {name: 'Kontakt Os', to:'/'},
-            {name: 'Returret', to:'/'}
+            {name: 'Kontakt Os', to:'/ContactUs'},
+            {name: 'Returret', to:'/ReturRet'}
         ],
     }),
     methods: {

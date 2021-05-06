@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import AboutUs from '../views/NotImportantSites/AboutUs.vue';
+import ContactUs from '../views/NotImportantSites/ContactUs.vue';
+import ReturRet from '../views/NotImportantSites/ReturRet.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/ErrorPages/404.vue';
@@ -35,19 +37,19 @@ const routes = [
 			]
 		}
 	},
-	{ path: '/', name: 'Forside', component: Home, 
+	{ path: '/ContactUs', name: 'ContactUs', component: ContactUs, 
 		meta: { 
-			title: 'Forside',
+			title: 'ContactUs',
 			breadcrumb: [
-				{ name: 'Forside', to: '/' },
+				{ name: 'ContactUs', to: '/ContactUs' },
 			]
 		}
 	},
-	{ path: '/', name: 'Forside', component: Home, 
+	{ path: '/ReturRet', name: 'ReturRet', component: ReturRet, 
 		meta: { 
-			title: 'Forside',
+			title: 'ReturRet',
 			breadcrumb: [
-				{ name: 'Forside', to: '/' },
+				{ name: 'ReturRet', to: '/ReturRet' },
 			]
 		}
 	},
