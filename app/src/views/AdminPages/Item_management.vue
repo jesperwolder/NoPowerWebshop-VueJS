@@ -365,6 +365,7 @@
 import { CurrentSession } from '@/Services/GlobalVariables';
 import { GetAllProductsBody } from '@/Services/ProductApi';
 import {UpdateProductBody} from '@/Services/ProductApi';
+import {CreateProductBody} from '@/Services/ProductApi';
 
 
 export default {
@@ -518,12 +519,13 @@ export default {
            
         },
 
+        //create item
         AdminCreateItem: function() {
             
-            ({user: this.editedItem},
-             {headers: { 
-                jwt: this.$cookies.get('jwt'),
-            }})
+            CreateProductBody({product: this.editedItem},
+             
+                this.$cookies.get('jwt'),
+            )
             .then((res) => {
                 console.log(res)
                  
