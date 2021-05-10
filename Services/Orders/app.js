@@ -2,22 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const db = require('./modules/mongo.js')
+const db = require('./Modules/mongo');
 
-// Setting route variables
 let indexRouter = require('./Routes/index.js');
+let createRoute = require('./Routes/Create');
 
 let app = express();
 
-// Parsing middleware
 app.use(bodyParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: '*' }));
 
-// Initiating routes
 app.use('/', indexRouter);
+app.use('/create', createRoute);
 
-app.listen(3003);
+app.listen(3002);
 
 module.exports = app;
