@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const rateLimit = require('express-rate-limit');
 
 const db = require('./modules/mongo.js')
 
@@ -15,14 +14,7 @@ let changeprodStatusRoute = require('./Routes/Admin/ActivateDeactiveProduct');
 
 let app = express();
 
-const limit = rateLimit({
-    windowMs: 1 * 60 * 1000,
-    max: 10,
-    message: 'STYR DIG CHRISTIAN 👉👌'
-});
-
 // Parsing middleware
-app.use(limit);
 app.use(bodyParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

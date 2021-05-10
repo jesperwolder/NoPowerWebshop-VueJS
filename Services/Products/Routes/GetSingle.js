@@ -27,7 +27,6 @@ router.get('/:id', async (req, res) => {
         product.Creator = null;
     }
     
-
     // Success response
     res.json({
         message: 'success',

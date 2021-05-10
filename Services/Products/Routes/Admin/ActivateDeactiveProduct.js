@@ -17,6 +17,7 @@ router.post('/:ID/:status', async (req, res) => {
         return;
     }
 
+    //checking if the status was sent
     if(!req.params.status) {
         res.status(422).json({
             message: "manglende status",
