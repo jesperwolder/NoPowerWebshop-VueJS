@@ -60,7 +60,9 @@ router.post('/', async (req, res) => {
     Order.DateOfDelivery = today.setDate(today.getDate() + 3);
     Order.Status = "Under håndtering";
 
-    Order.save();
+    Order.save(err => {
+        console.log(err);
+    });
 
     res.json({
         message: 'success',
