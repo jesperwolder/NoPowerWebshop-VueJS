@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 
 const OrderSchema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
-    Products: [], // Contains { _id, Name, Price  } 
-    User: {
+    Buyer: {
         _id: mongoose.Types.ObjectId,
         Fullname: String,
-        email: String
+        Email: String 
     },
-    status: String,
-    TotalPrice: Number
+    Products: [], // { _id, Name, Price, Image }
+    TotalPrice: Number,
+    Status: String,
+    DateOfDelivery: Date
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
