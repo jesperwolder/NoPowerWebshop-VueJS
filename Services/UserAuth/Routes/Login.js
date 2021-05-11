@@ -4,7 +4,7 @@ const auth = require('../modules/authentication.js')
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    if(!req.body.Email || !req.body.Password) {
+    if(!req.body.User.Email || !req.body.User.Password) {
         res.status(400).json({
             Authorized: false,
             Jwt: null,
@@ -13,9 +13,9 @@ router.post('/', async (req, res) => {
         return
     }
 
-    console.log('/login -> ' + req.body.email);
+    console.log('/login -> ' + req.body.User.Email);
 
-    let err, user = await User.findOne({ Email: req.body.email });
+    let err, user = await User.findOne({ Email: req.body.User.Email });
     if(err || !user) {
         res.status(503).json({
             Authorized: false,
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    if(!(await auth.Compare(req.body.Password, user.Password))){
+    if(!(await auth.Compare(req.body.User.Password, user.Password))){
         res.status(401).json({
             Authorized: false,
             Jwt: null,
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    let jwt = auth.SignJwt({ _id: user._id, Email: req.body.email });
+    let jwt = auth.SignJwt({ _id: user._id, Email: req.body.User.Email });
     res.status(200).json({
         Authorized: true,
         Jwt: jwt,
