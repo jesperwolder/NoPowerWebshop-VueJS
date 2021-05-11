@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
         return;
     }
     
-    let err2, user = await User.findOne( { _id: jwt.id } );
+    let err2, user = await User.findOne( { _id: jwt._id } );
     if(err2 || !user || !user.isAdmin) {
         res.status(403).json({
             Message: "Ikke autoriseret",
