@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProductSchema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
     Creator: {
-        createdBy: mongoose.Types.ObjectId,
+        _id: mongoose.Types.ObjectId,
         creatorEmail: String,
         creatorFullname: String,
     },
