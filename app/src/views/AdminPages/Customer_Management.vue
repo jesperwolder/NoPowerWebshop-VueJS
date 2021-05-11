@@ -330,7 +330,7 @@ export default {
 
     methods: {
         onUpdateProfileAdminChange: function() {
-            
+            console.log(this.editedItem)
             UpdateUserAdminBody({User: this.editedItem},
              
                 this.$cookies.get('jwt'),
@@ -365,7 +365,7 @@ export default {
         },
 
         ChangeAdminRole: function() {
-            ChangePrivilegeBody({userID: this.editedItem._id}, this.editedItem.isAdmin, this.$cookies.get('jwt') )
+            ChangePrivilegeBody({UserID: this.editedItem._id}, this.editedItem.isAdmin, this.$cookies.get('jwt') )
             .then((res) => {
                 console.log(res)
                 

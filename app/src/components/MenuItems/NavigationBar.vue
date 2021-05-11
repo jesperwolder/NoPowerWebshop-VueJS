@@ -102,11 +102,11 @@ export default {
 		if(this.$cookies.isKey('jwt')) {
 			AuthBody( this.$cookies.get('jwt') )
 				.then(res => {
-					if(res.Message === 'Success') { console.log('du lort'); }
+					//if(res.Message === 'Success') { console.log('du lort'); }
 
-					if(res.Authorized) CurrentSession.isLoggedIn = true;
-
-					if(res.isAdmin) CurrentSession.isAdmin = true;
+					CurrentSession.isLoggedIn = res.Authorized;
+					CurrentSession.isAdmin = res.isAdmin;
+				
 				}).catch(err => {
 					console.log(err);
 				});
