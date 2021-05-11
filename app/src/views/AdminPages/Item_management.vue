@@ -25,8 +25,8 @@
                             </v-card-title>
                             <v-data-table
                             :headers="headers"
-                            :items="products"
-                            :items-per-page="25"
+                            :Items="products"
+                            :Items-per-page="25"
                             :search="search"
                             >
 
@@ -34,7 +34,7 @@
                                 <v-toolbar
                                     flat
                                 >
-                                    <v-toolbar-title>Thomas er gay i items, uses a placeholder lige nu</v-toolbar-title>
+                                    <v-toolbar-title>Thomas er gay i Items, uses a placeholder lige nu</v-toolbar-title>
                                     <v-divider
                                     class="mx-4"
                                     inset
@@ -71,8 +71,8 @@
                                                 class="px-0"
                                             >
                                                 <v-text-field
-                                                    v-model="editedItem.name"
-                                                    label="name" 
+                                                    v-model="editedItem.Name"
+                                                    label="Name" 
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -80,7 +80,7 @@
                                                 class="px-0"
                                             >
                                                 <v-textarea
-                                                    v-model="editedItem.description"
+                                                    v-model="editedItem.Description"
                                                     label="Description"
                                                     outlined
                                                 ></v-textarea>
@@ -92,9 +92,9 @@
                                                 class="pl-0"
                                             >
                                                 <v-text-field
-                                                    v-model="editedItem.price"
+                                                    v-model="editedItem.Price"
                                                     type="number"
-                                                    label="price"
+                                                    label="Price"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -104,9 +104,9 @@
                                                 class="pr-0"
                                             >
                                                 <v-text-field
-                                                    v-model="editedItem.stock"
+                                                    v-model="editedItem.Stock"
                                                     type="number"
-                                                    label="stock"
+                                                    label="Stock"
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
@@ -130,7 +130,7 @@
                                             >
                                                 <v-text-field
                                                     disabled
-                                                    v-model="editedItem.Creator.creatorFullname"
+                                                    v-model="editedItem.Creator.CreatorFullname"
                                                 ></v-text-field>
                                                 </v-col>
                                                 
@@ -167,16 +167,16 @@
                                                         <v-card-title class="mt-4">
                                                             <v-text-field
                                                                 outlined
-                                                                v-model="item.header"
+                                                                v-model="item.Header"
                                                                 label="Header"
                                                             ></v-text-field>
                                                         </v-card-title>
 
                                                         <v-card-text>
                                                             <v-row
-                                                                v-for="(row, indx) in item.items"
+                                                                v-for="(row, indx) in item.Items"
                                                                 :key="'B' + indx"
-                                                                :id="indx + item.header"
+                                                                :id="indx + item.Header"
                                                             >
                                                                 <v-col
                                                                     col="12"
@@ -184,7 +184,7 @@
                                                                     md="6"
                                                                 >
                                                                     <v-text-field
-                                                                        v-model="row.name"
+                                                                        v-model="row.Name"
                                                                         label="Name"
                                                                     ></v-text-field>
                                                                 </v-col>
@@ -195,10 +195,10 @@
                                                                     md="6"
                                                                 >
                                                                     <v-text-field
-                                                                        v-model="row.value"
+                                                                        v-model="row.Value"
                                                                         label="Value"
                                                                         append-outer-icon="mdi-minus"
-                                                                        @click:append-outer="RemoveFieldInner( item.header, indx )"
+                                                                        @click:append-outer="RemoveFieldInner( item.Header, indx )"
                                                                     ></v-text-field>
                                                                 </v-col>
                                                             </v-row>
@@ -208,7 +208,7 @@
                                                                     fab
                                                                     color="primary"
                                                                     small
-                                                                    @click="AddFieldInner( item.header )"
+                                                                    @click="AddFieldInner( item.Header )"
                                                                 >
                                                                     <v-icon>
                                                                         mdi-plus
@@ -382,15 +382,15 @@ export default {
                 text: 'Name',
                 align: 'start',
                 filterable: true,
-                value: 'name',
+                Value: 'Name',
             },
           
-            { text: 'Description', value: 'description' },
-            { text: 'Price', value: 'price' },
-            { text: 'salepercentage', value: 'salepercentage' },
-            { text: 'Stock', value: 'stock' },
-            { text: 'Active', value: 'isActive' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Description', Value: 'Description' },
+            { text: 'Price', Value: 'Price' },
+            { text: 'SalePercentage', Value: 'SalePercentage' },
+            { text: 'Stock', Value: 'Stock' },
+            { text: 'Active', Value: 'isActive' },
+            { text: 'Actions', Value: 'actions', sortable: false },
         ],
         products: [
           
@@ -401,17 +401,17 @@ export default {
             _id: "",
             Categories:[],
             Creator:{
-                createdBy: "",
-                creatorEmail: "",
-                creatorFullname: "",
+                CreatedBy: "",
+                CreatorEmail: "",
+                CreatorFullname: "",
             },
             SalePercentage: "",
             TechnicalDetails:[],
-            name: "",
-            description: "",
-            price: "",
+            Name: "",
+            Description: "",
+            Price: "",
             Image: "",
-            stock: "",
+            Stock: "",
             isActive:"",
             
         },
@@ -420,17 +420,17 @@ export default {
             _id: "",
             Categories:[],
             Creator:{
-                createdBy: "",
-                creatorEmail: "",
-                creatorFullname: "",
+                CreatedBy: "",
+                CreatorEmail: "",
+                CreatorFullname: "",
             },
             SalePercentage: "",
             TechnicalDetails:[],
-            name: "",
-            description: "",
-            price: "",
+            Name: "",
+            Description: "",
+            Price: "",
             Image: "",
-            stock: "",
+            Stock: "",
             isActive:"",
             
         },
@@ -441,25 +441,25 @@ export default {
     mounted: function() {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
-            let obj = res.products;
+            let obj = res.Products;
 
             obj.forEach(element => {
                 this.products.push(
                     {
                         _id: element._id,
-                        name: element.Name,
-                        description: element.Description,
-                        price: element.Price,
-                        salepercentage: element.SalePercentage,
-                        stock: element.Stock,
+                        Name: element.Name,
+                        Description: element.Description,
+                        Price: element.Price,
+                        SalePercentage: element.SalePercentage,
+                        Stock: element.Stock,
                         isActive: element.isActive,
                         Image: element.Image,
                         TechnicalDetails: element.TechnicalDetails,
                         Categories: element.Categories,
                         Creator: {
-                            createdBy: element.Creator.creatorFullname,
-                            creatorEmail: element.Creator.creatorEmail,
-                            creatorFullname: element.Creator.creatorFullname,
+                            CreatedBy: element.Creator.CreatorFullname,
+                            CreatorEmail: element.Creator.CreatorEmail,
+                            CreatorFullname: element.Creator.CreatorFullname,
                         }
                     }
                 )
@@ -553,20 +553,20 @@ export default {
 
 
         AddFieldCategory: function() {
-            this.editedItem.TechnicalDetails.push( { header: '', items: [ { name: '', value: '' } ] } );
+            this.editedItem.TechnicalDetails.push( { Header: '', Items: [ { Name: '', Value: '' } ] } );
         },
 
         AddFieldInner: function( header ) {
             if( header != '' ) {
-                this.editedItem.TechnicalDetails.find( x => x.header === header ).items.push( { name: '', value: '' } )
+                this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.push( { Name: '', Value: '' } )
             } else {
-                console.log( 'Header must be defined before adding new fields.' );
+                console.log( 'header must be defined before adding new fields.' );
             }
         },
 
         RemoveFieldInner: function( header, index ) {
-            //delete this.editedItem.TechnicalDetails.find( x => x.header === header ).items[index];
-            this.editedItem.TechnicalDetails.find( x => x.header === header ).items.splice(index, 1);
+            //delete this.editedItem.TechnicalDetails.find( x => x.header === header ).Items[index];
+            this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.splice(index, 1);
             //document.getElementById(index + header).remove();
         }
 
