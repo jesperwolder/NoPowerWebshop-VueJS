@@ -6,26 +6,26 @@
                 elevation="3"
             >
                 <v-form class="col-12 pa-0"> 
-                    <h2 class="text-center">Profile Page {{ fullname }}</h2>
+                    <h2 class="text-center">Profile Page {{ Fullname }}</h2>
                     
                     <v-text-field
                         type="text"
-                        v-model="UpdateProfile.fullname"
-                        :placeholder="fullname"
+                        v-model="UpdateProfile.Fullname"
+                        :placeholder="Fullname"
                         
                     ></v-text-field>
                     <v-text-field
                         
                         type="email"
-                        v-model="UpdateProfile.email"
-                        :placeholder="email"
+                        v-model="UpdateProfile.Email"
+                        :placeholder="Email"
                     > </v-text-field>
                     
                     <v-text-field
                         
                         type="text"
-                        v-model="UpdateProfile.phone"
-                        :placeholder="phone"
+                        v-model="UpdateProfile.Phone"
+                        :placeholder="Phone"
                     > </v-text-field>
                         
                     <v-text-field
@@ -44,16 +44,16 @@
                         <v-text-field
                             
                             type="text"
-                            v-model="UpdateProfile.street"
+                            v-model="UpdateProfile.Street"
                             class="pr-2"
-                            :placeholder="address.street"
+                            :placeholder="Address.Street"
                         > </v-text-field>
 
                         <v-text-field
                             
                             type="text"
-                            v-model="UpdateProfile.number"
-                            :placeholder="address.number"
+                            v-model="UpdateProfile.Number"
+                            :placeholder="Address.Number"
                         > </v-text-field>
                     </div>
 
@@ -61,16 +61,16 @@
                         <v-text-field
                             
                             type="number"
-                            v-model="UpdateProfile.zip"
+                            v-model="UpdateProfile.Zip"
                             class="pr-2"
-                            :placeholder="address.zip.toString()"
+                            :placeholder="Address.Zip.toString()"
                         > </v-text-field>
 
                         <v-text-field
                             
                             type="text"
-                            v-model="UpdateProfile.city"
-                            :placeholder="address.city"
+                            v-model="UpdateProfile.City"
+                            :placeholder="Address.City"
                         > </v-text-field>
                     </div>
 
@@ -94,27 +94,27 @@ import {AuthBody} from '../Services/AuthApi';
 export default{
     data() {
         return {
-            email: null,
-            fullname: null,
-            password: null,
-            phone: null,
-            address: {
-                street: null,
-                number: null,
-                zip: '',
-                city: null
+            Email: null,
+            Fullname: null,
+            Password: null,
+            Phone: null,
+            Address: {
+                Street: null,
+                Number: null,
+                Zip: '',
+                City: null
             },
 
             UpdateProfile:{
-            email: "",
-            fullname: "",
-            password: "",
-            phone: "",
-            address: {
-                street: "",
-                number: "",
-                zip: "",
-                city: ""
+            Email: "",
+            Fullname: "",
+            Password: "",
+            Phone: "",
+            Address: {
+                Street: "",
+                Number: "",
+                Zip: "",
+                City: ""
             } 
             }
         };
@@ -124,11 +124,11 @@ export default{
     mounted: function() {
         AuthBody(this.$cookies.get('jwt'))
         .then((res) => {
-            this.fullname = res.user.fullname;
-            this.email = res.user.email;
+            this.Fullname = res.User.Fullname;
+            this.Email = res.User.Email;
             // this.password = res.data.user.password;
-            this.phone = res.user.phone;
-            this.address = res.user.address;
+            this.Phone = res.User.Phone;
+            this.Address = res.User.Address;
         }).catch(err => {
             console.log(err);
             //this.$router.push('/*');
@@ -148,7 +148,7 @@ export default{
                 // }
 
             // Send post request om at update brugeren
-            this.axios.post('http://server.topper144p.com:3000/update', {user: this.UpdateProfile}, { 
+            this.axios.post('http://server.topper144p.com:3000/update', {User: this.UpdateProfile}, { 
             headers: { 
                 jwt: this.$cookies.get('jwt'),
             }

@@ -87,7 +87,7 @@ export default {
                 .then((res) => {
                     CurrentSession.isLoggedIn = res.Authorized;
                     CurrentSession.isAdmin = res.isAdmin;
-                    this.$cookies.set('jwt', res.jwt);
+                    this.$cookies.set('jwt', res.Jwt);
                     this.$router.push('/profile');
                         
                 }).catch(err => {
