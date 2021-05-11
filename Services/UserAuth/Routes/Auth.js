@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    let err, user = await User.findOne({ _id: authObj.id });
+    let err, user = await User.findOne({ _id: authObj._id });
     if(err || !user) {
         res.status(403).json({
             Authorized: false,
