@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    req.body.user.email = req.body.User.Email.toLowerCase();
+    req.body.User.Email = req.body.User.Email.toLowerCase();
 
     console.log("/register -> " + req.body.User.Email);
 
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
         return;
     }
     
-    let hash = await auth.HashString(req.body.user.password);
+    let hash = await auth.HashString(req.body.User.Password);
     
     if(!hash){
         res.status(424).json({

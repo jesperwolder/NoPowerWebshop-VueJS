@@ -13,9 +13,9 @@ router.post('/', async (req, res) => {
         return
     }
 
-    console.log('/login -> ' + req.body.email);
+    console.log('/login -> ' + req.body.Email);
 
-    let err, user = await User.findOne({ Email: req.body.email });
+    let err, user = await User.findOne({ Email: req.body.Email });
     if(err || !user) {
         res.status(503).json({
             Authorized: false,
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    let jwt = auth.SignJwt({ _id: user._id, Email: req.body.email });
+    let jwt = auth.SignJwt({ _id: user._id, Email: req.body.Email });
     res.status(200).json({
         Authorized: true,
         Jwt: jwt,
