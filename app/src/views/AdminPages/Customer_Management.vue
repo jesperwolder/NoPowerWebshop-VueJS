@@ -60,9 +60,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.fullname"
-                                                label="fullname"
-                                                :placeholder="editedItem.fullname"
+                                                v-model="editedItem.Fullname"
+                                                label="Fullname"
+                                                :placeholder="editedItem.Fullname"
                                                 
                                                  
                                                 ></v-text-field>
@@ -73,9 +73,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                  v-model="editedItem.email"
-                                                label="email"
-                                                :placeholder="editedItem.email"
+                                                  v-model="editedItem.Email"
+                                                label="Email"
+                                                :placeholder="editedItem.Email"
                                                 
                                                 ></v-text-field>
                                             </v-col>
@@ -85,9 +85,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.phone"
-                                                label="phone"
-                                                :placeholder="editedItem.phone"
+                                                v-model="editedItem.Phone"
+                                                label="Phone"
+                                                :placeholder="editedItem.Phone"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -96,9 +96,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.street"
-                                                label="street"
-                                                :placeholder="editedItem.address.street"
+                                                v-model="editedItem.Address.Street"
+                                                label="Street"
+                                                :placeholder="editedItem.Address.Street"
                                                 ></v-text-field>
                                             </v-col>
                                              <v-col
@@ -107,9 +107,9 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.number"
-                                                label="number"
-                                                :placeholder="editedItem.address.number"
+                                                v-model="editedItem.Address.Number"
+                                                label="Number"
+                                                :placeholder="editedItem.Address.Number"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -119,9 +119,9 @@
                                             >
                                             
                                                 <v-text-field
-                                               v-model="editedItem.address.zip"
-                                                label="zip"
-                                                :placeholder="editedItem.address.zip.toString()"
+                                               v-model="editedItem.Address.Zip"
+                                                label="Zip"
+                                                :placeholder="editedItem.Address.Zip.toString()"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -130,10 +130,10 @@
                                                 md="4"
                                             >
                                                 <v-text-field
-                                                v-model="editedItem.address.city"
-                                                label="city"
-                                                :value="editedItem.address.city"
-                                                :placeholder="editedItem.address.city"
+                                                v-model="editedItem.Address.City"
+                                                label="City"
+                                                :value="editedItem.Address.City"
+                                                :placeholder="editedItem.Address.City"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -241,15 +241,15 @@ export default {
             text: 'Fullname',
             align: 'start',
             filterable: true,
-            value: 'fullname',
+            value: 'Fullname',
           },
           
-          { text: 'Email', value: 'email' },
-          { text: 'Phone', value: 'phone' },
-          { text: 'Street', value: 'address.street' },
-          { text: 'Number', value: 'address.number' },
-          { text: 'Zip', value: 'address.zip' },
-          { text: 'City', value: 'address.city' },
+          { text: 'Email', value: 'Email' },
+          { text: 'Phone', value: 'Phone' },
+          { text: 'Street', value: 'Address.Street' },
+          { text: 'Number', value: 'Address.Number' },
+          { text: 'Zip', value: 'Address.Zip' },
+          { text: 'City', value: 'Address.City' },
           { text: 'Actions', value: 'actions', sortable: false },
        
         ],
@@ -260,29 +260,29 @@ export default {
         editedIndex: -1,
         editedItem: {
             _id: "",
-            email: "",
-            fullname: "",
+            Email: "",
+            Fullname: "",
             password: "",
-            phone: "",
-            address: {
-                street: "",
-                number: "",
-                zip: 0,
-                city: "",
+            Phone: "",
+            Address: {
+                Street: "",
+                Number: "",
+                Zip: 0,
+                City: "",
             },
             isAdmin: false,
         },
         defaultItem: {
             _id: "",
-            email: "",
-            fullname: "",
+            Email: "",
+            Fullname: "",
             password: "",
-            phone: "",
-            address: {
-                street: "",
-                number: "",
-                zip: 0,
-                city: "",
+            Phone: "",
+            Address: {
+                Street: "",
+                Number: "",
+                Zip: 0,
+                City: "",
             },
             isAdmin: false,
         },
@@ -294,20 +294,20 @@ export default {
     mounted: function() {
         GetAllUsersBody(this.$cookies.get('jwt'))
         .then((res) => {
-            let obj = res.users;
+            let obj = res.Users;
 
           obj.forEach(element => {
               this.users.push(
                   {
                       _id: element._id,
-                      fullname: element.fullname,
-                      email: element.email,
-                      phone: element.phone,
-                      address:{
-                        street: element.address.street,
-                        number: element.address.number,
-                        zip: element.address.zip,
-                        city: element.address.city,
+                      Fullname: element.Fullname,
+                      Email: element.Email,
+                      Phone: element.Phone,
+                      Address:{
+                        Street: element.Address.Street,
+                        Number: element.Address.Number,
+                        Zip: element.Address.Zip,
+                        City: element.Address.City,
                     },
                     isAdmin: element.isAdmin,
                   }
@@ -331,7 +331,7 @@ export default {
     methods: {
         onUpdateProfileAdminChange: function() {
             
-            UpdateUserAdminBody({user: this.editedItem},
+            UpdateUserAdminBody({User: this.editedItem},
              
                 this.$cookies.get('jwt'),
             )
