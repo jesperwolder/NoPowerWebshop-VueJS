@@ -1,8 +1,10 @@
-let axios = require('axios');
+const axios = require('axios');
+
 require('dotenv').config();
 
-/*
-* @param {string} jwt Token used for athentication
+/**
+*   @param {string} jwt token used for authentication
+*   @returns {object} object check github docs for more information
 */
 const ValidateJwt = async (jwt) => {
     let err, response = await axios.post(process.env.AuthService + '/auth', null, { headers: { jwt: jwt } });
