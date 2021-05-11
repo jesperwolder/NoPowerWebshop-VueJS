@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
     }
 
     // Creating a product variable in order to save it on the db
-    let product = new Product(req.body.product);
+    let product = new Product(req.body.Product);
     product._id = mongoose.Types.ObjectId();
     product.Creator._id = response.data.User._id;
     product.Creator.Email = response.data.User.Email;

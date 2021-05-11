@@ -30,7 +30,7 @@ router.post('/:status', async (req, res) => {
         return;
     }
     
-    let err2, user = await User.findOne( { _id: jwt.id } );
+    let err2, user = await User.findOne( { _id: jwt._id } );
     if(err2 || !user || !user.isAdmin) {
         res.status(403).json({
             Message: "Ikke autoriseret",
@@ -41,7 +41,7 @@ router.post('/:status', async (req, res) => {
     
     console.log('/changePrivilege -> ' + user.Email);
 
-    let err3, newAdmin = await User.findOne({ _id: req.body.userID });
+    let err3, newAdmin = await User.findOne({ _id: req.body.UserID });
     if(err3 || !newAdmin) {
         res.status().json({
             Message: 'Der skete en ukendt fejl prøv igen senere, eller kontakt en system admin',
