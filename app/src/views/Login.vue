@@ -29,14 +29,14 @@
                     <v-text-field
                         label="Email"
                         type="email"
-                        v-model="login.email"
+                        v-model="login.Email"
                         required
                     ></v-text-field>
                     
                     <v-text-field
                         label="Password"
                         type="password"
-                        v-model="login.password"
+                        v-model="login.Password"
                         required
                     ></v-text-field>
 
@@ -67,8 +67,8 @@ export default {
             loading: false,
             error: null,
             login: {
-                email: "",
-                password: "",
+                Email: "",
+                Password: "",
             },
             meta: this.$route.meta,
             CS: CurrentSession
@@ -79,11 +79,13 @@ export default {
             this.loading = true;
 
             LoginBody({
-                email: this.login.email.toLowerCase(), 
-                password: this.login.password
+                User:{
+                    Email: this.login.Email.toLowerCase(), 
+                    Password: this.login.Password
+                }
             })
                 .then((res) => {
-                    CurrentSession.isLoggedIn = res.authorized;
+                    CurrentSession.isLoggedIn = res.Authorized;
                     CurrentSession.isAdmin = res.isAdmin;
                     this.$cookies.set('jwt', res.jwt);
                     this.$router.push('/profile');

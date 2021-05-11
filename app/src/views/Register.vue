@@ -30,33 +30,33 @@
                     <v-text-field
                         label="Fulde navn"
                         type="text"
-                        v-model="register.fullname"
+                        v-model="register.Fullname"
                         required
                     > </v-text-field>
                     <v-text-field
                         label="Email"
                         type="email"
-                        v-model="register.email"
+                        v-model="register.Email"
                         required
                     > </v-text-field>
                     <v-text-field
                         label="Telefon nummer"
                         type="text"
-                        v-model="register.phone"
+                        v-model="register.Phone"
                         required
                     > </v-text-field>
                     <div class="row ma-0">
                         <v-text-field
                             label="Password"
                             type="password"
-                            v-model="register.password"
+                            v-model="register.Password"
                             required
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="Gentag password"
                             type="password"
-                            v-model="register.confirmPassword"
+                            v-model="register.ConfirmPassword"
                             required
                         > </v-text-field>
                     </div>
@@ -64,26 +64,26 @@
                         <v-text-field
                             label="Vej"
                             type="text"
-                            v-model="register.address.street"
+                            v-model="register.Address.Street"
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="Husnummer"
                             type="text"
-                            v-model="register.address.number"
+                            v-model="register.Address.Number"
                         > </v-text-field>
                     </div>
                     <div class="row ma-0">
                         <v-text-field
                             label="Postnummer"
                             type="number"
-                            v-model="register.address.zip"
+                            v-model="register.Address.Zip"
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="By"
                             type="text"
-                            v-model="register.address.city"
+                            v-model="register.Address.City"
                         > </v-text-field>
                     </div>
                     <v-btn
@@ -133,16 +133,16 @@ export default {
             loading: false,
             error: null,
             register: {
-                email: null,
-                fullname: null,
-                password: null,
-                confirmPassword: null,
-                phone: null,
-                address: {
-                    street: null,
-                    number: null,
-                    zip: null,
-                    city: null
+                Email: null,
+                Fullname: null,
+                Password: null,
+                ConfirmPassword: null,
+                Phone: null,
+                Address: {
+                    Street: null,
+                    Number: null,
+                    Zip: null,
+                    City: null
                 }
             },
             meta: this.$route.meta,
@@ -158,14 +158,14 @@ export default {
                 return;
             }
             // Validere om passwords matcher
-            if(this.register.password != this.register.confirmPassword) {
+            if(this.register.Password != this.register.ConfirmPassword) {
                 this.error = "Passwords matcher ikke";
                 this.loading = false;
                 return;
             }
 
             // Send post request om at oprette brugeren
-            RegisterBody({ user: this.register })
+            RegisterBody({ User: this.register })
             .then((res) => {
                 // Success respons
                 CurrentSession.isLoggedIn = res.authorized;
