@@ -7,19 +7,19 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     if(!req.headers.jwt) {
         res.status(403).json({
-            authorized: false,
-            message: "Ikke Autoriseret"
+            Authorized: false,
+            Message: "Ikke Autoriseret"
         });
         return;
     }
 
-    console.log("/auth -> " + auth.VerifyJwt(req.headers.jwt).email);
+    console.log("/auth -> " + auth.VerifyJwt(req.headers.jwt).Email);
 
     let authObj = auth.VerifyJwt(req.headers.jwt);
     if(!authObj) {
         res.status(403).json({
-            authorized: false,
-            message: "Ikke Autoriseret"
+            Authorized: false,
+            Message: "Ikke Autoriseret"
         });
         return;
     }
@@ -27,17 +27,17 @@ router.post('/', async (req, res) => {
     let err, user = await User.findOne({ _id: authObj.id });
     if(err || !user) {
         res.status(403).json({
-            authorized: false,
-            message: "Der blev ikke fundet en brugere, prøv at logge ud og ind"
+            Authorized: false,
+            Message: "Der blev ikke fundet en brugere, prøv at logge ud og ind"
         });
         return;
     }
 
     res.status(200).json({
-        authorized: true,
+        Authorized: true,
         isAdmin: user.isAdmin,
-        user: user,
-        message: "Success"
+        User: user,
+        Message: "Success"
     });
 });
 

@@ -7,15 +7,16 @@ const router = express.Router();
 router.post('/:status', async (req, res) => {
     if(!req.headers.jwt) {
         res.status(403).json({
-            message: "Ikke autoriseret",
-            users: null
+            Message: "Ikke autoriseret",
+            User: null
         });
         return;
     }
 
-    if(!req.body.userID) {
+    if(!req.body.UserID) {
         res.status(400).json({
-            message: 'Intet brugerID (userID)'
+            Message: 'Intet brugerID (userID)',
+            User: null
         });
         return;
     }
@@ -23,29 +24,28 @@ router.post('/:status', async (req, res) => {
     let jwt = auth.VerifyJwt(req.headers.jwt);
     if(!jwt) {
         res.status(403).json({
-            message: "Ikke autoriseret",
-            users: null
+            Message: "Ikke autoriseret",
+            User: null
         });
         return;
     }
     
     let err2, user = await User.findOne( { _id: jwt.id } );
-    console.log(user);
     if(err2 || !user || !user.isAdmin) {
         res.status(403).json({
-            message: "Ikke autoriseret",
-            users: null
+            Message: "Ikke autoriseret",
+            User: null
         });
         return;
     }
     
-    console.log('/changePrivilege -> ' + user.email);
+    console.log('/changePrivilege -> ' + user.Email);
 
     let err3, newAdmin = await User.findOne({ _id: req.body.userID });
     if(err3 || !newAdmin) {
         res.status().json({
-            message: 'Der skete en ukendt fejl prøv igen senere, eller kontakt en system admin',
-            users: null
+            Message: 'Der skete en ukendt fejl prøv igen senere, eller kontakt en system admin',
+            Users: null
         });
         return;
     }
@@ -59,7 +59,8 @@ router.post('/:status', async (req, res) => {
     newAdmin.save();
 
     res.json({
-        message: 'success'
+        Message: 'success',
+        User: newAdmin
     });
 });
 

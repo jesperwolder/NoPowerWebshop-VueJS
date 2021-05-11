@@ -19,23 +19,23 @@ router.post('/', async (req, res) => {
     // checking for any errors and if the user is not admin
     if(err || !response.data.isAdmin) {
         res.status(403).json({
-            message: "unauthorized",
-            product: null
+            Message: "unauthorized",
+            Product: null
         });
         return;
     }
 
     // checkign if the product id was given
-    if(!req.body.product._id) {
+    if(!req.body.Product._id) {
         res.status(503).json({
-            message: "Intet produkt id var givet",
-            product: null
+            Message: "Intet produkt id var givet",
+            Product: null
         });
         return;
     }
 
     // finding the product with the given id
-    let err2, product = await Product.findById(req.body.product._id);
+    let err2, product = await Product.findById(req.body.Product._id);
 
     // checking for errors or if the product was not found
     if(err2 || !product) {
@@ -55,13 +55,13 @@ router.post('/', async (req, res) => {
     // changing the values in try statement in order to catch null errors
     try {
         // updating the values if the given new value is not null
-        product.Name = (req.body.product.name ? req.body.product.name : product.Name);
-        product.Description = (req.body.product.description ? req.body.product.description : product.Description);
-        product.Price = (req.body.product.price ? req.body.product.price : product.Price);
-        product.Image = (req.body.product.image ? req.body.product.image : product.Image);
-        product.SalePercentage = (req.body.product.SalePercentage ? req.body.product.SalePercentage : product.SalePercentage);
-        product.Stock =(req.body.product.Stock ? req.body.product.Stock : product.Stock);
-        product.TechnicalDetails = (req.body.product.TechnicalDetails ? req.body.product.TechnicalDetails : product.TechnicalDetails);
+        product.Name = (req.body.Product.Name ? req.body.Product.Name : product.Name);
+        product.Description = (req.body.Product.Description ? req.body.Product.Description : product.Description);
+        product.Price = (req.body.Product.Price ? req.body.Product.Price : product.Price);
+        product.Image = (req.body.Product.image ? req.body.Product.Image : product.Image);
+        product.SalePercentage = (req.body.Product.SalePercentage ? req.body.Product.SalePercentage : product.SalePercentage);
+        product.Stock =(req.body.Product.Stock ? req.body.Product.Stock : product.Stock);
+        product.TechnicalDetails = (req.body.Product.TechnicalDetails ? req.body.Product.TechnicalDetails : product.TechnicalDetails);
         product.Categories = (newCats ? newCats : product.Categories);
 
         // Saving the changes
@@ -69,16 +69,16 @@ router.post('/', async (req, res) => {
     }catch {
         // error response if an value was not received
         res.status(503).json({
-            message: 'Manglende værdier',
-            product: null
+            Message: 'Manglende værdier',
+            Product: null
         });
         return;
     }
 
     // Success response
     res.json({
-        message: "success",
-        product: product
+        Message: "success",
+        Product: product
     });
 });
 

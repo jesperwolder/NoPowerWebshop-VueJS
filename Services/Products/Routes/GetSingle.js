@@ -29,8 +29,8 @@ router.get('/:id', async (req, res) => {
     
     // Success response
     res.json({
-        message: 'success',
-        product: product
+        Message: 'success',
+        Product: product
     });
 });
 

@@ -7,43 +7,43 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     if(
         !req.body.user ||
-        !req.body.user.email ||
-        !req.body.user.fullname ||
-        !req.body.user.password ||
-        !req.body.user.phone ||
-        !req.body.user.address ||
-        !req.body.user.address.street ||
-        !req.body.user.address.number ||
-        !req.body.user.address.zip ||
-        !req.body.user.address.city
+        !req.body.user.Email ||
+        !req.body.user.Fullname ||
+        !req.body.user.Password ||
+        !req.body.user.Phone ||
+        !req.body.user.Address ||
+        !req.body.user.Address.Street ||
+        !req.body.user.Address.Number ||
+        !req.body.user.Address.Zip ||
+        !req.body.user.Address.City
     ) {
         res.status(503).json({
-            authorized: false,
-            jwt: null,
-            message: "Nogle værdier var tomme"
+            Authorized: false,
+            Jwt: null,
+            Message: "Nogle værdier var tomme"
         });
         return;
     }
 
-    req.body.user.email = req.body.user.email.toLowerCase();
+    req.body.user.email = req.body.User.Email.toLowerCase();
 
-    console.log("/register -> " + req.body.user.email);
+    console.log("/register -> " + req.body.User.Email);
 
-    let err, data = await User.findOne({ email: req.body.user.email });
+    let err, data = await User.findOne({ Email: req.body.User.Email });
     if(err) {
         res.status(503).json({ 
-            authorized: false,
-            jwt: null,
-            message: "Der skete en fejl, prøv igen senere"
+            Authorized: false,
+            Jwt: null,
+            Message: "Der skete en fejl, prøv igen senere"
         });
         return;
     }
 
     if(data != null) {
         res.status(409).json({
-            authorized: false,
-            jwt: null,
-            message: "Email allerede i brug"
+            Authorized: false,
+            Jwt: null,
+            Message: "Email allerede i brug"
         });
         return;
     }
@@ -52,25 +52,25 @@ router.post('/', async (req, res) => {
     
     if(!hash){
         res.status(424).json({
-            authorized: false,
-            jwt: null,
-            message: "Der skete en fejl prøv igen senere"
+            Authorized: false,
+            Jwt: null,
+            Message: "Der skete en fejl prøv igen senere"
         });
         return;
     }
 
-    let user = new User(req.body.user);
+    let user = new User(req.body.User);
     user._id = mongoose.Types.ObjectId();
-    user.password = hash;
+    user.Password = hash;
 
-    let jwt = auth.SignJwt({id: user._id, email: req.body.user.email});
+    let jwt = auth.SignJwt({_id: user._id, Email: req.body.User.Email});
 
     user.save();
     res.status(200).json({
-        authorized: true,
-        jwt: jwt,
+        Authorized: true,
+        Jwt: jwt,
         isAdmin: false,
-        message: "Success"
+        Message: "Success"
     });
 });
 

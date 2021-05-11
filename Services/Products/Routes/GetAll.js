@@ -11,8 +11,8 @@ router.get('/', async (req, res) => {
     // Checking if an error was encountered or if no products was found
     if(err || !products) {
         res.status(404).json({
-            message: 'Ingen produkter fundet, prøv igen senere',
-            products: null
+            Message: 'Ingen produkter fundet, prøv igen senere',
+            Products: null
         });
         return;
     }
@@ -40,8 +40,8 @@ router.get('/', async (req, res) => {
 
     // Success response
     res.json({
-        message: 'success',
-        products: prods
+        Message: 'success',
+        Products: prods
     });
 });
 

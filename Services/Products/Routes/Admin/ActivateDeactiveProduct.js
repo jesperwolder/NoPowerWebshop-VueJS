@@ -11,8 +11,8 @@ router.post('/:ID/:status', async (req, res) => {
     // Checking if the jwt was sent
     if(!req.headers.jwt) {
         res.status(403).json({
-            message: 'Manglende jwt',
-            product: null
+            Message: 'Manglende jwt',
+            Product: null
         });
         return;
     }
@@ -20,8 +20,8 @@ router.post('/:ID/:status', async (req, res) => {
     //checking if the status was sent
     if(!req.params.status) {
         res.status(422).json({
-            message: "manglende status",
-            product: null
+            Message: "manglende status",
+            Product: null
         });
         return;
     }
@@ -35,8 +35,8 @@ router.post('/:ID/:status', async (req, res) => {
     // Checking for errors or if the user is admin
     if(err || !response.data.isAdmin) {
         res.status(403).json({
-            message: 'Ikke autoriseret',
-            product: null
+            Message: 'Ikke autoriseret',
+            Product: null
         });
         return;
     }
@@ -46,8 +46,8 @@ router.post('/:ID/:status', async (req, res) => {
     // checking for errors or if the product was not found
     if(err2 || !product) {
         res.status(404).json({
-            message: 'product ikke fundet',
-            product: null
+            Message: 'product ikke fundet',
+            Product: null
         });
         return;
     }
@@ -63,8 +63,8 @@ router.post('/:ID/:status', async (req, res) => {
 
     // Success response
     res.json({
-        message: 'success',
-        product: product
+        Message: 'success',
+        Product: product
     });
 });
 

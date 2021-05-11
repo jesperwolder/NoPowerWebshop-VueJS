@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
     // Checking if the jwt was received
     if(!req.headers.jwt) {
         res.status(403).json({
-            message: 'unauthorized'
+            Message: 'unauthorized',
+            Product: null
         });
         return;
     }
@@ -31,8 +32,8 @@ router.post('/', async (req, res) => {
     // Checking for errors or if the user is not admin
     if(err || !response.data.isAdmin) {
         res.status(403).json({
-            message: err.response.data.message,
-            product: null
+            Message: err.response.data.message,
+            Product: null
         });
         return;
     }
@@ -68,8 +69,8 @@ router.post('/', async (req, res) => {
     // returns an error if the validation failed
     if(failed){
         res.status(422).json({
-            message: 'Manglende værdier i tekniske detaljer',
-            product: null
+            Message: 'Manglende værdier i tekniske detaljer',
+            Product: null
         });
         return;
     }
@@ -77,15 +78,15 @@ router.post('/', async (req, res) => {
     // Creating a product variable in order to save it on the db
     let product = new Product(req.body.product);
     product._id = mongoose.Types.ObjectId();
-    product.Creator.createdBy = response.data.user._id;
-    product.Creator.creatorEmail = response.data.user.email;
-    product.Creator.creatorFullname = response.data.user.fullname;
+    product.Creator._id = response.data.User._id;
+    product.Creator.Email = response.data.User.Email;
+    product.Creator.Fullname = response.data.User.Fullname;
     product.Categories = newCats;
 
     // Checking if Technical details was provided or if any value is not provided
     if(product.TechnicalDetails.length == 0 || validator.ObjectHasNoNull(product)) {
         res.status(401).json({
-            message: 'Der var ikke nok tekniske detaljer, eller også er alle værdier ikke udfyldt'
+            Message: 'Der var ikke nok tekniske detaljer, eller også er alle værdier ikke udfyldt'
         });
         return;
     }
@@ -95,8 +96,8 @@ router.post('/', async (req, res) => {
 
     // success response
     res.json({
-        message: 'success',
-        product: product
+        Message: 'success',
+        Product: product
     });
 
 });

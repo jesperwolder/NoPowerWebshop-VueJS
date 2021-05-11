@@ -10,14 +10,14 @@ router.post('/', async (req, res) => {
     let body = await Validator.ValidateJwt(req.headers.jwt);
     if(!body) {
         res.status(403).json({
-            message: 'Du er ikke autoriseret til denne handling',
-            order: null
+            Message: 'Du er ikke autoriseret til denne handling',
+            Order: null
         });
     }
-    if(!req.body.productIDs || req.body.productIDs.length == 0) {
+    if(!req.body.ProductIDs || req.body.ProductIDs.length == 0) {
         res.status(420).json({
-            message: "ingen produkter givet",
-            order: null
+            Message: "ingen produkter givet",
+            Order: null
         });
         return;
     }
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
     let failed = false;
 
-    for (ID of req.body.productIDs) {
+    for (ID of req.body.ProductIDs) {
         let product = await Fetcher.GetProductByID(ID);
         if(!product || !product.isActive) failed = true;
         else {
@@ -45,16 +45,17 @@ router.post('/', async (req, res) => {
 
     if(failed) {
         res.status(404).json({
-            message: "Et af produkterne eksistere ikke eller er ikke salgbar længere"
+            Message: "Et af produkterne eksistere ikke eller er ikke salgbar længere",
+            Order: null
         });
         return;
     }
 
     Order._id = mongoose.Types.ObjectId();
 
-    Order.Buyer._id = body.user._id;
-    Order.Buyer.Fullname = body.user.fullname;
-    Order.Buyer.Email = body.user.email;
+    Order.Buyer._id = body.User._id;
+    Order.Buyer.Fullname = body.User.Fullname;
+    Order.Buyer.Email = body.User.Email;
 
     let today = new Date();
     Order.DateOfDelivery = today.setDate(today.getDate() + 3);
@@ -65,8 +66,8 @@ router.post('/', async (req, res) => {
     });
 
     res.json({
-        message: 'success',
-        order: Order
+        Message: 'success',
+        Order: Order
     });
 });
 

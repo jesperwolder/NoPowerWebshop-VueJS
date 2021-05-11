@@ -11,8 +11,8 @@ router.post('/', async (req, res) => {
 
     if(!obj) {
         res.status(403).json({
-            authorized: false,
-            mesage: "unauthorized"
+            Authorized: false,
+            Mesage: "unauthorized"
         });
         return;
     }
@@ -22,23 +22,25 @@ router.post('/', async (req, res) => {
     let err, user = await User.findOne({ _id: obj.id });
     if(err || !user) {
         res.status(404).json({
-            message: "An unknown error has occured, try again later"
+            Authorized: false,
+            Message: "An unknown error has occured, try again later"
         });
         return;
     }
 
-    user.email = (req.body.user.email ? req.body.user.email : user.email);
-    user.fullname = (req.body.user.fullname ? req.body.user.fullname : user.fullname);
-    user.phone = (req.body.user.phone ? req.body.user.phone : user.phone);
-    user.address.street = (req.body.user.address.street ? req.body.user.address.street : user.address.street);
-    user.address.number = (req.body.user.address.number ? req.body.user.address.number : user.address.number);
-    user.address.zip = (req.body.user.zip ? req.body.user.address.zip : user.address.zip);
-    user.address.city = (req.body.user.city ? req.body.user.address.city : user.address.city);
+    user.Email = (req.body.User.Email ? req.body.User.Email : user.Email);
+    user.Fullname = (req.body.User.Fullname ? req.body.User.Fullname : user.Fullname);
+    user.Phone = (req.body.User.Phone ? req.body.User.Phone : user.Phone);
+    user.Address.Street = (req.body.User.Address.Street ? req.body.User.Address.Street : user.Address.Street);
+    user.Address.Number = (req.body.User.Address.Number ? req.body.User.Address.Number : user.Address.Number);
+    user.Address.Zip = (req.body.User.Address.Zip ? req.body.User.Address.Zip : user.Address.Zip);
+    user.Address.City = (req.body.User.Address.City ? req.body.User.Address.City : user.Address.City);
 
     user.save();
 
     res.status(200).json({
-        mesage: 'success'
+        Authorized: true,
+        Mesage: 'success'
     });
 
 });

@@ -5,49 +5,48 @@ const User = require('../Schema/UserInfo');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    if(!req.headers.jwt || !req.body.user || !req.body.user._id) {
+    if(!req.headers.jwt || !req.body.User || !req.body.User._id) {
         res.status(503).json({
-            message: "manglende værdier",
-            user: null
+            Message: "manglende værdier",
+            User: null
         });
         return;
     }
 
     let jwt = auth.VerifyJwt(req.headers.jwt);
-    let checkErr, admin = await User.findById(jwt.id);
+    let checkErr, admin = await User.findById(jwt._id);
     if(checkErr || !admin || !admin.isAdmin) {
         res.status(403).json({
-            message: "Ikke autoriseret",
-            user: null
+            Message: "Ikke autoriseret",
+            User: null
         });
         return;
     }
 
-    let err, user = await User.findById(req.body.user._id);
-    console.log(err);
+    let err, user = await User.findById(req.body.User._id);
     if(err || !user) {
         res.status(404).json({
-            message: "Bruger ikke fundet",
-            user: null
+            Message: "Bruger ikke fundet",
+            User: null
         });
         return;
     }
 
-    let newUserVals = new User(req.body.user);
+    let newUserVals = new User(req.body.User);
 
-    user.email = (newUserVals.email ? newUserVals.email : user.email);
-    user.fullname = (newUserVals.fullname ? newUserVals.fullname : user.fullname);
-    user.phone = (newUserVals.phone ? newUserVals.phone : user.phone);
-    user.address.street = (newUserVals.address.street ? newUserVals.address.street : user.address.street);
-    user.address.number = (newUserVals.address.number ? newUserVals.address.number : user.address.number);
-    user.address.zip = (newUserVals.zip ? newUserVals.address.zip : user.address.zip);
-    user.address.city = (newUserVals.city ? newUserVals.address.city : user.address.city);
+    user.Email = (newUserVals.Email ? newUserVals.Email : user.Email);
+    user.Fullname = (newUserVals.Fullname ? newUserVals.Fullname : user.Fullname);
+    user.Phone = (newUserVals.Phone ? newUserVals.Phone : user.Phone);
+    user.Address.street = (newUserVals.Address.Street ? newUserVals.Address.Street : user.Address.Street);
+    user.Address.Number = (newUserVals.Address.Number ? newUserVals.Address.Number : user.Address.Number);
+    user.Address.Zip = (newUserVals.Adress.Zip ? newUserVals.Address.Zip : user.Address.Zip);
+    user.Address.City = (newUserVals.Adress.City ? newUserVals.Address.City : user.Address.City);
 
     user.save();
 
     res.json({
-        message: "success",
-        user: user
+        Message: "success",
+        User: user
     });
 });
 
