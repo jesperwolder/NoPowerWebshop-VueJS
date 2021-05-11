@@ -4,7 +4,7 @@ const auth = require('../modules/authentication.js')
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    if(!req.body.Email || !req.body.Password) {
+    if(!req.body.User.Email || !req.body.User.Password) {
         res.status(400).json({
             Authorized: false,
             Jwt: null,
