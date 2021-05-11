@@ -6,16 +6,16 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     if(
-        !req.body.user ||
-        !req.body.user.Email ||
-        !req.body.user.Fullname ||
-        !req.body.user.Password ||
-        !req.body.user.Phone ||
-        !req.body.user.Address ||
-        !req.body.user.Address.Street ||
-        !req.body.user.Address.Number ||
-        !req.body.user.Address.Zip ||
-        !req.body.user.Address.City
+        !req.body.User ||
+        !req.body.User.Email ||
+        !req.body.User.Fullname ||
+        !req.body.User.Password ||
+        !req.body.User.Phone ||
+        !req.body.User.Address ||
+        !req.body.User.Address.Street ||
+        !req.body.User.Address.Number ||
+        !req.body.User.Address.Zip ||
+        !req.body.User.Address.City
     ) {
         res.status(503).json({
             Authorized: false,
