@@ -88,7 +88,7 @@ export default {
                     CurrentSession.isLoggedIn = res.Authorized;
                     CurrentSession.isAdmin = res.isAdmin;
                     this.$cookies.set('jwt', res.Jwt);
-                    this.$router.push('/profile');
+                    this.$router.push('/dashboard');
                         
                 }).catch(err => {
                     this.error = err.response.message;
