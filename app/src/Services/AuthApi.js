@@ -27,8 +27,8 @@ export const LoginBody = async (body) => {
     return response.data;
 }
 
-export const RegisterBody = async (body, jwt) => {
-    let err, response = await axios.post(RegisterUrl, body, { headers: { jwt: jwt }});
+export const RegisterBody = async (body) => {
+    let err, response = await axios.post(RegisterUrl, body, { headers: {} });
 
     if(err) throw err;
 
@@ -44,7 +44,7 @@ export const UpdateBody = async (body, options) => {
 }
 
 export const GetAllUsersBody = async (jwt) =>{
-    let err, response = await axios.get(GetAllUsersUrl, { headers: { jwt: jwt }});
+    let err, response = await axios.get(GetAllUsersUrl, { headers: { Jwt: jwt }});
 
     if(err) throw err;
 
@@ -52,7 +52,7 @@ export const GetAllUsersBody = async (jwt) =>{
 }
 
 export const ChangePrivilegeBody = async(body, status, jwt) => {
-    let err, response = await axios.post(ChangePrivilegeUrl + status, body, { headers: { jwt: jwt } });
+    let err, response = await axios.post(ChangePrivilegeUrl + status, body, { headers: { Jwt: jwt } } );
 
     if(err) throw err;
 
@@ -60,7 +60,7 @@ export const ChangePrivilegeBody = async(body, status, jwt) => {
 }
 
 export const UpdateUserAdminBody = async (body, jwt) => {
-    let err, response = await axios.post(UpdateUserURL, body, {headers:{jwt: jwt}});
+    let err, response = await axios.post(UpdateUserURL, body, { headers: { Jwt: jwt } } );
 
     if(err) throw err;
 

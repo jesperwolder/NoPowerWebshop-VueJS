@@ -126,6 +126,7 @@
 
 <script>
 import { RegisterBody } from '../Services/AuthApi.js';
+import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
     data() {
@@ -168,13 +169,14 @@ export default {
             RegisterBody({ User: this.register })
             .then((res) => {
                 // Success respons
-                CurrentSession.isLoggedIn = res.authorized;
+                CurrentSession.isLoggedIn = res.Authorized;
                 CurrentSession.isAdmin = res.isAdmin;
-                this.$cookies.set('jwt', res.jwt);
+                this.$cookies.set('jwt', res.Jwt);
                 this.$router.push('/dashboard');
-            }).catch(err => {
+            }).catch( err => {
                 // Fejled respons
-                this.error = err.response.data.message;
+                
+                this.error = err.response.data.Message;
             });
             this.loading = false;
         },
