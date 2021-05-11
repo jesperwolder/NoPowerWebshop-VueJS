@@ -30,33 +30,33 @@
                     <v-text-field
                         label="Fulde navn"
                         type="text"
-                        v-model="register.Fullname"
+                        v-model="Register.Fullname"
                         required
                     > </v-text-field>
                     <v-text-field
                         label="Email"
                         type="email"
-                        v-model="register.Email"
+                        v-model="Register.Email"
                         required
                     > </v-text-field>
                     <v-text-field
                         label="Telefon nummer"
                         type="text"
-                        v-model="register.Phone"
+                        v-model="Register.Phone"
                         required
                     > </v-text-field>
                     <div class="row ma-0">
                         <v-text-field
                             label="Password"
                             type="password"
-                            v-model="register.Password"
+                            v-model="Register.Password"
                             required
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="Gentag password"
                             type="password"
-                            v-model="register.ConfirmPassword"
+                            v-model="Register.ConfirmPassword"
                             required
                         > </v-text-field>
                     </div>
@@ -64,26 +64,26 @@
                         <v-text-field
                             label="Vej"
                             type="text"
-                            v-model="register.Address.Street"
+                            v-model="Register.Address.Street"
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="Husnummer"
                             type="text"
-                            v-model="register.Address.Number"
+                            v-model="Register.Address.Number"
                         > </v-text-field>
                     </div>
                     <div class="row ma-0">
                         <v-text-field
                             label="Postnummer"
                             type="number"
-                            v-model="register.Address.Zip"
+                            v-model="Register.Address.Zip"
                             class="pr-2"
                         > </v-text-field>
                         <v-text-field
                             label="By"
                             type="text"
-                            v-model="register.Address.City"
+                            v-model="Register.Address.City"
                         > </v-text-field>
                     </div>
                     <v-btn
@@ -133,7 +133,7 @@ export default {
         return {
             loading: false,
             error: null,
-            register: {
+            Register: {
                 Email: null,
                 Fullname: null,
                 Password: null,
@@ -153,20 +153,20 @@ export default {
         SignUp: function() {
             this.loading = true;
 
-            if(!this.CheckForNullInObject(this.register)) {
+            if(!this.CheckForNullInObject(this.Register)) {
                 this.error = "Et eller flere felter er tomme";
                 this.loading = false;
                 return;
             }
             // Validere om passwords matcher
-            if(this.register.Password != this.register.ConfirmPassword) {
+            if(this.Register.Password != this.Register.ConfirmPassword) {
                 this.error = "Passwords matcher ikke";
                 this.loading = false;
                 return;
             }
 
             // Send post request om at oprette brugeren
-            RegisterBody({ User: this.register })
+            RegisterBody({ User: this.Register })
             .then((res) => {
                 // Success respons
                 CurrentSession.isLoggedIn = res.Authorized;
