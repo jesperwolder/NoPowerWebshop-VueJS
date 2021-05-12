@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         });
     }
     
-    let err, orders = await Orders.find({ Buyer: { _id: body.User._id, Fullname: body.User.Fullname, Email: body.User.Email } });
+    let err, orders = await Orders.find({ _id: body.User._id });
     if(err) {
         res.status(404).json({
             Message: 'Der skete en fejl prøv igen senere',

@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
     }
 
     let newCats = [];
-    req.body.product.Categories.forEach(Cat => {
+    req.body.Product.Categories.forEach(Cat => {
         Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
         newCats.push(Cat);
     });

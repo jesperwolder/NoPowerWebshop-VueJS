@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
     }
 
     let jwt = auth.VerifyJwt(req.headers.jwt);
-    console.log(jwt);
     let checkErr, admin = await User.findById(jwt._id);
     if(checkErr || !admin || !admin.isAdmin) {
         res.status(403).json({
