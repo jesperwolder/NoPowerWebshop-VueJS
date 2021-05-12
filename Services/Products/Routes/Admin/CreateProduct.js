@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
             return;
         }else {
             // checking if the required keys exists within items
-            detail.items.forEach(item => {
+            detail.Items.forEach(item => {
                 if(!('Name' in item) || !('Value' in item)){
                     failed = true;
                     return;
