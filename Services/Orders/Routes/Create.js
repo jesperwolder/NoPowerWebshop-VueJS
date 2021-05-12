@@ -13,6 +13,7 @@ router.post('/', async (req, res) => {
             Message: 'Du er ikke autoriseret til denne handling',
             Order: null
         });
+        return;
     }
     if(!req.body.ProductIDs || req.body.ProductIDs.length == 0) {
         res.status(420).json({
