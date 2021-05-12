@@ -25,8 +25,8 @@
                             </v-card-title>
                             <v-data-table
                             :headers="headers"
-                            :Items="products"
-                            :Items-per-page="25"
+                            :items="products"
+                            :items-per-page="25"
                             :search="search"
                             >
 
@@ -363,9 +363,8 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { GetAllProductsBody } from '@/Services/ProductApi';
-import {UpdateProductBody} from '@/Services/ProductApi';
-import {CreateProductBody} from '@/Services/ProductApi';
+import { GetAllProductsBody, UpdateProductBody, CreateProductBody } from '@/Services/ProductApi';
+
 
 
 export default {
@@ -382,15 +381,15 @@ export default {
                 text: 'Name',
                 align: 'start',
                 filterable: true,
-                Value: 'Name',
+                value: 'Name',
             },
           
-            { text: 'Description', Value: 'Description' },
-            { text: 'Price', Value: 'Price' },
-            { text: 'SalePercentage', Value: 'SalePercentage' },
-            { text: 'Stock', Value: 'Stock' },
-            { text: 'Active', Value: 'isActive' },
-            { text: 'Actions', Value: 'actions', sortable: false },
+            { text: 'Description', value: 'Description' },
+            { text: 'Price', value: 'Price' },
+            { text: 'SalePercentage', value: 'SalePercentage' },
+            { text: 'Stock', value: 'Stock' },
+            { text: 'Active', value: 'isActive' },
+            { text: 'Actions', value: 'actions', sortable: false },
         ],
         products: [
           
@@ -442,7 +441,7 @@ export default {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Products;
-
+            console.log(obj)
             obj.forEach(element => {
                 this.products.push(
                     {
@@ -505,7 +504,7 @@ export default {
         //updater item
         onUpdateItem: function() {
             
-            UpdateProductBody({product: this.editedItem},
+            UpdateProductBody({Product: this.editedItem},
               this.$cookies.get('jwt'),
             )
             .then((res) => {

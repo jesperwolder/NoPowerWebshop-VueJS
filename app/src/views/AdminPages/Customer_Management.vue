@@ -223,9 +223,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import {GetAllUsersBody} from '@/Services/AuthApi';
-import {UpdateUserAdminBody} from '@/Services/AuthApi';
-import {ChangePrivilegeBody} from '@/Services/AuthApi';
+import {GetAllUsersBody, UpdateUserAdminBody, ChangePrivilegeBody} from '@/Services/AuthApi';
 
 export default {
 	data() {
