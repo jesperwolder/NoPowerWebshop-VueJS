@@ -9,8 +9,8 @@
                  v-if="CS.isAdmin" 
                  
             >
-            <h1>Admin Page, Only Admin's Can See This!</h1>
-            
+                <h1>Admin Page, Only Admin's Can See This!</h1>
+
                 <v-form class="col-12 pa-0"> 
                     
                     <v-divider class="pb-3 mt-3"></v-divider>
@@ -24,10 +24,10 @@
                             ></v-text-field>
                             </v-card-title>
                             <v-data-table
-                            :headers="headers"
-                            :Items="products"
-                            :Items-per-page="25"
-                            :search="search"
+                                :headers="headers"
+                                :items="products"
+                                :items-per-page="25"
+                                :search="search"
                             >
 
                             <template v-slot:top>
@@ -64,7 +64,6 @@
                                         <v-card-text>
                                         <v-container>
                                             <v-row>
-                                             
 
                                             <v-col
                                                 cols="12"
@@ -363,10 +362,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { GetAllProductsBody } from '@/Services/ProductApi';
-import {UpdateProductBody} from '@/Services/ProductApi';
-import {CreateProductBody} from '@/Services/ProductApi';
-
+import { GetAllProductsBody, UpdateProductBody, CreateProductBody } from '@/Services/ProductApi';
 
 export default {
 	data() {
@@ -382,20 +378,17 @@ export default {
                 text: 'Name',
                 align: 'start',
                 filterable: true,
-                Value: 'Name',
+                value: 'Name',
             },
           
-            { text: 'Description', Value: 'Description' },
-            { text: 'Price', Value: 'Price' },
-            { text: 'SalePercentage', Value: 'SalePercentage' },
-            { text: 'Stock', Value: 'Stock' },
-            { text: 'Active', Value: 'isActive' },
-            { text: 'Actions', Value: 'actions', sortable: false },
+            { text: 'Description', value: 'Description' },
+            { text: 'Price', value: 'Price' },
+            { text: 'SalePercentage', value: 'SalePercentage' },
+            { text: 'Stock', value: 'Stock' },
+            { text: 'Active', value: 'isActive' },
+            { text: 'Actions', value: 'actions', sortable: false },
         ],
-        products: [
-          
-              
-        ],
+        products: [],
         editedIndex: -1,
         editedItem: {
             _id: "",
@@ -504,17 +497,14 @@ export default {
 
         //updater item
         onUpdateItem: function() {
-            
-            UpdateProductBody({product: this.editedItem},
-              this.$cookies.get('jwt'),
-            )
+            console.log('yes')
+            UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateProductsData();
                 console.log(res)
                 this.close();
             }).catch(err => {
                console.log(err.response.data)
-                
             });
            
         },
