@@ -34,13 +34,13 @@ router.post('/', async (req, res) => {
 
     let newUserVals = new User(req.body.User);
 
-    user.Email = (newUserVals.Email ? req.body.User.Email : user.Email);
-    user.Fullname = (newUserVals.Fullname ? req.body.User.Fullname : user.Fullname);
-    user.Phone = (newUserVals.Phone ? req.body.User.Phone : user.Phone);
-    user.Address.street = (newUserVals.Address.Street ? req.body.User.Address.Street : user.Address.Street);
-    user.Address.Number = (newUserVals.Address.Number ? req.body.User.Address.Number : user.Address.Number);
-    user.Address.Zip = (newUserVals.Adress.Zip ? req.body.User.Address.Zip : user.Address.Zip);
-    user.Address.City = (newUserVals.Adress.City ? req.body.User.Address.City : user.Address.City);
+    user.Email = (newUserVals.Email ? newUserVals.Email : user.Email);
+    user.Fullname = (newUserVals.Fullname ? newUserVals.Fullname : user.Fullname);
+    user.Phone = (newUserVals.Phone ? newUserVals.Phone : user.Phone);
+    user.Address.street = (newUserVals.Address.Street ? newUserVals.Address.Street : user.Address.Street);
+    user.Address.Number = (newUserVals.Address.Number ? newUserVals.Address.Number : user.Address.Number);
+    user.Address.Zip = (newUserVals.Address.Zip ? newUserVals.Address.Zip : user.Address.Zip);
+    user.Address.City = (newUserVals.Address.City ? newUserVals.Address.City : user.Address.City);
 
     user.save();
 

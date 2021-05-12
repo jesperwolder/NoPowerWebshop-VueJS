@@ -329,17 +329,13 @@ export default {
     methods: {
         onUpdateProfileAdminChange: function() {
             console.log(this.editedItem)
-            UpdateUserAdminBody({User: this.editedItem},
-             
-                this.$cookies.get('jwt'),
-            )
+            UpdateUserAdminBody( { User: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateUserData()
                 console.log(res)
                 this.close();
             }).catch(err => {
-               console.log(err.response.data)
-                
+               console.log(err.response.data)    
             });
            
         },
