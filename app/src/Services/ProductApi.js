@@ -17,25 +17,25 @@ export const GetAllProductsBody = async(jwt) =>{
 }
 
 export const CreateProductBody = async(body, jwt) =>{
-    let err, reponse = await axios.post(CreateProductURL, body, {headers: {jwt: jwt}})
+    let err, response = await axios.post(CreateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
 
     return response.data;
 }
 
-export const UpdateProductBody = async(body, jwt) =>{
-    let err, reponse = await axios.post(UpdateProductURL, body, {headers: {jwt: jwt}})
+export const UpdateProductBody = async(body, jwt) => {
+    let err, response = await axios.post(UpdateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
 
-    return reponse.data;
+    return response.data;
 }
 
 export const ChangeProductStatus = async(id, status, jwt) =>{
-    let err, reponse = await axios.post(ChangeProductStatusURL + id + '/' + status, {headers: {jwt: jwt}})
+    let err, response = await axios.post(ChangeProductStatusURL + id + '/' + status, {headers: {jwt: jwt}})
 
     if(err) throw err;
 
-    return reponse.data;
+    return response.data;
 }

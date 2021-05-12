@@ -9,8 +9,8 @@
                  v-if="CS.isAdmin" 
                  
             >
-            <h1>Admin Page, Only Admin's Can See This!</h1>
-            
+                <h1>Admin Page, Only Admin's Can See This!</h1>
+
                 <v-form class="col-12 pa-0"> 
                     
                     <v-divider class="pb-3 mt-3"></v-divider>
@@ -24,10 +24,10 @@
                             ></v-text-field>
                             </v-card-title>
                             <v-data-table
-                            :headers="headers"
-                            :Items="products"
-                            :Items-per-page="25"
-                            :search="search"
+                                :headers="headers"
+                                :items="products"
+                                :items-per-page="25"
+                                :search="search"
                             >
 
                             <template v-slot:top>
@@ -64,7 +64,6 @@
                                         <v-card-text>
                                         <v-container>
                                             <v-row>
-                                             
 
                                             <v-col
                                                 cols="12"
@@ -331,12 +330,6 @@
                                 </v-toolbar>
                                 </template>
 
-
-
-
-
-
-
                             <template v-slot:[`item.actions`]="{ item }">
                                 <v-icon
                                     small
@@ -353,7 +346,6 @@
                                 </v-icon>
                                 </template>
                             </v-data-table>
-                        
                 </v-form>
             </v-card>
         </div>
@@ -363,10 +355,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { GetAllProductsBody } from '@/Services/ProductApi';
-import {UpdateProductBody} from '@/Services/ProductApi';
-import {CreateProductBody} from '@/Services/ProductApi';
-
+import { GetAllProductsBody, UpdateProductBody, CreateProductBody } from '@/Services/ProductApi';
 
 export default {
 	data() {
@@ -382,20 +371,17 @@ export default {
                 text: 'Name',
                 align: 'start',
                 filterable: true,
-                Value: 'Name',
+                value: 'Name',
             },
           
-            { text: 'Description', Value: 'Description' },
-            { text: 'Price', Value: 'Price' },
-            { text: 'SalePercentage', Value: 'SalePercentage' },
-            { text: 'Stock', Value: 'Stock' },
-            { text: 'Active', Value: 'isActive' },
-            { text: 'Actions', Value: 'actions', sortable: false },
+            { text: 'Description', value: 'Description' },
+            { text: 'Price', value: 'Price' },
+            { text: 'SalePercentage', value: 'SalePercentage' },
+            { text: 'Stock', value: 'Stock' },
+            { text: 'Active', value: 'isActive' },
+            { text: 'Actions', value: 'actions', sortable: false },
         ],
-        products: [
-          
-              
-        ],
+        products: [],
         editedIndex: -1,
         editedItem: {
             _id: "",
@@ -442,7 +428,7 @@ export default {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Products;
-
+            console.log(obj)
             obj.forEach(element => {
                 this.products.push(
                     {
@@ -504,17 +490,17 @@ export default {
 
         //updater item
         onUpdateItem: function() {
-            
-            UpdateProductBody({product: this.editedItem},
-              this.$cookies.get('jwt'),
-            )
+            console.log( this.editedItem )
+
+            this.editedItem.Categories = this.editedItem.Categories.replace(' ', '').split(',');
+
+            UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateProductsData();
                 console.log(res)
                 this.close();
             }).catch(err => {
                console.log(err.response.data)
-                
             });
            
         },
@@ -522,18 +508,14 @@ export default {
         //create item
         AdminCreateItem: function() {
             
-            CreateProductBody({product: this.editedItem},
-             
-                this.$cookies.get('jwt'),
-            )
+            CreateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 console.log(res)
                  
             }).catch(err => {
-               console.log(err.response.data)
-                
+                console.log(err.response.data)
             });
-            close();
+            this.close();
         },
 
         editItem(item){
@@ -550,14 +532,13 @@ export default {
             })
         },
 
-
-
         AddFieldCategory: function() {
             this.editedItem.TechnicalDetails.push( { Header: '', Items: [ { Name: '', Value: '' } ] } );
         },
 
         AddFieldInner: function( header ) {
             if( header != '' ) {
+                console.log(this.editedItem);
                 this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.push( { Name: '', Value: '' } )
             } else {
                 console.log( 'header must be defined before adding new fields.' );

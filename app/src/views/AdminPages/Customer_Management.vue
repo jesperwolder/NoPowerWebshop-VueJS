@@ -223,9 +223,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-import {GetAllUsersBody} from '@/Services/AuthApi';
-import {UpdateUserAdminBody} from '@/Services/AuthApi';
-import {ChangePrivilegeBody} from '@/Services/AuthApi';
+import {GetAllUsersBody, UpdateUserAdminBody, ChangePrivilegeBody} from '@/Services/AuthApi';
 
 export default {
 	data() {
@@ -331,17 +329,13 @@ export default {
     methods: {
         onUpdateProfileAdminChange: function() {
             console.log(this.editedItem)
-            UpdateUserAdminBody({User: this.editedItem},
-             
-                this.$cookies.get('jwt'),
-            )
+            UpdateUserAdminBody( { User: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateUserData()
                 console.log(res)
                 this.close();
             }).catch(err => {
-               console.log(err.response.data)
-                
+               console.log(err.response.data)    
             });
            
         },
