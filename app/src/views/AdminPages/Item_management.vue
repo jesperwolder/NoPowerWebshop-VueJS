@@ -330,12 +330,6 @@
                                 </v-toolbar>
                                 </template>
 
-
-
-
-
-
-
                             <template v-slot:[`item.actions`]="{ item }">
                                 <v-icon
                                     small
@@ -352,7 +346,6 @@
                                 </v-icon>
                                 </template>
                             </v-data-table>
-                        
                 </v-form>
             </v-card>
         </div>
@@ -497,7 +490,10 @@ export default {
 
         //updater item
         onUpdateItem: function() {
-            console.log('yes')
+            console.log( this.editedItem )
+
+            this.editedItem.Categories = this.editedItem.Categories.replace(' ', '').split(',');
+
             UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateProductsData();
@@ -512,18 +508,14 @@ export default {
         //create item
         AdminCreateItem: function() {
             
-            CreateProductBody({product: this.editedItem},
-             
-                this.$cookies.get('jwt'),
-            )
+            CreateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 console.log(res)
                  
             }).catch(err => {
-               console.log(err.response.data)
-                
+                console.log(err.response.data)
             });
-            close();
+            this.close();
         },
 
         editItem(item){
@@ -540,14 +532,13 @@ export default {
             })
         },
 
-
-
         AddFieldCategory: function() {
             this.editedItem.TechnicalDetails.push( { Header: '', Items: [ { Name: '', Value: '' } ] } );
         },
 
         AddFieldInner: function( header ) {
             if( header != '' ) {
+                console.log(this.editedItem);
                 this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.push( { Name: '', Value: '' } )
             } else {
                 console.log( 'header must be defined before adding new fields.' );

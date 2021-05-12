@@ -25,7 +25,6 @@ export const CreateProductBody = async(body, jwt) =>{
 }
 
 export const UpdateProductBody = async(body, jwt) => {
-    console.log('running')
     let err, response = await axios.post(UpdateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
