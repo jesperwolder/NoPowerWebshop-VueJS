@@ -49,13 +49,13 @@ router.post('/', async (req, res) => {
     let failed = false;
     req.body.Product.TechnicalDetails.forEach(detail => {
         // Checking if the 2 keys exists within the detail object
-        if(!('header' in detail) || !('items' in detail)) {
+        if(!('Header' in detail) || !('Items' in detail)) {
             failed = true;
             return;
         }else {
             // checking if the required keys exists within items
             detail.items.forEach(item => {
-                if(!('name' in item) || !('value' in item)){
+                if(!('Name' in item) || !('Value' in item)){
                     failed = true;
                     return;
                 }
