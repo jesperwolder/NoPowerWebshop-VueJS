@@ -39,8 +39,8 @@ router.post('/', async (req, res) => {
     user.Phone = (newUserVals.Phone ? newUserVals.Phone : user.Phone);
     user.Address.street = (newUserVals.Address.Street ? newUserVals.Address.Street : user.Address.Street);
     user.Address.Number = (newUserVals.Address.Number ? newUserVals.Address.Number : user.Address.Number);
-    user.Address.Zip = (newUserVals.Adress.Zip ? newUserVals.Address.Zip : user.Address.Zip);
-    user.Address.City = (newUserVals.Adress.City ? newUserVals.Address.City : user.Address.City);
+    user.Address.Zip = (newUserVals.Address.Zip ? newUserVals.Address.Zip : user.Address.Zip);
+    user.Address.City = (newUserVals.Address.City ? newUserVals.Address.City : user.Address.City);
 
     user.save();
 

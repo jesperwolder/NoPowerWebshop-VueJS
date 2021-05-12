@@ -6,6 +6,7 @@ const db = require('./Modules/mongo');
 
 let indexRouter = require('./Routes/index.js');
 let createRoute = require('./Routes/Create');
+let getUserOrdersRoute = require('./Routes/GetUserOrders');
 
 let app = express();
 
@@ -16,6 +17,7 @@ app.use(cors({ origin: '*' }));
 
 app.use('/', indexRouter);
 app.use('/create', createRoute);
+app.use('/orders', getUserOrdersRoute);
 
 app.listen(3002);
 
