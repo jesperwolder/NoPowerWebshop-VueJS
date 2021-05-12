@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     // Checking for errors or if the user is not admin
     if(err || !response.data.isAdmin) {
         res.status(403).json({
-            Message: err.response.data.message,
+            Message: err.response.data.Message,
             Product: null
         });
         return;
@@ -40,22 +40,22 @@ router.post('/', async (req, res) => {
 
     // Changes to first letter to uppercase and the rest to lowercase
     let newCats = []
-    req.body.product.Categories.forEach(Cat => {
+    req.body.Product.Categories.forEach(Cat => {
         Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
         newCats.push(Cat);
     });
 
     // failed is a value indictating if the validation for TechnicalDetails failed
     let failed = false;
-    req.body.product.TechnicalDetails.forEach(detail => {
+    req.body.Product.TechnicalDetails.forEach(detail => {
         // Checking if the 2 keys exists within the detail object
-        if(!('header' in detail) || !('items' in detail)) {
+        if(!('Header' in detail) || !('Items' in detail)) {
             failed = true;
             return;
         }else {
             // checking if the required keys exists within items
-            detail.items.forEach(item => {
-                if(!('name' in item) || !('value' in item)){
+            detail.Items.forEach(item => {
+                if(!('Name' in item) || !('Value' in item)){
                     failed = true;
                     return;
                 }
