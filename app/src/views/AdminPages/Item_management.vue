@@ -52,6 +52,7 @@
                                         class="mb-2"
                                         v-bind="attrs"
                                         v-on="on"
+                                        v-on:click="InsertState()"
                                         >
                                         New Item
                                         </v-btn>
@@ -157,6 +158,7 @@
                                                             absolute
                                                             right
                                                             top
+                                                            @click="RemoveTechnicalDetailsHeader( index )"
                                                         >
                                                             <v-icon>
                                                                 mdi-minus
@@ -309,7 +311,7 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                           v-on:click="onUpdateItem()"
+                                           v-on:click="SaveItems()"
                                         >
                                             Save
                                         </v-btn>
@@ -334,7 +336,7 @@
                                 <v-icon
                                     small
                                     class="mr-2"
-                                    @click="editItem(item)"
+                                    @click="editItem( item )"
                                 >
                                     mdi-pencil
                                 </v-icon>
@@ -366,6 +368,7 @@ export default {
             CS: CurrentSession,
             dialog: false,
             search: '',
+            state: null,
         headers: [
             {
                 text: 'Name',
@@ -395,10 +398,10 @@ export default {
             TechnicalDetails:[],
             Name: "",
             Description: "",
-            Price: "",
+            Price: 0,
             Image: "",
-            Stock: "",
-            isActive:"",
+            Stock: 0,
+            isActive: false,
             
         },
 
@@ -414,10 +417,10 @@ export default {
             TechnicalDetails:[],
             Name: "",
             Description: "",
-            Price: "",
+            Price: 0,
             Image: "",
-            Stock: "",
-            isActive:"",
+            Stock: 0,
+            isActive: false,
             
         },
 
@@ -428,27 +431,25 @@ export default {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Products;
-            console.log(obj)
+
             obj.forEach(element => {
-                this.products.push(
-                    {
-                        _id: element._id,
-                        Name: element.Name,
-                        Description: element.Description,
-                        Price: element.Price,
-                        SalePercentage: element.SalePercentage,
-                        Stock: element.Stock,
-                        isActive: element.isActive,
-                        Image: element.Image,
-                        TechnicalDetails: element.TechnicalDetails,
-                        Categories: element.Categories,
-                        Creator: {
-                            CreatedBy: element.Creator.CreatorFullname,
-                            CreatorEmail: element.Creator.CreatorEmail,
-                            CreatorFullname: element.Creator.CreatorFullname,
-                        }
+                this.products.push( {
+                    _id: element._id,
+                    Name: element.Name,
+                    Description: element.Description,
+                    Price: element.Price,
+                    SalePercentage: element.SalePercentage,
+                    Stock: element.Stock,
+                    isActive: element.isActive,
+                    Image: element.Image,
+                    TechnicalDetails: element.TechnicalDetails,
+                    Categories: element.Categories,
+                    Creator: {
+                        CreatedBy: element.Creator.CreatorFullname,
+                        CreatorEmail: element.Creator.CreatorEmail,
+                        CreatorFullname: element.Creator.CreatorFullname,
                     }
-                )
+                })
             });
         }).catch(err => {
             console.log(err);
@@ -467,19 +468,8 @@ export default {
     },
 
     methods: {
-        DeleteThisFieldMethod: function() {
-            alert('🤌');
-        },
-
-        test: function( index ) {
-            let cat = document.getElementById('cat-' + index);
-            cat.remove();
-        },
-
-        AddCategoryField() {
-            let cat = document.getElementById('newcat');
-            // cat.append('<v-divider></v-divider>');
-            cat.innerHTML += '<v-card>test</v-card>';
+        InsertState: function() {
+            this.state = 'insert'
         },
 
         //opdater Products localt
@@ -488,12 +478,21 @@ export default {
             this.products.push(this.editedItem); 
         },
 
+        SaveItems: function( ) {
+            console.log(this.state);
+
+            if( this.state === 'insert' ) {
+                this.AdminCreateItem();
+                return;
+            } else if( this.state === 'update' ) {
+                this.onUpdateItem()
+                return;
+            }
+            return false; // error
+        },
+
         //updater item
         onUpdateItem: function() {
-            console.log( this.editedItem )
-
-            this.editedItem.Categories = this.editedItem.Categories.replace(' ', '').split(',');
-
             UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateProductsData();
@@ -508,18 +507,25 @@ export default {
         //create item
         AdminCreateItem: function() {
             
+            this.editedItem.Price = parseFloat( this.editedItem.Price );
+            this.editedItem.Stock = parseInt( this.editedItem.Stock );
+            this.editedItem.SalePercentage = parseInt( this.editedItem.SalePercentage );
+            this.editedItem.isActive = ( this.editedItem.isActive === 'true' );
+
             CreateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 console.log(res)
-                 
+                
+                this.products.push( res.Product );
+
+                this.close();
             }).catch(err => {
-                console.log(err.response.data)
+                console.log( err.response.data );
             });
-            this.close();
         },
 
         editItem(item){
-            
+            this.state = 'update'
             this.editedIndex = this.products.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
@@ -546,13 +552,15 @@ export default {
         },
 
         RemoveFieldInner: function( header, index ) {
-            //delete this.editedItem.TechnicalDetails.find( x => x.header === header ).Items[index];
             this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.splice(index, 1);
-            //document.getElementById(index + header).remove();
+        },
+
+        RemoveTechnicalDetailsHeader: function( index ) {
+            this.editedItem.TechnicalDetails.splice( index, 1 );
         }
 
-        }
     }
+}
 
 
 </script>

@@ -22,8 +22,22 @@
 
                     <v-divider class="pb-5"></v-divider>
 
-                    <div v-if="this.error">
-                        <h2 class="error-text"> {{ this.error }} </h2>
+                    <div 
+                        v-for="( err, index ) in error"
+                        :key="err"
+                    >
+                        <v-alert
+                            text
+                            dismissible
+                            border="bottom"
+                            color="red"
+                            type="error"
+                            transition="scroll-x-reverse-transition"
+                            :id="`error-` + index"
+                            :onload="RemoveAlert(index)"
+                        >
+                            {{ err }}
+                        </v-alert>
                     </div>
                 
                     <v-text-field
@@ -51,12 +65,6 @@
     </v-container>
 </template>
 
-<style>
-    .error-text {
-        color: red;
-    }
-</style>
-
 <script>
 import { LoginBody } from '../Services/AuthApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
@@ -65,7 +73,7 @@ export default {
     data() {
         return {
             loading: false,
-            error: null,
+            error: [],
             login: {
                 Email: "",
                 Password: "",
@@ -79,7 +87,7 @@ export default {
             this.loading = true;
 
             LoginBody({
-                User:{
+                User: {
                     Email: this.login.Email.toLowerCase(), 
                     Password: this.login.Password
                 }
@@ -91,10 +99,17 @@ export default {
                     this.$router.push('/dashboard');
                         
                 }).catch(err => {
-                    this.error = err.response.message;
+                    this.error.push(err.response.data.Message);
                 });
             
             this.loading = false;
+        },
+
+        RemoveAlert: function( id ) {
+            setTimeout( () => {
+                const err = document.getElementById( 'error-' + id );
+                if( err != null|undefined ) err.remove();
+            }, 7069 );
         }
     }
 }
