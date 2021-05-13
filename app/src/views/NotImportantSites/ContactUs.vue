@@ -15,7 +15,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
           <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-          <v-textarea v-model="message" :rules="messageRules" label="Message" required></v-textarea>
+          <v-textarea v-model="message" :rules="messageRules" label="Message" required outlined></v-textarea>
           <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Submit</v-btn>
           <v-btn color="error" class="mr-4" @click="reset">Reset</v-btn>
         </v-form>

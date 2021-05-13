@@ -5,7 +5,8 @@ const CreateProductURL = server1 + '/admin/create';
 const UpdateProductURL = server1 + '/admin/update';
 const ChangeProductStatusURL = server1 + '/admin/changeProductStatus/';
 
-//products
+
+//------------------products------------------
 
 export const GetAllProductsBody = async(jwt) =>{
     let err, response = await axios.get(GetAllProductsURL, {headers: {jwt: jwt }});
@@ -16,6 +17,7 @@ export const GetAllProductsBody = async(jwt) =>{
 
 }
 
+//------------------Admin routes-------------------
 export const CreateProductBody = async(body, jwt) =>{
     let err, response = await axios.post(CreateProductURL, body, {headers: {jwt: jwt}})
 
