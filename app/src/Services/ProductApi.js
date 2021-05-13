@@ -19,6 +19,8 @@ export const GetAllProductsBody = async(jwt) =>{
 
 //------------------Admin routes-------------------
 export const CreateProductBody = async(body, jwt) =>{
+    console.log(body)
+    
     let err, response = await axios.post(CreateProductURL, body, {headers: {jwt: jwt}})
 
     if(err) throw err;
