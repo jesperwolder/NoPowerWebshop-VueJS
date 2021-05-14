@@ -13,8 +13,8 @@ const UpdateStatusRouteURL = server2 + '/admin/updateStatus';
 const GetAnyOrderRouteURL = server2 + '/admin/order';
 
 //Order Routes
-export const CreateRouteBody = async(ProductID, body, jwt) =>{
-    let err, response = await axios.post(CreateRouteURL, ProductID +'/', body, {headers: {jwt: jwt}});
+export const CreateRouteBody = async(body, jwt) =>{
+    let err, response = await axios.post(CreateRouteURL, body, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
