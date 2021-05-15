@@ -9,8 +9,8 @@ const ChangeProductStatusURL = server1 + '/admin/changeProductStatus/';
 
 //------------------products------------------
 
-export const GetAllProductsBody = async(jwt) =>{
-    let err, response = await axios.get(GetAllProductsURL, {headers: {jwt: jwt }});
+export const GetAllProductsBody = async() =>{
+    let err, response = await axios.get(GetAllProductsURL);
 
     if(err) throw err;
 
@@ -18,8 +18,8 @@ export const GetAllProductsBody = async(jwt) =>{
 
 }
 
-export const GetProductBody = async( id, jwt ) => {
-    let err, response = await axios.get(GetSingleProductURL + id , { headers: { jwt: jwt } });
+export const GetProductBody = async( id ) => {
+    let err, response = await axios.get(GetSingleProductURL + id);
 
     if( err ) throw err;
 

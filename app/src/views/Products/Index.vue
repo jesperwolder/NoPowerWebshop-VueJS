@@ -103,7 +103,7 @@ export default {
     },
 
     mounted: function() {
-        GetAllProductsBody( this.$cookies.get( 'jwt' ) )
+        GetAllProductsBody()
         .then( res => {
             const obj = res.Products;
 

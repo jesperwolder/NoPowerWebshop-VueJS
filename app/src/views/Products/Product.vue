@@ -25,7 +25,7 @@ export default {
     },
 
     mounted: function() {
-        GetProductBody( this.$route.params.id, this.$cookies.get( 'jwt' ) )
+        GetProductBody( this.$route.params.id )
         .then( res => {
             this.product = res.Product;
             this.$route.meta.title = this.product.Name
