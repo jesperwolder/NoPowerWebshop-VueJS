@@ -9,7 +9,13 @@
 				fluid
 			>
 				<Breadcrumb v-if="!this.hideBreadcrumb" />
-				<router-view />
+
+				<div v-if="!CS.PageFound">
+					<NotFound />
+				</div>
+				<div v-else>
+					<router-view />
+				</div>
 			</v-container>
 		</v-main>
 		<Footer />
@@ -27,6 +33,8 @@ import NavBar from '@/components/MenuItems/NavigationBar';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/MenuItems/Footer';
 import AppDrawer from '@/components/MenuItems/AppDrawer';
+import { CurrentSession } from '@/Services/GlobalVariables';
+import NotFound from '@/views/ErrorPages/404.vue';
 
 export default {
 	name: 'App',
@@ -36,16 +44,17 @@ export default {
 		Breadcrumb,
 		Footer,
 		AppDrawer,
+		NotFound
 	},
 
 	data: () => ({
 		hideDrawer: false,
 		hideBreadcrumb: false,
+		CS: CurrentSession,
 	}),
 
 	mounted() {
 		document.title = this.$route.name + " - NoPower"; // ? Updates the page title, on mouting.
-
 
 		/*  
 		 ? Checks if cookie exists with theme preference, on mounting.
@@ -71,6 +80,8 @@ export default {
 			} else {
 				this.$vuetify.theme.dark = false;
 			}
+			
+			this.CS = CurrentSession;
 		}
 	}
 };

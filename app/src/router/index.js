@@ -14,6 +14,7 @@ import Customer_Management from '../views/AdminPages/Customer_Management.vue';
 import Item_management from '../views/AdminPages/Item_management.vue';
 import Support_management from '../views/AdminPages/Support_tickets.vue';
 import Products from '../views/Products/Index.vue';
+import Product from '../views/Products/Product.vue';
 import Cart from '../views/Cart.vue';
 
 
@@ -29,27 +30,30 @@ const routes = [
 			]
 		}
 	},
-	{ path: '/AboutUs', name: 'AboutUs', component: AboutUs, 
+	{ path: '/AboutUs', name: 'Om Os', component: AboutUs, 
 		meta: { 
-			title: 'AboutUs',
+			title: 'Om Os',
 			breadcrumb: [
-				{ name: 'AboutUs', to: '/AboutUs' },
+				{ name: 'Forside', to: '/' },
+				{ name: 'Om Os', to: '/AboutUs' },
 			]
 		}
 	},
-	{ path: '/ContactUs', name: 'ContactUs', component: ContactUs, 
+	{ path: '/ContactUs', name: 'Kontakt Os', component: ContactUs, 
 		meta: { 
-			title: 'ContactUs',
+			title: 'Kontakt Os',
 			breadcrumb: [
-				{ name: 'ContactUs', to: '/ContactUs' },
+				{ name: 'Forside', to: '/' },
+				{ name: 'Kontakt Os', to: '/ContactUs' },
 			]
 		}
 	},
-	{ path: '/ReturRet', name: 'ReturRet', component: ReturRet, 
+	{ path: '/ReturRet', name: 'Returret', component: ReturRet, 
 		meta: { 
-			title: 'ReturRet',
+			title: 'Returret',
 			breadcrumb: [
-				{ name: 'ReturRet', to: '/ReturRet' },
+				{ name: 'Forside', to: '/' },
+				{ name: 'Returret', to: '/ReturRet' },
 			]
 		}
 	},
@@ -99,51 +103,42 @@ const routes = [
 			]
 		} 
 	},
-	{ path: '/adminpage', name: 'AdminPage', component: AdminPage,
+	{ path: '/adminpage', name: 'Administrator område', component: AdminPage,
 		meta: {
-			title: 'AdminPage',
+			title: 'Administrator område',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'AdminPage', to: '/adminpage' },
-				{ name: 'Item_management', to: '/item_management' },	
-				{ name: 'Customer_Management', to: '/customer_management' },
-				{ name: 'Support_management', to: '/support_management' },
+				{ name: 'Administrator område', to: '/adminpage' },
 			]
 		} 
 	},
-	{ path: '/customer_management', name: 'Customer_Management', component: Customer_Management,
+	{ path: '/customer_management', name: 'Administrer kunder', component: Customer_Management,
 		meta: {
-			title: 'Customer_Management',
+			title: 'Administrer kunder',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'AdminPage', to: '/adminpage' },
-				{ name: 'Item_management', to: '/item_management' },	
-				{ name: 'Customer_Management', to: '/customer_management' },
-				{ name: 'Support_management', to: '/support_management' },
+				{ name: 'Administrator område', to: '/adminpage' },
+				{ name: 'Administrer kunder', to: '/customer_management' },
 			]
 		} 
 	},
-	{ path: '/item_management', name: 'Item_management', component: Item_management,
+	{ path: '/item_management', name: 'Administrer produkter', component: Item_management,
 		meta: {
-			title: 'Customer_Management',
+			title: 'Administrer produkter',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'AdminPage', to: '/adminpage' },
-				{ name: 'Item_management', to: '/item_management' },
-				{ name: 'Customer_Management', to: '/customer_management' },
-				{ name: 'Support_management', to: '/support_management' },
+				{ name: 'Administrator område', to: '/adminpage' },
+				{ name: 'Administrer produkter', to: '/item_management' },
 			]
 		} 
 	},
-	{ path: '/support_management', name: 'Support_management', component: Support_management,
+	{ path: '/support_management', name: 'Administrer support', component: Support_management,
 		meta: {
-			title: 'Customer_Management',
+			title: 'Administrer support',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'AdminPage', to: '/adminpage' },
-				{ name: 'Item_management', to: '/item_management' },
-				{ name: 'Customer_Management', to: '/customer_management' },
-				{ name: 'Support_management', to: '/support_management' },
+				{ name: 'Administrator område', to: '/adminpage' },
+				{ name: 'Administrer support', to: '/support_management' },
 			]
 		} 
 	},
@@ -153,6 +148,16 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Alle Produkter', to: '/products' },
+			]
+		} 
+	},
+	{ path: '/products/:id', name: 'Produkter', component: Product,
+		meta: {
+			title: 'Loading',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Alle Produkter', to: '/products' },
+				{ name: 'Loading', to: '/products/:id' },
 			]
 		} 
 	},

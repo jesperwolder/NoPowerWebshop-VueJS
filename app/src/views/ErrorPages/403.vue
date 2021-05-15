@@ -1,11 +1,11 @@
 <template>
     <div>
         <v-card class="text-center">
-            <div class="pt-5 text-h2 text-center">
-                ¯\_(ツ)_/¯
+            <div class="pt-10 text-h2 text-center">
+                ༼ つ ಥ_ಥ ༽つ
             </div>
             <v-card-subtitle class="text-subtitle-1">
-                Det ser ud til du har fundet en side, som endnu ikke findes hos NoPower. <br>
+                Hov, du skulle vidst ikke have fundet denne side, eftersom du ikke har rettigheder til at besøge den side.<br>
                 <v-btn 
                     to="/"
                     color="primary"
@@ -16,7 +16,7 @@
                 </v-btn>
             </v-card-subtitle>
             <v-card-subtitle class="text-subtitle-2">
-                Fejlkode: 404 - Not Found
+                Fejlkode: 403 - Permission Denied
             </v-card-subtitle>
         </v-card>
     </div>

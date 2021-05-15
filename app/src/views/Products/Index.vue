@@ -7,11 +7,20 @@
             <h1>{{ meta.title }}</h1>
 
             <v-divider class="pb-3 mt-3"></v-divider>
+            
+            <v-card v-if="products.length <= 0" class="text-center" elevation="0">
+                <div class="py-5 text-h2 text-center">
+                    ¯\_(ツ)_/¯
+                </div>
+                <v-card-subtitle class="text-subtitle-1">
+                    Der blev ikke fundet nogle produkter i vores katalog.
+                </v-card-subtitle>
+            </v-card>
 
-            <v-row>
+            <v-row v-if="products.length != 0">
                 <v-col
-                    v-for="n in 20"
-                    :key="n"
+                    v-for="( product, index ) in products"
+                    :key="index"
                     cols="auto"
                     xs="12"
                     sm="6"
@@ -47,13 +56,13 @@
                         <v-card-title
                             class="productTitle text-truncate"
                         >
-                            {{ n }}: Produkt
+                            {{ product.Name }}
                         </v-card-title>
                         <v-card-subtitle class="pb-0 text-caption text-truncate truncate-2">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quam laudantium consectetur aliquid maxime! Dignissimos dolor minima officiis possimus deleniti consectetur aut sed sequi deserunt perspiciatis, commodi necessitatibus ipsum in.
+                            {{ product.Description }}
                         </v-card-subtitle>
                         <v-card-subtitle class="pt-2">
-                            Kun <b>200</b>,- 
+                            Kun <b>{{ product.Price }}</b>,- 
                         </v-card-subtitle>
 
                         <v-card-actions>
@@ -61,6 +70,7 @@
                                 color="#F7941D"
                                 class="mb-0"
                                 text
+                                :to="`/products/`+ product._id"
                             >
                                 Til produkt
                             </v-btn>
@@ -74,6 +84,8 @@
 
 <script>
 
+import { GetAllProductsBody } from '@/Services/ProductApi';
+
 export default {
     
     methods: {
@@ -86,7 +98,32 @@ export default {
     data() {
         return {
             meta: this.$route.meta,
+            products: []
         }
+    },
+
+    mounted: function() {
+        GetAllProductsBody( this.$cookies.get( 'jwt' ) )
+        .then( res => {
+            const obj = res.Products;
+
+            obj.forEach( element => {
+                if( element.isActive ) {
+                    this.products.push({
+                        _id: element._id,
+                        Stock: element.Stock,
+                        Name: element.Name,
+                        Description: element.Description,
+                        Price: element.Price,
+                        SalePercentage: element.SalePercentage,
+                        Image: element.Image 
+                    });
+                }
+            });
+        })
+        .catch( err => {
+            console.log( err.response.data.Message );
+        });
     }
 }
 </script>

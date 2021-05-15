@@ -8,7 +8,7 @@
 			bottom
 			color="#F7941D"
 			v-on:click="scrollToTop()"
-			class="toTopBtn"
+			class="toTopBtn off"
 			v-scroll="onScroll"
 		>
 			<v-icon>mdi-chevron-up</v-icon>
@@ -28,23 +28,6 @@
 
 			<v-spacer></v-spacer>
 
-			<!-- <v-container class="searchBar"
-								fill-height fluid
-								align="center"
-								justify="center"
-						>
-								<v-text-field
-										
-										
-										dense
-										v-model="search"
-										solo
-										label="Søg ..."
-										type="search"
-								></v-text-field>
-						</v-container>
-
-						<v-spacer></v-spacer> -->
 			<div v-if="CS.isLoggedIn">
 				<div v-if="CS.isAdmin">
 					<v-btn class="buttons" depressed text mr-2 to="/adminpage">
@@ -101,15 +84,19 @@ export default {
 	mounted: function() {
 		if(this.$cookies.isKey('jwt')) {
 			AuthBody( this.$cookies.get('jwt') )
-				.then(res => {
-					//if(res.Message === 'Success') { console.log('du lort'); }
+			.then(res => {
+				CurrentSession.isLoggedIn = res.Authorized;
+				CurrentSession.isAdmin = res.isAdmin;
 
-					CurrentSession.isLoggedIn = res.Authorized;
-					CurrentSession.isAdmin = res.isAdmin;
-				
-				}).catch(err => {
-					console.log(err);
-				});
+				if( CurrentSession.RequireAdmin ) {
+					if( !CurrentSession.isAdmin ) {
+						CurrentSession.PermissionDenied = true;
+					}
+				}
+			}).catch(err => {
+				CurrentSession.isLoggedIn = false;
+				CurrentSession.RequireAdmin = false;
+			});
 		}
 	},
 	methods: {
@@ -125,8 +112,8 @@ export default {
 		onScroll() {
 			let scrollTop =
 				window.pageYOffset ||
-				(document.documentElement || document.body.parentNode || document.body)
-					.scrollTop;
+				(document.documentElement || document.body.parentNode || document.body).scrollTop;
+
 			this.offsetTop = scrollTop;
 
 			if (scrollTop < 100) {
@@ -135,6 +122,11 @@ export default {
 				document.querySelector(".toTopBtn").classList.remove("off");
 			}
 		},
+	},
+	watch: {
+		$route() {
+			CurrentSession.PageFound = true;
+		}
 	}
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container :onload="isUserLoggedIn()">
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
                 :loading="loading"
@@ -83,6 +83,10 @@ export default {
         }
     },
     methods: {
+        isUserLoggedIn: function() {
+            if( CurrentSession.isLoggedIn ) this.$router.push('/dashboard'); // If user is already logged in, redirect to dashboard
+        },
+
         UserLogin: function() {
             this.loading = true;
 
@@ -95,7 +99,7 @@ export default {
                 .then((res) => {
                     CurrentSession.isLoggedIn = res.Authorized;
                     CurrentSession.isAdmin = res.isAdmin;
-                    this.$cookies.set('jwt', res.Jwt);
+                    this.$cookies.set('jwt', res.Jwt, 2592000);
                     this.$router.push('/dashboard');
                         
                 }).catch(err => {
