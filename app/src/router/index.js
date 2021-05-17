@@ -17,6 +17,7 @@ import Products from '../views/Products/Index.vue';
 import Product from '../views/Products/Product.vue';
 import Cart from '../views/Cart.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
+import Checkout from '../views/CheckOut/CheckOut.vue';
 
 
 
@@ -173,6 +174,12 @@ const routes = [
 			{ name: 'Forside', to: '/' },
 			
 		]
+	}
+},
+
+{ path: '/checkout', name: 'CheckOut', component: Checkout, 
+	meta: { 
+		title: 'CheckOut',
 	}
 },
 
