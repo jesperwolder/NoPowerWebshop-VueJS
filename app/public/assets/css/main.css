@@ -67,11 +67,13 @@ html, body{
     background-color: var(--c-light-drawer) !important;
 }
 
-.v-card.theme--dark {
+.v-card.theme--dark,
+.v-stepper.theme--dark {
     background-color: var(--c-dark-card) !important;
 }
 
-.v-card.theme--light {
+.v-card.theme--light,
+.v-stepper.theme--light {
     background-color: var(--c-light-card) !important;
 }
 

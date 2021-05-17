@@ -165,28 +165,25 @@ const routes = [
 			]
 		} 
 	},
-	{ path: '*', name: '404', component: NotFound },
-
 	{ path: '/cartcheckout', name: 'CartCheckOut', component: CartCheckOut, 
-	meta: { 
-		title: 'CartCheckOut',
-		breadcrumb: [
-			{ name: 'Forside', to: '/' },
-			
-		]
-	}
-},
-
-{ path: '/checkout', name: 'CheckOut', component: Checkout, 
-	meta: { 
-		title: 'CheckOut',
-		breadcrumb: [
-			{ name: 'Forside', to: '/' },
-			
-		]
-	}
-},
-
+		meta: { 
+			title: 'CartCheckOut',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				
+			]
+		}
+	},
+	{ path: '/checkout', name: 'CheckOut', component: Checkout, 
+		meta: { 
+			title: 'CheckOut',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				
+			]
+		}
+	},
+	{ path: '*', name: '404', component: NotFound },
 ];
 
 const router = new VueRouter({

@@ -118,18 +118,6 @@
                                             
                                             ></v-text-field>
                                         </v-col>
-
-                                            <v-col
-                                            cols="12"
-                                            sm="6"
-                                            md="6"
-                                            class="pr-0"
-                                        >
-                                            <v-text-field
-                                                disabled
-                                                v-model="editedItem.Creator.CreatorFullname"
-                                            ></v-text-field>
-                                            </v-col>
                                             
                                             <!-- Technical Details -->
                                             
@@ -373,69 +361,67 @@ export default {
             dialog: false,
             search: '',
             state: null,
-        headers: [
-            {
-                text: 'Name',
-                align: 'start',
-                filterable: true,
-                value: 'Name',
-            },
-          
-            { text: 'Description', value: 'Description' },
-            { text: 'Price', value: 'Price' },
-            { text: 'SalePercentage', value: 'SalePercentage' },
-            { text: 'Stock', value: 'Stock' },
-            { text: 'Active', value: 'isActive' },
-            { text: 'Actions', value: 'actions', sortable: false },
-        ],
-        products: [],
-        editedIndex: -1,
-        editedItem: {
-            _id: "",
-            Categories:[],
-            Creator:{
-                CreatedBy: "",
-                CreatorEmail: "",
-                CreatorFullname: "",
-            },
-            SalePercentage: "",
-            TechnicalDetails:[],
-            Name: "",
-            Description: "",
-            Price: 0,
-            Image: "",
-            Stock: 0,
-            isActive: false,
+            headers: [
+                {
+                    text: 'Name',
+                    align: 'start',
+                    filterable: true,
+                    value: 'Name',
+                },
             
-        },
-
-        defaultItem: {
-            _id: "",
-            Categories:[],
-            Creator:{
-                CreatedBy: "",
-                CreatorEmail: "",
-                CreatorFullname: "",
+                { text: 'Description', value: 'Description' },
+                { text: 'Price', value: 'Price' },
+                { text: 'SalePercentage', value: 'SalePercentage' },
+                { text: 'Stock', value: 'Stock' },
+                { text: 'Active', value: 'isActive' },
+                { text: 'Actions', value: 'actions', sortable: false },
+            ],
+            products: [],
+            editedIndex: -1,
+            editedItem: {
+                _id: "",
+                Categories:[],
+                Creator:{
+                    CreatedBy: "",
+                    CreatorEmail: "",
+                    CreatorFullname: "",
+                },
+                SalePercentage: "",
+                TechnicalDetails:[],
+                Name: "",
+                Description: "",
+                Price: 0,
+                Image: "",
+                Stock: 0,
+                isActive: false,
+                
             },
-            SalePercentage: "",
-            TechnicalDetails:[],
-            Name: "",
-            Description: "",
-            Price: 0,
-            Image: "",
-            Stock: 0,
-            isActive: false,
-            
-        },
 
-         
-      }    
+            defaultItem: {
+                _id: "",
+                Categories:[],
+                Creator:{
+                    CreatedBy: "",
+                    CreatorEmail: "",
+                    CreatorFullname: "",
+                },
+                SalePercentage: "",
+                TechnicalDetails:[],
+                Name: "",
+                Description: "",
+                Price: 0,
+                Image: "",
+                Stock: 0,
+                isActive: false,
+                
+            },
+        }    
     },
     mounted: function() {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Products;
-
+            
             obj.forEach(element => {
                 this.products.push( {
                     _id: element._id,
@@ -449,9 +435,10 @@ export default {
                     TechnicalDetails: element.TechnicalDetails,
                     Categories: element.Categories,
                     Creator: {
-                        CreatedBy: element.Creator.CreatorFullname,
-                        CreatorEmail: element.Creator.CreatorEmail,
-                        CreatorFullname: element.Creator.CreatorFullname,
+                        _id: null,
+                        CreatedBy: null,
+                        CreatorEmail: null,
+                        CreatorFullname: null,
                     }
                 })
             });

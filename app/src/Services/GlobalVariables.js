@@ -5,3 +5,7 @@ export const CurrentSession = {
     PermissionDenied: false,
     RequireAdmin: false,
 }
+
+export const Cart = {
+    Items: []
+}
