@@ -1,38 +1,57 @@
 <template>
-	<div class="CartCheckOut">
-		<v-card class="pa-5">
-			 Vi er en gruppe på 3 som sælger elktroniske varer og tilbhøre vi er i hvertfald ikke et indien scam firma bare køb her
-             Nopower Group er Nordens største på e-handel med i alt 10 netbutikker i Skandinavien. Nopower Group er det eneste led mellem producenter og kunder. 
-             Det giver en effektiv driftsmodel og er medvirkende til, at Nopowers netbutikker kan være rentable og tilbyde konkurrencedygtige priser. 
-             Nopower Groups netbutikker sælger til slutkunder, virksomheder, offentlige virksomheder og forhandlere. 
-             Ved udgangen af 2015 var der registreret 1.800.000 aktive kunder (kunder, som har handlet de sidste 12 måneder).
-            <br>
-            <br>
-            Mere information kan findes på www.Nopower.com. På denne side er også oversigt over ledige stillinger.
-            <br>
-            
-             <br>
-            Returadresse - send ikke din selv, brug den forudbetalte fragtlabel du får af os, når du opretter en retursag
-             <br>
-            Nopower.dk
-             <br>
-            Bergvägen 1
-             <br>
-            SE-341 42 LJUNGBY
-             <br>
-            SWEDEN
-             <br>
-		</v-card>
-	</div>
+  <v-container>
+    <v-row>
+      <v-col sm="4" offset-sm="2" xl="4" offset-xl="2">
+        <div>
+    <v-card
+      outlined
+    >
+      <v-card-title>Payment Details</v-card-title>
+
+      <v-card-text>
+        <p>Total: $999</p>
+        <v-btn
+          color="primary"
+          @click="goToCheckout"
+        >
+          Checkout
+        </v-btn>
+      </v-card-text>
+    </v-card>
+  </div>
+      </v-col>
+      <v-col sm="4" xl="3" order="first" order-sm="last">
+                    <div>
+                <v-row v-for="(product, i) in products" :key="i">
+                <HorizontalProduct
+                    :product="product"
+                    :i="i"
+                    :updateCart="removeFromCart"
+                    btnAction="remove"
+                />
+                </v-row>
+            </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 
-
 export default {
-	name: 'CartCheckOut',
-	components: {
-		
-	}
+  data() {
+    return {
+      checkoutForm: null,
+      nameRules: [],
+      name: '',
+      emailRules: [],
+      email: ''
+    }
+  },
+  methods: {
+    goToCheckout() {
+      this.$router.push({ name: 'checkout' })
+    }
+  }
 }
 </script>

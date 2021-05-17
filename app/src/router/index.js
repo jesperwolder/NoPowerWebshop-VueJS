@@ -16,6 +16,7 @@ import Support_management from '../views/AdminPages/Support_tickets.vue';
 import Products from '../views/Products/Index.vue';
 import Product from '../views/Products/Product.vue';
 import Cart from '../views/Cart.vue';
+import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 
 
 
@@ -30,6 +31,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/AboutUs', name: 'Om Os', component: AboutUs, 
 		meta: { 
 			title: 'Om Os',
@@ -39,6 +41,7 @@ const routes = [
 			]
 		}
 	},
+	
 	{ path: '/ContactUs', name: 'Kontakt Os', component: ContactUs, 
 		meta: { 
 			title: 'Kontakt Os',
@@ -162,6 +165,16 @@ const routes = [
 		} 
 	},
 	{ path: '*', name: '404', component: NotFound },
+
+	{ path: '/cartcheckout', name: 'CartCheckOut', component: CartCheckOut, 
+	meta: { 
+		title: 'CartCheckOut',
+		breadcrumb: [
+			{ name: 'Forside', to: '/' },
+			
+		]
+	}
+},
 
 ];
 
