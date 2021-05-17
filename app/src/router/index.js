@@ -180,6 +180,10 @@ const routes = [
 { path: '/checkout', name: 'CheckOut', component: Checkout, 
 	meta: { 
 		title: 'CheckOut',
+		breadcrumb: [
+			{ name: 'Forside', to: '/' },
+			
+		]
 	}
 },
 

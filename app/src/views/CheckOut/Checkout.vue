@@ -61,10 +61,10 @@
 
 <script>
 import { CurrentSession } from '@/Services/GlobalVariables';
-import ContactInfo from '@/Checkout/CheckoutInfo/CantactInfo';
-import ShippingInfo from '@/Checkout/CheckoutInfo/ShippingInfo.vue';
-import Review from '@/Checkout/CheckoutInfo/Review.vue';
-import Payment from '@/Checkout/CheckoutInfo/Payment.vue';
+import ContactInfo from '@/components/CheckoutInfo/ContactInfo.vue';
+import ShippingInfo from '@/components/CheckoutInfo/ShippingInfo.vue';
+import Review from '@/components/CheckoutInfo/Review.vue';
+import Payment from '@/components/CheckoutInfo/Payment.vue';
 export default {
   components: {
     ContactInfo,
