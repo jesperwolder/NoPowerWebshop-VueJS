@@ -6,9 +6,9 @@
       required
     />
 
-    <v-text-field
-      v-model="data.state"
-      label="State"
+   <v-text-field
+      v-model="data.Number"
+      label="Address Number "
       required
     />
 
@@ -16,6 +16,18 @@
       v-model="data.zip"
       label="Zip"
       :rules="[rules.required, rules.zip]"
+      required
+    />
+
+    <v-text-field
+      v-model="data.City"
+      label="City"
+      required
+    /> 
+
+    <v-text-field
+      v-model="data.state"
+      label="State"
       required
     />
 

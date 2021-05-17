@@ -18,6 +18,7 @@ import Product from '../views/Products/Product.vue';
 import Cart from '../views/Cart.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
+import ThankYou from '../views/CheckOut/Thankyoupage.vue';
 
 
 
@@ -180,12 +181,18 @@ const routes = [
 { path: '/checkout', name: 'CheckOut', component: Checkout, 
 	meta: { 
 		title: 'CheckOut',
-		breadcrumb: [
-			{ name: 'Forside', to: '/' },
-			
-		]
+		
 	}
 },
+
+{ path: '/ThankYou', name: 'ThankYou', component: ThankYou, 
+	meta: { 
+		title: 'ThankYou',
+		
+	}
+},
+
+
 
 ];
 
