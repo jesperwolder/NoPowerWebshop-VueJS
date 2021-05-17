@@ -35,17 +35,18 @@
                             >
                                 <v-toolbar-title>Oversigt</v-toolbar-title>
                                 <v-divider
-                                class="mx-4"
-                                inset
-                                vertical
+                                    class="mx-4"
+                                    inset
+                                    vertical
                                 ></v-divider>
                                 <v-spacer></v-spacer>
                                 <v-dialog
-                                v-model="dialog"
-                                max-width="500px"
+                                    v-model="dialog"
+                                    max-width="500px"
+                                    persistent
                                 >
                                 
-                                <v-card class="ma-0">
+                                <v-card class="ma-0" :loading="isLoading" :disabled="isLoading">
                                     <v-card-title>
                                         Administrer kunde '<i>{{ editedItem.Fullname }}</i>'
                                     </v-card-title>
@@ -156,22 +157,22 @@
                                     </v-card-text>
 
                                     <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        @click="close"
-                                    >
-                                        Cancel
-                                    </v-btn>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        
-                                        v-on:click=" ChangeAdminRole(), onUpdateProfileAdminChange()"
-                                    >
-                                        Save
-                                    </v-btn>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            @click="close"
+                                        >
+                                            Cancel
+                                        </v-btn>
+                                        <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            
+                                            v-on:click=" ChangeAdminRole(), onUpdateProfileAdminChange()"
+                                        >
+                                            Save
+                                        </v-btn>
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
@@ -230,6 +231,7 @@ export default {
         return {
             error: null,
             meta: this.$route.meta,
+            isLoading: false,
             isAdminswitch: false,
             CS: CurrentSession,
             dialog: false,
@@ -322,7 +324,8 @@ export default {
 
     methods: {
         onUpdateProfileAdminChange: function() {
-            console.log(this.editedItem)
+            this.isLoading = true;
+
             UpdateUserAdminBody( { User: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateUserData()
@@ -346,9 +349,11 @@ export default {
         },
         close() {
             this.dialog = false
+            this.isLoading = false;
+
             this.$nextTick(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
-            this.editedIndex = -1
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
             })
         },
 

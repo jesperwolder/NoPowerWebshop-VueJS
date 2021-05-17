@@ -32,21 +32,21 @@
 				<div v-if="CS.isAdmin">
 					<v-btn class="buttons" depressed text mr-2 to="/adminpage">
 						<v-icon left>mdi-account</v-icon>
-						Admin page
+						Administrator
 					</v-btn>
 				</div>
 			</div>
 			<div v-if="CS.isLoggedIn">
 				<v-btn class="buttons" depressed text mr-2 to="/dashboard">
 					<v-icon left>mdi-account</v-icon>
-					dashboard
+					Dashboard
 				</v-btn>
 			</div>
 
 			<div v-if="CS.isLoggedIn">
 				<v-btn depressed text v-on:click.prevent="logout()">
 					<v-icon left>mdi-logout</v-icon>
-					Logout
+					Log ud
 				</v-btn>
 			</div>
 
