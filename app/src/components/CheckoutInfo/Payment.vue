@@ -34,8 +34,8 @@
     >
       Continue
     </v-btn>
-    <v-btn text @click="$router.replace({})">
-      Cancel
+     <v-btn text @click="previous">
+      Go Back
     </v-btn>
   </v-stepper-content>
 </template>
@@ -44,6 +44,7 @@
 export default {
   props: {
     next: Function,
+    previous: Function,
     rules: Object,
     data: Object
   }
