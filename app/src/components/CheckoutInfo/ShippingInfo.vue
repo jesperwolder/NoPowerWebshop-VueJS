@@ -1,5 +1,6 @@
 <template>
   <v-stepper-content step="2">
+    <p>LeveringsAddresse</p>
     <v-text-field
       v-model="data.street"
       label="Street Address"

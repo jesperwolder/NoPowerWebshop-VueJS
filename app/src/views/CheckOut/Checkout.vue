@@ -88,10 +88,6 @@ export default {
         Zip: '',
         City: '',
         State: '',
-        CardHolder:'',
-        CardNumber: '',
-        ExpDate: '',
-        LastThree: '',
       },
       rules: {
         required: value => !!value || 'Required.',

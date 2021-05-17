@@ -1,5 +1,6 @@
 <template>
   <v-stepper-content step="1">
+    <p>ContactInfo</p>
     <v-text-field
       v-model="data.name"
       :rules="[rules.required]"
