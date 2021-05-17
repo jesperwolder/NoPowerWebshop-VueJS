@@ -18,6 +18,7 @@ import Product from '../views/Products/Product.vue';
 import Cart from '../views/Cart.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
+import ThankYou from '../views/CheckOut/Thankyoupage.vue';
 
 
 

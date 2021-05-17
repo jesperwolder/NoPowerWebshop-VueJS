@@ -1,14 +1,15 @@
 <template>
   <v-stepper-content step="2">
+    <p>LeveringsAddresse</p>
     <v-text-field
       v-model="data.street"
       label="Street Address"
       required
     />
 
-    <v-text-field
-      v-model="data.state"
-      label="State"
+   <v-text-field
+      v-model="data.Number"
+      label="Address Number "
       required
     />
 
@@ -16,6 +17,18 @@
       v-model="data.zip"
       label="Zip"
       :rules="[rules.required, rules.zip]"
+      required
+    />
+
+    <v-text-field
+      v-model="data.City"
+      label="City"
+      required
+    /> 
+
+    <v-text-field
+      v-model="data.state"
+      label="State"
       required
     />
 

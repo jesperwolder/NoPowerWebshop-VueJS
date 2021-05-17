@@ -1,5 +1,6 @@
 <template>
   <v-stepper-content step="3">
+    <p>BetalingsMåde</p>
     <v-text-field
       v-model="data.CardHolder"
       :rules="[rules.required]"
