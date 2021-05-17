@@ -2,9 +2,7 @@
   <v-container>
     <v-card
             class="pa-5 ma-0"
-            elevation="3"
-            v-if="CS.isLoggedIn" 
-                
+            elevation="3" 
         >
     <v-row>
       <v-col sm="6" offset-sm="3" xl="4" offset-xl="4">
@@ -91,7 +89,7 @@ export default {
       },
       rules: {
         required: value => !!value || 'Required.',
-        zip: value => value.length == 5 || 'Must be five characters',
+        zip: value => value.length == 4 || 'Must be four characters',
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
@@ -111,7 +109,7 @@ export default {
       this.step -= 1
     },
     submitOrder() {
-      this.$router.push({name: 'thankyou'})
+      this.$router.push({name: 'ThankYou'})
     }
   }
 }

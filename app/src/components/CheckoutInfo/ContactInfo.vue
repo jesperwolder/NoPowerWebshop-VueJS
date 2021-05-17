@@ -2,22 +2,22 @@
   <v-stepper-content step="1">
     <p>ContactInfo</p>
     <v-text-field
-      v-model="data.name"
+      v-model="data.Name"
       :rules="[rules.required]"
       label="Name"
       required
     />
 
     <v-text-field
-      v-model="data.email"
-      :rules="[rules.required, rules.email]"
+      v-model="data.Email"
+      :rules="[rules.required, rules.Email]"
       label="E-mail"
       required
     />
 
     <v-text-field
-      v-model="data.phone"
-      :rules="[rules.required, rules.phone]"
+      v-model="data.Phone"
+      :rules="[rules.required, rules.Phone]"
       label="Phone Number"
       required
     />

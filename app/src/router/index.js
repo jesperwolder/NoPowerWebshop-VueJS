@@ -184,6 +184,15 @@ const routes = [
 			]
 		}
 	},
+	{ path: '/ThankYou', name: 'ThankYou', component: ThankYou, 
+		meta: { 
+			title: 'ThankYou',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				
+			]
+		}
+	},
 	{ path: '*', name: '404', component: NotFound },
 ];
 
