@@ -27,7 +27,7 @@
     >
       Continue
     </v-btn>
-    <v-btn text @click="$router.replace({name: 'cart'})">
+    <v-btn text @click="$router.replace({})">
       Cancel
     </v-btn>
   </v-stepper-content>

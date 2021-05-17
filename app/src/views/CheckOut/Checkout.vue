@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-card
+            class="pa-5 ma-0"
+            elevation="3"
+            v-if="CS.isLoggedIn" 
+                
+        >
     <v-row>
       <v-col sm="6" offset-sm="3" xl="4" offset-xl="4">
         <v-stepper v-model="step">
@@ -49,10 +55,12 @@
         </v-stepper>
       </v-col>
     </v-row>
+    </v-card>
   </v-container>
 </template>
 
 <script>
+import { CurrentSession } from '@/Services/GlobalVariables';
 import ContactInfo from '@/Checkout/CheckoutInfo/CantactInfo';
 import ShippingInfo from '@/Checkout/CheckoutInfo/ShippingInfo.vue';
 import Review from '@/Checkout/CheckoutInfo/Review.vue';
@@ -66,6 +74,9 @@ export default {
   },
   data() {
     return {
+      error: null,
+        meta: this.$route.meta,
+        CS: CurrentSession,
       step: 1,
       checkoutForm: false,
       data: {
