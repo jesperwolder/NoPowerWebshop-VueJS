@@ -1,7 +1,6 @@
 <template>
  <v-card
   outlined
-  min-width="100%"
   class="mb-5 pa-4"
   >
 <h2 class="display-2 mb-4">Basket</h2>
