@@ -56,9 +56,11 @@ router.post('/', async (req, res) => {
     try {
         // updating the values if the given new value is not null
         product.Name = (req.body.Product.Name ? req.body.Product.Name : product.Name);
+        product.LowerHeader = (req.body.Product.LowerHeader ? req.body.Product.LowerHeader : product.LowerHeader );
         product.Description = (req.body.Product.Description ? req.body.Product.Description : product.Description);
         product.Price = (req.body.Product.Price ? req.body.Product.Price : product.Price);
-        product.Image = (req.body.Product.image ? req.body.Product.Image : product.Image);
+        product.Thumbnail = (req.body.Product.Thumbnail ? req.body.Product.Thumbnail : product.Thumbnail);
+        product.Images = (req.body.Product.Images ? req.body.Product.Images : product.Images);
         product.SalePercentage = (req.body.Product.SalePercentage ? req.body.Product.SalePercentage : product.SalePercentage);
         product.Stock =(req.body.Product.Stock ? req.body.Product.Stock : product.Stock);
         product.TechnicalDetails = (req.body.Product.TechnicalDetails ? req.body.Product.TechnicalDetails : product.TechnicalDetails);
