@@ -46,31 +46,34 @@
             {{ product.Name }}
         </v-card-title>
         <v-card-subtitle class="px-0">
-            {{ product.Description }}
+            {{ product.LowerHeader }}
         </v-card-subtitle>    
 
         <v-row>
             <v-col
-                cols="6"
+                cols="12"
                 sm="12"
                 md="8"
             >
                 <v-carousel
                     cycle
-                    height="300"
+                    height="35vh"
                     hide-delimiter-background
                     show-arrows-on-hover
-                >
+                    touch
+                    class="caro"
+                >   
                     <v-carousel-item
                         v-for="( slide, index ) in slides"
                         :key="index"
+                        :src="slide"
+                        contain
                     >
-                        {{ slide }}
                     </v-carousel-item>
                 </v-carousel>
             </v-col>
             <v-col
-                cols="6"
+                cols="12"
                 sm="12"
                 md="4"
             >
@@ -175,8 +178,11 @@
             >
                 <v-card outlined>
                     <v-card-title>
-                        Produkt anmeldelser
+                        Produkt beskrivelse
                     </v-card-title>
+                    <v-card-text>
+                        {{ product.Description }}
+                    </v-card-text>
                 </v-card>
                 <v-card outlined>
                     <v-card-title>
@@ -199,10 +205,7 @@ export default {
             _id: this.$route.params.id,
             meta: this.$route.meta,
             product: [],
-            slides: [
-                "hey",
-                "x"
-            ],
+            slides: [],
             CS: CurrentSession,
             AvailabilityColors: [ 'red', 'amber', 'green' ]
         }
@@ -213,6 +216,7 @@ export default {
         .then( res => {
             this.product = res.Product;
             this.$route.meta.title = this.product.Name
+            this.slides = this.product.Images
             this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length - 1].name = this.product.Name
             this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length - 1].to = this.$route.path
         })
@@ -270,5 +274,19 @@ export default {
 
     .tech-item-name {
         border-right: 1px solid transparent;
+    }
+
+    .caro {
+        border-radius: 4px;
+    }
+
+    .caro.theme--dark {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background-color: var(--c-dark-header);
+    }
+
+    .caro.theme--light {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background-color: var(--c-light-header);
     }
 </style>
