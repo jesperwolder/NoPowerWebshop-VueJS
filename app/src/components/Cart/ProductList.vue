@@ -8,65 +8,65 @@
   		<!-- Products udprinting -->
 		<v-card v-for="(product, index) in products" :key="index" elevation="0">
 			
-				<div class="d-flex">
-					<div>
-					<!-- Products photo -->
-						<v-img
-							:src="product.Thumbnail"
-							width="170px"
-							height="140px"
-						/>
-					</div>
+			<div class="d-flex">
+				<div>
+				<!-- Products photo -->
+					<v-img
+						:src="product.Thumbnail"
+						width="170px"
+						height="140px"
+					/>
 				</div>
-				<!-- Products Name -->
-				<v-card-title class="pt-0 pl-0 pb-0 text-truncate">
-					{{ product.Name }}
-				</v-card-title>
-			
-				<v-divider v-if="index < products.length"></v-divider>
+			</div>
+			<!-- Products Name -->
+			<v-card-title class="pt-0 pl-0 pb-0 text-truncate">
+				{{ product.Name }}
+			</v-card-title>
+		
+			<v-divider v-if="index < products.length"></v-divider>
 
-				<!-- Products Description -->
-				<v-card-title class="pt-0 pl-0 pb-0">
-					{{ product.LowerHeader }}
-				</v-card-title>
+			<!-- Products Description -->
+			<v-card-title class="pt-0 pl-0 pb-0">
+				{{ product.LowerHeader }}
+			</v-card-title>
 
-				<v-divider v-if="index < products.length"></v-divider>
+			<v-divider v-if="index < products.length"></v-divider>
 
-				<!-- Products pris per unit -->
-				<v-card-subtitle class="pt-7 pl-0 pb-0">
-					<h2>Pris per unit</h2>
-					{{ product.Price }},-
+			<!-- Products pris per unit -->
+			<v-card-subtitle class="pt-7 pl-0 pb-0">
+				<h2>Pris per unit</h2>
+				{{ product.Price }},-
+			</v-card-subtitle>
+
+			<!-- Products quantity -->
+			<div class="d-flex">
+				<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity" :onchange="CartUpdate()"></v-text-field>
+			</div>
+				
+			<!-- Products price * quantity -->
+			<div class="pt-7 pl-0 pb-0">
+				<v-card-subtitle class="pl-0">
+					<h2>Total</h2>
+					{{ product.Price * product.Quantity }},-
 				</v-card-subtitle>
-
-				<!-- Products quantity -->
-				<div class="d-flex">
-					<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity" :onchange="CartUpdate()"></v-text-field>
-				</div>
-					
-				<!-- Products price * quantity -->
-				<div class="pt-7 pl-0 pb-0">
-					<v-card-subtitle class="pl-0">
-						<h2>Total</h2>
-						{{ product.Price * product.Quantity }},-
-					</v-card-subtitle>
-				</div>
+			</div>
 
 
-				<!-- Products REMOVE -->
-				<v-col class="text-right">
-					<v-btn
-						color="error"
-						class="ml-4"
-						outlined
-						small
-						@click="RemoveProduct(product._id)"
-					>
-						<v-icon small>mdi-minus</v-icon>
-						Remove from Cart
-					</v-btn>
-				</v-col>
+			<!-- Products REMOVE -->
+			<v-col class="text-right">
+				<v-btn
+					color="error"
+					class="ml-4"
+					outlined
+					small
+					@click="RemoveProduct(product._id)"
+				>
+					<v-icon small>mdi-minus</v-icon>
+					Remove from Cart
+				</v-btn>
+			</v-col>
 
-			<v-divider v-if="index + 1 < products.length"></v-divider>
+		<v-divider v-if="index + 1 < products.length"></v-divider>
 
 		</v-card>
 
