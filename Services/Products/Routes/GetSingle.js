@@ -1,37 +1,72 @@
 const express = require('express');
 const axios = require('axios');
+const mongoose = require('mongoose');
 require('dotenv').config();
 const Product = require('../Schema/Product');
 
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
-    // Finding the product from the given id
-    let err, product = await Product.findById(req.params.id);
+    let prods = [];
+    if(req.params.id.includes(',')) {
+        let IDs = req.params.id.split(',');
+        let failed = false;
 
-    //Checking for errors or if no product was found
-    if(err || !product) {
-        res.status(404).json({
-            message: 'Not found',
-            product: null
-        });
-        return;
-    }
+        for (id of IDs) {
+            try {
+                mongoose.Types.ObjectId(id);
+            }catch{
+                failed = true;
+            }
+            if(failed) break;
 
-    if(req.headers.jwt){
-        let error, response = await axios.post('http://' + process.env.AuthService + '/auth', null, { headers: { jwt: req.headers.jwt } });
-        if(error || !response.data.isAdmin) {
-            product.Creator = null;
+            let err, product = await Product.findById(id);
+            if(err || !product) {
+                failed = true;
+                break;
+            }else {
+                product.Creator = null;
+                prods.push(product);
+            }
         }
+
+        if(failed) {
+            res.status(404).json({
+                Message: 'Nogle produkter blev ikke fundet',
+                Products: null
+            });
+            return;
+        }
+
+        res.json({
+            Message: 'Success',
+            Products: prods
+        });
     }else {
+        try {
+            mongoose.Types.ObjectId(req.params.id);
+        }catch{
+            res.status(404).json({
+                Message: 'Det blev ikke fundet noget produkt',
+                Products: null
+            });
+            return;
+        }
+        
+        let err, product = await Product.findById(req.params.id);
+        if(err || !product) {
+            res.status(404).json({
+                Message: 'Nogle produkter blev ikke fundet',
+                Products: null
+            });
+        }
+
         product.Creator = null;
+        res.json({
+            Message: 'Success',
+            Products: [ product ]
+        });
     }
-    
-    // Success response
-    res.json({
-        Message: 'success',
-        Product: product
-    });
 });
 
 module.exports = router;
