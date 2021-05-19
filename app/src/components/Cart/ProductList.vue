@@ -40,7 +40,7 @@
 
 				<!-- Products quantity -->
 				<div class="d-flex">
-					<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity"></v-text-field>
+					<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity" :onchange="CartUpdate()"></v-text-field>
 				</div>
 					
 				<!-- Products price * quantity -->
@@ -91,23 +91,35 @@
 
 		mounted: function() {
 			const cart = GetCart();
+			let ids = "";
+			let i = 0;
 
-			cart.forEach( async item => {
-				const res = await GetProductBody( item._id );
-
-				if( res.Message === 'success' ) {
-					const p = res.Product;					
-
-					this.products.push({
-						_id: p._id,
-						Name: p.Name,
-						Thumbnail: p.Thumbnail,
-						LowerHeader: p.LowerHeader,
-						Price: p.Price,
-						Quantity: item.Quantity
-					})
+			cart.forEach( item => {
+				if( (cart.length - 1) === i ) {
+					ids += item._id;
+				} else {
+					ids += item._id + ',';
 				}
+
+				i++;
 			});
+
+			GetProductBody( ids )
+			.then( res => {
+				res.Products.forEach( item => {
+					this.products.push({
+						_id: item._id,
+						Name: item.Name,
+						Thumbnail: item.Thumbnail,
+						LowerHeader: item.LowerHeader,
+						Price: item.Price,
+						Quantity: cart.find( x => x._id === item._id ).Quantity
+					})
+				} )
+			})
+			.catch( err => {
+				console.log(err)
+			})
 		},
 
 		methods: {

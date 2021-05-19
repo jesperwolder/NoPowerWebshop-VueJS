@@ -47,7 +47,7 @@
                             </v-btn>
                             <v-img
                                 height="20rem"
-                                :src="`http://placeimg.com/${ getRandomInt(250, 600) }/${ getRandomInt(250, 600) }/tech`"
+                                :src="product.Thumbnail"
                                 contain
                                 class="productImage"
                             ></v-img>
@@ -116,7 +116,7 @@ export default {
                         Description: element.Description,
                         Price: element.Price,
                         SalePercentage: element.SalePercentage,
-                        Image: element.Image 
+                        Thumbnail: element.Thumbnail 
                     });
                 }
             });

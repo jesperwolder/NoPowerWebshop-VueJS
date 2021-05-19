@@ -223,7 +223,7 @@ export default {
     mounted: function() {
         GetProductBody( this.$route.params.id )
         .then( res => {
-            this.product = res.Product;
+            this.product = res.Products[0];
             this.$route.meta.title = this.product.Name
             this.slides = this.product.Images
             this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length - 1].name = this.product.Name
