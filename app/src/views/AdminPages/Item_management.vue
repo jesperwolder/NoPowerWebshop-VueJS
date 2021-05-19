@@ -553,11 +553,9 @@ export default {
 
         //create item
         AdminCreateItem: function() {
-            
             this.editedItem.Price = parseFloat( this.editedItem.Price );
             this.editedItem.Stock = parseInt( this.editedItem.Stock );
             this.editedItem.SalePercentage = parseInt( this.editedItem.SalePercentage );
-            this.editedItem.isActive = ( this.editedItem.isActive === 'true' );
 
             CreateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {                

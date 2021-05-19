@@ -60,7 +60,6 @@
                     height="35vh"
                     hide-delimiter-background
                     show-arrows-on-hover
-                    touch
                     class="caro"
                 >   
                     <v-carousel-item
@@ -92,9 +91,18 @@
                             color="#F7941D"
                             class="mb-0"
                             text
-                            :to="`/products/`+ product._id"
+                            @click="AddProduct(1)"
                         >
                             Læg i indkøbskurven
+                        </v-btn>
+
+                        <v-btn
+                            color="#F7941D"
+                            class="mb-0"
+                            text
+                            @click="RemoveProduct()"
+                        >
+                            Fjern pisset
                         </v-btn>
                     </v-card-actions>
                     <v-card-text class="px-0 pb-0">
@@ -198,6 +206,7 @@
 
 import { GetProductBody } from '@/Services/ProductApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
+import { AddToCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
 
 export default {
     data() {
@@ -240,6 +249,14 @@ export default {
             if( amount > 10 ) return this.AvailabilityColors[2];
             if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
             if( amount >= 0 ) return this.AvailabilityColors[0];
+        },
+
+        AddProduct: function( quantity ) {
+            console.log( AddToCart( { _id: this.product._id, Quantity: quantity } ) );
+        },
+
+        RemoveProduct: function() {
+            RemoveItemFromCart( this.product._id );
         }
     }
 }
