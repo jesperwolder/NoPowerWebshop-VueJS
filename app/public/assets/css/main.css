@@ -68,12 +68,14 @@ html, body{
 }
 
 .v-card.theme--dark,
-.v-stepper.theme--dark {
+.v-stepper.theme--dark,
+.v-data-table.theme--dark {
     background-color: var(--c-dark-card) !important;
 }
 
 .v-card.theme--light,
-.v-stepper.theme--light {
+.v-stepper.theme--light,
+.v-data-table.theme--light {
     background-color: var(--c-light-card) !important;
 }
 
@@ -83,11 +85,13 @@ html, body{
     backdrop-filter: blur(10px);
 }
 
-.v-app-bar.theme--dark {
+.v-app-bar.theme--dark,
+.v-toolbar.theme--dark {
     background-color: var(--c-dark-header) !important;
 }
 
-.v-app-bar.theme--light {
+.v-app-bar.theme--light,
+.v-toolbar.theme--light {
     background-color: var(--c-light-header) !important;
 }
 

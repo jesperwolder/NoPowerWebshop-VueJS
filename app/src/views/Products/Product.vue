@@ -46,31 +46,33 @@
             {{ product.Name }}
         </v-card-title>
         <v-card-subtitle class="px-0">
-            {{ product.Description }}
+            {{ product.LowerHeader }}
         </v-card-subtitle>    
 
         <v-row>
             <v-col
-                cols="6"
+                cols="12"
                 sm="12"
                 md="8"
             >
                 <v-carousel
                     cycle
-                    height="300"
+                    height="35vh"
                     hide-delimiter-background
                     show-arrows-on-hover
-                >
+                    class="caro"
+                >   
                     <v-carousel-item
                         v-for="( slide, index ) in slides"
                         :key="index"
+                        :src="slide"
+                        contain
                     >
-                        {{ slide }}
                     </v-carousel-item>
                 </v-carousel>
             </v-col>
             <v-col
-                cols="6"
+                cols="12"
                 sm="12"
                 md="4"
             >
@@ -89,9 +91,18 @@
                             color="#F7941D"
                             class="mb-0"
                             text
-                            :to="`/products/`+ product._id"
+                            @click="AddProduct(1)"
                         >
                             Læg i indkøbskurven
+                        </v-btn>
+
+                        <v-btn
+                            color="#F7941D"
+                            class="mb-0"
+                            text
+                            @click="RemoveProduct()"
+                        >
+                            Fjern pisset
                         </v-btn>
                     </v-card-actions>
                     <v-card-text class="px-0 pb-0">
@@ -175,8 +186,11 @@
             >
                 <v-card outlined>
                     <v-card-title>
-                        Produkt anmeldelser
+                        Produkt beskrivelse
                     </v-card-title>
+                    <v-card-text>
+                        {{ product.Description }}
+                    </v-card-text>
                 </v-card>
                 <v-card outlined>
                     <v-card-title>
@@ -192,6 +206,7 @@
 
 import { GetProductBody } from '@/Services/ProductApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
+import { AddToCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
 
 export default {
     data() {
@@ -199,10 +214,7 @@ export default {
             _id: this.$route.params.id,
             meta: this.$route.meta,
             product: [],
-            slides: [
-                "hey",
-                "x"
-            ],
+            slides: [],
             CS: CurrentSession,
             AvailabilityColors: [ 'red', 'amber', 'green' ]
         }
@@ -213,6 +225,7 @@ export default {
         .then( res => {
             this.product = res.Product;
             this.$route.meta.title = this.product.Name
+            this.slides = this.product.Images
             this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length - 1].name = this.product.Name
             this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length - 1].to = this.$route.path
         })
@@ -236,6 +249,14 @@ export default {
             if( amount > 10 ) return this.AvailabilityColors[2];
             if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
             if( amount >= 0 ) return this.AvailabilityColors[0];
+        },
+
+        AddProduct: function( quantity ) {
+            console.log( AddToCart( { _id: this.product._id, Quantity: quantity } ) );
+        },
+
+        RemoveProduct: function() {
+            RemoveItemFromCart( this.product._id );
         }
     }
 }
@@ -270,5 +291,19 @@ export default {
 
     .tech-item-name {
         border-right: 1px solid transparent;
+    }
+
+    .caro {
+        border-radius: 4px;
+    }
+
+    .caro.theme--dark {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background-color: var(--c-dark-header);
+    }
+
+    .caro.theme--light {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background-color: var(--c-light-header);
     }
 </style>

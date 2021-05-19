@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <v-container class="pa-0" fluid>
     <v-row>
-      <v-col sm="10" offset-sm="5" xl="5" offset-xl="2">
+      <v-col cols="12" sm="8">
         <ProductList />
       </v-col>
-      <v-col sm="4" xl="3">
+      <v-col cols="12" sm="4">
         <CheckoutBox />
       </v-col>
     </v-row>

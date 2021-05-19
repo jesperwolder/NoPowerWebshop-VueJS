@@ -1,8 +1,8 @@
 <template>
-    <v-container v-if="CS.isAdmin" class="pa-0">
+    <v-container v-if="CS.isAdmin" class="pa-0" fluid>
         <v-card
             class="pa-5 ma-0"
-            elevation="3"
+            elevation="2"
             v-if="CS.isAdmin" 
                 
         >
@@ -23,8 +23,10 @@
                         <v-data-table
                             :headers="headers"
                             :items="products"
-                            :items-per-page="25"
+                            :items-per-page="69"
+                            :pagination.sync="pagination"   
                             :search="search"
+                            :rows-per-page-items="[10, 69, 420, 100]"
                         >
 
                         <template v-slot:top>
@@ -78,7 +80,7 @@
                                                 class="px-0"
                                             >
                                                 <v-text-field
-                                                    v-model="editedItem.Description.Short"
+                                                    v-model="editedItem.LowerHeader"
                                                     label="Kort beskrivelse (140 tegn)"
                                                     outlined
                                                     max-length="140"
@@ -89,7 +91,7 @@
                                                 class="px-0"
                                             >
                                                 <v-textarea
-                                                    v-model="editedItem.Description.Long"
+                                                    v-model="editedItem.Description"
                                                     label="Lang beskrivelse"
                                                     outlined
                                                 ></v-textarea>
@@ -276,23 +278,23 @@
                                                     <v-divider class="mb-5"></v-divider>
                                                     <v-card-subtitle class="px-0">Images</v-card-subtitle>
 
-                                                    <v-card 
+                                                    <v-card
                                                         class="pa-2"
                                                         outlined
                                                     >
                                                         <v-text-field
-                                                            v-model="editedItem.Image.Thumbnail"
+                                                            v-model="editedItem.Thumbnail"
                                                             label="Thumbnail image"
                                                         ></v-text-field>
 
                                                         <v-divider class="mb-5"></v-divider>
 
                                                         <div
-                                                            v-for="( image, index ) in editedItem.Image.Images"
+                                                            v-for="( image, index ) in editedItem.Images"
                                                             :key="index"
                                                         >
                                                             <v-text-field
-                                                                v-model="editedItem.Image.Images[index]"
+                                                                v-model="editedItem.Images[index]"
                                                                 :label="`Image url ` + ( index + 1 )"
                                                                 append-outer-icon="mdi-minus"
                                                                 @click:append-outer="RemoveFieldImage( index )"
@@ -409,6 +411,9 @@ export default {
             dialog: false,
             search: '',
             state: null,
+            pagination: {
+              rowsPerPage: 69
+            },
             headers: [
                 {
                     text: 'Name',
@@ -417,9 +422,8 @@ export default {
                     value: 'Name',
                 },
             
-                { text: 'Description', value: 'Description.Short' },
+                { text: 'Kort beskrivelse', value: 'LowerHeader' },
                 { text: 'Price', value: 'Price' },
-                { text: 'SalePercentage', value: 'SalePercentage' },
                 { text: 'Stock', value: 'Stock' },
                 { text: 'Active', value: 'isActive' },
                 { text: 'Actions', value: 'actions', sortable: false },
@@ -429,7 +433,7 @@ export default {
             editedItem: {
                 _id: "",
                 Categories:[],
-                Creator:{
+                Creator: {
                     CreatedBy: "",
                     CreatorEmail: "",
                     CreatorFullname: "",
@@ -437,24 +441,19 @@ export default {
                 SalePercentage: "",
                 TechnicalDetails:[],
                 Name: "",
-                Description: {
-                    Short: "",
-                    Long: ""
-                },
+                LowerHeader: "",
+                Description: "",
                 Price: 0,
-                Image: {
-                    Thumbnail: "",
-                    Images: []
-                },
+                Thumbnail: "",
+                Images: [],
                 Stock: 0,
                 isActive: false,
-                
             },
 
             defaultItem: {
                 _id: "",
                 Categories:[],
-                Creator:{
+                Creator: {
                     CreatedBy: "",
                     CreatorEmail: "",
                     CreatorFullname: "",
@@ -462,18 +461,13 @@ export default {
                 SalePercentage: "",
                 TechnicalDetails:[],
                 Name: "",
-                Description: {
-                    Short: "",
-                    Long: ""
-                },
+                LowerHeader: "",
+                Description: "",
                 Price: 0,
-                Image: {
-                    Thumbnail: "",
-                    Images: []
-                },
+                Thumbnail: "",
+                Images: [],
                 Stock: 0,
                 isActive: false,
-                
             },
         }    
     },
@@ -482,22 +476,20 @@ export default {
         .then((res) => {
             let obj = res.Products;
             
+            console.log(res)
+
             obj.forEach(element => {
                 this.products.push( {
                     _id: element._id,
                     Name: element.Name,
-                    Description: {
-                        Short: element.Description.Short,
-                        Long: element.Description.Long,
-                    },
+                    LowerHeader: element.LowerHeader,
+                    Description: element.Description,
                     Price: element.Price,
                     SalePercentage: element.SalePercentage,
                     Stock: element.Stock,
                     isActive: element.isActive,
-                    Image: {
-                        Thumbnail: ( element.Image.Thumbnail != undefined ? element.Image.Thumbnail : '' ),
-                        Images: ( element.Image.Images != undefined ? element.Image.Images : [] )
-                    },
+                    Thumbnail: ( element.Thumbnail != undefined ? element.Thumbnail : '' ),
+                    Images: ( element.Images != undefined ? element.Images : [] ),
                     TechnicalDetails: element.TechnicalDetails,
                     Categories: element.Categories,
                     Creator: {
@@ -561,16 +553,14 @@ export default {
 
         //create item
         AdminCreateItem: function() {
-            
             this.editedItem.Price = parseFloat( this.editedItem.Price );
             this.editedItem.Stock = parseInt( this.editedItem.Stock );
             this.editedItem.SalePercentage = parseInt( this.editedItem.SalePercentage );
-            this.editedItem.isActive = ( this.editedItem.isActive === 'true' );
 
             CreateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {                
                 this.products.push( res.Product );
-                
+                console.log(res)
                 this.close();
             }).catch(err => {
                 console.log( err.response.data );
@@ -614,11 +604,11 @@ export default {
         },
 
         AddFieldImage: function() {
-            this.editedItem.Image.Images.push("http://");
+            this.editedItem.Images.push("http://");
         },
 
         RemoveFieldImage: function( index ) {
-            this.editedItem.Image.Images.splice( index, 1 );
+            this.editedItem.Images.splice( index, 1 );
         },
 
         RemoveFieldInner: function( header, index ) {
