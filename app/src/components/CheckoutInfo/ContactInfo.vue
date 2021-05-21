@@ -1,4 +1,5 @@
 <template>
+<!----- Contactinfo fillout validation with rules  ------>
 	<v-stepper-content step="1">
 		<v-text-field
 			v-model="data.Name"
@@ -37,6 +38,7 @@
 
 <script>
 export default {
+	//data from checkout
 	props: {
 		next: Function,
 		rules: Object,

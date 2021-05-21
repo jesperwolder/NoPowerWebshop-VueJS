@@ -4,6 +4,7 @@
 			disabled
 			dense
 		>
+<!----- Review takes the props and prints out the data that is given from user  ------>
 			<v-list-item-group color="primary">
 				<v-list-item
 					v-for="(value, name) in data"
@@ -35,6 +36,7 @@
 
 <script>
 export default {
+	//data from checkout
 	props: {
 		previous: Function,
 		submitOrder: Function,

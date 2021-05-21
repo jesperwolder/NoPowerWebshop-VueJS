@@ -1,4 +1,5 @@
 <template>
+<!-- shippinginfo with rules  -->
 	<v-stepper-content step="2">
 		<v-text-field
 			v-model="data.Street"
@@ -48,6 +49,7 @@
 
 <script>
 export default {
+	//data from checkout
 	props: {
 		next: Function,
 		previous: Function,

@@ -1,4 +1,5 @@
 <template>
+<!----- Payment dummy data this is not used because we suck at making stuff secure enough for it  ------>
 	<v-stepper-content step="3">
 		<v-text-field
 			v-model="data.CardHolder"
@@ -44,6 +45,7 @@
 
 <script>
 export default {
+	//data from checkout
 	props: {
 		next: Function,
 		previous: Function,
