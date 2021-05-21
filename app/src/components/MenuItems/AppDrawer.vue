@@ -28,16 +28,27 @@
                 dense
                 nav
             >
-                <v-list-item
-                    v-for="item in drawerItems"
-                    :key="item.title"
-                    link
-                    :to="item.path"
+                <v-list-group
+                    :value="true"
+                    to="/products"
                 >
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                    <template v-slot:activator>
+                        <v-list-item-title>Produkter</v-list-item-title>
+                    </template>
+
+                    <v-subheader>Produkt Kategorier</v-subheader>
+                    <v-list-item
+                        v-for="item in drawerItems"
+                        :key="item.title"
+                        link
+                        :to="item.path"
+                        exact
+                    >
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-group>
             </v-list>
         </v-navigation-drawer>
     </v-card>
@@ -49,15 +60,13 @@
     export default {
         data: () => ({
             drawerItems: [
-                { title: 'Alle Produkter', path: '/products' },
+                { title: 'Alle produkter', path: '/products' }
             ]
         }),
 
         mounted: function() {
             setTimeout(function() {
-                this.drawerItems = [
-                    { title: 'Alle Produkter', path: '/products' },
-                ]
+                this.drawerItems = [ { title: 'Alle produkter', path: '/products' } ]
 
                 GlobalProducts.Categories.forEach( cat => {
                     this.drawerItems.push({
@@ -71,9 +80,7 @@
 
         watch: {
             $route() {
-                this.drawerItems = [
-                    { title: 'Alle Produkter', path: '/products' },
-                ]
+                this.drawerItems = [ { title: 'Alle produkter', path: '/products' } ]
 
                 GlobalProducts.Categories.forEach( cat => {
                     this.drawerItems.push({
