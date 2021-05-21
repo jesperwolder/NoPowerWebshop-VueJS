@@ -1,7 +1,7 @@
 /**
  * Cart methods.
  */
-
+//-----------------Gets items put in cart from localstorage, if its not found it puts a empty array in--------------------
 export const GetCart = () => {
     const cart = localStorage.getItem( 'cart' );
 
@@ -9,10 +9,10 @@ export const GetCart = () => {
 
     return JSON.parse( cart );
 }
-
+//-----------------Puts the item in cart by ID, if the ID is the same it adds Quantity, it puts in them item and quantity in localstorage--------------------
 export const AddToCart = ( item = {} ) => {
     // Item object = { _id: 'id', Quantity: 1 }
-
+    
     let cart = GetCart();
 
     if( cart != false ) {
@@ -39,7 +39,7 @@ export const AddToCart = ( item = {} ) => {
         return cart;
     }
 }
-
+//-----------------Removes the item from cart by ID and returns index and deletes it from localstorage and the new cart --------------------
 export const RemoveItemFromCart = ( id ) => {
     
     let cart = GetCart();
@@ -56,6 +56,7 @@ export const RemoveItemFromCart = ( id ) => {
     return [];
 }
 
+//-----------------Updates Cart everytime a textfield is changed, localstorage is updated.--------------------
 // ! May only be used in the cart view.
 export const UpdateCart = ( cartObject ) => {
     localStorage.setItem( 'cart', JSON.stringify( cartObject ) );

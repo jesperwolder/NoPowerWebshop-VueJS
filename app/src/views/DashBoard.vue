@@ -1,6 +1,5 @@
 <template>
-    
-        
+    <!----------------- Dashboard for the user checks if the user is logged in ------------------> 
             <v-card
                 class="pa-5 ma-0"
                 elevation="2"
@@ -38,7 +37,7 @@
 <script>
 
 import { CurrentSession } from '@/Services/GlobalVariables';
-
+//<!----------------- Checks the session (isloggedin)------------------> 
 export default {
 	data() {
         return {

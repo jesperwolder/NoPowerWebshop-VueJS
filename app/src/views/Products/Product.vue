@@ -11,13 +11,14 @@
         >
             Dette produkt findes ikke længere i vores sortiment.
         </v-alert>
-
+<!------------ our alet v-if the stock is 0 or is not active-------------   -->
         <v-alert
             type="info"
             text
             prominent
             v-if="product.Stock == 0 && product.isActive"
         >
+        <!------------ I our alert has been trigged is display this message-------------   -->
             <v-row align="center">
                 <v-col class="grow">
                     Dette produkt er desværre udsolgt!
@@ -41,7 +42,7 @@
             </v-row>
         </v-alert>
 
-        <!-- Product headings -->
+        <!----------------- Product headings on inscepting product ------------------------>
         <v-card-title class="headline px-0 pt-0">
             {{ product.Name }}
         </v-card-title>
@@ -55,6 +56,7 @@
                 sm="12"
                 md="8"
             >
+    <!----------------- Switches automatikcly pictures when you inscept product ------------------------>
                 <v-carousel
                     cycle
                     height="35vh"
@@ -76,6 +78,7 @@
                 sm="12"
                 md="4"
             >
+            <!----------------- Price box on the right side ------------------------>
                 <v-card
                     outlined
                     class="pa-5"
@@ -87,6 +90,7 @@
                         + 39,- fragt
                     </v-card-subtitle>
                     <v-card-actions class="pa-0">
+        <!----------------- Bottons buying or removing from cart ------------------------>
                         <v-btn
                             color="#F7941D"
                             class="mb-0"
@@ -106,6 +110,7 @@
                         </v-btn>
                     </v-card-actions>
                     <v-card-text class="px-0 pb-0">
+        <!----------------- Checks the stock on the product ------------------------>
                         <v-icon :color="ReturnAvailabilityColor( product.Stock )">mdi-checkbox-blank-circle</v-icon> {{ product.Stock }} stk på lager
                     </v-card-text>
                 </v-card>
@@ -115,6 +120,7 @@
                         Kategori(er)
                     </v-card-title>
                     <v-card-text class="px-0 pt-0">
+     <!----------------- Prints out every category on cat ------------------------>
                         <v-chip
                             outlined
                             link
@@ -142,6 +148,7 @@
                 <v-card
                     outlined
                 >
+  <!----------------- Our header technicol details left side ------------------------>                
                     <v-card-title class="tech-header">
                         Tekniske detaljer
                     </v-card-title>
@@ -184,6 +191,7 @@
                 sm="12"
                 md="6"
             >
+<!----------------- Product information right side  ------------------------>     
                 <v-card outlined>
                     <v-card-title>
                         Produkt beskrivelse
@@ -207,9 +215,10 @@
 import { GetProductBody } from '@/Services/ProductApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
 import { AddToCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
-
+//----------------- Imported methods Getproduct, and functionalty AddToCart and RemoveFromCart  ------------------------
 export default {
     data() {
+//----------------- Gets the _id, metalink, Products in a array, slides, current session and Availabillitycoloers on stock  ------------------------
         return {
             _id: this.$route.params.id,
             meta: this.$route.meta,
@@ -219,7 +228,7 @@ export default {
             AvailabilityColors: [ 'red', 'amber', 'green' ]
         }
     },
-
+//----------------- Mounted function that get the correct product by id, meta title, our images and slide function, and our breadcrumb ------------------------
     mounted: function() {
         GetProductBody( this.$route.params.id )
         .then( res => {
@@ -231,7 +240,7 @@ export default {
         })
         .catch( err => {
             const res = err.response;
-
+//----------------- If the sites goes down------------------------
             if( res.status === 404 ) {
                 CurrentSession.PageFound = false;
             }
@@ -245,16 +254,17 @@ export default {
     },
 
     methods: {
+//----------------- Returns stock color if above 10 is green, 10 or less its yellow, red is the stock is 0------------------------
         ReturnAvailabilityColor: function( amount ) {
             if( amount > 10 ) return this.AvailabilityColors[2];
             if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
             if( amount >= 0 ) return this.AvailabilityColors[0];
         },
-
+//----------------- Add to cart method adds the id by the product and adds 1 in quantity and keeps adding 1 in quantity in another method if the id is the same------------------ 
         AddProduct: function( quantity ) {
             console.log( AddToCart( { _id: this.product._id, Quantity: quantity } ) );
         },
-
+//----------------- Removes the product in the cart, other methed removes the id by 1 in quantity------------------
         RemoveProduct: function() {
             RemoveItemFromCart( this.product._id );
         }
@@ -263,6 +273,7 @@ export default {
 </script>
 
 <style scoped>
+/* ----------------- Style components------------------  */
     .tech-header {
         background-color: rgba(247, 148, 29, .1);
     }

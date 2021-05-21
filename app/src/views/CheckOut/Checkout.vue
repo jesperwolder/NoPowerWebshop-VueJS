@@ -2,9 +2,9 @@
 
 	<v-card flat class="d-flex justify-center" color="transparent">
 		<v-stepper v-model="step" style="max-width:40rem;width:100%;" class="pb-0" vertical>
-			
+<!-------- A stepper thats goes tough every checkoutInfo  -------------->
 			<v-stepper-step step="1" :complete="step > 1">Kontakt informaton</v-stepper-step>
-
+<!-------- Contactinfo  step1-------------->
 			<ContactInfo
 				:data="data"
 				:rules="rules"
@@ -14,7 +14,7 @@
 			<v-divider></v-divider>
 
 			<v-stepper-step :complete="step > 2" step="2">Regnings- og leveringsadresse</v-stepper-step>
-
+<!-------- ShippingInfo step 2 -------------->
 			<ShippingInfo
 				:data="data"
 				:rules="rules"
@@ -25,7 +25,7 @@
 			<v-divider></v-divider>
 
 			<v-stepper-step :complete="step > 3" step="3">Betalingsløsning</v-stepper-step>
-
+<!-------- Payment  step3-------------->
 			<Payment
 				:data="data"
 				:rules="rules"
@@ -36,7 +36,7 @@
 			<v-divider></v-divider>
 
 			<v-stepper-step step="4">Gennemgang af ordre</v-stepper-step>
-
+<!-------- Review step 4  -------------->
 			<Review
 				:data="data"
 				:submitOrder="submitOrder"
@@ -62,6 +62,7 @@
 			Review,
 			Payment,
 		},
+		//-------- Data though contactinfo  --------------
 		data() {
 			return {
 				error: null,
@@ -78,6 +79,7 @@
 					City: '',
 					State: '',
 				},
+//-------- Rules  --------------	
 				rules: {
 					required: value => !!value || 'Required.',
 					zip: value => value.length == 4 || 'Must be four characters',
@@ -86,13 +88,14 @@
 						return pattern.test(value) || 'Invalid e-mail.'
 					},
 					phone: value => {
-						const pattern = /\d{10}/
+						const pattern = /\d{8}/
 						return pattern.test(value) || 'Invalid phone number.'
 					}
 				}
 			}
 		},
 		methods: {
+//-------- The steps in the stepping that can go back and next and then the sumbit  --------------
 			next() {
 				this.step += 1
 			},
@@ -100,8 +103,8 @@
 				this.step -= 1
 			},
 			submitOrder() {
-				//console.log(this.data)
-
+				
+	//-------- Prints out Orderdetails  --------------
 				const OrderDetailsBody = {
 					ProductIDs: []
 				}

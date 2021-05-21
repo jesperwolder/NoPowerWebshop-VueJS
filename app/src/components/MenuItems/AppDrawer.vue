@@ -11,6 +11,7 @@
             class="drawer"
             width="256"
         >
+        <!-- //-- ------ Our appdrawer on left side, contains all products and categories -------------  -->
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="title">
@@ -28,6 +29,7 @@
                 dense
                 nav
             >
+            <!-- //-- ------ The link to product site -------------  -->
                 <v-list-item
                     v-for="item in drawerItems"
                     :key="item.title"
@@ -44,6 +46,7 @@
 </template>
 
 <script>
+//-- ------ Global component for fetchting all our products and breadcrum to navigate though it  -------------  -->
     import { GlobalProducts } from '@/Services/GlobalVariables';
 
     export default {
@@ -52,7 +55,7 @@
                 { title: 'Alle Produkter', path: '/products' },
             ]
         }),
-
+     //-- ------ Does not work yet but is soppussed to print out categories-------------  -->
         mounted: function() {
             setTimeout(function() {
                 this.drawerItems = [

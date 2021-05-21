@@ -1,4 +1,5 @@
 <template>
+<!-- Checks if the user is admin, this page controlls items -->
     <v-container v-if="CS.isAdmin" class="pa-0" fluid>
         <v-card
             class="pa-5 ma-0"
@@ -6,6 +7,7 @@
             v-if="CS.isAdmin" 
                 
         >
+<!----- Json board over every items you can search and sort the items and change their information ------>  
             <h1>{{ meta.title }}</h1>
 
             <v-form class="col-12 pa-0"> 
@@ -63,7 +65,7 @@
                                     <v-card-text>
                                         <v-container>
                                             <v-row>
-
+                            <!---------- Items information -------------->  
                                             <v-col
                                                 cols="12"
                                                 class="px-0"
@@ -130,7 +132,7 @@
                                                 ></v-switch>
                                             </v-col>
                                                 
-                                                <!-- Technical Details -->
+                                    <!------------ Technical Details ---------------->
                                                 
                                                 <v-card
                                                     width="100%"
@@ -230,7 +232,7 @@
                                                     </v-card-actions>
                                                 </v-card>
 
-                                                <!-- Categories -->
+                              <!----------------- Categories ---------------------->
 
                                                 <v-card
                                                     width="100%"
@@ -267,7 +269,7 @@
 
                                                 </v-card>
 
-                                                <!-- Images -->
+                         <!----------------- Images ------------------------>
 
                                                 <v-card
                                                     width="100%"
@@ -386,6 +388,7 @@
     </v-container>
 
     <div v-else>
+<!-- If the user is not admin and or gets demoted he will get denied -->
         <PermissionDenied />
     </div>
 </template>
@@ -401,6 +404,7 @@ export default {
         PermissionDenied
     },
 	data() {
+//------ alle metoder i jason table -------
         return {
             error: null,
             meta: this.$route.meta,
@@ -426,6 +430,7 @@ export default {
                 { text: 'Active', value: 'isActive' },
                 { text: 'Actions', value: 'actions', sortable: false },
             ],
+//------ all products we either create, update og read -------
             products: [],
             editedIndex: -1,
             editedItem: {
@@ -469,6 +474,7 @@ export default {
             },
         }    
     },
+ //------henter produktet gennem et obj og printer dem ud ved jwten------------------
     mounted: function() {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
@@ -515,12 +521,12 @@ export default {
             this.state = 'insert'
         },
 
-        //opdater Products localt
+//-------opdater Products localt-------
         UpdateProductsData: function() {             
             delete this.products[this.editedIndex];             
             this.products.push(this.editedItem); 
         },
-
+//-------Kigger på om den skal tilføje et produkt ellers updater den produktet--------
         SaveItems: function( ) {
             if( this.state === 'insert' ) {
                 this.AdminCreateItem();
@@ -532,7 +538,7 @@ export default {
             return false; // error
         },
 
-        //updater item
+        //------updater item------
         onUpdateItem: function() {
             this.isLoading = true;
             UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
@@ -546,7 +552,7 @@ export default {
            
         },
 
-        //create item
+        //---------create item------------
         AdminCreateItem: function() {
             this.editedItem.Price = parseFloat( this.editedItem.Price );
             this.editedItem.Stock = parseInt( this.editedItem.Stock );
@@ -561,13 +567,14 @@ export default {
                 console.log( err.response.data );
             });
         },
-
+//---------edit item------------
         editItem(item){
             this.state = 'update'
             this.editedIndex = this.products.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
+//----------closes the editItem--------
         close () {
             this.dialog = false
             this.isLoading = false;
@@ -576,11 +583,11 @@ export default {
                 this.editedIndex = -1
             })
         },
-
+//-------Add an exstra TechnicalDetails on item--------
         AddFieldTechnicalDetails: function() {
             this.editedItem.TechnicalDetails.push( { Header: '', Items: [ { Name: '', Value: '' } ] } );
         },
-
+//-------Add an exstra TechnicalDetails innerfields(smaller information) on item--------
         AddFieldInner: function( header ) {
             if( header != '' ) {
                 console.log(this.editedItem);
@@ -589,27 +596,27 @@ export default {
                 console.log( 'header must be defined before adding new fields.' );
             }
         },
-
+//-------Add an exstra Category--------
         AddFieldCategory: function() {
             this.editedItem.Categories.push("");
         },
-
+//-------Removes an exstra Category--------
         RemoveFieldCategory: function( index ) {
             this.editedItem.Categories.splice( index, 1 );
         },
-
+//-------Add an a picture or another--------
         AddFieldImage: function() {
             this.editedItem.Images.push("http://");
         },
-
+//-------Removes an a picture or more-------
         RemoveFieldImage: function( index ) {
             this.editedItem.Images.splice( index, 1 );
         },
-
+//-------Removes an a Fieldinner or more--------
         RemoveFieldInner: function( header, index ) {
             this.editedItem.TechnicalDetails.find( x => x.Header === header ).Items.splice(index, 1);
         },
-
+//-------Removes an a picture or more--------
         RemoveTechnicalDetailsHeader: function( index ) {
             this.editedItem.TechnicalDetails.splice( index, 1 );
         }

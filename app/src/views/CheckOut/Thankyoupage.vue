@@ -1,4 +1,5 @@
 <template>
+<!-- Thank you page with loading order -->
   <div class="text-center">
     <v-overlay :value="overlay" class="flex-column">
       <p>Processing order...</p>
@@ -20,6 +21,7 @@
 <script>
 export default {
   data() {
+    //-- Overlay with prosseing order with timer --
     return {
       overlay: false
     }

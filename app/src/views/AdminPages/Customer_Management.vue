@@ -1,4 +1,5 @@
 <template>
+<!-- Checks if the user is admin and loggedin, this page controlls user and can see orders -->
     <v-container v-if="CS.isAdmin" class="pa-0">
        	<div
            v-if="CS.isLoggedIn" 
@@ -12,7 +13,7 @@
             <h1>{{ meta.title }}</h1>
             
             <v-form class="col-12 pa-0"> 
-                
+<!----- Json board over every user you can search and sort the users and change their information and see their products ------>
                 <v-divider class="pb-3 mt-3"></v-divider>
                     <v-card-title>
                         <v-text-field
@@ -165,10 +166,11 @@
                                         >
                                             Cancel
                                         </v-btn>
+    <!---------- this changes the user information and and checks if the user should be admin -------------------->
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                            
+                                    
                                             v-on:click=" ChangeAdminRole(), onUpdateProfileAdminChange()"
                                         >
                                             Save
@@ -213,6 +215,7 @@
     </v-container>
 
     <div v-else>
+<!-- If the user is not admin and or gets demoted he will get denied -->
         <PermissionDenied />
     </div>
 </template>
@@ -229,6 +232,7 @@ export default {
     },
 	data() {
         return {
+//-------- Data on users on json table  --------------
             error: null,
             meta: this.$route.meta,
             isLoading: false,
@@ -252,6 +256,7 @@ export default {
             { text: 'Actions', value: 'actions', sortable: false },
        
         ],
+ //-------- User information  --------------
         users: [],
         editedIndex: -1,
         editedItem: {
@@ -288,6 +293,7 @@ export default {
       }    
     },
     mounted: function() {
+//-------- Pushes all the users information though the jwt and pushes the obj data info --------------
         GetAllUsersBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Users;
@@ -315,7 +321,6 @@ export default {
         
     },
     
-    
     watch: {
         dialog (val) {
             val || this.close();
@@ -323,6 +328,7 @@ export default {
     },
 
     methods: {
+        //-------- Changes the user information thouh the jwt  --------------
         onUpdateProfileAdminChange: function() {
             this.isLoading = true;
 
@@ -336,17 +342,18 @@ export default {
             });
            
         },
-
+// deletes the users data and then pushes the new information 
         UpdateUserData: function() {             
             delete this.users[this.editedIndex];             
             this.users.push(this.editedItem); 
         },
-
+//Assigns the item in editCustomer and click event
         editItem(item){
             this.editedIndex = this.users.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
+//closes the editCustomer
         close() {
             this.dialog = false
             this.isLoading = false;
@@ -356,7 +363,7 @@ export default {
                 this.editedIndex = -1
             })
         },
-
+//changes the admin role on the user though a switch
         ChangeAdminRole: function() {
             ChangePrivilegeBody({UserID: this.editedItem._id}, this.editedItem.isAdmin, this.$cookies.get('jwt') )
             .then((res) => {

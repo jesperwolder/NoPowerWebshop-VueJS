@@ -14,6 +14,7 @@
             width="100%"
             color="transparent"
         >
+        <!-- //-- ------ Name and link for route footer (om os, kontakt os, returret) -------------  -->
             <v-card-text>
                 <v-btn
                     v-for="(link, index) in links"
@@ -35,7 +36,7 @@
                 label="Mørk tema"
             >
             </v-switch>
-
+        <!-- //-- ------ Name and year date -------------  -->
             <v-divider></v-divider>
             <v-card-text>
                 © {{ new Date().getFullYear() }} — <strong>NoPower</strong>
@@ -52,6 +53,7 @@
 export default {
         
     data: () => ({
+        //-- ------ Our Footer routes links/too  ------------- 
         links: [
             {name: 'Om Os', to:'/AboutUs'},
             {name: 'Kontakt Os', to:'/ContactUs'},
@@ -60,6 +62,8 @@ export default {
     }),
     methods: {
         setTheme() {
+            //-- ------ Our Dark/light theme switch that set dark mode and has a timer on 25 days esimated on our cookie ------------- 
+
             /*
              ?  Updates theme, and cookie, when the switch button, has been pressed.  
              */

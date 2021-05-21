@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<v-card class="pa-5">
+<!----------------- About us information------------------> 
 			 Vi er en gruppe på 3 som sælger elktroniske varer og tilbhøre vi er i hvertfald ikke et indien scam firma bare køb her
              Nopower Group er Nordens største på e-handel med i alt 10 netbutikker i Skandinavien. Nopower Group er det eneste led mellem producenter og kunder. 
              Det giver en effektiv driftsmodel og er medvirkende til, at Nopowers netbutikker kan være rentable og tilbyde konkurrencedygtige priser. 

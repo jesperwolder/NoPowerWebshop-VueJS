@@ -12,7 +12,7 @@ const OrderStatusURL = server2 + '/admin/statuses';
 const UpdateOrderStatusURL = server2 + '/admin/updateStatus';
 const GetAnyOrderURL = server2 + '/admin/order';
 
-//Order Routes
+//------------------Order Routes-------------------
 export const CreateOrderBody = async(body, jwt) =>{
     let err, response = await axios.post(CreateOrderURL, body, {headers: {jwt: jwt}});
 
@@ -38,7 +38,7 @@ export const GetSingleOrderBody = async(jwt) =>{
     return response.data;
 }
 
-//Admin Routes
+//------------------Admin routes-------------------
 export const GetAllOrderBody = async(jwt) =>{
     let err, response = await axios.get(GetAllOrdersURL, {headers: {jwt: jwt}});
 

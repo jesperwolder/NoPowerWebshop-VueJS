@@ -5,6 +5,7 @@
                 class="pa-5"
                 elevation="3"
             >
+ <!-- ------------Profile information and changes if there is written input on click event---------------------- -->
                 <v-form class="col-12 pa-0"> 
                     <h2 class="text-center">Profile Page {{ Fullname }}</h2>
                     
@@ -93,6 +94,7 @@ import {AuthBody} from '../Services/AuthApi';
 
 export default{
     data() {
+// ------------Data for current user information and the changeable information----------------------
         return {
             Email: null,
             Fullname: null,
@@ -122,6 +124,7 @@ export default{
     
 
     mounted: function() {
+// ------------Gets the user information by checking the jwt ----------------------
         AuthBody(this.$cookies.get('jwt'))
         .then((res) => {
             this.Fullname = res.User.Fullname;
@@ -131,7 +134,6 @@ export default{
             this.Address = res.User.Address;
         }).catch(err => {
             console.log(err);
-            //this.$router.push('/*');
         });
                         
         
@@ -140,14 +142,7 @@ export default{
 
     methods: {
         onUpdateProfile: function() {
-            // Validere om passwords matcher
-                // if(this.register.password != this.register.confirmPassword) {
-                //     this.error = "Passwords matcher ikke";
-                //     this.loading = false;
-                //     return;
-                // }
-
-            // Send post request om at update brugeren
+            // ------sending a post request for udating the user pushing to the dashboard if succesful---------
             this.axios.post('http://server.topper144p.com:3000/update', {User: this.UpdateProfile}, { 
             headers: { 
                 jwt: this.$cookies.get('jwt'),

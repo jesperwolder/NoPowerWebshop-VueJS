@@ -1,4 +1,5 @@
 <template>
+<!-- The Cartcheckout with items and final price and then the stepper afterwards if you click sumbit -->
   <v-container class="pa-0" fluid>
     <v-row>
       <v-col cols="12" sm="8">

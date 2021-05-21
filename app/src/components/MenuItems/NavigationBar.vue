@@ -13,7 +13,7 @@
 		>
 			<v-icon>mdi-chevron-up</v-icon>
 		</v-btn>
-
+		<!-- --------------------------- Logo--------------------------------- -->
 		<v-app-bar fixed dark app clipped-left>
 			<RouterLink to="/" class="logo">
 				<v-img
@@ -27,7 +27,7 @@
 			<v-toolbar-title> </v-toolbar-title>
 
 			<v-spacer></v-spacer>
-
+<!-- --------------------------- Checks if user is logged in and admin then it shows a new buttom in navigation bar--------------------------------- -->
 			<div v-if="CS.isLoggedIn">
 				<div v-if="CS.isAdmin">
 					<v-btn class="buttons" depressed text mr-2 to="/adminpage">
@@ -36,20 +36,21 @@
 					</v-btn>
 				</div>
 			</div>
+<!-- --------------------------- Checks if user is logged in, shows dashboard--------------------------------- -->
 			<div v-if="CS.isLoggedIn">
 				<v-btn class="buttons" depressed text mr-2 to="/dashboard">
 					<v-icon left>mdi-account</v-icon>
 					Dashboard
 				</v-btn>
 			</div>
-
+<!-- --------------------------- Checks if user is logged in, then logs out user by logout method and deletes the jwt--------------------------------- -->
 			<div v-if="CS.isLoggedIn">
 				<v-btn depressed text v-on:click.prevent="logout()">
 					<v-icon left>mdi-logout</v-icon>
 					Log ud
 				</v-btn>
 			</div>
-
+<!-- --------------------------- Hvis ingen er logged in giver den muligheden for det--------------------------------- -->
 			<div v-else>
 				<v-btn class="buttons" depressed text mr-2 to="/login">
 					<v-icon left>mdi-account</v-icon>
@@ -67,7 +68,7 @@
 				:close-on-content-click="false"
 				transition="slide-y-transition"
 			>
-
+<!-- --------------------------- Vores kurv--------------------------------- -->
 				<template v-slot:activator="{ on, attrs }">
 					<v-badge content="5" color="#F7941D" overlap>
 						<v-btn 
@@ -107,6 +108,7 @@
 </template>
 
 <script>
+//-- --------------------------- Uses Authbody to check jwt for user in navigationbar in current-session--------------------------------- -->
 import { AuthBody } from '@/Services/AuthApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
 
@@ -116,6 +118,7 @@ export default {
 		offsetTop: 0,
 		CS: CurrentSession
 	}),
+	//-- ------ We use mounted function to checks the current session for the jwt for user islogged in and isAdmin if not admin it deninies the user the admin page------------- 
 	mounted: function() {
 		if(this.$cookies.isKey('jwt')) {
 			AuthBody( this.$cookies.get('jwt') )
@@ -135,12 +138,14 @@ export default {
 		}
 	},
 	methods: {
+		//-- ------ Logout function removes the jwt and pushes you to the home page and sets everything to false------------- 
 		logout: function() {
 			CurrentSession.isLoggedIn = false;
 			CurrentSession.isAdmin = false;
 			this.$cookies.remove("jwt");
 			this.$router.push("/");
 		},
+		//-- ------ Our scroll function ------------- 
 		scrollToTop() {
 			window.scrollTo(0, 0);
 		},
@@ -166,7 +171,9 @@ export default {
 };
 </script>
 
+
 <style scoped>
+/* Style components for navbar for buttom placement and scroll */
 .v-app-bar {
 	border-radius: 0 !important;
 	z-index: 9999999;

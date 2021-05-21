@@ -1,7 +1,11 @@
 let axios = require('axios');
 const server1 = "http://server.topper144p.com:3001"
+
+///------- Products --------
 const GetAllProductsURL = server1 + '/all';
 const GetSingleProductURL = server1 + '/product/';
+
+///------- Admin controll --------
 const CreateProductURL = server1 + '/admin/create';
 const UpdateProductURL = server1 + '/admin/update';
 const ChangeProductStatusURL = server1 + '/admin/changeProductStatus/';
