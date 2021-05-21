@@ -9,7 +9,7 @@
       <v-row>
         <v-col sm="6" offset-sm="3" xl="4" offset-xl="4">
           <h2>
-            Tak for dit køb, du for aldrig dit product
+            Tak for dit køb, du for aldrig dit produkt
           </h2>
         </v-col>
       </v-row>
@@ -27,7 +27,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.overlay = false
-    }, 3000)
+    }, 30000)
   },
   beforeMount() {
     this.overlay = true

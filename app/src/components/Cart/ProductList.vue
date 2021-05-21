@@ -3,7 +3,7 @@
 		outlined
 		class="mb-5 pa-4"
 	>
-		<h2 class="display-2 mb-4">Basket</h2>
+		<h1>{{ title }}</h1>
 		<v-divider></v-divider>
   		<!-- Products udprinting -->
 		<v-card v-for="(product, index) in products" :key="index" elevation="0">
@@ -86,8 +86,10 @@
 
 	export default {
 		data: () => ({
-			products: []
+			products: [],
 		}),
+
+		props: ['title'],
 
 		mounted: function() {
 			const cart = GetCart();

@@ -44,14 +44,46 @@
 </template>
 
 <script>
-export default {
-    data: () => ({
-		drawerItems: [
-			{ title: 'Alle Produkter', path: '/products' },
-			{ title: 'Ingen produkter', path: '/' },
-		]
-	}),
-}
+    import { GlobalProducts } from '@/Services/GlobalVariables';
+
+    export default {
+        data: () => ({
+            drawerItems: [
+                { title: 'Alle Produkter', path: '/products' },
+            ]
+        }),
+
+        mounted: function() {
+            setTimeout(function() {
+                this.drawerItems = [
+                    { title: 'Alle Produkter', path: '/products' },
+                ]
+
+                GlobalProducts.Categories.forEach( cat => {
+                    this.drawerItems.push({
+                        title: cat,
+                        path: '/products/categories/' + cat
+                    })
+                })
+                console.log('kørt')
+            }, 5000)
+        },
+
+        watch: {
+            $route() {
+                this.drawerItems = [
+                    { title: 'Alle Produkter', path: '/products' },
+                ]
+
+                GlobalProducts.Categories.forEach( cat => {
+                    this.drawerItems.push({
+                        title: cat,
+                        path: '/products/categories/' + cat
+                    })
+                })
+            }
+        }
+    }
 </script>
 
 <style scoped>

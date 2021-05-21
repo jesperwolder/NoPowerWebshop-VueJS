@@ -17,7 +17,7 @@
 		<v-app-bar fixed dark app clipped-left>
 			<RouterLink to="/" class="logo">
 				<v-img
-					src="@/assets/images/NoPowerLogo.svg"
+					src="@/assets/images/NoPowerLogo.png"
 					max-height="40"
 					max-width="100"
 					contain
@@ -61,12 +61,47 @@
 				</v-btn>
 			</div>
 
-			<v-badge content="5" color="#F7941D" overlap>
-				<v-btn class="buttons" depressed text pl-12 to="/cart">
-					<v-icon left>mdi-cart</v-icon>
-					Kurv
-				</v-btn>
-			</v-badge>
+			<v-menu 
+				offset-y 
+				class="pa-0"
+				:close-on-content-click="false"
+				transition="slide-y-transition"
+			>
+
+				<template v-slot:activator="{ on, attrs }">
+					<v-badge content="5" color="#F7941D" overlap>
+						<v-btn 
+							class="buttons" 
+							depressed 
+							text 
+							v-bind="attrs"
+							v-on="on"
+						>
+							<v-icon left>mdi-cart</v-icon>
+							Kurv
+						</v-btn>
+					</v-badge>
+				</template>
+				<v-card
+					class="ma-0"
+					style="min-width: 250px;"
+				>
+					<v-card-title>Indkøbskurv</v-card-title>
+					<v-card-text>
+						Content here
+					</v-card-text>
+					<v-card-actions>
+						<v-btn
+							block
+							color="#F7941D"
+							to="/cart"
+							class="cartButton"
+						>
+							Til indkøbskurven
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-menu>
 		</v-app-bar>
 	</v-card>
 </template>
@@ -160,5 +195,9 @@ export default {
 .toTopBtn.off {
 	opacity: 0;
 	pointer-events: none;
+}
+
+.cartButton.v-btn--active:before {
+	background-color: #F7941D !important;
 }
 </style>

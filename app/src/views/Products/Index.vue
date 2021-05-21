@@ -85,6 +85,7 @@
 <script>
 
 import { GetAllProductsBody } from '@/Services/ProductApi';
+import { GlobalProducts } from '@/Services/GlobalVariables';
 
 export default {
     
@@ -103,6 +104,8 @@ export default {
     },
 
     mounted: function() {
+        console.log(this.$route.params.category)
+
         GetAllProductsBody()
         .then( res => {
             const obj = res.Products;
@@ -116,10 +119,19 @@ export default {
                         Description: element.Description,
                         Price: element.Price,
                         SalePercentage: element.SalePercentage,
-                        Thumbnail: element.Thumbnail 
+                        Thumbnail: element.Thumbnail,
                     });
+
+                    element.Categories.forEach( cat => {
+                        if( !GlobalProducts.Categories.includes( cat ) ) {
+                            GlobalProducts.Categories.push( cat );
+                        }
+                    } )
                 }
             });
+
+            console.log( GlobalProducts.Categories )
+
         })
         .catch( err => {
             console.log( err.response.data.Message );

@@ -23,10 +23,8 @@
                         <v-data-table
                             :headers="headers"
                             :items="products"
-                            :items-per-page="69"
-                            :pagination.sync="pagination"   
+                            :items-per-page="15"
                             :search="search"
-                            :rows-per-page-items="[10, 69, 420, 100]"
                         >
 
                         <template v-slot:top>
@@ -475,8 +473,6 @@ export default {
         GetAllProductsBody(this.$cookies.get('jwt'))
         .then((res) => {
             let obj = res.Products;
-            
-            console.log(res)
 
             obj.forEach(element => {
                 this.products.push( {
@@ -542,7 +538,6 @@ export default {
             UpdateProductBody( { Product: this.editedItem }, this.$cookies.get('jwt') )
             .then((res) => {
                 this.UpdateProductsData();
-                console.log(this.editedItem)
                 console.log(res)
                 this.close();
             }).catch(err => {

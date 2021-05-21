@@ -9,3 +9,7 @@ export const CurrentSession = {
 export const Cart = {
     Items: []
 }
+
+export const GlobalProducts = {
+    Categories: []
+}

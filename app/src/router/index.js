@@ -80,15 +80,6 @@ const routes = [
 			]
 		}
 	},
-	{ path: '/cart', name: 'Kurv', component: Cart, 
-		meta: {
-			title: 'Indkøbskurv',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				{ name: 'Kurv', to: '/cart' }
-			]
-		}
-	},
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
 		meta: {
 			title: 'Dashboard',
@@ -156,6 +147,16 @@ const routes = [
 			]
 		} 
 	},
+	{ path: '/products/categories/:category', name: 'Produkter', component: Products,
+		meta: {
+			title: 'Alle Produkter',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Alle Produkter', to: '/products' },
+				{ name: 'Kategori', to: '/products/categories/:category' },
+			]
+		} 
+	},
 	{ path: '/products/:id', name: 'Produkter', component: Product,
 		meta: {
 			title: 'Loading',
@@ -166,12 +167,12 @@ const routes = [
 			]
 		} 
 	},
-	{ path: '/cartcheckout', name: 'CartCheckOut', component: CartCheckOut, 
+	{ path: '/cart', name: 'Indkøbskurv', component: CartCheckOut, 
 		meta: { 
-			title: 'CartCheckOut',
+			title: 'Indkøbskurv',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				
+				{ name: 'Indløbskurv', to: '/cart' },
 			]
 		}
 	},
