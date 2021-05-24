@@ -6,7 +6,7 @@
             elevation="2"                
         >
 <!---------- Dashboard for admin controll  ---------------->
-            <v-form class="col-12 pa-0"> 
+            <div class="col-12 pa-0"> 
                 <h1>{{ meta.title }}</h1>
                 <v-divider class="pb-3 mt-3"></v-divider>
                 
@@ -34,7 +34,7 @@
                     <v-icon left>mdi-face-agent</v-icon>
                     support
                     </v-btn>
-            </v-form>
+            </div>
         </v-card>
     </v-container>
 <!-- If the user is not admin and or gets demoted he will get denied -->

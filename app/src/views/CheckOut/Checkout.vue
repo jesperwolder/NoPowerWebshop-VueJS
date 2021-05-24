@@ -79,7 +79,7 @@
 					City: '',
 					State: '',
 				},
-//-------- Rules  --------------	
+//--------------------- Rules  -----------------------------	
 				rules: {
 					required: value => !!value || 'Required.',
 					zip: value => value.length == 4 || 'Must be four characters',
