@@ -102,3 +102,28 @@ html, body{
 .v-footer.theme--light {
     background-color: var(--c-light-footer) !important;
 }
+
+.v-pagination .v-pagination__item,
+.v-pagination .v-pagination__navigation {
+    border: 3px solid rgba(0,0,0,.12);
+    box-shadow: none;
+}
+
+.theme--dark.v-pagination .v-pagination__item,
+.theme--dark.v-pagination .v-pagination__navigation {
+    background-color: var(--c-dark-footer) !important;
+}
+
+.theme--light.v-pagination .v-pagination__item,
+.theme--light.v-pagination .v-pagination__navigation {
+    background-color: white !important;
+}
+
+.theme--light.v-pagination .v-pagination__item--active {
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.theme--light.v-pagination .v-pagination__item--active,
+.theme--dark.v-pagination .v-pagination__item--active {
+    border-color: rgb(247, 148, 29) !important;
+}

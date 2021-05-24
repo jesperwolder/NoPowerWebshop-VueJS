@@ -51,6 +51,7 @@ export default {
 		hideDrawer: false,
 		hideBreadcrumb: false,
 		CS: CurrentSession,
+		Categories: []
 	}),
 
 	mounted() {
@@ -64,7 +65,7 @@ export default {
 			this.$vuetify.theme.dark = (this.$cookies.get('themeDark') === 'true' ? true : false);
 		} else {
 			this.$vuetify.theme.dark = false;
-		}
+		}		
 	},
 
 	watch: {
