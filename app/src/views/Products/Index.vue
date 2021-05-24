@@ -23,22 +23,24 @@
                 <v-col
                     v-for="( product, index ) in products"
                     :key="index"
-                    cols="auto"
+                    cols="12"
                     xs="12"
                     sm="6"
-                    md="4"
+                    md="5"
                     lg="3"
                     xl="2"
                     class="px-2 my-0 productCols"
                 >
                     <v-card
                         height="100%"
-                        class="pb-0 mb-0 productCard rounded-lg"
+                        class="pa-5 mb-0 productCard"
                         outlined
+                        tile
+                        :to="`/products/`+ product._id"
                     >
          <!---------- Prints every picture for our products and syling  -------------  -->
                         <div style="position:relative;">
-                            <v-btn
+                            <!-- <v-btn
                                 elevation="2"
                                 fab
                                 absolute
@@ -47,9 +49,9 @@
                                 bottom
                             >
                                 <v-icon>mdi-heart-outline</v-icon>
-                            </v-btn>
+                            </v-btn> -->
                             <v-img
-                                height="20rem"
+                                :aspect-ratio="4/3"
                                 :src="product.Thumbnail"
                                 contain
                                 class="productImage"
@@ -57,30 +59,44 @@
                         </div>
   <!---------- Our information about the product below the picture  -------------  -->
                         <v-card-title
-                            class="productTitle text-truncate"
+                            class="productTitle text-truncate pb-2 px-0"
                         >
                             {{ product.Name }}
                         </v-card-title>
-                        <v-card-subtitle class="pb-0 text-caption text-truncate truncate-2">
-                            {{ product.Description }}
-                        </v-card-subtitle>
-                        <v-card-subtitle class="pt-2">
-                            Kun <b>{{ product.Price }}</b>,- 
-                        </v-card-subtitle>
+                        <v-card-text class="pa-0 pt-0 text-caption text-truncate truncate-2">
+                            {{ product.LowerHeader }}
+                            <br>
+                            <div class="pt-3">
+                                <v-icon :color="ReturnAvailabilityColor( product.Stock )" dense>mdi-checkbox-blank-circle</v-icon> {{ product.Stock }} stk på lager
+                            </div>
+                        </v-card-text>
+
  <!---------- Buttom link for inspectiting the produc and more information -------------  -->
-                        <v-card-actions>
+                        <v-card-actions class="px-0 pb-0">
+                            <v-card-subtitle class="px-0 py-0">
+                                Kun <b>{{ product.Price }}</b>,- 
+                            </v-card-subtitle>
+                            <v-spacer></v-spacer>
                             <v-btn
                                 color="#F7941D"
                                 class="mb-0"
                                 text
-                                :to="`/products/`+ product._id"
+                                
                             >
-                                Til produkt
+                                Læg i kurv
                             </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
             </v-row>
+
+            <div class="text-center mt-5">
+                <v-pagination
+                    v-model="Page"
+                    :length="PagesTotal"
+                    :total-visible="5"
+                ></v-pagination>
+            </div>
         </v-card>
     </div>
 </template>
@@ -88,21 +104,28 @@
 <script>
 
 import { GetAllProductsBody } from '@/Services/ProductApi';
-import { GlobalProducts } from '@/Services/GlobalVariables';
 
 export default {
-    
-   
+    methods: {
+        //----------------- Returns stock color if above 10 is green, 10 or less its yellow, red is the stock is 0------------------------
+        ReturnAvailabilityColor: function( amount ) {
+            if( amount > 10 ) return this.AvailabilityColors[2];
+            if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
+            if( amount >= 0 ) return this.AvailabilityColors[0];
+        },
+    },
     data() {
     //---------- Gets all our products in a array  -------------  
         return {
             meta: this.$route.meta,
-            products: []
+            products: [],
+            AvailabilityColors: [ 'red', 'amber', 'green' ],
+            Page: 1,
+            PagesTotal: 50
         }
     },
 
     mounted: function() {
-        console.log(this.$route.params.category)
 //---------- Gets all our products and then we print out every products details in a obj and push them, rendreing them on the site with mounted  -------------  
         GetAllProductsBody()
         .then( res => {
@@ -114,26 +137,20 @@ export default {
                         _id: element._id,
                         Stock: element.Stock,
                         Name: element.Name,
-                        Description: element.Description,
+                        LowerHeader: element.LowerHeader,
                         Price: element.Price,
                         SalePercentage: element.SalePercentage,
                         Thumbnail: element.Thumbnail,
                     });
-//---------- Categories (Jesper) -------------  
-                    element.Categories.forEach( cat => {
-                        if( !GlobalProducts.Categories.includes( cat ) ) {
-                            GlobalProducts.Categories.push( cat );
-                        }
-                    } )
                 }
             });
-
-            console.log( GlobalProducts.Categories )
 
         })
         .catch( err => {
             console.log( err.response.data.Message );
         });
+
+        console.log('mounted from index.vue')
     }
 }
 </script>
@@ -141,7 +158,9 @@ export default {
 <style scoped>
  /* ------ Style Components for all Products site  -------------    */
     .productImage {
-        background-color: #212121;
+        /* background-color: #212121; */
+        /* border-top-left-radius: 4px;
+        border-top-right-radius: 4px; */
     }
 
     .productCols {
@@ -150,7 +169,15 @@ export default {
     }
 
     .productCard {
-        border-bottom: 3px solid rgba(0,0,0,.2)
+        border: 3px solid rgba(0,0,0,.12);
+        transition: border 200ms ease;
+
+        /* border-radius: 0 !important; */
+    }
+
+    .productCard:hover, 
+    .productCard:focus {
+        border: 3px solid rgba(247, 149, 29, .8);
     }
 
     .productTitle {

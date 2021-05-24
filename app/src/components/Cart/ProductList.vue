@@ -1,6 +1,5 @@
 <template>
 	<v-card
-		outlined
 		class="mb-5 pa-4"
 	>
 		<h1>{{ title }}</h1>

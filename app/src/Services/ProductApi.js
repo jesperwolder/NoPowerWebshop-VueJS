@@ -2,7 +2,7 @@ let axios = require('axios');
 const server1 = "http://server.topper144p.com:3001"
 
 ///------- Products --------
-const GetAllProductsURL = server1 + '/all';
+const GetAllProductsURL = server1 + '/all/';
 const GetSingleProductURL = server1 + '/product/';
 
 ///------- Admin controll --------
@@ -13,8 +13,8 @@ const ChangeProductStatusURL = server1 + '/admin/changeProductStatus/';
 
 //------------------products------------------
 
-export const GetAllProductsBody = async() =>{
-    let err, response = await axios.get(GetAllProductsURL);
+export const GetAllProductsBody = async( limit = 0, page = 0 ) =>{
+    let err, response = await axios.get( GetAllProductsURL + limit + '/' + page );
 
     if(err) throw err;
 

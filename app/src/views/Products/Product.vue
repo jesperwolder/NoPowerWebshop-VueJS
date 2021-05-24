@@ -48,7 +48,7 @@
         </v-card-title>
         <v-card-subtitle class="px-0">
             {{ product.LowerHeader }}
-        </v-card-subtitle>    
+        </v-card-subtitle>
 
         <v-row>
             <v-col
@@ -59,18 +59,19 @@
     <!----------------- Switches automatikcly pictures when you inscept product ------------------------>
                 <v-carousel
                     cycle
-                    height="35vh"
+                    height="auto"
                     hide-delimiter-background
                     show-arrows-on-hover
                     class="caro"
-                >   
-                    <v-carousel-item
-                        v-for="( slide, index ) in slides"
-                        :key="index"
-                        :src="slide"
-                        contain
-                    >
-                    </v-carousel-item>
+                > 
+                    <v-responsive :aspect-ratio="4/3">
+                        <v-carousel-item
+                            v-for="( slide, index ) in slides"
+                            :key="index"
+                        >
+                            <v-img contain :src="slide" :aspect-ratio="4/3"></v-img>
+                        </v-carousel-item>
+                    </v-responsive>
                 </v-carousel>
             </v-col>
             <v-col
@@ -98,15 +99,6 @@
                             @click="AddProduct(1)"
                         >
                             Læg i indkøbskurven
-                        </v-btn>
-
-                        <v-btn
-                            color="#F7941D"
-                            class="mb-0"
-                            text
-                            @click="RemoveProduct()"
-                        >
-                            Fjern pisset
                         </v-btn>
                     </v-card-actions>
                     <v-card-text class="px-0 pb-0">

@@ -58,6 +58,7 @@
 <script>
 //-- ------ Global component for fetchting all our products and breadcrum to navigate though it  -------------  -->
     import { GlobalProducts } from '@/Services/GlobalVariables';
+    import { GetAllProductsBody } from '@/Services/ProductApi';
 
     export default {
         data: () => ({
@@ -67,7 +68,23 @@
         }),
      //-- ------ Does not work yet but is soppussed to print out categories-------------  -->
         mounted: function() {
-            setTimeout(function() {
+
+            GetAllProductsBody()
+            .then( res => {
+                const obj = res.Products;
+
+                obj.forEach( element => {
+                    if( element.isActive ) {
+
+                        element.Categories.forEach( cat => {
+                            if( !GlobalProducts.Categories.includes( cat ) ) {
+                                GlobalProducts.Categories.push( cat );
+                            }
+                        })
+
+                    }
+                });
+
                 this.drawerItems = [ { title: 'Alle produkter', path: '/products' } ]
 
                 GlobalProducts.Categories.forEach( cat => {
@@ -76,8 +93,13 @@
                         path: '/products/categories/' + cat
                     })
                 })
-                console.log('kørt')
-            }, 5000)
+
+                console.log( GlobalProducts.Categories )
+
+            })
+            .catch( err => {
+                console.log( err.response.data.Message );
+            });
         },
 
         watch: {
