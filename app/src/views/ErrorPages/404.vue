@@ -1,4 +1,5 @@
 <template>
+<!-- //-- ------ Our 404 page that redirceret the site if it does not exist  -------------  --> 
     <div>
         <v-card class="text-center">
             <div class="pt-5 text-h2 text-center">

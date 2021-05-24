@@ -1,20 +1,20 @@
 let axios = require('axios');
-const server1 = "http://server.topper144p.com:3002"
+const server2 = "http://server.topper144p.com:3002"
 
 ///------- Order --------
-const CreateRouteURL = server2 + '/create';
-const GetUserOrdersRouteURL = server2 + '/GetUserOrdersRoute';
+const CreateOrderURL = server2 + '/create';
+const GetUserOrdersURL = server2 + '/GetUserOrders';
 const GetSingleOrderURL = server2 + '/GetSingleOrder';
 
 ///------- Admin controll --------
 const GetAllOrdersURL = server2 + '/admin/all';
-const StatusRouteURL = server2 + '/admin/statuses';
-const UpdateStatusRouteURL = server2 + '/admin/updateStatus';
-const GetAnyOrderRouteURL = server2 + '/admin/order';
+const OrderStatusURL = server2 + '/admin/statuses';
+const UpdateOrderStatusURL = server2 + '/admin/updateStatus';
+const GetAnyOrderURL = server2 + '/admin/order';
 
-//Order Routes
-export const CreateRouteBody = async(body, jwt) =>{
-    let err, response = await axios.post(CreateRouteURL, body, {headers: {jwt: jwt}});
+//------------------Order Routes-------------------
+export const CreateOrderBody = async(body, jwt) =>{
+    let err, response = await axios.post(CreateOrderURL, body, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
@@ -22,15 +22,15 @@ export const CreateRouteBody = async(body, jwt) =>{
 
 }
 
-export const GetUserOrdersRouteBody = async(jwt) =>{
-    let err, response = await axios.get(GetUserOrdersRouteURL, {headers: {jwt: jwt}});
+export const GetUserOrdersBody = async(jwt) =>{
+    let err, response = await axios.get(GetUserOrdersURL, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
     return response.data;
 }
 
-export const GetsingleOrderBody = async(jwt) =>{
+export const GetSingleOrderBody = async(jwt) =>{
     let err, response = await axios.get(GetSingleOrderURL, {headers: {jwt: jwt}});
 
     if(err) throw err;
@@ -38,7 +38,7 @@ export const GetsingleOrderBody = async(jwt) =>{
     return response.data;
 }
 
-//Admin Routes
+//------------------Admin routes-------------------
 export const GetAllOrderBody = async(jwt) =>{
     let err, response = await axios.get(GetAllOrdersURL, {headers: {jwt: jwt}});
 
@@ -47,24 +47,24 @@ export const GetAllOrderBody = async(jwt) =>{
     return response.data;
 }
 
-export const StatusRouteBody = async(jwt) =>{
-    let err, response = await axios.get(StatusRouteURL, {headers: {jwt: jwt}});
+export const OrderStatusBody = async(jwt) =>{
+    let err, response = await axios.get(OrderStatusURL, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
     return response.data;
 }
 
-export const UpdateStatusRouteBody = async(body, jwt) =>{
-    let err, response = await axios.get(UpdateStatusRouteURL, body, {headers: {jwt: jwt}});
+export const UpdateOrderStatusBody = async(body, jwt) =>{
+    let err, response = await axios.get(UpdateOrderStatusURL, body, {headers: {jwt: jwt}});
 
     if(err) throw err;
 
     return response.data;
 }
 
-export const GetAnyOrderRouteBody = async(jwt) =>{
-    let err, response = await axios.get(GetAnyOrderRouteURL, {headers: {jwt: jwt}});
+export const GetAnyOrderBody = async(jwt) =>{
+    let err, response = await axios.get(GetAnyOrderURL, {headers: {jwt: jwt}});
 
     if(err) throw err;
 

@@ -9,7 +9,7 @@
           </v-container>
         </v-col>
       </v-row>
-    
+    <!----------------- Fill out information with map nothing speicel mails get send to nothing------------------> 
     <div class="block">
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -34,6 +34,7 @@
 export default {
 	name: "ContactUs",
   data: () => ({
+  //----------------- Check Rules length and email and so on and reset on sumbit------------------
     valid: true,
     name: "",
     nameRules: [

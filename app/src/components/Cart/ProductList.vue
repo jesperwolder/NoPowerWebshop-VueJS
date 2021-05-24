@@ -3,70 +3,70 @@
 		outlined
 		class="mb-5 pa-4"
 	>
-		<h2 class="display-2 mb-4">Basket</h2>
+		<h1>{{ title }}</h1>
 		<v-divider></v-divider>
-  		<!-- Products udprinting -->
+  		<!------- Products udprinting ----->
 		<v-card v-for="(product, index) in products" :key="index" elevation="0">
 			
-				<div class="d-flex">
-					<div>
-					<!-- Products photo -->
-						<v-img
-							:src="product.Thumbnail"
-							width="170px"
-							height="140px"
-						/>
-					</div>
+			<div class="d-flex">
+				<div>
+		<!------- Products photo ------->
+					<v-img
+						:src="product.Thumbnail"
+						width="170px"
+						height="140px"
+					/>
 				</div>
-				<!-- Products Name -->
-				<v-card-title class="pt-0 pl-0 pb-0 text-truncate">
-					{{ product.Name }}
-				</v-card-title>
-			
-				<v-divider v-if="index < products.length"></v-divider>
+			</div>
+		<!---------- Products Name -------->
+			<v-card-title class="pt-0 pl-0 pb-0 text-truncate">
+				{{ product.Name }}
+			</v-card-title>
+		
+			<v-divider v-if="index < products.length"></v-divider>
 
-				<!-- Products Description -->
-				<v-card-title class="pt-0 pl-0 pb-0">
-					{{ product.LowerHeader }}
-				</v-card-title>
+	    <!------ Products Description ------>
+			<v-card-title class="pt-0 pl-0 pb-0">
+				{{ product.LowerHeader }}
+			</v-card-title>
 
-				<v-divider v-if="index < products.length"></v-divider>
+			<v-divider v-if="index < products.length"></v-divider>
 
-				<!-- Products pris per unit -->
-				<v-card-subtitle class="pt-7 pl-0 pb-0">
-					<h2>Pris per unit</h2>
-					{{ product.Price }},-
+		<!------- Products pris per unit -------->
+			<v-card-subtitle class="pt-7 pl-0 pb-0">
+				<h2>Pris per unit</h2>
+				{{ product.Price }},-
+			</v-card-subtitle>
+
+		<!------------ Products quantity ---------->
+			<div class="d-flex">
+				<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity" :onchange="CartUpdate()"></v-text-field>
+			</div>
+				
+		<!---------- Products price * quantity --------->
+			<div class="pt-7 pl-0 pb-0">
+				<v-card-subtitle class="pl-0">
+					<h2>Total</h2>
+					{{ product.Price * product.Quantity }},-
 				</v-card-subtitle>
-
-				<!-- Products quantity -->
-				<div class="d-flex">
-					<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity"></v-text-field>
-				</div>
-					
-				<!-- Products price * quantity -->
-				<div class="pt-7 pl-0 pb-0">
-					<v-card-subtitle class="pl-0">
-						<h2>Total</h2>
-						{{ product.Price * product.Quantity }},-
-					</v-card-subtitle>
-				</div>
+			</div>
 
 
-				<!-- Products REMOVE -->
-				<v-col class="text-right">
-					<v-btn
-						color="error"
-						class="ml-4"
-						outlined
-						small
-						@click="RemoveProduct(product._id)"
-					>
-						<v-icon small>mdi-minus</v-icon>
-						Remove from Cart
-					</v-btn>
-				</v-col>
+		<!----------- Products REMOVE ----------------->
+			<v-col class="text-right">
+				<v-btn
+					color="error"
+					class="ml-4"
+					outlined
+					small
+					@click="RemoveProduct(product._id)"
+				>
+					<v-icon small>mdi-minus</v-icon>
+					Remove from Cart
+				</v-btn>
+			</v-col>
 
-			<v-divider v-if="index + 1 < products.length"></v-divider>
+		<v-divider v-if="index + 1 < products.length"></v-divider>
 
 		</v-card>
 
@@ -81,35 +81,53 @@
 </template>
 
 <script>
+// -------- imports globalmethodes updatecart getcart and removeitemfromcart  ------------------
 	import { UpdateCart, GetCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
 	import { GetProductBody } from '@/Services/ProductApi';
 
 	export default {
+// -------- Get product in a array ------------------
 		data: () => ({
-			products: []
+			products: [],
 		}),
 
+		props: ['title'],
+
 		mounted: function() {
+		//GetCart() (items put in cart from localstorage, if its not found it puts a empty array in)
+		//---------------- Prints out the current items in localstorage, then prints all the variables from the item though ID
 			const cart = GetCart();
+			let ids = "";
+			let i = 0;
 
-			cart.forEach( async item => {
-				const res = await GetProductBody( item._id );
-
-				if( res.Message === 'success' ) {
-					const p = res.Product;					
-
-					this.products.push({
-						_id: p._id,
-						Name: p.Name,
-						Thumbnail: p.Thumbnail,
-						LowerHeader: p.LowerHeader,
-						Price: p.Price,
-						Quantity: item.Quantity
-					})
+			cart.forEach( item => {
+				if( (cart.length - 1) === i ) {
+					ids += item._id;
+				} else {
+					ids += item._id + ',';
 				}
-			});
-		},
 
+				i++;
+			});
+		
+			GetProductBody( ids )
+			.then( res => {
+				res.Products.forEach( item => {
+					this.products.push({
+						_id: item._id,
+						Name: item.Name,
+						Thumbnail: item.Thumbnail,
+						LowerHeader: item.LowerHeader,
+						Price: item.Price,
+						Quantity: cart.find( x => x._id === item._id ).Quantity
+					})
+				} )
+			})
+			.catch( err => {
+				console.log(err)
+			})
+		},
+//------updates the cartcashout the product or quantity everytime we change the quantity in the texfield---------
 		methods: {
 			CartUpdate: function() {
 				let cart = [];
@@ -123,7 +141,7 @@
 
 				UpdateCart( cart );
 			},
-
+//------- Removes the product on ID, this happens on bottom event click ---------
 			RemoveProduct: function( id ) {
 				this.products.splice( this.products.findIndex( x => x._id === id ), 1 );
 				RemoveItemFromCart( id );

@@ -15,15 +15,14 @@ import Item_management from '../views/AdminPages/Item_management.vue';
 import Support_management from '../views/AdminPages/Support_tickets.vue';
 import Products from '../views/Products/Index.vue';
 import Product from '../views/Products/Product.vue';
-import Cart from '../views/Cart.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
 import ThankYou from '../views/CheckOut/Thankyoupage.vue';
 
-
-
 Vue.use(VueRouter)
+///------- Every route for every site and meta tags and breadcrumbs --------
 
+///------- Homepage Nopower --------
 const routes = [
 	{ path: '/', name: 'Forside', component: Home, 
 		meta: { 
@@ -62,6 +61,8 @@ const routes = [
 			]
 		}
 	},
+
+	///--------------------------- User Controll---------------------------------
 	{ path: '/register', name: 'Bliv medlem', component: Register, 
 		meta: {
 			title: 'Bliv medlem',
@@ -77,15 +78,6 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Log Ind', to: '/login' }
-			]
-		}
-	},
-	{ path: '/cart', name: 'Kurv', component: Cart, 
-		meta: {
-			title: 'Indkøbskurv',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				{ name: 'Kurv', to: '/cart' }
 			]
 		}
 	},
@@ -108,6 +100,9 @@ const routes = [
 			]
 		} 
 	},
+
+
+	///--------------------------- Admin controll---------------------------------
 	{ path: '/adminpage', name: 'Administrator område', component: AdminPage,
 		meta: {
 			title: 'Administrator område',
@@ -147,12 +142,25 @@ const routes = [
 			]
 		} 
 	},
+
+
+	///--------------------------- Products---------------------------------
 	{ path: '/products', name: 'Produkter', component: Products,
 		meta: {
 			title: 'Alle Produkter',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Alle Produkter', to: '/products' },
+			]
+		} 
+	},
+	{ path: '/products/categories/:category', name: 'Produkter', component: Products,
+		meta: {
+			title: 'Alle Produkter',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Alle Produkter', to: '/products' },
+				{ name: 'Kategori', to: '/products/categories/:category' },
 			]
 		} 
 	},
@@ -166,12 +174,14 @@ const routes = [
 			]
 		} 
 	},
-	{ path: '/cartcheckout', name: 'CartCheckOut', component: CartCheckOut, 
+
+	///--------------------------- Cart and checkout---------------------------------
+	{ path: '/cart', name: 'Indkøbskurv', component: CartCheckOut, 
 		meta: { 
-			title: 'CartCheckOut',
+			title: 'Indkøbskurv',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				
+				{ name: 'Indløbskurv', to: '/cart' },
 			]
 		}
 	},
@@ -193,6 +203,7 @@ const routes = [
 			]
 		}
 	},
+	///--------------------------- 404 page, dont do new routes or paths below here---------------------------------
 	{ path: '*', name: '404', component: NotFound },
 ];
 

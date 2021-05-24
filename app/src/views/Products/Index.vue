@@ -4,10 +4,11 @@
             class="pa-5 ma-0"
             elevation="2"
         >
+        <!---------- Our all products site -------------  --> 
             <h1>{{ meta.title }}</h1>
 
             <v-divider class="pb-3 mt-3"></v-divider>
-            
+        <!---------- If we have 0 products on our page -------------  --> 
             <v-card v-if="products.length <= 0" class="text-center" elevation="0">
                 <div class="py-5 text-h2 text-center">
                     ¯\_(ツ)_/¯
@@ -18,6 +19,7 @@
             </v-card>
 
             <v-row v-if="products.length != 0">
+                <!-- //-- ------ Prints out every product in all of our products on our site in v-for in our obj/data  -------------  --> 
                 <v-col
                     v-for="( product, index ) in products"
                     :key="index"
@@ -34,6 +36,7 @@
                         class="pb-0 mb-0 productCard rounded-lg"
                         outlined
                     >
+         <!---------- Prints every picture for our products and syling  -------------  -->
                         <div style="position:relative;">
                             <v-btn
                                 elevation="2"
@@ -47,12 +50,12 @@
                             </v-btn>
                             <v-img
                                 height="20rem"
-                                :src="`http://placeimg.com/${ getRandomInt(250, 600) }/${ getRandomInt(250, 600) }/tech`"
+                                :src="product.Thumbnail"
                                 contain
                                 class="productImage"
                             ></v-img>
                         </div>
-
+  <!---------- Our information about the product below the picture  -------------  -->
                         <v-card-title
                             class="productTitle text-truncate"
                         >
@@ -64,7 +67,7 @@
                         <v-card-subtitle class="pt-2">
                             Kun <b>{{ product.Price }}</b>,- 
                         </v-card-subtitle>
-
+ <!---------- Buttom link for inspectiting the produc and more information -------------  -->
                         <v-card-actions>
                             <v-btn
                                 color="#F7941D"
@@ -85,9 +88,10 @@
 <script>
 
 import { GetAllProductsBody } from '@/Services/ProductApi';
+import { GlobalProducts } from '@/Services/GlobalVariables';
 
 export default {
-    
+     //---------- uhm what does this do?  -------------  
     methods: {
         getRandomInt(min, max) {
             min = Math.ceil(min);
@@ -96,6 +100,7 @@ export default {
         }
     },
     data() {
+    //---------- Gets all our products in a array  -------------  
         return {
             meta: this.$route.meta,
             products: []
@@ -103,6 +108,8 @@ export default {
     },
 
     mounted: function() {
+        console.log(this.$route.params.category)
+//---------- Gets all our products and then we print out every products details in a obj and push them, rendreing them on the site with mounted  -------------  
         GetAllProductsBody()
         .then( res => {
             const obj = res.Products;
@@ -116,10 +123,19 @@ export default {
                         Description: element.Description,
                         Price: element.Price,
                         SalePercentage: element.SalePercentage,
-                        Image: element.Image 
+                        Thumbnail: element.Thumbnail,
                     });
+//---------- Categories (Jesper) -------------  
+                    element.Categories.forEach( cat => {
+                        if( !GlobalProducts.Categories.includes( cat ) ) {
+                            GlobalProducts.Categories.push( cat );
+                        }
+                    } )
                 }
             });
+
+            console.log( GlobalProducts.Categories )
+
         })
         .catch( err => {
             console.log( err.response.data.Message );
@@ -129,6 +145,7 @@ export default {
 </script>
 
 <style scoped>
+ /* ------ Style Components for all Products site  -------------    */
     .productImage {
         background-color: #212121;
     }

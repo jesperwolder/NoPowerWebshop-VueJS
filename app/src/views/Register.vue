@@ -1,4 +1,5 @@
 <template>
+<!----------------- Checks if the user is loggedin in the session------------------> 
   <v-container :onload="isUserLoggedIn()">
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
@@ -6,6 +7,7 @@
                 class="pa-5"
                 elevation="3"
             >
+<!----------------- Register Form and validation with rules------------------> 
                 <v-form class="col-12 pa-0">
                     <v-card-title class="px-0 pt-0">{{ meta.title }}</v-card-title>
                     <v-card-subtitle class="px-0">
@@ -31,12 +33,14 @@
                         label="Fulde navn"
                         type="text"
                         v-model="Register.Fullname"
+                        :rules="nameRules"
                         required
                     > </v-text-field>
                     <v-text-field
                         label="Email"
                         type="email"
                         v-model="Register.Email"
+                        :rules="emailRules"
                         required
                     > </v-text-field>
                     <v-text-field
@@ -130,6 +134,7 @@ import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
     data() {
+//----------------- Data on Register------------------
         return {
             loading: false,
             error: null,
@@ -147,13 +152,23 @@ export default {
                 }
             },
             meta: this.$route.meta,
+
+            nameRules: [
+                v => !!v || "Name is required",
+                v => (v && v.length <= 10) || "Name must be less than 10 characters"
+                ],
+            emailRules: [
+                v => !!v || "E-mail is required",
+                v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+            ],
         }
     },
     methods: {
         isUserLoggedIn: function() {
-            if( CurrentSession.isLoggedIn ) this.$router.push('/dashboard'); // If user is already logged in, redirect to dashboard
+// ----------If user is already logged in, redirect to dashboard----------------------
+            if( CurrentSession.isLoggedIn ) this.$router.push('/dashboard'); 
         },
-
+//----------------- Signup validation check for empty texfields and rules ------------------
         SignUp: function() {
             this.loading = true;
 
@@ -162,14 +177,14 @@ export default {
                 this.loading = false;
                 return;
             }
-            // Validere om passwords matcher
+            // Validates if passwords match
             if(this.Register.Password != this.Register.ConfirmPassword) {
                 this.error = "Passwords matcher ikke";
                 this.loading = false;
                 return;
             }
 
-            // Send post request om at oprette brugeren
+            // Sends a reuqest for Register the user and logs in and goes to dashboard
             RegisterBody({ User: this.Register })
             .then((res) => {
                 // Success respons
@@ -178,12 +193,13 @@ export default {
                 this.$cookies.set('jwt', res.Jwt, 2592000);
                 this.$router.push('/dashboard');
             }).catch( err => {
-                // Fejled respons
+                // fail respons
                 
                 this.error = err.response.data.Message;
             });
             this.loading = false;
         },
+        //----------------- Checks nullobjects------------------
         CheckForNullInObject: function(obj) {
             for (let key in obj) {
                 if(obj[key] == null || obj[key] == "") return false;

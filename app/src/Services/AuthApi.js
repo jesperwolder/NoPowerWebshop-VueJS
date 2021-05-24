@@ -1,10 +1,13 @@
 let axios = require('axios');
-
 const server = "http://server.topper144p.com:3000"
+
+///------- Normal User controll --------
 const AuthUrl = server + '/auth';
 const LoginUrl = server + '/login';
 const RegisterUrl = server + '/register';
 const UpdateUrl = server + '/update';
+
+///------- Admin controll --------
 const GetAllUsersUrl = server +'/admin/getAllUsers';
 const ChangePrivilegeUrl = server + '/admin/changePrivilege/';
 const UpdateUserURL = server + '/admin/updateUser';

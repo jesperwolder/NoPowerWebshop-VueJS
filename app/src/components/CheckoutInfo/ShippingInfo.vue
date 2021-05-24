@@ -1,57 +1,60 @@
 <template>
-  <v-stepper-content step="2">
-    <p>LeveringsAddresse</p>
-    <v-text-field
-      v-model="data.street"
-      label="Street Address"
-      required
-    />
+<!-- shippinginfo with rules  -->
+	<v-stepper-content step="2">
+		<v-text-field
+			v-model="data.Street"
+			label="Street Address"
+			required
+		/>
 
-   <v-text-field
-      v-model="data.Number"
-      label="Address Number "
-      required
-    />
+	 <v-text-field
+			v-model="data.Number"
+			label="Address Number "
+			required
+		/>
 
-    <v-text-field
-      v-model="data.zip"
-      label="Zip"
-      :rules="[rules.required, rules.zip]"
-      required
-    />
+		<v-text-field
+			v-model="data.Zip"
+			label="Zip"
+			:rules="[rules.required, rules.Zip]"
+			required
+		/>
 
-    <v-text-field
-      v-model="data.City"
-      label="City"
-      required
-    /> 
+		<v-text-field
+			v-model="data.City"
+			label="City"
+			required
+		/> 
 
-    <v-text-field
-      v-model="data.state"
-      label="State"
-      required
-    />
+		<v-text-field
+			v-model="data.State"
+			label="State"
+			required
+		/>
 
-    <v-btn
-      color="primary"
-      @click="next"
-    >
-      Continue
-    </v-btn>
+		<v-btn
+			color="primary"
+			@click="next"
+		>
+			Næste
+		</v-btn>
 
-    <v-btn text @click="previous">
-      Go Back
-    </v-btn>
-  </v-stepper-content>
+		<v-btn text @click="previous">
+			Tilbage
+		</v-btn>
+
+		<div class="pb-5"></div>
+	</v-stepper-content>
 </template>
 
 <script>
 export default {
-  props: {
-    next: Function,
-    previous: Function,
-    rules: Object,
-    data: Object
-  }
+	//data from checkout
+	props: {
+		next: Function,
+		previous: Function,
+		rules: Object,
+		data: Object
+	}
 }
 </script>

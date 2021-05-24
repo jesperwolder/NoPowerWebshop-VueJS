@@ -1,4 +1,5 @@
 <template>
+<!----------------- Checks if the user is loggedin in the session------------------> 
     <v-container :onload="isUserLoggedIn()">
         <div class="col-md-5 col-sm-12 mx-auto">
             <v-card
@@ -6,6 +7,7 @@
                 class="pa-5"
                 elevation="3"
             >
+            <!----------------- Login page------------------> 
                 <v-form class="col-12 pa-0">
                     <v-card-title class="px-0 pt-0">{{ meta.title }}</v-card-title>
                     <v-card-subtitle class="px-0">
@@ -26,6 +28,7 @@
                         v-for="( err, index ) in error"
                         :key="err"
                     >
+<!----------------- Alert if the user login is wrong, has a timer------------------> 
                         <v-alert
                             text
                             dismissible
@@ -39,7 +42,7 @@
                             {{ err }}
                         </v-alert>
                     </div>
-                
+ <!----------------- Login fomular------------------>         
                     <v-text-field
                         label="Email"
                         type="email"
@@ -53,7 +56,7 @@
                         v-model="login.Password"
                         required
                     ></v-text-field>
-
+<!----------------- Event login------------------> 
                     <v-btn
                         block
                         color="primary"
@@ -71,6 +74,7 @@ import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
     data() {
+//<!----------------- Data for error, loading, meta currentsession and login details------------------> 
         return {
             loading: false,
             error: [],
@@ -84,9 +88,10 @@ export default {
     },
     methods: {
         isUserLoggedIn: function() {
-            if( CurrentSession.isLoggedIn ) this.$router.push('/dashboard'); // If user is already logged in, redirect to dashboard
+// ------------If user is already logged in, redirect to dashboard----------------------
+            if( CurrentSession.isLoggedIn ) this.$router.push('/dashboard'); 
         },
-
+// ------------Validates the users input puts the email in lower case ----------------------
         UserLogin: function() {
             this.loading = true;
 
@@ -96,6 +101,7 @@ export default {
                     Password: this.login.Password
                 }
             })
+// ------------Sets the jwt for being logged in and checks isAdmin and sets a automatic log out on 25 days estimated----------------------
                 .then((res) => {
                     CurrentSession.isLoggedIn = res.Authorized;
                     CurrentSession.isAdmin = res.isAdmin;
@@ -108,7 +114,7 @@ export default {
             
             this.loading = false;
         },
-
+// ------------Error display for wrong login details, has a timer on 7 sec----------------------
         RemoveAlert: function( id ) {
             setTimeout( () => {
                 const err = document.getElementById( 'error-' + id );
