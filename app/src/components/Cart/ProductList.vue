@@ -81,7 +81,7 @@
 
 <script>
 // -------- imports globalmethodes updatecart getcart and removeitemfromcart  ------------------
-	import { UpdateCart, GetCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
+	import { UpdateCart, GetCart, RemoveItemFromCart, GetCartCount } from '@/Services/GlobalMethods';
 	import { GetProductBody } from '@/Services/ProductApi';
 
 	export default {
@@ -139,6 +139,8 @@
 				});
 
 				UpdateCart( cart );
+
+				this.$globalData.CartCount = GetCartCount();
 			},
 //------- Removes the product on ID, this happens on bottom event click ---------
 			RemoveProduct: function( id ) {

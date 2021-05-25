@@ -206,7 +206,7 @@
 
 import { GetProductBody } from '@/Services/ProductApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { AddToCart, RemoveItemFromCart } from '@/Services/GlobalMethods';
+import { AddToCart, RemoveItemFromCart, GetCartCount } from '@/Services/GlobalMethods';
 //----------------- Imported methods Getproduct, and functionalty AddToCart and RemoveFromCart  ------------------------
 export default {
     data() {
@@ -255,6 +255,7 @@ export default {
 //----------------- Add to cart method adds the id by the product and adds 1 in quantity and keeps adding 1 in quantity in another method if the id is the same------------------ 
         AddProduct: function( quantity ) {
             console.log( AddToCart( { _id: this.product._id, Quantity: quantity } ) );
+            this.$globalData.CartCount = GetCartCount();
         },
 //----------------- Removes the product in the cart, other methed removes the id by 1 in quantity------------------
         RemoveProduct: function() {

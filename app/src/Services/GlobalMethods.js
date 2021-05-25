@@ -1,6 +1,9 @@
 /**
  * Cart methods.
  */
+
+import { Cart } from './GlobalVariables';
+
 //-----------------Gets items put in cart from localstorage, if its not found it puts a empty array in--------------------
 export const GetCart = () => {
     const cart = localStorage.getItem( 'cart' );
@@ -9,6 +12,24 @@ export const GetCart = () => {
 
     return JSON.parse( cart );
 }
+
+export const GetCartCount = () => {
+
+    const cart = GetCart();
+    let count = 0;
+
+    cart.forEach( item => {
+        count += item.Quantity;
+    });
+
+    return count;
+
+}
+
+export const UpdateCartCount = () => {
+    GetCartCount();
+}
+
 //-----------------Puts the item in cart by ID, if the ID is the same it adds Quantity, it puts in them item and quantity in localstorage--------------------
 export const AddToCart = ( item = {} ) => {
     // Item object = { _id: 'id', Quantity: 1 }
@@ -60,6 +81,8 @@ export const RemoveItemFromCart = ( id ) => {
 // ! May only be used in the cart view.
 export const UpdateCart = ( cartObject ) => {
     localStorage.setItem( 'cart', JSON.stringify( cartObject ) );
+
+    UpdateCartCount();
 
     return cartObject;
 }

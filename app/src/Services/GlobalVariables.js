@@ -8,7 +8,8 @@ export const CurrentSession = {
 }
 //------------------Puts a array of items in cart-------------------
 export const Cart = {
-    Items: []
+    Items: [],
+    Count: 0
 }
 //-----------------splitter products up in different categories--------------------
 export const GlobalProducts = {
