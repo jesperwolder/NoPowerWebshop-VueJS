@@ -15,6 +15,11 @@
 		</v-btn>
 		<!-- --------------------------- Logo--------------------------------- -->
 		<v-app-bar fixed dark app clipped-left>
+			<v-app-bar-nav-icon
+				v-on:click="ToggleAppDrawer()"
+			>
+			</v-app-bar-nav-icon>
+
 			<RouterLink to="/" class="logo">
 				<v-img
 					src="@/assets/images/NoPowerLogo.png"
@@ -188,6 +193,10 @@ export default {
 		})
 	},
 	methods: {
+		ToggleAppDrawer: function() {
+			console.log(this.$globalData.AppDrawer)
+			this.$globalData.AppDrawer = !this.$globalData.AppDrawer;
+		},
 		//-- ------ Logout function removes the jwt and pushes you to the home page and sets everything to false------------- 
 		logout: function() {
 			CurrentSession.isLoggedIn = false;
@@ -218,6 +227,9 @@ export default {
 			CurrentSession.PageFound = true;
 			//this.CartCount = GetCartCount();
 		},
+		$globalData () {
+			console.log('cart updated')
+		}
 	},
 };
 </script>

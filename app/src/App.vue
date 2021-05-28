@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<AppDrawer v-if="!this.hideDrawer" />
+		<AppDrawer />
 		<NavBar />
 		<v-main class="pt-5 mb-0">
 			<v-container
@@ -8,7 +8,7 @@
 				class="mainContainer"
 				fluid
 			>
-				<Breadcrumb v-if="!this.hideBreadcrumb" />
+				<Breadcrumb v-if="$globalData.Breadcrump" />
 
 				<div v-if="!CS.PageFound">
 					<NotFound />
@@ -48,8 +48,6 @@ export default {
 	},
 
 	data: () => ({
-		hideDrawer: false,
-		hideBreadcrumb: false,
 		CS: CurrentSession,
 		Categories: []
 	}),
@@ -83,6 +81,8 @@ export default {
 			}
 			
 			this.CS = CurrentSession;
+			this.$globalData.AppDrawer = true;
+			this.$globalData.Breadcrumb = true;
 		}
 	}
 };

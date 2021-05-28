@@ -5,7 +5,7 @@
         elevation="2"
     >
         <v-navigation-drawer 
-            permanet
+            v-model="$globalData.AppDrawer"
             app
             clipped
             class="drawer"
@@ -64,7 +64,7 @@
         data: () => ({
             drawerItems: [
                 { title: 'Alle produkter', path: '/products' }
-            ]
+            ],
         }),
      //-- ------ Does not work yet but is soppussed to print out categories-------------  -->
         mounted: function() {
@@ -94,7 +94,7 @@
                     })
                 })
 
-                console.log( GlobalProducts.Categories )
+                //console.log( GlobalProducts.Categories )
 
             })
             .catch( err => {

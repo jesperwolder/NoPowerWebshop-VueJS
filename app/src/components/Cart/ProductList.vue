@@ -2,129 +2,93 @@
 	<v-card
 		class="mb-5 pa-4"
 	>
-		<h1>{{ title }}</h1>
+		<h1 class="pb-5">{{ title }}</h1>
 		<v-divider></v-divider>
-  		<!------- Products udprinting ----->
-		<v-card v-for="(product, index) in products" :key="index" elevation="0">
-			
-			<div class="d-flex">
-				<div>
-		<!------- Products photo ------->
-					<v-img
-						:src="product.Thumbnail"
-						width="170px"
-						height="140px"
-					/>
-				</div>
-			</div>
-		<!---------- Products Name -------->
-			<v-card-title class="pt-0 pl-0 pb-0 text-truncate">
-				{{ product.Name }}
-			</v-card-title>
-		
-			<v-divider v-if="index < products.length"></v-divider>
+  		
+		<v-card v-for="(product, index) in products" :key="index" flat :class="`pb-0`+ ( index + 1 < products.length ? '' : ' mb-0')">
 
-	    <!------ Products Description ------>
-			<v-card-title class="pt-0 pl-0 pb-0">
-				{{ product.LowerHeader }}
-			</v-card-title>
+			<v-row
+				no-gutters
+				class="py-5 pb-0"
+			>
 
-			<v-divider v-if="index < products.length"></v-divider>
+				<v-col 
+					cols="2"
+				>
+					<v-img contain avatar :aspect-ratio="1/1" :src="product.Thumbnail"></v-img>
+				</v-col>
 
-		<!------- Products pris per unit -------->
-			<v-card-subtitle class="pt-7 pl-0 pb-0">
-				<h2>Pris per unit</h2>
-				{{ product.Price }},-
-			</v-card-subtitle>
+				<v-col
+					cols="7"
+					class="px-5"
+				>
+					<div class="text-h5 text--primary text-truncate">
+						{{ product.Name }}
+					</div>
+					<div class="text-h6 text--secondary text-truncate">
+						{{ product.LowerHeader }}
+					</div>
+				</v-col>
 
-		<!------------ Products quantity ---------->
-			<div class="d-flex">
-				<v-text-field label="Quantity" type="number" reverse v-model="product.Quantity" :onchange="CartUpdate()"></v-text-field>
-			</div>
-				
-		<!---------- Products price * quantity --------->
-			<div class="pt-7 pl-0 pb-0">
-				<v-card-subtitle class="pl-0">
-					<h2>Total</h2>
-					{{ product.Price * product.Quantity }},-
-				</v-card-subtitle>
-			</div>
+				<v-col
+					cols="1"
+				>
+					<v-text-field 
+						outlined
+						label="Quantity" 
+						type="number" 
+						reverse 
+						v-model="product.Quantity"
+						min="1"
+						:onchange="CartUpdate()"
+					></v-text-field>
+				</v-col>
 
+				<v-col
+					cols="2"
+					class="text-right"
+				>
+					<h5>Pris pr. stk</h5>
+					{{ product.Price }} kr <br><br>
 
-		<!----------- Products REMOVE ----------------->
-			<v-col class="text-right">
+					<h5>Totalt</h5>
+					{{ product.Price * product.Quantity }} kr
+				</v-col>
+			</v-row>
+
+			<v-card-actions :class="`px-0` + ( index + 1 < products.length ? ' pb-5' : ' pb-0')">
+				<v-spacer></v-spacer>
 				<v-btn
 					color="error"
 					class="ml-4"
-					outlined
+					text
 					small
 					@click="RemoveProduct(product._id)"
 				>
-					<v-icon small>mdi-minus</v-icon>
-					Remove from Cart
+					<v-icon small class="pr-2">mdi-minus</v-icon> Fjern
 				</v-btn>
-			</v-col>
+			</v-card-actions>
 
-		<v-divider v-if="index + 1 < products.length"></v-divider>
-
+			<v-divider v-if="index + 1 < products.length"></v-divider>
 		</v-card>
-
-		<v-btn
-			color="primary"
-			@click="CartUpdate()"
-		>
-			Opdater kurv
-		</v-btn>
 
   	</v-card>
 </template>
 
 <script>
 // -------- imports globalmethodes updatecart getcart and removeitemfromcart  ------------------
-	import { UpdateCart, GetCart, RemoveItemFromCart, GetCartCount } from '@/Services/GlobalMethods';
-	import { GetProductBody } from '@/Services/ProductApi';
+	import { UpdateCart, RemoveItemFromCart, GetCartCount } from '@/Services/GlobalMethods';
 
 	export default {
 // -------- Get product in a array ------------------
 		data: () => ({
-			products: [],
+			//products: [],
 		}),
 
-		props: ['title'],
+		props: ['title', 'products'],
 
 		mounted: function() {
-		//GetCart() (items put in cart from localstorage, if its not found it puts a empty array in)
-		//---------------- Prints out the current items in localstorage, then prints all the variables from the item though ID
-			const cart = GetCart();
-			let ids = "";
-			let i = 0;
-
-			cart.forEach( item => {
-				if( (cart.length - 1) === i ) {
-					ids += item._id;
-				} else {
-					ids += item._id + ',';
-				}
-
-				i++;
-			});
 		
-			GetProductBody( ids )
-			.then( res => {
-				res.Products.forEach( item => {
-					this.products.push({
-						_id: item._id,
-						Name: item.Name,
-						Thumbnail: item.Thumbnail,
-						LowerHeader: item.LowerHeader,
-						Price: item.Price,
-						Quantity: cart.find( x => x._id === item._id ).Quantity
-					})
-				} )
-			})
-			.catch( err => {
-				console.log(err)
-			})
 		},
 //------updates the cartcashout the product or quantity everytime we change the quantity in the texfield---------
 		methods: {

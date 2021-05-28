@@ -6,14 +6,17 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueCookies from 'vue-cookies';
 import Vuetify from 'vuetify/lib/framework';
-import { GetCartCount } from './Services/GlobalMethods'
+import { GetCartCount, GetCart } from './Services/GlobalMethods'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios);
 Vue.use(VueCookies);
 
 Vue.prototype.$globalData = Vue.observable({
-	CartCount: GetCartCount()
+	CartCount: GetCartCount(),
+	Cart: GetCart(),
+	AppDrawer: true,
+	Breadcrump: true
 });
 
 new Vue({

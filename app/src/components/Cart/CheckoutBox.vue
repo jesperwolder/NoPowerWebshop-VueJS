@@ -1,23 +1,36 @@
 <template>
 	<div>
 		<v-card>
-			<v-card-title>Payment Details</v-card-title>
-
 			<v-card-text>
-				<p>Total: $999</p>
+				<v-row no-gutters>
+					<v-col class="text-h6">
+						Samlet beløb
+					</v-col>
+					<v-col class="text--primary text-right">
+						<h2>{{ totalPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} kr </h2>
+						<small class="font-italic font-weight-regular text--secondary">Heraf moms (25%) {{ ( totalPrice * .20 ).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</b> kr</small>
+					</v-col>
+				</v-row>
+			</v-card-text>
+
+			<v-card-actions>
 				<v-btn
-					color="primary"
+					color="#F7941D"
+					block
+					text
 					@click="goToCheckout"
 				>
-					Checkout
+					Gå til kassen
 				</v-btn>
-			</v-card-text>
+			</v-card-actions>
 		</v-card>
 	</div>
 </template>
 
 <script>
 export default {
+	props: ['totalPrice'],
+
 	data() {
 		return {
 			checkoutForm: null,
