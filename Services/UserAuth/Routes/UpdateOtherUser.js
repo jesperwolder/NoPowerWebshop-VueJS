@@ -1,53 +1,40 @@
 const express = require('express');
-const auth = require('../modules/authentication');
-const User = require('../Schema/UserInfo');
-
 const router = express.Router();
 
+const logic = require('../Logic/UpdateOtherUser');
+
 router.post('/', async (req, res) => {
-    if(!req.headers.jwt || !req.body.User || !req.body.User._id) {
-        res.status(503).json({
-            Message: "manglende værdier",
-            User: null
+    try {
+        let user = await logic.Execute(
+            req.headers.jwt,
+            req.body.User._id,
+            req.body.User.Email,
+            req.body.User.Fullname,
+            req.body.User.Phone,
+            req.body.User.Address.Street,
+            req.body.User.Address.Number,
+            req.body.User.Address.Zip,
+            req.body.User.Address.City
+        );
+
+        res.json({
+            Message: 'Success',
+            User: user
         });
-        return;
+    }catch(e) {
+        if(e.hasOwnProperty('code')) {
+            res.status(e.code).json({
+                Message: e.msg,
+                User: null
+            });
+        }else {
+            console.log(e);
+            res.status(404).json({
+                Message: 'Der skete en fejl, prøv igen',
+                User: null
+            });
+        }
     }
-
-    let jwt = auth.VerifyJwt(req.headers.jwt);
-    let checkErr, admin = await User.findById(jwt._id);
-    if(checkErr || !admin || !admin.isAdmin) {
-        res.status(403).json({
-            Message: "Ikke autoriseret",
-            User: null
-        });
-        return;
-    }
-
-    let err, user = await User.findById(req.body.User._id);
-    if(err || !user) {
-        res.status(404).json({
-            Message: "Bruger ikke fundet",
-            User: null
-        });
-        return;
-    }
-
-    let newUserVals = new User(req.body.User);
-
-    user.Email = (newUserVals.Email ? newUserVals.Email : user.Email);
-    user.Fullname = (newUserVals.Fullname ? newUserVals.Fullname : user.Fullname);
-    user.Phone = (newUserVals.Phone ? newUserVals.Phone : user.Phone);
-    user.Address.street = (newUserVals.Address.Street ? newUserVals.Address.Street : user.Address.Street);
-    user.Address.Number = (newUserVals.Address.Number ? newUserVals.Address.Number : user.Address.Number);
-    user.Address.Zip = (newUserVals.Address.Zip ? newUserVals.Address.Zip : user.Address.Zip);
-    user.Address.City = (newUserVals.Address.City ? newUserVals.Address.City : user.Address.City);
-
-    user.save();
-
-    res.json({
-        Message: "success",
-        User: user
-    });
 });
 
 module.exports = router;

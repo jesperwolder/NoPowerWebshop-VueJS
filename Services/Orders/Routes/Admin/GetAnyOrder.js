@@ -4,10 +4,8 @@ let mongoose = require('mongoose');
 let Fetcher = require('../../modules/Fetcher');
 let Orders = require('../../Schema/OrderSchema');
 
-const Validator = require('../../modules/validator');
-
 router.get('/:ID', async (req, res) => {
-    let body = await Validator.ValidateJwt(req.headers.jwt);
+    let body = await Fetcher.ValidateJwt(req.headers.jwt);
     if(!body || !body.isAdmin) {
         res.status(403).json({
             Message: 'Du er ikke autoriseret til denne handling',

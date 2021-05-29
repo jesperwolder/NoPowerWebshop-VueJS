@@ -1,46 +1,35 @@
 const express = require('express');
-const User = require('../Schema/UserInfo.js');
-const auth = require('../modules/authentication.js')
 const router = express.Router();
+const logic = require('../Logic/Login');
 
 router.post('/', async (req, res) => {
-    if(!req.body.User.Email || !req.body.User.Password) {
-        res.status(400).json({
-            Authorized: false,
-            Jwt: null,
-            Message: "Manglende værdier" 
+    try{
+        let obj = await logic.Execute(req.body.User.Email, req.body.User.Password);
+        res.json({
+            Message: 'Success',
+            Authorized: true,
+            Jwt: obj.jwt,
+            isAdmin: obj.user.isAdmin
         });
-        return
+    }catch(e) {
+        if(e.hasOwnProperty('code')) {
+            res.status(e.code).json({
+                Message: e.msg,
+                Authorized: false,
+                Jwt: null,
+                isAdmin: false
+            });
+        }else {
+            console.log(e);
+            res.status(404).json({
+                Message: 'Der skete en fejl prøv igen senere',
+                Authorized: false,
+                Jwt: null,
+                isAdmin: false
+            });
+        }
     }
 
-    console.log('/login -> ' + req.body.User.Email);
-
-    let err, user = await User.findOne({ Email: req.body.User.Email });
-    if(err || !user) {
-        res.status(503).json({
-            Authorized: false,
-            Jwt: null,
-            Message: "Der blev ikke fundet en bruger"
-        });
-        return;
-    }
-
-    if(!(await auth.Compare(req.body.User.Password, user.Password))){
-        res.status(401).json({
-            Authorized: false,
-            Jwt: null,
-            Message: "Forkert email eller password"
-        });
-        return;
-    }
-
-    let jwt = auth.SignJwt({ _id: user._id, Email: req.body.User.Email });
-    res.status(200).json({
-        Authorized: true,
-        Jwt: jwt,
-        isAdmin: user.isAdmin,
-        Message: "Success"
-    });
 });
 
 module.exports = router;
