@@ -40,18 +40,8 @@
                     >
          <!---------- Prints every picture for our products and syling  -------------  -->
                         <div style="position:relative;">
-                            <!-- <v-btn
-                                elevation="2"
-                                fab
-                                absolute
-                                right
-                                small
-                                bottom
-                            >
-                                <v-icon>mdi-heart-outline</v-icon>
-                            </v-btn> -->
                             <v-img
-                                :aspect-ratio="4/3"
+                                :aspect-ratio="1/1"
                                 :src="product.Thumbnail"
                                 contain
                                 class="productImage"
@@ -149,8 +139,6 @@ export default {
         .catch( err => {
             console.log( err.response.data.Message );
         });
-
-        console.log('mounted from index.vue')
     }
 }
 </script>

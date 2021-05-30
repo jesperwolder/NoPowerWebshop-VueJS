@@ -23,6 +23,18 @@ export const GetCartCount = () => {
     });
 
     return count;
+}
+
+export const GetCartTotal = () => {
+
+    const cart = GetCart();
+    let total = 0;
+
+    cart.forEach( item => {
+        total += ( item.Price * item.Quantity )
+    });
+
+    return total;
 
 }
 

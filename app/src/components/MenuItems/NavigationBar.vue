@@ -68,6 +68,7 @@
 			</div>
 
 			<v-menu 
+				v-if="$globalData.CartCount > 0"
 				offset-y 
 				class="pa-0"
 				:close-on-content-click="false"
@@ -92,10 +93,15 @@
 					class="ma-0"
 					style="min-width: 300px;max-width: 600px;"
 				>
-					<v-card-title>Indkøbskurv</v-card-title>
+					<v-card-title class="font-weight-regular">Indkøbskurv</v-card-title>
 					<v-card-text>
+						<div v-if="$globalData.CartCount < 0" class="pt-5 text-center">
+							<div class="text-h3">ಠ▃ಠ</div><br>
+							<h3 class="font-weight-light">Ingen produkter i kurven</h3>
+						</div>
+
 						<div
-							v-for="( item, index ) in products"
+							v-for="( item, index ) in $globalData.Cart"
 							:key="index"
 						>
 							<v-row no-gutters>
@@ -110,6 +116,10 @@
 							</v-row>
 
 							<v-divider class="mb-5"></v-divider>
+						</div>
+
+						<div>
+							Samlet beløb <span class="font-weight-bold">{{ $globalData.CartTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</span> kr
 						</div>
 					</v-card-text>
 					<v-card-actions>
@@ -132,15 +142,12 @@
 //-- --------------------------- Uses Authbody to check jwt for user in navigationbar in current-session--------------------------------- -->
 import { AuthBody } from '@/Services/AuthApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { GetCart } from '@/Services/GlobalMethods';
-import { GetProductBody } from '@/Services/ProductApi';
 
 export default {
 	data: () => ({
 		search: "",
 		offsetTop: 0,
 		CS: CurrentSession,
-		products: []
 	}),
 	//-- ------ We use mounted function to checks the current session for the jwt for user islogged in and isAdmin if not admin it deninies the user the admin page------------- 
 	mounted: function() {
@@ -160,37 +167,6 @@ export default {
 				CurrentSession.RequireAdmin = false;
 			});
 		}
-
-		const cart = GetCart();
-		let ids = "";
-		let i = 0;
-
-		cart.forEach( item => {
-			if( (cart.length - 1) === i ) {
-				ids += item._id;
-			} else {
-				ids += item._id + ',';
-			}
-
-			i++;
-		});
-	
-		GetProductBody( ids )
-		.then( res => {
-			res.Products.forEach( item => {
-				this.products.push({
-					_id: item._id,
-					Name: item.Name,
-					Thumbnail: item.Thumbnail,
-					LowerHeader: item.LowerHeader,
-					Price: item.Price,
-					Quantity: cart.find( x => x._id === item._id ).Quantity
-				})
-			} )
-		})
-		.catch( err => {
-			console.log(err)
-		})
 	},
 	methods: {
 		ToggleAppDrawer: function() {
@@ -226,9 +202,6 @@ export default {
 		$route() {
 			CurrentSession.PageFound = true;
 			//this.CartCount = GetCartCount();
-		},
-		$globalData () {
-			console.log('cart updated')
 		}
 	},
 };

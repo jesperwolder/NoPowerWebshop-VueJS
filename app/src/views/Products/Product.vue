@@ -42,6 +42,35 @@
             </v-row>
         </v-alert>
 
+        <div 
+            v-for="( err ) in msg"
+            :key="err"
+        >
+            <v-alert
+                text
+                icon="mdi-cart-check"
+                dismissible
+                prominent
+                border="bottom"
+                color="green"
+                type="success"
+                transition="scroll-x-reverse-transition"
+                class="pb-7"
+            >
+                {{ err }}
+                <v-divider
+                    class="my-4 success"
+                    style="opacity: 0.22"
+                ></v-divider>
+                <v-btn
+                    color="green"
+                    to="/cart"
+                >
+                    Gå til indkøbskurven
+                </v-btn>
+            </v-alert>
+        </div>
+
         <!----------------- Product headings on inscepting product ------------------------>
         <v-card-title class="headline px-0 pt-0">
             {{ product.Name }}
@@ -206,7 +235,7 @@
 
 import { GetProductBody } from '@/Services/ProductApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
-import { AddToCart, RemoveItemFromCart, GetCartCount } from '@/Services/GlobalMethods';
+import { AddToCart, RemoveItemFromCart, GetCart, GetCartCount, GetCartTotal } from '@/Services/GlobalMethods';
 //----------------- Imported methods Getproduct, and functionalty AddToCart and RemoveFromCart  ------------------------
 export default {
     data() {
@@ -216,6 +245,7 @@ export default {
             meta: this.$route.meta,
             product: [],
             slides: [],
+            msg: [],
             CS: CurrentSession,
             AvailabilityColors: [ 'red', 'amber', 'green' ]
         }
@@ -254,13 +284,23 @@ export default {
         },
 //----------------- Add to cart method adds the id by the product and adds 1 in quantity and keeps adding 1 in quantity in another method if the id is the same------------------ 
         AddProduct: function( quantity ) {
-            console.log( AddToCart( { _id: this.product._id, Quantity: quantity } ) );
+            AddToCart( { 
+                _id: this.product._id, 
+                Quantity: quantity,
+                Thumbnail: this.product.Thumbnail,
+                Price: this.product.Price,
+                LowerHeader: this.product.LowerHeader,
+                Name: this.product.Name
+            } );
             this.$globalData.CartCount = GetCartCount();
+            this.$globalData.CartTotal = GetCartTotal();
+            this.$globalData.Cart = GetCart();
+            this.msg.push('Produktet blev føjet til indkøbskurven 😁 👍')
         },
 //----------------- Removes the product in the cart, other methed removes the id by 1 in quantity------------------
         RemoveProduct: function() {
             RemoveItemFromCart( this.product._id );
-        }
+        },
     }
 }
 </script>
