@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="pa-5 ma-0"
+        class="pa-5 ma-0 mx-auto mw"
         elevation="2"
     >
         <!-- Alerts -->

@@ -1,11 +1,11 @@
 <template>
 <!-- The Cartcheckout with items and final price and then the stepper afterwards if you click sumbit -->
-	<v-container class="pa-0" fluid>
+	<v-container class="pa-0 mx-auto mw" fluid>
 		<v-row>
-			<v-col cols="12" sm="12" md="8">
+			<v-col cols="12" sm="12" md="8" lg="8" xl="9">
 				<ProductList :title="meta.title" :products="this.$globalData.Cart" />
 			</v-col>
-			<v-col cols="12" sm="12" md="4">
+			<v-col cols="12" sm="12" md="4" lg="4" xl="3">
 				<CheckoutBox :totalPrice="$globalData.CartTotal" />
 			</v-col>
 		</v-row>

@@ -2,8 +2,9 @@
 	<v-card
 		class="pa-4 mb-0"
 	>
-		<h1 class="pb-5">{{ title }}</h1>
-		<v-divider></v-divider>
+		<h1 class="font-weight-regular">{{ title }}</h1>
+		
+		<v-divider class="pb-8 mt-3"></v-divider>
 
 		<div v-if="CartProducts.length == 0" class="pt-5 text-center">
 			<div class="text-h1">ಠ▃ಠ</div><br>
@@ -19,13 +20,20 @@
 
 				<v-col 
 					cols="2"
+					sm="2"
+					md="2"
+					lg="2"
+					class=""
 				>
 					<v-img contain avatar :aspect-ratio="1/1" :src="product.Thumbnail"></v-img>
 				</v-col>
 
 				<v-col
-					cols="7"
 					class="px-5"
+					cols="10"
+					sm="10"
+					md="7"
+					lg="7"
 				>
 					<div class="text-h5 text--primary text-truncate">
 						{{ product.Name }}
@@ -36,11 +44,17 @@
 				</v-col>
 
 				<v-col
-					cols="1"
-					xs="3"
+					cols="6"
+					order="2"
+					order-md="1"
+					sm="6"
+					md="1"
+					lg="1"
+					class="pt-10 pt-md-0"
 				>
 					<v-text-field 
 						outlined
+						dense
 						label="Antal" 
 						type="number" 
 						reverse 
@@ -52,9 +66,13 @@
 				</v-col>
 
 				<v-col
-					cols="2"
-					xs="3"
-					class="text-right"
+					cols="6"
+					order="1"
+					order-md="2"
+					sm="6"
+					md="2"
+					lg="2"
+					class="text-left text-md-right pt-10 pt-md-0"
 				>
 					<h5>Pris pr. stk</h5>
 					{{ product.Price }} kr <br><br>

@@ -5,7 +5,7 @@
             elevation="2"
         >
         <!---------- Our all products site -------------  --> 
-            <h1>{{ meta.title }}</h1>
+            <h1 class="font-weight-regular">{{ meta.title }}</h1>
 
             <v-divider class="pb-3 mt-3"></v-divider>
         <!---------- If we have 0 products on our page -------------  --> 
@@ -139,6 +139,8 @@ export default {
         .catch( err => {
             console.log( err.response.data.Message );
         });
+
+        console.log(this.$route.params.category)
     }
 }
 </script>
