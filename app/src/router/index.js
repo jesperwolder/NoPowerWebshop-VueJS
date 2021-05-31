@@ -12,7 +12,6 @@ import DashBoard from '../views/DashBoard.vue';
 import AdminPage from '../views/AdminPages/AdminPage.vue';
 import Customer_Management from '../views/AdminPages/Customer_Management.vue';
 import Item_management from '../views/AdminPages/Item_management.vue';
-import Support_management from '../views/AdminPages/Support_tickets.vue';
 import Products from '../views/Products/ProductsOverview.vue';
 import Product from '../views/Products/Product.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
@@ -132,16 +131,7 @@ const routes = [
 			]
 		} 
 	},
-	{ path: '/support_management', name: 'Administrer support', component: Support_management,
-		meta: {
-			title: 'Administrer support',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				{ name: 'Administrator område', to: '/adminpage' },
-				{ name: 'Administrer support', to: '/support_management' },
-			]
-		} 
-	},
+	
 
 
 	///--------------------------- Products---------------------------------
