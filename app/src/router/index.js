@@ -51,6 +51,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/ReturRet', name: 'Returret', component: ReturRet, 
 		meta: { 
 			title: 'Returret',
@@ -71,6 +72,7 @@ const routes = [
 			]	
 		}
 	},
+
 	{ path: '/login', name: 'Log ind', component: Login, 
 		meta: {
 			title: 'Log ind',
@@ -80,6 +82,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
 		meta: {
 			title: 'Dashboard',
@@ -89,6 +92,7 @@ const routes = [
 			]
 		} 
 	},
+
 	{ path: '/profile', name: 'Profil', component: Profile,
 		meta: { 
 			title: 'Profil',
@@ -172,16 +176,15 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Indløbskurv', to: '/cart' },
-			]
+			],
+			appDrawer: false
 		}
 	},
 	{ path: '/checkout', name: 'CheckOut', component: Checkout, 
 		meta: { 
 			title: 'CheckOut',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				
-			]
+			breadcrumb: false,
+			appDrawer: false
 		}
 	},
 	{ path: '/ThankYou', name: 'ThankYou', component: ThankYou, 

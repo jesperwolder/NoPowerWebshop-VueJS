@@ -1,6 +1,6 @@
 <template>
 <!----------------- Home page/landing------------------> 
-	<div class="home">
+	<div class="home mx-auto mw">
 	<v-card class="pa-5">
 	<v-carousel hide-delimiters height="auto">
     <v-responsive :aspect-ratio="30/9">

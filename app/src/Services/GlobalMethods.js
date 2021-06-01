@@ -99,6 +99,11 @@ export const UpdateCart = ( cartObject ) => {
     return cartObject;
 }
 
+export const ClearCart = () => {
+    localStorage.removeItem( 'cart' );
+    console.log( 'Cart has been cleared' )
+}
+
 /**
  * Cart methods end.
  */

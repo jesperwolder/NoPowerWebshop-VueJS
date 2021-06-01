@@ -241,6 +241,18 @@
                                                     <v-divider class="mb-5" ></v-divider>
                                                     <v-card-subtitle class="px-0">Categories</v-card-subtitle>
 
+                                                    <div>
+                                                        <!-- Category -->
+                                                        <v-autocomplete
+                                                            v-model="editedItem.Categories"
+                                                            :items="AllCategories"
+                                                            chips
+                                                            multiple
+                                                        >
+
+                                                        </v-autocomplete>
+                                                    </div>
+
                                                     <div
                                                         v-for="( cat, index ) in editedItem.Categories"
                                                         :key="index"
@@ -395,7 +407,7 @@
 
 <script>
 
-import { CurrentSession } from '@/Services/GlobalVariables';
+import { CurrentSession, GlobalProducts } from '@/Services/GlobalVariables';
 import { GetAllProductsBody, UpdateProductBody, CreateProductBody } from '@/Services/ProductApi';
 import PermissionDenied from '@/views/ErrorPages/403.vue';
 
@@ -410,6 +422,7 @@ export default {
             meta: this.$route.meta,
             isLoading: false,
             CS: CurrentSession,
+            AllCategories: GlobalProducts.Categories,
             dialog: false,
             search: '',
             state: null,
