@@ -8,7 +8,7 @@
                 
         >
 <!----- Json board over every items you can search and sort the items and change their information ------>  
-            <h1>{{ meta.title }}</h1>
+            <h1 class="font-weight-regular">{{ meta.title }}</h1>
 
             <v-form class="col-12 pa-0"> 
                 
@@ -29,6 +29,15 @@
                             :search="search"
                         >
 
+                            <template v-slot:item.isActive="{ item }">
+                                <v-icon v-if="item.isActive" color="green">
+                                    mdi-check-circle
+                                </v-icon>
+                                <v-icon v-if="!item.isActive" color="red">
+                                    mdi-block-helper
+                                </v-icon>           
+                            </template>
+
                         <template v-slot:top>
                             <v-toolbar
                                 flat
@@ -47,12 +56,12 @@
                                 >
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
-                                    color="primary"
-                                    dark
-                                    class="mb-2"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                    v-on:click="InsertState()"
+                                        color="#F7941D"
+                                        dark
+                                        class="mb-2"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        v-on:click="InsertState()"
                                     >
                                     Tilføj produkt
                                     </v-btn>
@@ -431,16 +440,16 @@ export default {
             },
             headers: [
                 {
-                    text: 'Name',
+                    text: 'Produkt titel',
                     align: 'start',
                     filterable: true,
                     value: 'Name',
                 },
             
                 { text: 'Kort beskrivelse', value: 'LowerHeader' },
-                { text: 'Price', value: 'Price' },
-                { text: 'Stock', value: 'Stock' },
-                { text: 'Active', value: 'isActive' },
+                { text: 'Pris', value: 'Price' },
+                { text: 'Lagerstatus', value: 'Stock' },
+                { text: 'Aktiv', value: 'isActive' },
                 { text: 'Actions', value: 'actions', sortable: false },
             ],
 //------ all products we either create, update og read -------

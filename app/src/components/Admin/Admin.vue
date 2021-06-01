@@ -7,7 +7,7 @@
         >
 <!---------- Dashboard for admin controll  ---------------->
             <div class="col-12 pa-0"> 
-                <h1>{{ meta.title }}</h1>
+                <h1 class="font-weight-regular">{{ meta.title }}</h1>
                 <v-divider class="pb-3 mt-3"></v-divider>
                 
                 <v-btn class="buttons" depressed text mr-2 to="/profile">

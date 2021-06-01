@@ -68,8 +68,6 @@ export default {
 		
 		this.ShowBreadcrumb = ( this.$route.meta.breadcrumb == false ? false : true );
 		this.$globalData.AppDrawer = ( this.$route.meta.appDrawer == false ? false : true );
-		console.log(this.$globalData.AppDrawer)
-		console.log(this.$route.meta.appDrawer)
 	},
 
 	watch: {

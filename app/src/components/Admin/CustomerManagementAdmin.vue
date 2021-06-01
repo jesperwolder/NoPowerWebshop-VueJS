@@ -10,7 +10,7 @@
                  v-if="CS.isAdmin" 
                  
             >
-            <h1>{{ meta.title }}</h1>
+            <h1 class="font-weight-regular">{{ meta.title }}</h1>
             
             <v-form class="col-12 pa-0"> 
 <!----- Json board over every user you can search and sort the users and change their information and see their products ------>
@@ -242,17 +242,17 @@ export default {
             search: '',
         headers: [
             {
-                text: 'Fullname',
+                text: 'Fulde navn',
                 align: 'start',
                 filterable: true,
                 value: 'Fullname',
             },
             { text: 'Email', value: 'Email' },
-            { text: 'Phone', value: 'Phone' },
-            { text: 'Street', value: 'Address.Street' },
-            { text: 'Number', value: 'Address.Number' },
-            { text: 'Zip', value: 'Address.Zip' },
-            { text: 'City', value: 'Address.City' },
+            { text: 'Telefonnummer', value: 'Phone' },
+            { text: 'Adresse', value: 'Address.Street' },
+            { text: 'Nummer', value: 'Address.Number' },
+            { text: 'Postnummer', value: 'Address.Zip' },
+            { text: 'By', value: 'Address.City' },
             { text: 'Actions', value: 'actions', sortable: false },
        
         ],

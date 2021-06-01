@@ -105,14 +105,15 @@ const routes = [
 	},
 
 
-	///--------------------------- Admin controll---------------------------------
+	///--------------------------- Admin control---------------------------------
 	{ path: '/adminpage', name: 'Administrator område', component: AdminPage,
 		meta: {
 			title: 'Administrator område',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/customer_management', name: 'Administrer kunder', component: Customer_Management,
@@ -122,7 +123,8 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer kunder', to: '/customer_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/item_management', name: 'Administrer produkter', component: Item_management,
@@ -132,7 +134,8 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer produkter', to: '/item_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	
