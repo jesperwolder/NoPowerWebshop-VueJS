@@ -15,14 +15,14 @@
         
         
          
-        
+      
       </v-carousel-item>
 </v-responsive>
     </v-carousel>
-
+  <v-divider class="pb-3 mt-4"></v-divider>
 	 <!-- <v-row no-gutters>
         <v-col :cols="12">
-          <v-divider class="pb-3 mt-4"></v-divider>
+          
             <div class="col-12 pa-0 d-flex justify-space-between"> 
                 
                 
@@ -66,7 +66,7 @@
 			
 		<!-- </v-col>
     </v-row> --> 
-<v-divider></v-divider>
+
 	<v-container fluid>
       <v-row no-gutters>
         <v-col :cols="12">
