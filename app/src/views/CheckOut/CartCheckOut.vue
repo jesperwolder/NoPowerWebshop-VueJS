@@ -27,5 +27,8 @@ export default {
 			TotalPrice: 0,
 		}
 	},
+	mounted: function() {
+		//this.$globalData.AppDrawer = false;
+	}
 }
 </script>

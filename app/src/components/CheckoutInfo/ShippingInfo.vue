@@ -3,32 +3,26 @@
 	<v-stepper-content step="2">
 		<v-text-field
 			v-model="data.Street"
-			label="Street Address"
-			required
-		/>
-
-	 <v-text-field
-			v-model="data.Number"
-			label="Address Number "
+			label="Adresse"
 			required
 		/>
 
 		<v-text-field
 			v-model="data.Zip"
-			label="Zip"
+			label="Postnummer"
 			:rules="[rules.required, rules.Zip]"
 			required
 		/>
 
 		<v-text-field
 			v-model="data.City"
-			label="City"
+			label="By"
 			required
 		/> 
 
 		<v-text-field
 			v-model="data.State"
-			label="State"
+			label="Region"
 			required
 		/>
 

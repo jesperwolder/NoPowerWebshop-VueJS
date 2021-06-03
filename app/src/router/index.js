@@ -51,6 +51,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/ReturRet', name: 'Returret', component: ReturRet, 
 		meta: { 
 			title: 'Returret',
@@ -71,6 +72,7 @@ const routes = [
 			]	
 		}
 	},
+
 	{ path: '/login', name: 'Log ind', component: Login, 
 		meta: {
 			title: 'Log ind',
@@ -80,6 +82,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
 		meta: {
 			title: 'Dashboard',
@@ -89,6 +92,7 @@ const routes = [
 			]
 		} 
 	},
+
 	{ path: '/profile', name: 'Profil', component: Profile,
 		meta: { 
 			title: 'Profil',
@@ -101,14 +105,15 @@ const routes = [
 	},
 
 
-	///--------------------------- Admin controll---------------------------------
+	///--------------------------- Admin control---------------------------------
 	{ path: '/adminpage', name: 'Administrator område', component: AdminPage,
 		meta: {
 			title: 'Administrator område',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/customer_management', name: 'Administrer kunder', component: Customer_Management,
@@ -118,7 +123,8 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer kunder', to: '/customer_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/item_management', name: 'Administrer produkter', component: Item_management,
@@ -128,7 +134,8 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer produkter', to: '/item_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	
@@ -172,16 +179,15 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Indløbskurv', to: '/cart' },
-			]
+			],
+			appDrawer: false
 		}
 	},
 	{ path: '/checkout', name: 'CheckOut', component: Checkout, 
 		meta: { 
 			title: 'CheckOut',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				
-			]
+			breadcrumb: false,
+			appDrawer: false
 		}
 	},
 	{ path: '/ThankYou', name: 'ThankYou', component: ThankYou, 

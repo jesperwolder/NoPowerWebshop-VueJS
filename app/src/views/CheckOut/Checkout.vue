@@ -53,7 +53,7 @@
 	import Review from '@/components/CheckoutInfo/Review.vue';
 	import Payment from '@/components/CheckoutInfo/Payment.vue';
 	import { CreateOrderBody } from '@/Services/OrdersApi'
-	import { GetCart } from '@/Services/GlobalMethods'
+	import { GetCart, ClearCart, GetCartTotal, GetCartCount } from '@/Services/GlobalMethods'
 
 	export default {
 		components: {
@@ -94,6 +94,10 @@
 				}
 			}
 		},
+		mounted: function() {
+			//this.$globalData.Breadcrump = false;
+			//this.$globalData.AppDrawer = false;
+		},
 		methods: {
 //-------- The steps in the stepping that can go back and next and then the sumbit  --------------
 			next() {
@@ -106,14 +110,40 @@
 				
 	//-------- Prints out Orderdetails  --------------
 				const OrderDetailsBody = {
-					ProductIDs: []
+					Products: [],
+					Billing: {
+						Fullname: this.data.Name,
+						Email: this.data.Email,
+						Phone: this.data.Phone,
+						Address: this.data.Street + ', ' + this.data.zip + ' ' + this.data.city,
+						State: this.data.State
+					},
+					Total: this.$globalData.CartTotal,
+					OrderId: null
 				}
 
 				GetCart().forEach( item => {
-					OrderDetailsBody.ProductIDs.push( item._id );
+					OrderDetailsBody.Products.push( {
+						_id: item._id,
+						Name: item.Name,
+						Thumbnail: item.Thumbnail,
+						Price: item.Price,
+						Quantity: item.Quantity
+					});
 				})
 
+				console.log(this.data)
 				console.log(OrderDetailsBody);
+				return;
+				// Process order
+
+				// Order success
+				ClearCart(); // Clears cart if order is a success 👍
+				this.$globalData.Cart = GetCart();
+				this.$globalData.CartTotal = GetCartTotal();
+				this.$globalData.CartCount = GetCartCount();
+
+				// Order failed
 				return;
 
 				CreateOrderBody( {}, this.$cookies.get( 'jwt' ) )

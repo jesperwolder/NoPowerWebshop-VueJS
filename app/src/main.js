@@ -16,7 +16,7 @@ Vue.prototype.$globalData = Vue.observable({
 	CartCount: GetCartCount(),
 	Cart: GetCart(),
 	CartTotal: GetCartTotal(),
-	AppDrawer: true,
+	AppDrawer: false,
 	Breadcrump: true
 });
 
