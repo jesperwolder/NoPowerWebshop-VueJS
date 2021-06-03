@@ -11,9 +11,10 @@
 						<small class="font-italic font-weight-regular text--secondary">Heraf moms (25%) {{ ( totalPrice * .20 ).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</b> kr</small>
 					</v-col>
 				</v-row>
+				{{ $globalData.CartCount }} produkt{{ ( $globalData.CartCount == 1 ? '' : 'er' ) }}
 			</v-card-text>
 
-			<v-card-actions>
+			<v-card-actions v-if="$globalData.CartCount > 0">
 				<v-btn
 					color="#F7941D"
 					block

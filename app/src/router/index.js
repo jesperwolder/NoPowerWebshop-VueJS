@@ -12,8 +12,7 @@ import DashBoard from '../views/DashBoard.vue';
 import AdminPage from '../views/AdminPages/AdminPage.vue';
 import Customer_Management from '../views/AdminPages/Customer_Management.vue';
 import Item_management from '../views/AdminPages/Item_management.vue';
-import Support_management from '../views/AdminPages/Support_tickets.vue';
-import Products from '../views/Products/Index.vue';
+import Products from '../views/Products/ProductsOverview.vue';
 import Product from '../views/Products/Product.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
@@ -52,6 +51,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/ReturRet', name: 'Returret', component: ReturRet, 
 		meta: { 
 			title: 'Returret',
@@ -72,6 +72,7 @@ const routes = [
 			]	
 		}
 	},
+
 	{ path: '/login', name: 'Log ind', component: Login, 
 		meta: {
 			title: 'Log ind',
@@ -81,6 +82,7 @@ const routes = [
 			]
 		}
 	},
+
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
 		meta: {
 			title: 'Dashboard',
@@ -90,6 +92,7 @@ const routes = [
 			]
 		} 
 	},
+
 	{ path: '/profile', name: 'Profil', component: Profile,
 		meta: { 
 			title: 'Profil',
@@ -102,14 +105,15 @@ const routes = [
 	},
 
 
-	///--------------------------- Admin controll---------------------------------
+	///--------------------------- Admin control---------------------------------
 	{ path: '/adminpage', name: 'Administrator område', component: AdminPage,
 		meta: {
 			title: 'Administrator område',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/customer_management', name: 'Administrer kunder', component: Customer_Management,
@@ -119,7 +123,8 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer kunder', to: '/customer_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
 	{ path: '/item_management', name: 'Administrer produkter', component: Item_management,
@@ -129,19 +134,11 @@ const routes = [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Administrator område', to: '/adminpage' },
 				{ name: 'Administrer produkter', to: '/item_management' },
-			]
+			],
+			appDrawer: false
 		} 
 	},
-	{ path: '/support_management', name: 'Administrer support', component: Support_management,
-		meta: {
-			title: 'Administrer support',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				{ name: 'Administrator område', to: '/adminpage' },
-				{ name: 'Administrer support', to: '/support_management' },
-			]
-		} 
-	},
+	
 
 
 	///--------------------------- Products---------------------------------
@@ -182,16 +179,15 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Indløbskurv', to: '/cart' },
-			]
+			],
+			appDrawer: false
 		}
 	},
 	{ path: '/checkout', name: 'CheckOut', component: Checkout, 
 		meta: { 
 			title: 'CheckOut',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-				
-			]
+			breadcrumb: false,
+			appDrawer: false
 		}
 	},
 	{ path: '/ThankYou', name: 'ThankYou', component: ThankYou, 

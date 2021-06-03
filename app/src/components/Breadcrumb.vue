@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="mx-auto mw">
         <v-breadcrumbs :items="bread">
             <template v-slot:divider>
                 <v-icon>mdi-chevron-right</v-icon>

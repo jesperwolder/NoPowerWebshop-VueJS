@@ -5,7 +5,7 @@
             elevation="2"
         >
         <!---------- Our all products site -------------  --> 
-            <h1>{{ meta.title }}</h1>
+            <h1 class="font-weight-regular">{{ meta.title }}</h1>
 
             <v-divider class="pb-3 mt-3"></v-divider>
         <!---------- If we have 0 products on our page -------------  --> 
@@ -40,18 +40,8 @@
                     >
          <!---------- Prints every picture for our products and syling  -------------  -->
                         <div style="position:relative;">
-                            <!-- <v-btn
-                                elevation="2"
-                                fab
-                                absolute
-                                right
-                                small
-                                bottom
-                            >
-                                <v-icon>mdi-heart-outline</v-icon>
-                            </v-btn> -->
                             <v-img
-                                :aspect-ratio="4/3"
+                                :aspect-ratio="1/1"
                                 :src="product.Thumbnail"
                                 contain
                                 class="productImage"
@@ -150,7 +140,7 @@ export default {
             console.log( err.response.data.Message );
         });
 
-        console.log('mounted from index.vue')
+        console.log(this.$route.params.category)
     }
 }
 </script>

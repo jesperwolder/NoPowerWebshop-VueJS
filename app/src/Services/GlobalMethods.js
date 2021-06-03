@@ -23,6 +23,18 @@ export const GetCartCount = () => {
     });
 
     return count;
+}
+
+export const GetCartTotal = () => {
+
+    const cart = GetCart();
+    let total = 0;
+
+    cart.forEach( item => {
+        total += ( item.Price * item.Quantity )
+    });
+
+    return total;
 
 }
 
@@ -85,6 +97,11 @@ export const UpdateCart = ( cartObject ) => {
     UpdateCartCount();
 
     return cartObject;
+}
+
+export const ClearCart = () => {
+    localStorage.removeItem( 'cart' );
+    console.log( 'Cart has been cleared' )
 }
 
 /**

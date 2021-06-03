@@ -127,3 +127,7 @@ html, body{
 .theme--dark.v-pagination .v-pagination__item--active {
     border-color: rgb(247, 148, 29) !important;
 }
+
+.mw {
+    max-width: 119rem !important;
+}

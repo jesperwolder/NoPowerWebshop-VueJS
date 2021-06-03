@@ -4,7 +4,7 @@
 		<v-text-field
 			v-model="data.Name"
 			:rules="[rules.required]"
-			label="Name"
+			label="Fulde navn"
 			required
 		/>
 
@@ -18,7 +18,7 @@
 		<v-text-field
 			v-model="data.Phone"
 			:rules="[rules.required, rules.Phone]"
-			label="Phone Number"
+			label="Telefonnummer"
 			required
 		/>
 

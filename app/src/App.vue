@@ -8,7 +8,7 @@
 				class="mainContainer"
 				fluid
 			>
-				<Breadcrumb v-if="$globalData.Breadcrump" />
+				<Breadcrumb v-if="ShowBreadcrumb" />
 
 				<div v-if="!CS.PageFound">
 					<NotFound />
@@ -49,7 +49,8 @@ export default {
 
 	data: () => ({
 		CS: CurrentSession,
-		Categories: []
+		Categories: [],
+		ShowBreadcrumb: true
 	}),
 
 	mounted() {
@@ -63,7 +64,10 @@ export default {
 			this.$vuetify.theme.dark = (this.$cookies.get('themeDark') === 'true' ? true : false);
 		} else {
 			this.$vuetify.theme.dark = false;
-		}		
+		}
+		
+		this.ShowBreadcrumb = ( this.$route.meta.breadcrumb == false ? false : true );
+		this.$globalData.AppDrawer = ( this.$route.meta.appDrawer == false ? false : true );
 	},
 
 	watch: {
@@ -81,8 +85,9 @@ export default {
 			}
 			
 			this.CS = CurrentSession;
-			this.$globalData.AppDrawer = true;
-			this.$globalData.Breadcrumb = true;
+
+			this.ShowBreadcrumb = ( this.$route.meta.breadcrumb == false ? false : true );
+			this.$globalData.AppDrawer = ( this.$route.meta.appDrawer == false ? false : true );
 		}
 	}
 };

@@ -4,28 +4,28 @@
 		<v-text-field
 			v-model="data.CardHolder"
 			:rules="[rules.required]"
-			label="Cardholder"
+			label="Kortholders navn"
 			required
 		/>
 
 		<v-text-field
 			v-model="data.CardNumber"
 			:rules="[rules.required]"
-			label="CardNumber"
+			label="Kortnummer"
 			required
 		/>
 
 		 <v-text-field
 			v-model="data.ExpDate"
 			:rules="[rules.required]"
-			label="ExpDate"
+			label="Udløbsdato"
 			required
 		/>
 
 		<v-text-field
 			v-model="data.LastThree"
 			:rules="[rules.required]"
-			label="AutCode"
+			label="Sikkerhedsnummer"
 			required
 		/>
 
