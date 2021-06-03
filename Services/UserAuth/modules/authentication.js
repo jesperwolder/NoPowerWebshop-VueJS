@@ -9,6 +9,11 @@ let GetSalt = async () => {
     return salt;
 }
 
+/**
+ * 
+ * @param {string} str 
+ * @returns {string}
+ */
 let HashString = async (str) => {
     let salt = await GetSalt();
 
@@ -17,14 +22,30 @@ let HashString = async (str) => {
     return hash;
 }
 
+/**
+ * 
+ * @param {string} plain 
+ * @param {string} hash 
+ * @returns 
+ */
 let Compare = async (plain, hash) => {
     return await bcrypt.compare(plain, hash);
 }
 
+/**
+ * 
+ * @param {any} store { _id, Email }
+ * @returns 
+ */
 let SignJwt = (store) => {
     return jwt.sign(store, process.env.SECRET);
 }
 
+/**
+ * 
+ * @param {string} token 
+ * @returns {string} jwt
+ */
 let VerifyJwt = (token) => {
     return jwt.verify(token, process.env.SECRET);
 }

@@ -1,71 +1,29 @@
 const express = require('express');
-const axios = require('axios');
-const mongoose = require('mongoose');
-require('dotenv').config();
-const Product = require('../Schema/Product');
-
 const router = express.Router();
 
-router.get('/:id', async (req, res) => {
-    let prods = [];
-    if(req.params.id.includes(',')) {
-        let IDs = req.params.id.split(',');
-        let failed = false;
+const logic = require('../Logic/GetSingleOrMultiple');
 
-        for (id of IDs) {
-            try {
-                mongoose.Types.ObjectId(id);
-            }catch{
-                failed = true;
-            }
-            if(failed) break;
-
-            let err, product = await Product.findById(id);
-            if(err || !product) {
-                failed = true;
-                break;
-            }else {
-                product.Creator = null;
-                prods.push(product);
-            }
-        }
-
-        if(failed) {
-            res.status(404).json({
-                Message: 'Nogle produkter blev ikke fundet',
-                Products: null
-            });
-            return;
-        }
+router.get('/:ids', async (req, res) => {
+    try {
+        let products = await logic.Execute(req.params.ids);
 
         res.json({
             Message: 'Success',
-            Products: prods
+            Products: products
         });
-    }else {
-        try {
-            mongoose.Types.ObjectId(req.params.id);
-        }catch{
-            res.status(404).json({
-                Message: 'Det blev ikke fundet noget produkt',
+    }catch(e){
+        if(e.hasOwnProperty('code')){
+            res.status(e.code).json({
+                Message: e.msg,
                 Products: null
             });
-            return;
-        }
-        
-        let err, product = await Product.findById(req.params.id);
-        if(err || !product) {
+        }else {
+            console.log(e);
             res.status(404).json({
-                Message: 'Nogle produkter blev ikke fundet',
+                Message: 'Der skete en ukendt fejl, prøv igen senere',
                 Products: null
             });
         }
-
-        product.Creator = null;
-        res.json({
-            Message: 'Success',
-            Products: [ product ]
-        });
     }
 });
 

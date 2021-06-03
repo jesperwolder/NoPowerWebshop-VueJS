@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const ProductSchema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
-    Creator: {
-        _id: mongoose.Types.ObjectId,
-        creatorEmail: String,
-        creatorFullname: String,
-    },
     Name: String,
     LowerHeader: String,
     Description: String,
