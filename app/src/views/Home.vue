@@ -84,10 +84,10 @@
                 >
                   <v-img
                     class="white--text align-end"
-                    height="200px"
-                   src="~@/assets/images/Home/SommerTilbud.png" 
+                   src="~@/assets/images/Home/hardware2.png"
+                   :aspect-ratio="5/3" 
                   >
-                    <v-card-title>Hardware </v-card-title>
+                    <v-card-title >Hardware </v-card-title>
                   </v-img>
 
                   <v-card-text class="text--primary text-center">
@@ -118,10 +118,10 @@
                   >
                   <v-img
                     class="white--text align-end"
-                    height="200px"
-                     src="~@/assets/images/Home/SommerTilbud.png" 
+                     src="~@/assets/images/Home/Gaming.png" 
+                     :aspect-ratio="5/3"
                   >
-                    <v-card-title>pc og tablets </v-card-title>
+                    <v-card-title>Stationær,Laptops og skærme </v-card-title>
                   </v-img>
 
                   <v-card-text class="text--primary text-center">
@@ -151,10 +151,10 @@
                   >
                   <v-img
                     class="white--text align-end"
-                    height="200px"
-                     src="~@/assets/images/Home/SommerTilbud.png" 
+                     src="~@/assets/images/Home/mobile.png" 
+                     :aspect-ratio="5/3"
                   >
-                    <v-card-title>Mobil og kamera </v-card-title>
+                    <v-card-title>Mobil og tablets </v-card-title>
                   </v-img>
 
                   <v-card-text class="text--primary text-center">
@@ -184,8 +184,8 @@
                   >
                   <v-img
                     class="white--text align-end"
-                    height="200px"
-                     src="~@/assets/images/Home/SommerTilbud.png" 
+                     src="~@/assets/images/Home/getimage.png" 
+                     :aspect-ratio="5/3"
                   >
                     <v-card-title>Fritid og hårdehvidvare </v-card-title>
                   </v-img>
