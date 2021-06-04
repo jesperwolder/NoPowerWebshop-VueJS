@@ -14,10 +14,10 @@ const GetProductByID = async (ID) => {
 *   @param {string} jwt token used for authentication
 *   @returns {object} object check github docs for more information
 */
-const ValidateJwt = async (jwt) => {
+const FetchUser = async (jwt) => {
     let err, response = await axios.post(process.env.AuthService + '/auth', null, { headers: { jwt: jwt } });
     if(err) throw { msg: "Der skete en teknisk fejl prøv igen senere", code: 503 };
-    return response.data;
+    return response.data.User;
 }
 
-module.exports = { GetProductByID: GetProductByID, ValidateJwt, ValidateJwt }
+module.exports = { GetProductByID: GetProductByID, FetchUser, FetchUser }

@@ -40,7 +40,7 @@ const Execute = async (email, fullname, password, phone, street, number, zip, ci
 
     let hash = await auth.HashString(password);
 
-    let user = Repository.CreateUser(email, fullname, password, phone, street, number, zip, city);
+    let user = Repository.CreateUser(email, fullname, hash, phone, street, number, zip, city);
 
     let jwt = auth.SignJwt({ _id: user._id, Email: user.Email });
 
