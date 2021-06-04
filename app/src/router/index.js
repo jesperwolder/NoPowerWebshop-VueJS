@@ -17,6 +17,7 @@ import Product from '../views/Products/Product.vue';
 import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
 import ThankYou from '../views/CheckOut/Thankyoupage.vue';
+import Order from '../views/Orders/Order.vue';
 
 Vue.use(VueRouter)
 ///------- Every route for every site and meta tags and breadcrumbs --------
@@ -26,9 +27,7 @@ const routes = [
 	{ path: '/', name: 'Forside', component: Home, 
 		meta: { 
 			title: 'Forside',
-			breadcrumb: [
-				{ name: 'Forside', to: '/' },
-			]
+			breadcrumb: false
 		}
 	},
 
@@ -199,6 +198,15 @@ const routes = [
 			]
 		}
 	},
+	/// Orders
+	{ path: '/order/:id', name: 'Ordre', component: Order,
+		meta: {
+			title: 'Order',
+			breadcrumb: false,
+			appDrawer: false,
+		}
+	},
+
 	///--------------------------- 404 page, dont do new routes or paths below here---------------------------------
 	{ path: '*', name: '404', component: NotFound },
 ];
