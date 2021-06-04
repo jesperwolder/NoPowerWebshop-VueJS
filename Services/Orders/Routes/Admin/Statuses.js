@@ -1,30 +1,30 @@
 const express = require('express');
 const router = express.Router();
-let mongoose = require('mongoose');
-let Fetcher = require('../../modules/Fetcher');
-let Orders = require('../../Schema/OrderSchema');
+
+const logic = require('../../Logic/Statuses');
 
 router.get('/', async (req, res) => {
-    let body = await Fetcher.ValidateJwt(req.headers.jwt);
-    if(!body || !body.isAdmin) {
-        res.status(403).json({
-            Message: 'Du er ikke autoriseret til denne handling',
-            Orders: null
+    try {
+        let statuses = await logic.Execute(req.headers.jwt);
+        
+        res.json({
+            Message: 'Success',
+            Statuses: statuses
         });
-        return;
+    }catch(e) {
+        if(e.hasOwnProperty('code')) {
+            res.status(e.code).json({
+                Message: e.msg,
+                Statuses: null
+            });
+        }else {
+            console.log(e);
+            res.status(503).json({
+                Message: 'Der skete en fejl, prøv igen senere',
+                Statuses: null
+            });
+        }
     }
-    
-    res.json({
-        Message: 'Success',
-        Statuses: [
-            "Under håndtering",
-            "Afventer pickup",
-            "På vej",
-            "Leveret",
-            "Fejl",
-            "Afbrudt"
-        ]
-    });
 });
 
 module.exports = router;

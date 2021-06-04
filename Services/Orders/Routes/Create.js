@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const Create = require('../Repository/Create');
-
 router.post('/', async (req, res) => {
     try {
-        let Order = await Create.Execute(req.body.ProductIDs, req.headers.jwt);
+        //let Order = await Create.Execute(req.body.ProductIDs, req.headers.jwt);
         res.json({
             Message: 'Success',
             Order: Order

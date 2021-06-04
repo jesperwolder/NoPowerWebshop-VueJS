@@ -3,7 +3,7 @@ const Repository = require('../Repository/Product');
 /**
  * 
  * @param {string} ids ids seperated by , 
- * @returns 
+ * @returns {array} array containing products
  */
 const Execute = async (ids) => {
     let prods = [];
