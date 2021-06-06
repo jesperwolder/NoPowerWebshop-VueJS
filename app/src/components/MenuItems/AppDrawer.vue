@@ -51,6 +51,25 @@
                     </v-list-item>
                 </v-list-group>
             </v-list>
+
+            <v-list
+                dense
+                nav
+                v-if="CS.isLoggedIn"
+            >
+                <v-list-item-subtitle>
+                    Bruger
+                </v-list-item-subtitle>
+                <v-list-item
+                    v-for="item in userItems"
+                    :key="item.title"
+                    link
+                    :to="item.path"
+                    exact
+                >
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>   
+                </v-list-item>
+            </v-list>
         </v-navigation-drawer>
     </v-card>
 </template>
@@ -59,12 +78,18 @@
 //-- ------ Global component for fetchting all our products and breadcrum to navigate though it  -------------  -->
     import { GlobalProducts } from '@/Services/GlobalVariables';
     import { GetAllProductsBody } from '@/Services/ProductApi';
+    import { CurrentSession } from '@/Services/GlobalVariables';
 
     export default {
         data: () => ({
             drawerItems: [
                 { title: 'Alle produkter', path: '/products' }
             ],
+            userItems: [
+                { title: "Min side", path: '/dashboard'},
+                { title: "Log Ud", path: '/logout'},
+            ],
+            CS: CurrentSession
         }),
      //-- ------ Does not work yet but is soppussed to print out categories-------------  -->
         mounted: function() {
@@ -72,6 +97,9 @@
             GetAllProductsBody()
             .then( res => {
                 const obj = res.Products;
+
+                // console.log( obj.find( x => x.Categories.includes('Gpu') ))
+                // return;
 
                 obj.forEach( element => {
                     if( element.isActive ) {

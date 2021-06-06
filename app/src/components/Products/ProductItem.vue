@@ -29,14 +29,16 @@
                 </div>
 
                 <v-card-title
-                    class="productTitle text-truncate pb-2 px-0"
+                    class="productTitle pb-2 px-0"
                 >
-                    {{ data.Name }}
+                    <div class="text-truncate">{{ data.Name }}</div>
                 </v-card-title>
                 <v-card-text 
-                    class="pa-0 pt-0 text-caption text-truncate truncate-2"
+                    class="pa-0 pt-0 text-caption"
                 >
-                    {{ data.LowerHeader }}
+                    <div class="text-truncate">
+                        {{ data.LowerHeader }}
+                    </div>
                     <br>
                     <div class="pt-3">
                         <v-icon :color="ReturnAvailabilityColor( data.Stock )" dense>mdi-checkbox-blank-circle</v-icon> {{ data.Stock }} stk på lager
@@ -49,7 +51,7 @@
                     Kun <b>{{ data.Price }}</b>,- 
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
-                <AddToCart :product="data" />
+                <AddToCart v-if="data.Stock != 0" :product="data" />
             </v-card-actions>
         </v-card>
     </v-col>
@@ -72,7 +74,7 @@ export default {
         ReturnAvailabilityColor: function( amount ) {
             if( amount > 10 ) return this.AvailabilityColors[2];
             if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
-            if( amount >= 0 ) return this.AvailabilityColors[0];
+            if( amount == 0 ) return this.AvailabilityColors[0];
         },
     }
 }
@@ -87,8 +89,6 @@ export default {
     .productCard {
         border: 3px solid rgba(0,0,0,.12);
         transition: border 200ms ease;
-
-        /* border-radius: 0 !important; */
     }
 
     .productCard:hover, 

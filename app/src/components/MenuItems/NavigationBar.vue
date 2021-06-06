@@ -35,7 +35,7 @@
 				<div v-if="CS.isLoggedIn">
 					<div v-if="CS.isAdmin">
 						<v-btn class="buttons" depressed text mr-2 to="/adminpage">
-							<v-icon left>mdi-account</v-icon>
+							<v-icon left>mdi-account-lock</v-icon>
 							Administrator
 						</v-btn>
 					</div>
@@ -44,7 +44,7 @@
 				<div v-if="CS.isLoggedIn">
 					<v-btn class="buttons" depressed text mr-2 to="/dashboard">
 						<v-icon left>mdi-account</v-icon>
-						Dashboard
+						Min side
 					</v-btn>
 				</div>
 	<!-- --------------------------- Checks if user is logged in, then logs out user by logout method and deletes the jwt--------------------------------- -->
@@ -201,7 +201,6 @@ export default {
 	watch: {
 		$route() {
 			CurrentSession.PageFound = true;
-			//this.CartCount = GetCartCount();
 		}
 	},
 };

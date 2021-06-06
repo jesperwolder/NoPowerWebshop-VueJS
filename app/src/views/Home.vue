@@ -1,11 +1,9 @@
 <template>
-
-		<div>
-				<HomePage
-                class="mx-auto mw"
-                />
-		</div>
-	
+	<div>
+		<HomePage
+			class="mx-auto mw"
+		/>
+	</div>
 </template>
 
 <script>
