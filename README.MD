@@ -5,7 +5,7 @@ Password:
 123
 
 <!-- Oles login -->
-Bruger navn:
+Bruger navn:  
 OleNoPower@yahoo.dk  
 Password:   
 123
