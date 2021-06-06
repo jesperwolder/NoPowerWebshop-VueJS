@@ -22,11 +22,11 @@ const Execute = async (jwt, Name, LowerHeader, Description, Price, SalePercentag
     if(!user.isAdmin) throw { msg: 'Du er ikke autoriseret til denne handling', code: 403 };
 
     // Changes to first letter to uppercase and the rest to lowercase
-    let newCats = [];
-    Categories.forEach(Cat => {
-        Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
-        newCats.push(Cat);
-    });
+    let newCats = Categories;
+    //Categories.forEach(Cat => {
+    //    Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
+    //    newCats.push(Cat);
+    //});
 
     if(TechnicalDetails.length == 0) throw { msg: 'Der var ikke nogle tekniske detaljer', code: 401 };
 
