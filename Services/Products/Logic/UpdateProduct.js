@@ -25,11 +25,11 @@ const Execute = async (Jwt, ProductID, Name, LowerHeader, Description, Price, Th
 
     let product = await Repository.GetProductById(ProductID);
 
-    let newCats = [];
-    Categories.forEach(Cat => {
-        Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
-        newCats.push(Cat);
-    });
+    let newCats = Categories;
+    //Categories.forEach(Cat => {
+    //    Cat = Cat[0].toUpperCase() + Cat.slice(1).toLowerCase();
+    //    newCats.push(Cat);
+    //});
 
     try {
         // updating the values if the given new value is not null
