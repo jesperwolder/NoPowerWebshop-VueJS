@@ -30,7 +30,7 @@
                 nav
             >
                 <v-list-group
-                    :value="true"
+                    :value="false"
                     to="/products"
                 >
                     <template v-slot:activator>
@@ -44,6 +44,7 @@
                         link
                         :to="item.path"
                         exact
+                        color="#F7941D"
                     >
                         <v-list-item-content>
                             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -66,8 +67,9 @@
                     link
                     :to="item.path"
                     exact
+                    color="red"
                 >
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>   
+                    <v-list-item-title color="#ff0000">{{ item.title }}</v-list-item-title>   
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
@@ -87,7 +89,7 @@
             ],
             userItems: [
                 { title: "Min side", path: '/dashboard'},
-                { title: "Log Ud", path: '/logout'},
+                { title: "Log Ud", path: '/logout', color: "red"},
             ],
             CS: CurrentSession
         }),

@@ -4,9 +4,10 @@
         xs="12"
         sm="6"
         md="5"
-        lg="3"
-        xl="2"
-        class="px-2 my-0 productCols"
+        lg="4"
+        xl="3"
+        class="px-2 mt-0 mb-4 productCols"
+        v-if="data.Categories.includes( category ) || category == undefined"
     >
         <v-card
             height="100%"
@@ -64,7 +65,7 @@ export default {
     components: {
         AddToCart
     },
-    props: ['data'],
+    props: ['data', 'category'],
     data() {
         return {
             AvailabilityColors: [ 'red', 'amber', 'green' ],

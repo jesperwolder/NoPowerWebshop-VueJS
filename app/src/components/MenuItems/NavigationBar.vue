@@ -41,21 +41,9 @@
 					</div>
 				</div>
 	<!-- --------------------------- Checks if user is logged in, shows dashboard--------------------------------- -->
-				<div v-if="CS.isLoggedIn">
-					<v-btn class="buttons" depressed text mr-2 to="/dashboard">
-						<v-icon left>mdi-account</v-icon>
-						Min side
-					</v-btn>
-				</div>
-	<!-- --------------------------- Checks if user is logged in, then logs out user by logout method and deletes the jwt--------------------------------- -->
-				<div v-if="CS.isLoggedIn">
-					<v-btn depressed text v-on:click.prevent="logout()">
-						<v-icon left>mdi-logout</v-icon>
-						Log ud
-					</v-btn>
-				</div>
+
 	<!-- --------------------------- Hvis ingen er logged in giver den muligheden for det--------------------------------- -->
-				<div v-else>
+				<div v-if="!CS.isLoggedIn">
 					<v-btn class="buttons" depressed text mr-2 to="/login">
 						<v-icon left>mdi-account</v-icon>
 						Log Ind

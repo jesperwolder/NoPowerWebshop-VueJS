@@ -22,6 +22,7 @@
                 v-for="( item, index ) in products"
                 :key="index"
                 :data="item" 
+                :category="category"
             />
         </v-row>
 
@@ -32,7 +33,6 @@
                 :total-visible="7"
             ></v-pagination>
         </div> -->
-
     </v-card>
 </template>
 
@@ -52,12 +52,9 @@ export default {
         return {
             Page: 1,
             PagesTotal: 10,
+            ProductsCategories: []
         }
     },
-
-    mounted: function() {
-        console.log('hey x')
-    }
 }
 </script>
 
