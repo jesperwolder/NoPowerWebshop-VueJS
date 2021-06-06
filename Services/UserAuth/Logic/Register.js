@@ -14,7 +14,7 @@ const Repository = require('../Repository/User');
  * @param {number} zip 
  * @param {string} city 
  * 
- * @returns {objecy} { jwt, user }
+ * @returns {object} { jwt, user }
  */
 const Execute = async (email, fullname, password, phone, street, number, zip, city) => {
     if( 

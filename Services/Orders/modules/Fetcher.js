@@ -20,4 +20,22 @@ const FetchUser = async (jwt) => {
     return response.data.User;
 }
 
-module.exports = { GetProductByID: GetProductByID, FetchUser, FetchUser }
+const UpdateProduct = async (product) => {
+    let body = { Product: product }
+    let options = { headers: { jwt: process.env.JWT } }
+
+    let err, response = await axios.post(process.env.ProductService + '/admin/update', body, options);
+    
+    if(err) { 
+        console.log('stock failed on ' + product.Name + " with id " + product._id);
+        throw { msg: 'Der skete en transactions fejl', code: 404 } 
+    }
+
+    return response.data.Product;
+}
+
+module.exports = { 
+    GetProductByID: GetProductByID, 
+    FetchUser, FetchUser,
+    UpdateProduct: UpdateProduct
+}
