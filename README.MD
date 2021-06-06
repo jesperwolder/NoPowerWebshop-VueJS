@@ -12,7 +12,7 @@ Password:
 
 <!-- Pers login -->
 bruger navn:  
-Per@Nopower@yahoo.dk  
+PerNopower@yahoo.dk  
 Password:   
 123
 
