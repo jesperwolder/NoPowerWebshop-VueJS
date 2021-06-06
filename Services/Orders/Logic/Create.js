@@ -52,7 +52,7 @@ async function Execute(jwt, products, fullname, email, phone, address) {
             Name: product[0].Name,
             Price: product[0].Price, 
             SalePercentage: product[0].SalePercentage, 
-            Tumbnail: product[0].Thumbnail, 
+            Thumbnail: product[0].Thumbnail, 
             Quantity: products[i].Quantity
         });
     }
