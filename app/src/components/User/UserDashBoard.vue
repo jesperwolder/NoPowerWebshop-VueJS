@@ -6,12 +6,12 @@
                 v-if="CS.isLoggedIn"
             >
                 <v-form class="col-12 pa-0"> 
-                    <h1>{{ meta.title }}</h1>
+                    <h1 class="font-weight-regular">{{ meta.title }}</h1>
                     <v-divider class="pb-3 mt-3"></v-divider>
                    
                     <v-btn class="buttons" depressed text mr-2 to="/profile">
                         <v-icon left>mdi-account</v-icon>
-                        Profile
+                        Profil
                         </v-btn>
 
                         <v-btn class="buttons" depressed text mr-2 to="/OrderHistory">
@@ -21,7 +21,7 @@
 
                         <v-btn class="buttons" depressed text mr-2 to="/ContactUs">
                         <v-icon left>mdi-face-agent</v-icon>
-                        support
+                        Få support
                         </v-btn>
 
                     

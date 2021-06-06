@@ -121,15 +121,26 @@
                     </v-card-subtitle>
                     <v-card-actions class="pa-0">
         <!----------------- Bottons buying or removing from cart ------------------------>
-                        <v-btn
-                            color="#F7941D"
-                            class="mb-0"
-                            text
-                            @click="AddProduct(1)"
-                        >
-                            Læg i indkøbskurven
-                        </v-btn>
+                        <div v-if="product.Stock != 0">
+                            <v-btn
+                                color="#F7941D"
+                                class="mb-0"
+                                text
+                                @click="AddProduct(1)"
+                            >
+                                Læg i indkøbskurven
+                            </v-btn>
+                        </div>
+                        <div v-else>
+                            <v-btn
+                                disabled
+                                class="mb-0"
+                            >
+                                Produktet er udsolgt
+                            </v-btn>
+                        </div>
                     </v-card-actions>
+
                     <v-card-text class="px-0 pb-0">
         <!----------------- Checks the stock on the product ------------------------>
                         <v-icon :color="ReturnAvailabilityColor( product.Stock )">mdi-checkbox-blank-circle</v-icon> {{ product.Stock }} stk på lager

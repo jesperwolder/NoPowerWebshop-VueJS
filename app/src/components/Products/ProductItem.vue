@@ -51,7 +51,7 @@
                     Kun <b>{{ data.Price }}</b>,- 
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
-                <AddToCart :product="data" />
+                <AddToCart v-if="data.Stock != 0" :product="data" />
             </v-card-actions>
         </v-card>
     </v-col>

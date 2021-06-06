@@ -15,8 +15,6 @@
 			</v-carousel>
 			
 			<div class="pa-5">
-				<v-divider class="pb-3 mt-4"></v-divider>
-
 				<v-card-title class="font-weight-regular">Mest populære kategorier</v-card-title>
 
 				<v-row no-gutters>
@@ -36,10 +34,6 @@
 						:data="item"
 					/>
 				</v-row><br>
-			
-				<v-row no-gutters>
-					<v-card-title class="font-weight-regular">Ugens tilbud</v-card-title>
-				</v-row>
 			</div>
 
 			<BottomContainer />

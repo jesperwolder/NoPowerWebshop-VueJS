@@ -18,6 +18,7 @@ import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
 import ThankYou from '../views/CheckOut/Thankyoupage.vue';
 import Order from '../views/Orders/Order.vue';
+import Logout from '@/components/Logout.vue';
 
 Vue.use(VueRouter)
 ///------- Every route for every site and meta tags and breadcrumbs --------
@@ -84,10 +85,10 @@ const routes = [
 
 	{ path: '/dashboard', name: 'DashBoard', component: DashBoard,
 		meta: {
-			title: 'Dashboard',
+			title: 'Min side',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'Dashboard', to: '/dashboard' },
+				{ name: 'Min side', to: '/dashboard' },
 			]
 		} 
 	},
@@ -97,7 +98,7 @@ const routes = [
 			title: 'Profil',
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
-				{ name: 'Dashboard', to: '/dashboard' },
+				{ name: 'Min side', to: '/dashboard' },
 				{ name: 'Profil', to: '/profile' },
 			]
 		} 
@@ -202,6 +203,15 @@ const routes = [
 	{ path: '/order/:id', name: 'Ordre', component: Order,
 		meta: {
 			title: 'Order',
+			breadcrumb: false,
+			appDrawer: false,
+		}
+	},
+
+	/// Logout
+	{ path: '/logout', name: 'Logud', component: Logout,
+		meta: {
+			title: '',
 			breadcrumb: false,
 			appDrawer: false,
 		}
