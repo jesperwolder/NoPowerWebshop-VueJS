@@ -16,4 +16,4 @@ Per@Nopower@yahoo.dk
 Password:   
 123
 
-<!-- Husk at have nodejs installeret samt npm(backend) og yarn(frontend)-->
+Husk at have nodejs installeret samt npm(backend) og yarn(frontend)
