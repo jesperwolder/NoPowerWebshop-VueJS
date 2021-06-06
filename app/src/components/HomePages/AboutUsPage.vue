@@ -9,7 +9,7 @@
              Ved udgangen af 2015 var der registreret 1.800.000 aktive kunder (kunder, som har handlet de sidste 12 måneder).
             <br>
             <br>
-            Mere information kan findes på www.Nopower.com. På denne side er også oversigt over ledige stillinger.
+            Mere information kan findes på www.Nopower.com. 
             <br>
             
              <br>
@@ -17,11 +17,10 @@
              <br>
             Nopower.dk
              <br>
-            Bergvägen 1
              <br>
-            SE-341 42 LJUNGBY
+            Koldning
              <br>
-            SWEDEN
+            Danmark
              <br>
 		</v-card>
 	</div>
