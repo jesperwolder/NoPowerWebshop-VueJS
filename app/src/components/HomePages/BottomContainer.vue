@@ -30,7 +30,7 @@
                             <v-icon class="display-2 pt-3">mdi-headset</v-icon>
                         </v-col>
                         <v-col  class="col-12 col-sm-9 pr-4">
-                            <h3 class="font-weight-light pt-3"><a href="tel:25669503" class="text--primary" style="text-decoration:none;">25 66 95 03</a></h3>
+                            <h3 class="font-weight-light pt-3"><a href="tel:60472379" class="text--primary" style="text-decoration:none;">60 47 23 79</a></h3>
                             <p class="font-weight-thin">24/7 Tilstede support</p>
                         </v-col>
                     </v-row>
