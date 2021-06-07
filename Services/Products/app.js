@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const scheduler = require('node-schedule');
 
 const db = require('./modules/mongo.js')
+const index = require('./Repository/Index');
 
 // Setting route variables
 let indexRouter = require('./Routes/index.js');
@@ -29,5 +31,9 @@ app.use('/admin/update', updateRoute);
 app.use('/admin/changeProductStatus', changeprodStatusRoute);
 
 app.listen(3001);
+
+scheduler.scheduleJob('0 4 * * *', function() {
+    index.CreateIndex();
+});
 
 module.exports = app;

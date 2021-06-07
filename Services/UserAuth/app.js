@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const scheduler = require('node-schedule');
 
 const db = require('./modules/mongo.js');
+const index = require('./Repository/Index');
 
 let indexRouter = require('./Routes/index.js');
 let registerRouter = require('./Routes/Register.js');
@@ -33,5 +35,9 @@ app.use('/admin/changePrivilege/', promoteadminRoute);
 app.use('/admin/updateUser', updateUserRoute);
 
 app.listen(3000);
+
+scheduler.scheduleJob('0 4 * * *', function() {
+    index.CreateIndex();
+})
 
 module.exports = app;
