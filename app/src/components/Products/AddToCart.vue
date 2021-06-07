@@ -13,16 +13,16 @@
 import { AddToCart, GetCart, GetCartCount, GetCartTotal } from '@/Services/GlobalMethods';
 
 export default {
-    props: ['product'],
+    props: ['data'],
     methods: {
         AddProduct: function( quantity ) {
             AddToCart( { 
-                _id: this.product._id, 
+                _id: this.data._id, 
                 Quantity: quantity,
-                Thumbnail: this.product.Thumbnail,
-                Price: this.product.Price,
-                LowerHeader: this.product.LowerHeader,
-                Name: this.product.Name
+                Thumbnail: this.data.Thumbnail,
+                Price: this.data.Price,
+                LowerHeader: this.data.LowerHeader,
+                Name: this.data.Name
             } );
             this.$globalData.CartCount = GetCartCount();
             this.$globalData.CartTotal = GetCartTotal();

@@ -1,7 +1,7 @@
 <template>
 <!-- //-- ------ Our 403 page that denies acces this is a redirceret site  -------------  --> 
     <div>
-        <v-card class="text-center">
+        <v-card class="text-center mx-auto mw">
             <div class="pt-10 text-h2 text-center">
                 ༼ つ ಥ_ಥ ༽つ
             </div>

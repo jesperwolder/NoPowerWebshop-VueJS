@@ -60,7 +60,7 @@ export default {
 					Title: "Hardware",
 					Description: "Se vores sortimant alt fra Grafikkort, Cpu og meget mere...",
 					Image: "http://images.bit-tech.net/content_images/2010/08/evga-classified-sr-2-review/scansr2bundle.jpg",
-					Route: "/products/"
+					Route: "/products/categories/Hardware"
 				},
 				{
 					Title: "Stationær, Laptops og skærme",
@@ -72,7 +72,7 @@ export default {
 					Title: "Mobil og tablets",
 					Description: "Se vores ortimant alt fra Apple, samsung, Størrer kamera - Sony, Cannon...",
 					Image: "https://imenhamrah.ir/wp-content/uploads/2020/11/%D8%B1%D9%88%D9%86%D8%AF-%D8%AE%D8%B1%DB%8C%D8%AF-%DA%A9%D8%A7%D9%84%D8%A7%DB%8C-%D9%82%D8%B3%D8%B7%DB%8C.jpg",
-					Route: "/products/"
+					Route: "/products/categories/Mobil"
 				},
 				{
 					Title: "Fritid og hårdehvidvare",

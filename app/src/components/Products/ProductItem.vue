@@ -7,7 +7,7 @@
         lg="4"
         xl="3"
         class="px-2 mt-0 mb-4 productCols"
-        v-if="data.Categories.includes( category ) || category == undefined"
+        v-if="( category != undefined ? data.Categories.includes( category.toLowerCase() ) : null ) || category == undefined"
     >
         <v-card
             height="100%"
@@ -42,7 +42,7 @@
                     </div>
                     <br>
                     <div class="pt-3">
-                        <v-icon :color="ReturnAvailabilityColor( data.Stock )" dense>mdi-checkbox-blank-circle</v-icon> {{ data.Stock }} stk på lager
+                        <AvailabilityIcon :Stock="data.Stock" />
                     </div>
                 </v-card-text>
             </router-link>
@@ -60,24 +60,14 @@
 
 <script>
 import AddToCart from './AddToCart';
+import AvailabilityIcon from './Product/AvailabilityIcon';
 
 export default {
     components: {
-        AddToCart
+        AddToCart,
+        AvailabilityIcon
     },
     props: ['data', 'category'],
-    data() {
-        return {
-            AvailabilityColors: [ 'red', 'amber', 'green' ],
-        }
-    },
-    methods: {
-        ReturnAvailabilityColor: function( amount ) {
-            if( amount > 10 ) return this.AvailabilityColors[2];
-            if( amount <= 10 && amount > 0 ) return this.AvailabilityColors[1];
-            if( amount == 0 ) return this.AvailabilityColors[0];
-        },
-    }
 }
 </script>
 

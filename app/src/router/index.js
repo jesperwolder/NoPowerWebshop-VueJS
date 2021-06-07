@@ -166,7 +166,6 @@ const routes = [
 			breadcrumb: [
 				{ name: 'Forside', to: '/' },
 				{ name: 'Alle Produkter', to: '/products' },
-				{ name: 'Loading', to: '/products/:id' },
 			]
 		} 
 	},

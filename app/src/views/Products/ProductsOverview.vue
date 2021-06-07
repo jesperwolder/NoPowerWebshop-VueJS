@@ -39,9 +39,8 @@ export default {
                             Price: element.Price,
                             SalePercentage: element.SalePercentage,
                             Thumbnail: element.Thumbnail,
-                            Categories: element.Categories
+                            Categories: element.Categories.map(v => v.toLowerCase())
                         });
-                        
                     }
                 //}
             });
