@@ -16,4 +16,5 @@ PerNopower@yahoo.dk
 Password:   
 123
 
-Husk at have nodejs installeret samt npm(backend) og yarn(frontend)
+Husk at have nodejs installeret samt npm(backend) og yarn(frontend) hvis i selv vil builde 
+http://server.topper144p.com/
