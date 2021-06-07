@@ -57,7 +57,11 @@ async function Execute(jwt, products, fullname, email, phone, address) {
         });
     }
 
-    let order = await Repository.CreateOrder(orderProds, UserID, Fullname, Email, Phone, Address);
+    var result = new Date();
+    result.setDate(result.getDate() + 5);
+    let date = new Date(result);
+
+    let order = await Repository.CreateOrder(orderProds, UserID, Fullname, Email, Phone, Address, result);
 
     return order;
 }
