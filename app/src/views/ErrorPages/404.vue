@@ -1,7 +1,7 @@
 <template>
 <!-- //-- ------ Our 404 page that redirceret the site if it does not exist  -------------  --> 
     <div>
-        <v-card class="text-center">
+        <v-card class="text-center mx-auto mw">
             <div class="pt-5 text-h2 text-center">
                 ¯\_(ツ)_/¯
             </div>

@@ -104,16 +104,19 @@
             </v-col>
         </v-card-text>
     </v-card>
+
+
 </template>
 
 <script>
 import { GetSingleOrderBody } from '@/Services/OrdersApi';
+import { CurrentSession } from '@/Services/GlobalVariables';
 
 export default {
     data() {
         return {
             OrderData: [],
-            TotalPrice: 0
+            TotalPrice: 0,
         }
     },
     mounted: function() {
@@ -125,8 +128,9 @@ export default {
                 this.TotalPrice += ( item.Price * item.Quantity )
             })
         })
-        .catch( err => {
-            console.log( err.response );
+        .catch( err => {            
+            if( err.response.status === 404 )
+                CurrentSession.PageFound = false;
         });
     }
 }
