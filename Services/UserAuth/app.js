@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const scheduler = require('node-schedule');
 
+const index = require('./Repository/Index');
 const db = require('./modules/mongo.js');
 const index = require('./Repository/Index');
 
@@ -38,6 +39,6 @@ app.listen(3000);
 
 scheduler.scheduleJob('0 4 * * *', function() {
     index.CreateIndex();
-})
+});
 
 module.exports = app;

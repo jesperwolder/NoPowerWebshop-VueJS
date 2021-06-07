@@ -1,8 +1,10 @@
-const Users = require('../Schema/UserInfo')
+const Users = require('../Schema/UserInfo');
 
 const CreateIndex = () => {
-    console.log("Creating indexes");
-    Users.createIndexes({ _id: 1 });
+    console.log('Index is being created');
+    Users.createIndexes({ _id : 1 });
 }
 
-module.exports = { CreateIndex: CreateIndex }
+module.exports = {
+    CreateIndex : CreateIndex
+}
