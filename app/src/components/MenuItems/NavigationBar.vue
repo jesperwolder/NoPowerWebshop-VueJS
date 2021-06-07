@@ -108,6 +108,15 @@
 								<v-btn
 									block
 									text
+									class="mb-5"
+									to="/order/history"
+								>
+									Købshistorik
+								</v-btn>
+
+								<v-btn
+									block
+									text
 									color="red"
 									to="/logout"
 								>
