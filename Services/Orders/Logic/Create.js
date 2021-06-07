@@ -43,7 +43,7 @@ async function Execute(jwt, products, fullname, email, phone, address) {
         if(product.Stock < products[i]) throw { msg: 'Der var ikke nok på lager', code: 409 };
 
         product[0].Stock = product[0].Stock - products[i].Quantity;
-        
+
         let updated = await Fetcher.UpdateProduct(product[0]);
         console.log(updated);
 

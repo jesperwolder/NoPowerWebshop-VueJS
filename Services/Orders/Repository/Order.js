@@ -19,6 +19,7 @@ const CreateOrder = async (products, userID, fullname, email, phone, address) =>
     order.Billing.Email = email;
     order.Billing.Phone = phone;
     order.Billing.Address = address;
+    order.Status = "Under håndtering";
 
     SaveChanges(order);
 
