@@ -6,8 +6,8 @@ const logic = require('../../Logic/UpdateStatus');
 router.post('/', async (req, res) => {
     try {
         let order = await logic.Execute(req.headers.jwt, 
-            req.body.Product._id, 
-            req.body.Product.status
+            req.body.Order._id, 
+            req.body.Order.Status
         );
 
         res.json({
