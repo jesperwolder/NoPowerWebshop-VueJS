@@ -25,7 +25,7 @@
 					/>
 				</v-row><br>
 
-				<v-card-title class="font-weight-regular">Mest solgte produkter</v-card-title>
+				<!--<v-card-title class="font-weight-regular">Mest solgte produkter</v-card-title>
 
 				<v-row no-gutters>
 					<ProductItem 
@@ -33,7 +33,7 @@
 						:key="index"
 						:data="item"
 					/>
-				</v-row><br>
+				</v-row><br>-->
 			</div>
 
 			<BottomContainer />
