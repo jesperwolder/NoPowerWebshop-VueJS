@@ -10,7 +10,7 @@ const Repository = require('../Repository/Order');
  * @param {string} status 
  */
 const Execute = async (jwt, orderID, status) => {
-    let user = Fetcher.FetchUser(jwt);
+    let user = await Fetcher.FetchUser(jwt);
     if(!user.isAdmin) throw { msg: 'Ikke autoriseret', code: 403 };
 
     let order = await Repository.GetOrderByID(orderID);
