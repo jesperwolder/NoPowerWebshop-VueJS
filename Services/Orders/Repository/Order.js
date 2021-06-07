@@ -10,7 +10,7 @@ const Order = require('../Schema/OrderSchema');
  * @param {string} phone 
  * @param {string} address 
  */
-const CreateOrder = async (products, userID, fullname, email, phone, address) => {
+const CreateOrder = async (products, userID, fullname, email, phone, address, totalprice) => {
     let order = new Order();
     order._id = mongoose.Types.ObjectId();
     order.Products = products;
@@ -19,6 +19,8 @@ const CreateOrder = async (products, userID, fullname, email, phone, address) =>
     order.Billing.Email = email;
     order.Billing.Phone = phone;
     order.Billing.Address = address;
+    order.TotalPrice = totalprice;
+    order.Status = "Under håndtering";
 
     SaveChanges(order);
 

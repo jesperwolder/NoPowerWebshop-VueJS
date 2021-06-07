@@ -37,13 +37,15 @@ async function Execute(jwt, products, fullname, email, phone, address) {
     }
 
     let orderProds = [];
+    Totalprice = 0;
     for(i = 0; i < products.length; i++) {
         let product = await Fetcher.GetProductByID(products[i]._id);
         
         if(product.Stock < products[i]) throw { msg: 'Der var ikke nok på lager', code: 409 };
 
         product[0].Stock = product[0].Stock - products[i].Quantity;
-        
+        Totalprice = Totalprice + (product[0].Price / 100 * product[0].SalePercentage);
+
         let updated = await Fetcher.UpdateProduct(product[0]);
         console.log(updated);
 
@@ -57,7 +59,7 @@ async function Execute(jwt, products, fullname, email, phone, address) {
         });
     }
 
-    let order = await Repository.CreateOrder(orderProds, UserID, Fullname, Email, Phone, Address);
+    let order = await Repository.CreateOrder(orderProds, UserID, Fullname, Email, Phone, Address, Totalprice);
 
     return order;
 }
