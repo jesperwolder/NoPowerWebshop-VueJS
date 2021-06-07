@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+const NowPlus5Days = () => {
+    var result = new Date();
+    result.setDate(result.getDate() + 5);
+    return new Date(result);
+}
+
 const OrderSchema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
     Products: [], // { _id, Name, Price, SalePercentage, Tumbnail, Quantity }
@@ -12,7 +18,7 @@ const OrderSchema = mongoose.Schema({
     },
     TotalPrice: Number,
     Status: String,
-    DateOfDelivery: Date
+    DateOfDelivery: { Type: Date, Default: NowPlus5Days() }
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
