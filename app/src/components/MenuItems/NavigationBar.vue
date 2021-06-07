@@ -54,16 +54,14 @@
 					</v-btn>
 				</div>
 
-				<v-menu 
-					v-if="$globalData.CartCount > 0"
-					offset-y 
-					class="pa-0"
-					:close-on-content-click="false"
-					transition="slide-y-transition"
-				>
-	<!-- --------------------------- Vores kurv--------------------------------- -->
-					<template v-slot:activator="{ on, attrs }">
-						<v-badge :content="$globalData.CartCount" color="#F7941D" overlap bordered offset-x="2em">
+				<div>
+					<v-menu
+						offset-y 
+						class="pa-0"
+						:close-on-content-click="false"
+						transition="slide-y-transition"
+					>
+						<template v-slot:activator="{ on, attrs }">
 							<v-btn 
 								class="buttons" 
 								depressed 
@@ -71,56 +69,54 @@
 								v-bind="attrs"
 								v-on="on"
 							>
-								<v-icon left>mdi-cart</v-icon>
-								Kurv
+								<v-icon left>mdi-account</v-icon>
+								Min side
 							</v-btn>
-						</v-badge>
-					</template>
-					<v-card
-						class="ma-0"
-						style="min-width: 300px;max-width: 600px;"
-					>
-						<v-card-title class="font-weight-regular">Indkøbskurv</v-card-title>
-						<v-card-text>
-							<div v-if="$globalData.CartCount < 0" class="pt-5 text-center">
-								<div class="text-h3">ಠ▃ಠ</div><br>
-								<h3 class="font-weight-light">Ingen produkter i kurven</h3>
-							</div>
-
+						</template>
+						<v-card
+							class="ma-0 pa-5"
+							style="min-width: 300px;max-width: 600px;"
+						>
 							<div
-								v-for="( item, index ) in $globalData.Cart"
-								:key="index"
+								class="d-flex align-center pb-5"
 							>
-								<v-row no-gutters>
-									<v-col cols="3">
-										<v-img contain avatar :aspect-ratio="1/1" :src="item.Thumbnail"></v-img>
-									</v-col>
-									<v-col cols="9" class="px-3">
-										<h3 class="text-body-1">{{ item.Name }}</h3>
-										<div class="text-caption">{{ item.Quantity }} stk</div>
-										<div class="text-button">{{ item.Price * item.Quantity }} kr</div>
-									</v-col>
-								</v-row>
-
-								<v-divider class="mb-5"></v-divider>
+								<v-avatar
+									color="#F7941D"
+									size="64"
+									class="mx-auto"
+								>
+									<v-icon dark>
+										mdi-account-circle
+									</v-icon>
+								</v-avatar>
 							</div>
 
-							<div>
-								Samlet beløb <span class="font-weight-bold">{{ $globalData.CartTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</span> kr
-							</div>
-						</v-card-text>
-						<v-card-actions>
-							<v-btn
-								block
-								color="#F7941D"
-								to="/cart"
-								class="cartButton"
-							>
-								Til indkøbskurven
-							</v-btn>
-						</v-card-actions>
-					</v-card>
-				</v-menu>
+							<div class="font-weight-regular text-center">{{ CS.Fullname }}</div>
+
+							<v-divider class="mt-5 pb-5"></v-divider>
+
+							<v-list color="transparent">
+								<v-btn
+									block
+									text
+									class="mb-5"
+								>
+									Min side
+								</v-btn>
+
+								<v-btn
+									block
+									text
+									color="red"
+								>
+									Log ud
+								</v-btn>
+							</v-list>
+						</v-card>
+					</v-menu>
+				</div>
+
+				<CartMenu />
 			
 		</v-app-bar>
 	</v-card>
@@ -130,8 +126,12 @@
 //-- --------------------------- Uses Authbody to check jwt for user in navigationbar in current-session--------------------------------- -->
 import { AuthBody } from '@/Services/AuthApi';
 import { CurrentSession } from '@/Services/GlobalVariables';
+import CartMenu from './NavigationBar/Cart';
 
 export default {
+	components: {
+		CartMenu
+	},
 	data: () => ({
 		search: "",
 		offsetTop: 0,
@@ -142,6 +142,7 @@ export default {
 		if(this.$cookies.isKey('jwt')) {
 			AuthBody( this.$cookies.get('jwt') )
 			.then(res => {
+				CurrentSession.Fullname = res.User.Fullname;
 				CurrentSession.isLoggedIn = res.Authorized;
 				CurrentSession.isAdmin = res.isAdmin;
 

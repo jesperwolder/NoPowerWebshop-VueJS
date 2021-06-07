@@ -2,6 +2,7 @@
 export const CurrentSession = {
     isLoggedIn: false,
     isAdmin: false,
+    Fullname: null,
     PageFound: true,
     PermissionDenied: false,
     RequireAdmin: false,

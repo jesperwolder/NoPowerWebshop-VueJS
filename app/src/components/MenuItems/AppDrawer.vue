@@ -52,26 +52,6 @@
                     </v-list-item>
                 </v-list-group>
             </v-list>
-
-            <v-list
-                dense
-                nav
-                v-if="CS.isLoggedIn"
-            >
-                <v-list-item-subtitle>
-                    Bruger
-                </v-list-item-subtitle>
-                <v-list-item
-                    v-for="item in userItems"
-                    :key="item.title"
-                    link
-                    :to="item.path"
-                    exact
-                    color="red"
-                >
-                    <v-list-item-title color="#ff0000">{{ item.title }}</v-list-item-title>   
-                </v-list-item>
-            </v-list>
         </v-navigation-drawer>
     </v-card>
 </template>

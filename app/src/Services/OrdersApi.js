@@ -4,7 +4,7 @@ const server2 = "http://server.topper144p.com:3002"
 ///------- Order --------
 const CreateOrderURL = server2 + '/create';
 const GetUserOrdersURL = server2 + '/GetUserOrders';
-const GetSingleOrderURL = server2 + '/GetSingleOrder';
+const GetSingleOrderURL = server2 + '/order/';
 
 ///------- Admin controll --------
 const GetAllOrdersURL = server2 + '/admin/all';
@@ -30,8 +30,8 @@ export const GetUserOrdersBody = async(jwt) =>{
     return response.data;
 }
 
-export const GetSingleOrderBody = async(jwt) =>{
-    let err, response = await axios.get(GetSingleOrderURL, {headers: {jwt: jwt}});
+export const GetSingleOrderBody = async(id) =>{
+    let err, response = await axios.get(GetSingleOrderURL + id);
 
     if(err) throw err;
 
