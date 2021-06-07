@@ -10,6 +10,7 @@ import NotFound from '../views/ErrorPages/404.vue';
 import Profile from '../views/Profile.vue';
 import DashBoard from '../views/DashBoard.vue';
 import AdminPage from '../views/AdminPages/AdminPage.vue';
+import Orders from '../views/AdminPages/Orders.vue';
 import Customer_Management from '../views/AdminPages/Customer_Management.vue';
 import Item_management from '../views/AdminPages/Item_management.vue';
 import Products from '../views/Products/ProductsOverview.vue';
@@ -18,6 +19,7 @@ import CartCheckOut from '../views/CheckOut/CartCheckOut.vue';
 import Checkout from '../views/CheckOut/Checkout.vue';
 import ThankYou from '../views/CheckOut/Thankyoupage.vue';
 import Order from '../views/Orders/Order.vue';
+import OrderHistory from '../views/Orders/History.vue';
 import Logout from '@/components/Logout.vue';
 
 Vue.use(VueRouter)
@@ -138,7 +140,17 @@ const routes = [
 			appDrawer: false
 		} 
 	},
-	
+	{ path: '/admin/orders', name: 'Ordre oversigt', component: Orders,
+		meta: {
+			title: 'Ordre oversigt',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Administrator område', to: '/adminpage' },
+				{ name: 'Ordre oversigt', to: '/admin/orders' },
+			],
+			appDrawer: false
+		} 
+	},	
 
 
 	///--------------------------- Products---------------------------------
@@ -198,6 +210,18 @@ const routes = [
 		}
 	},
 	/// Orders
+	{ path: '/order/history', name: 'Ordre', component: OrderHistory,
+		meta: {
+			title: 'Købshistorik',
+			breadcrumb: [
+				{ name: 'Forside', to: '/' },
+				{ name: 'Min side', to: '/dashboard' },
+				{ name: 'Købshistorik', to: '/order/history' },
+			],
+			appDrawer: false,
+		}
+	},
+	
 	{ path: '/order/:id', name: 'Ordre', component: Order,
 		meta: {
 			title: 'Order',

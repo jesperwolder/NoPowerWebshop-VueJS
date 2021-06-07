@@ -3,7 +3,7 @@ const server2 = "http://server.topper144p.com:3002"
 
 ///------- Order --------
 const CreateOrderURL = server2 + '/create';
-const GetUserOrdersURL = server2 + '/GetUserOrders';
+const GetUserOrdersURL = server2 + '/orders';
 const GetSingleOrderURL = server2 + '/order/';
 
 ///------- Admin controll --------
@@ -39,7 +39,7 @@ export const GetSingleOrderBody = async(id) =>{
 }
 
 //------------------Admin routes-------------------
-export const GetAllOrderBody = async(jwt) =>{
+export const GetAllOrdersBody = async(jwt) =>{
     let err, response = await axios.get(GetAllOrdersURL, {headers: {jwt: jwt}});
 
     if(err) throw err;
@@ -56,7 +56,7 @@ export const OrderStatusBody = async(jwt) =>{
 }
 
 export const UpdateOrderStatusBody = async(body, jwt) =>{
-    let err, response = await axios.get(UpdateOrderStatusURL, body, {headers: {jwt: jwt}});
+    let err, response = await axios.post(UpdateOrderStatusURL, body, {headers: {jwt: jwt}});
 
     if(err) throw err;
 

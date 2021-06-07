@@ -14,7 +14,7 @@
                         Profil
                         </v-btn>
 
-                        <v-btn class="buttons" depressed text mr-2 to="/OrderHistory">
+                        <v-btn class="buttons" depressed text mr-2 to="/order/history">
                         <v-icon left>mdi-cart-check</v-icon>
                         Købshistorik
                         </v-btn>

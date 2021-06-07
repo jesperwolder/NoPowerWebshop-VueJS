@@ -18,6 +18,7 @@
                         <li>{{ OrderData.Billing.Email }}</li>
                         <li>{{ OrderData.Billing.Phone }}</li>
                         <li>{{ OrderData.Billing.Address }}</li>
+                        <li>Ordre status: {{ OrderData.Status }}</li>
                     </ul>
                 </v-col>
 

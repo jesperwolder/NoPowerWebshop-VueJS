@@ -13,264 +13,312 @@
             <v-form class="col-12 pa-0"> 
                 
                 <v-divider class="pb-3 mt-3"></v-divider>
-                    <v-card-title>
-                        <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                        ></v-text-field>
-                        </v-card-title>
-                        <v-data-table
-                            :headers="headers"
-                            :items="products"
-                            :items-per-page="15"
-                            :search="search"
+                <v-card-title>
+                    <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                    ></v-text-field>
+                    </v-card-title>
+                    <v-data-table
+                        :headers="headers"
+                        :items="products"
+                        :items-per-page="15"
+                        :search="search"
+                    >
+
+                        <template v-slot:item.isActive="{ item }">
+                            <v-icon v-if="item.isActive" color="green">
+                                mdi-check-circle
+                            </v-icon>
+                            <v-icon v-if="!item.isActive" color="red">
+                                mdi-block-helper
+                            </v-icon>           
+                        </template>
+
+                    <template v-slot:top>
+                        <v-toolbar
+                            flat
                         >
-
-                            <template v-slot:item.isActive="{ item }">
-                                <v-icon v-if="item.isActive" color="green">
-                                    mdi-check-circle
-                                </v-icon>
-                                <v-icon v-if="!item.isActive" color="red">
-                                    mdi-block-helper
-                                </v-icon>           
-                            </template>
-
-                        <template v-slot:top>
-                            <v-toolbar
-                                flat
+                            <v-toolbar-title>Oversigt</v-toolbar-title>
+                            <v-divider
+                                class="mx-4"
+                                inset
+                                vertical
+                            ></v-divider>
+                            <v-spacer></v-spacer>
+                            <v-dialog
+                                v-model="dialog"
+                                max-width="500px"
+                                persistent
                             >
-                                <v-toolbar-title>Oversigt</v-toolbar-title>
-                                <v-divider
-                                    class="mx-4"
-                                    inset
-                                    vertical
-                                ></v-divider>
-                                <v-spacer></v-spacer>
-                                <v-dialog
-                                    v-model="dialog"
-                                    max-width="500px"
-                                    persistent
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                    color="#F7941D"
+                                    dark
+                                    class="mb-2"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    v-on:click="InsertState()"
                                 >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn
-                                        color="#F7941D"
-                                        dark
-                                        class="mb-2"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                        v-on:click="InsertState()"
-                                    >
-                                    Tilføj produkt
-                                    </v-btn>
-                                </template>
-                                <v-card class="ma-0" :loading="isLoading" :disabled="isLoading">
-                                    <v-card-title>
-                                    <span class="headline">Administrer '<b><i>{{ editedItem.Name }}</i></b>'</span>
-                                    </v-card-title>
+                                Tilføj produkt
+                                </v-btn>
+                            </template>
+                            <v-card class="ma-0" :loading="isLoading" :disabled="isLoading">
+                                <v-card-title>
+                                <span class="headline">Administrer '<b><i>{{ editedItem.Name }}</i></b>'</span>
+                                </v-card-title>
 
-                                    <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                            <!---------- Items information -------------->  
-                                            <v-col
-                                                cols="12"
-                                                class="px-0"
-                                            >
-                                                <v-text-field
-                                                    v-model="editedItem.Name"
-                                                    label="Name" 
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                class="px-0"
-                                            >
-                                                <v-text-field
-                                                    v-model="editedItem.LowerHeader"
-                                                    label="Kort beskrivelse (140 tegn)"
-                                                    outlined
-                                                    max-length="140"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                class="px-0"
-                                            >
-                                                <v-textarea
-                                                    v-model="editedItem.Description"
-                                                    label="Lang beskrivelse"
-                                                    outlined
-                                                ></v-textarea>
-                                            </v-col>
+                                <v-card-text>
+                                    <v-container>
+                                        <v-row>
+                        <!---------- Items information -------------->  
+                                        <v-col
+                                            cols="12"
+                                            class="px-0"
+                                        >
+                                            <v-text-field
+                                                v-model="editedItem.Name"
+                                                label="Name" 
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            class="px-0"
+                                        >
+                                            <v-text-field
+                                                v-model="editedItem.LowerHeader"
+                                                label="Kort beskrivelse (140 tegn)"
+                                                outlined
+                                                max-length="140"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            class="px-0"
+                                        >
+                                            <v-textarea
+                                                v-model="editedItem.Description"
+                                                label="Lang beskrivelse"
+                                                outlined
+                                            ></v-textarea>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            sm="6"
+                                            md="6"
+                                            class="pl-0"
+                                        >
+                                            <v-text-field
+                                                v-model="editedItem.Price"
+                                                type="number"
+                                                label="Price"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            sm="6"
+                                            md="6"
+                                            class="pr-0"
+                                        >
+                                            <v-text-field
+                                                v-model="editedItem.Stock"
+                                                type="number"
+                                                label="Stock"
+                                            ></v-text-field>
+                                        </v-col>
                                             <v-col
                                                 cols="12"
                                                 sm="6"
                                                 md="6"
                                                 class="pl-0"
                                             >
-                                                <v-text-field
-                                                    v-model="editedItem.Price"
-                                                    type="number"
-                                                    label="Price"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="6"
-                                                class="pr-0"
+                                            <v-switch
+                                                v-model="editedItem.isActive"
+                                                label="Active"
+                                            ></v-switch>
+                                        </v-col>
+                                            
+                                <!------------ Technical Details ---------------->
+                                            
+                                            <v-card
+                                                width="100%"
+                                                elevation="0"
+                                                class="technicalDetails"
                                             >
-                                                <v-text-field
-                                                    v-model="editedItem.Stock"
-                                                    type="number"
-                                                    label="Stock"
-                                                ></v-text-field>
-                                            </v-col>
-                                                <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="6"
-                                                    class="pl-0"
-                                                >
-                                                <v-switch
-                                                    v-model="editedItem.isActive"
-                                                    label="Active"
-                                                ></v-switch>
-                                            </v-col>
-                                                
-                                    <!------------ Technical Details ---------------->
-                                                
+                                                <v-divider class="mb-5" ></v-divider>
+                                                <v-card-subtitle class="px-0">Technical Details</v-card-subtitle>
+
                                                 <v-card
-                                                    width="100%"
-                                                    elevation="0"
-                                                    class="technicalDetails"
+                                                    outlined
+                                                    v-for="(item, index) in editedItem.TechnicalDetails"
+                                                    :key="'A' + index"
+                                                    class="pa-2"
+                                                    v-bind:class="[index !== editedItem.TechnicalDetails.length - 1 ? 'mb-12' : '']"
                                                 >
-                                                    <v-divider class="mb-5" ></v-divider>
-                                                    <v-card-subtitle class="px-0">Technical Details</v-card-subtitle>
-
-                                                    <v-card
-                                                        outlined
-                                                        v-for="(item, index) in editedItem.TechnicalDetails"
-                                                        :key="'A' + index"
-                                                        class="pa-2"
-                                                        v-bind:class="[index !== editedItem.TechnicalDetails.length - 1 ? 'mb-12' : '']"
+                                                    <v-btn
+                                                        fab
+                                                        color="red"
+                                                        x-small
+                                                        absolute
+                                                        right
+                                                        top
+                                                        @click="RemoveTechnicalDetailsHeader( index )"
                                                     >
-                                                        <v-btn
-                                                            fab
-                                                            color="red"
-                                                            x-small
-                                                            absolute
-                                                            right
-                                                            top
-                                                            @click="RemoveTechnicalDetailsHeader( index )"
+                                                        <v-icon>
+                                                            mdi-minus
+                                                        </v-icon>
+                                                    </v-btn>
+
+                                                    <v-card-title class="mt-4">
+                                                        <v-text-field
+                                                            outlined
+                                                            v-model="item.Header"
+                                                            label="Header"
+                                                        ></v-text-field>
+                                                    </v-card-title>
+
+                                                    <v-card-text>
+                                                        <v-row
+                                                            v-for="(row, indx) in item.Items"
+                                                            :key="'B' + indx"
+                                                            :id="indx + item.Header"
                                                         >
-                                                            <v-icon>
-                                                                mdi-minus
-                                                            </v-icon>
-                                                        </v-btn>
-
-                                                        <v-card-title class="mt-4">
-                                                            <v-text-field
-                                                                outlined
-                                                                v-model="item.Header"
-                                                                label="Header"
-                                                            ></v-text-field>
-                                                        </v-card-title>
-
-                                                        <v-card-text>
-                                                            <v-row
-                                                                v-for="(row, indx) in item.Items"
-                                                                :key="'B' + indx"
-                                                                :id="indx + item.Header"
+                                                            <v-col
+                                                                col="12"
+                                                                sm="6"
+                                                                md="6"
                                                             >
-                                                                <v-col
-                                                                    col="12"
-                                                                    sm="6"
-                                                                    md="6"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="row.Name"
-                                                                        label="Name"
-                                                                    ></v-text-field>
-                                                                </v-col>
+                                                                <v-text-field
+                                                                    v-model="row.Name"
+                                                                    label="Name"
+                                                                ></v-text-field>
+                                                            </v-col>
 
-                                                                <v-col
-                                                                    col="12"
-                                                                    sm="6"
-                                                                    md="6"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="row.Value"
-                                                                        label="Value"
-                                                                        append-outer-icon="mdi-minus"
-                                                                        @click:append-outer="RemoveFieldInner( item.Header, indx )"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                            </v-row>
+                                                            <v-col
+                                                                col="12"
+                                                                sm="6"
+                                                                md="6"
+                                                            >
+                                                                <v-text-field
+                                                                    v-model="row.Value"
+                                                                    label="Value"
+                                                                    append-outer-icon="mdi-minus"
+                                                                    @click:append-outer="RemoveFieldInner( item.Header, indx )"
+                                                                ></v-text-field>
+                                                            </v-col>
+                                                        </v-row>
 
-                                                            <v-card-actions class="justify-center align-center">
-                                                                <v-btn
-                                                                    fab
-                                                                    color="primary"
-                                                                    small
-                                                                    @click="AddFieldInner( item.Header )"
-                                                                >
-                                                                    <v-icon>
-                                                                        mdi-plus
-                                                                    </v-icon>
-                                                                </v-btn>
-                                                            </v-card-actions>
-                                                        </v-card-text>
-                                                    </v-card>
-
-                                                    <v-card-subtitle class="pb-0 text-center">Add more technical details categories.</v-card-subtitle>
-                                                    <v-card-actions class="justify-center align-center">
-                                                        <v-btn
-                                                            fab
-                                                            color="primary"
-                                                            small
-                                                            @click="AddFieldTechnicalDetails()"
-                                                        >
-                                                            <v-icon>
-                                                                mdi-plus
-                                                            </v-icon>
-                                                        </v-btn>
-                                                    </v-card-actions>
+                                                        <v-card-actions class="justify-center align-center">
+                                                            <v-btn
+                                                                fab
+                                                                color="primary"
+                                                                small
+                                                                @click="AddFieldInner( item.Header )"
+                                                            >
+                                                                <v-icon>
+                                                                    mdi-plus
+                                                                </v-icon>
+                                                            </v-btn>
+                                                        </v-card-actions>
+                                                    </v-card-text>
                                                 </v-card>
 
-                              <!----------------- Categories ---------------------->
+                                                <v-card-subtitle class="pb-0 text-center">Add more technical details categories.</v-card-subtitle>
+                                                <v-card-actions class="justify-center align-center">
+                                                    <v-btn
+                                                        fab
+                                                        color="primary"
+                                                        small
+                                                        @click="AddFieldTechnicalDetails()"
+                                                    >
+                                                        <v-icon>
+                                                            mdi-plus
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </v-card-actions>
+                                            </v-card>
+
+                            <!----------------- Categories ---------------------->
+
+                                            <v-card
+                                                width="100%"
+                                                elevation="0"
+                                            >
+                                                <v-divider class="mb-5" ></v-divider>
+                                                <v-card-subtitle class="px-0">Categories</v-card-subtitle>
+
+                                                <div>
+                                                    <!-- Category -->
+                                                    <v-autocomplete
+                                                        v-model="editedItem.Categories"
+                                                        :items="AllCategories"
+                                                        chips
+                                                        multiple
+                                                    >
+
+                                                    </v-autocomplete>
+                                                </div>
+
+                                                <div
+                                                    v-for="( cat, index ) in editedItem.Categories"
+                                                    :key="index"
+                                                >
+                                                    <v-text-field
+                                                        v-model="editedItem.Categories[index]"
+                                                        :label="`Kategori ` + ( index + 1 )"
+                                                        append-outer-icon="mdi-minus"
+                                                        @click:append-outer="RemoveFieldCategory( index )"
+                                                    >
+                                                    </v-text-field>
+                                                </div>
+
+                                                <v-card-actions class="justify-center align-center">
+                                                    <v-btn
+                                                        fab
+                                                        color="primary"
+                                                        small
+                                                        @click="AddFieldCategory()"
+                                                    >
+                                                        <v-icon>
+                                                            mdi-plus
+                                                        </v-icon>
+                                                    </v-btn>
+                                                </v-card-actions>
+
+                                            </v-card>
+
+                        <!----------------- Images ------------------------>
+
+                                            <v-card
+                                                width="100%"
+                                                elevation="0"
+                                            >
+                                                <v-divider class="mb-5"></v-divider>
+                                                <v-card-subtitle class="px-0">Images</v-card-subtitle>
 
                                                 <v-card
-                                                    width="100%"
-                                                    elevation="0"
+                                                    class="pa-2"
+                                                    outlined
                                                 >
-                                                    <v-divider class="mb-5" ></v-divider>
-                                                    <v-card-subtitle class="px-0">Categories</v-card-subtitle>
+                                                    <v-text-field
+                                                        v-model="editedItem.Thumbnail"
+                                                        label="Thumbnail image"
+                                                    ></v-text-field>
 
-                                                    <div>
-                                                        <!-- Category -->
-                                                        <v-autocomplete
-                                                            v-model="editedItem.Categories"
-                                                            :items="AllCategories"
-                                                            chips
-                                                            multiple
-                                                        >
-
-                                                        </v-autocomplete>
-                                                    </div>
+                                                    <v-divider class="mb-5"></v-divider>
 
                                                     <div
-                                                        v-for="( cat, index ) in editedItem.Categories"
+                                                        v-for="( image, index ) in editedItem.Images"
                                                         :key="index"
                                                     >
                                                         <v-text-field
-                                                            v-model="editedItem.Categories[index]"
-                                                            :label="`Kategori ` + ( index + 1 )"
+                                                            v-model="editedItem.Images[index]"
+                                                            :label="`Image url ` + ( index + 1 )"
                                                             append-outer-icon="mdi-minus"
-                                                            @click:append-outer="RemoveFieldCategory( index )"
+                                                            @click:append-outer="RemoveFieldImage( index )"
                                                         >
                                                         </v-text-field>
                                                     </div>
@@ -280,130 +328,76 @@
                                                             fab
                                                             color="primary"
                                                             small
-                                                            @click="AddFieldCategory()"
+                                                            @click="AddFieldImage()"
                                                         >
                                                             <v-icon>
                                                                 mdi-plus
                                                             </v-icon>
                                                         </v-btn>
                                                     </v-card-actions>
-
                                                 </v-card>
+                                            </v-card>
 
-                         <!----------------- Images ------------------------>
-
-                                                <v-card
-                                                    width="100%"
-                                                    elevation="0"
+                                            <v-col
+                                                cols="6"
+                                                sm="2"
+                                                md="1"
+                                            >
+                                                <v-container
+                                                    class="px-0"
+                                                    fluid
                                                 >
-                                                    <v-divider class="mb-5"></v-divider>
-                                                    <v-card-subtitle class="px-0">Images</v-card-subtitle>
+                                                    
+                                                </v-container>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                </v-card-text>
 
-                                                    <v-card
-                                                        class="pa-2"
-                                                        outlined
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.Thumbnail"
-                                                            label="Thumbnail image"
-                                                        ></v-text-field>
-
-                                                        <v-divider class="mb-5"></v-divider>
-
-                                                        <div
-                                                            v-for="( image, index ) in editedItem.Images"
-                                                            :key="index"
-                                                        >
-                                                            <v-text-field
-                                                                v-model="editedItem.Images[index]"
-                                                                :label="`Image url ` + ( index + 1 )"
-                                                                append-outer-icon="mdi-minus"
-                                                                @click:append-outer="RemoveFieldImage( index )"
-                                                            >
-                                                            </v-text-field>
-                                                        </div>
-
-                                                        <v-card-actions class="justify-center align-center">
-                                                            <v-btn
-                                                                fab
-                                                                color="primary"
-                                                                small
-                                                                @click="AddFieldImage()"
-                                                            >
-                                                                <v-icon>
-                                                                    mdi-plus
-                                                                </v-icon>
-                                                            </v-btn>
-                                                        </v-card-actions>
-                                                    </v-card>
-                                                </v-card>
-
-                                                <v-col
-                                                    cols="6"
-                                                    sm="2"
-                                                    md="1"
-                                                >
-                                                    <v-container
-                                                        class="px-0"
-                                                        fluid
-                                                    >
-                                                        
-                                                    </v-container>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
-
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn
-                                            color="blue darken-1"
-                                            text
-                                            @click="close"
-                                        >
-                                            Cancel
-                                        </v-btn>
-                                        <v-btn
-                                            color="blue darken-1"
-                                            text
-                                            v-on:click="SaveItems()"
-                                        >
-                                            Save
-                                        </v-btn>
-                                    </v-card-actions>
-
-                                </v-card>
-                                </v-dialog>
-                                <v-dialog  max-width="500px">
-                                <v-card>
-                                    
-                                    <v-card-actions>
+                                <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn color="blue darken-1" text>Cancel</v-btn>
-                                    
-                                    <v-spacer></v-spacer>
-                                    </v-card-actions>
-                                </v-card>
-                                </v-dialog>
-                            </v-toolbar>
-                            </template>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        @click="close"
+                                    >
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        v-on:click="SaveItems()"
+                                    >
+                                        Save
+                                    </v-btn>
+                                </v-card-actions>
 
-                        <template v-slot:[`item.actions`]="{ item }">
-                            <v-icon
-                                small
-                                class="mr-2"
-                                @click="editItem( item )"
-                            >
-                                mdi-pencil
-                            </v-icon>
-                            <v-icon
-                                small
-                            
-                            >
-                                mdi-cart-check
-                            </v-icon>
-                            </template>
-                        </v-data-table>
+                            </v-card>
+                            </v-dialog>
+                            <v-dialog  max-width="500px">
+                            <v-card>
+                                
+                                <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text>Cancel</v-btn>
+                                
+                                <v-spacer></v-spacer>
+                                </v-card-actions>
+                            </v-card>
+                            </v-dialog>
+                        </v-toolbar>
+                        </template>
+
+                    <template v-slot:[`item.actions`]="{ item }">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="editItem( item )"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                    </template>
+                </v-data-table>
             </v-form>
         </v-card>
     </v-container>

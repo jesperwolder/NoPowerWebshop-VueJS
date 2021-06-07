@@ -54,7 +54,7 @@
 					</v-btn>
 				</div>
 
-				<div>
+				<div v-if="CS.isLoggedIn">
 					<v-menu
 						offset-y 
 						class="pa-0"
@@ -100,6 +100,7 @@
 									block
 									text
 									class="mb-5"
+									to="/dashboard"
 								>
 									Min side
 								</v-btn>
@@ -108,6 +109,7 @@
 									block
 									text
 									color="red"
+									to="/logout"
 								>
 									Log ud
 								</v-btn>

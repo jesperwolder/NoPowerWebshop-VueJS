@@ -13,23 +13,27 @@
                 <v-btn class="buttons" depressed text mr-2 to="/profile">
                     <v-icon left>mdi-account</v-icon>
                     Profil
-                    </v-btn>
+                </v-btn>
 
-                    <v-btn class="buttons" depressed text mr-2 to="/products">
+                <v-btn class="buttons" depressed text mr-2 to="/products">
                     <v-icon left>mdi-cart-check</v-icon>
                     Produkt oversigt
-                    </v-btn>
+                </v-btn>
 
-                    <v-btn class="buttons" depressed text mr-2 to="/item_management">
+                <v-btn class="buttons" depressed text mr-2 to="/item_management">
                     <v-icon left>mdi-cart-check</v-icon>
                     Produkt administration
-                    </v-btn>
+                </v-btn>
 
-                    <v-btn class="buttons" depressed text mr-2 to="/customer_management">
+                <v-btn class="buttons" depressed text mr-2 to="/customer_management">
                     <v-icon left>mdi-account</v-icon>
                     Bruger administration
-                    </v-btn>
+                </v-btn>
 
+                <v-btn class="buttons" depressed text mr-2 to="/admin/orders">
+                    <v-icon left>mdi-cart</v-icon>
+                    Alle ordre
+                </v-btn>
                       
             </div>
         </v-card>
