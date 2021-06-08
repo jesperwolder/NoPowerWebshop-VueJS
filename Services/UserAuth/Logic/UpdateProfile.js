@@ -26,7 +26,7 @@ const Execute = async (Jwt, email, fullname, phone, street, number, zip, city) =
     user.Phone = (phone ? phone : user.Phone);
     user.Address.Street = (street ? street : user.Address.Street);
     user.Address.Zip = (zip ? zip : user.Address.Zip);
-    user.Address.Number = (number ? number : user.Adress.Number);
+    user.Address.Number = (number ? number : user.Address.Number);
     user.Address.City = (city ? city : user.Address.City);
 
     Repository.SaveUser(user);
