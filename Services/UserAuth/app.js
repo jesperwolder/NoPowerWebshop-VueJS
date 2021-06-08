@@ -5,7 +5,6 @@ const scheduler = require('node-schedule');
 
 const index = require('./Repository/Index');
 const db = require('./modules/mongo.js');
-const index = require('./Repository/Index');
 
 let indexRouter = require('./Routes/index.js');
 let registerRouter = require('./Routes/Register.js');
