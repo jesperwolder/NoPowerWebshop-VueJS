@@ -60,6 +60,13 @@
                 >
                     mdi-pencil
                 </v-icon>
+                <v-btn
+                    color="#F7941D"
+                    :to="`/order/` + item._id"
+                    class="ml-5"
+                >
+                    Se ordre
+                </v-btn>
             </template>
         </v-data-table>
     </v-card>
