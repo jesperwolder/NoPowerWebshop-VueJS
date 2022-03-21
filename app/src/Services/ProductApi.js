@@ -1,5 +1,5 @@
 let axios = require('axios');
-const server1 = "http://server.topper144p.com:3001"
+const server1 = "http://176.20.223.225:3001"
 
 ///------- Products --------
 const GetAllProductsURL = server1 + '/all/';

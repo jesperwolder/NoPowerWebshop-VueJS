@@ -1,5 +1,5 @@
 let axios = require('axios');
-const server2 = "http://server.topper144p.com:3002"
+const server2 = "http://176.20.223.225:3002"
 
 ///------- Order --------
 const CreateOrderURL = server2 + '/create';

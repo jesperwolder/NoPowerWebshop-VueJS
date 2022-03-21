@@ -1,5 +1,5 @@
 let axios = require('axios');
-const server = "http://server.topper144p.com:3000"
+const server = "http://176.20.223.225:3000"
 
 ///------- Normal User controll --------
 const AuthUrl = server + '/auth';
